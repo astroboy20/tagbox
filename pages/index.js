@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Header } from "@/components/Header";
 import { Why } from "@/container/Home/Why";
+import { MainFeature } from "@/container/Home/MainFeature";
+import { Choose } from "@/container/Home/Choose";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,8 @@ export default function Home() {
       <>
         <Header />
         <Why />
+        <MainFeature />
+        <Choose />
       </>
     </>
   );

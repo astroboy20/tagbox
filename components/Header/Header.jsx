@@ -1,9 +1,14 @@
-import { Logo } from "@/assets";
-import React from "react";
+import { Arrow_Down, Logo } from "@/assets";
+import { useState } from "react";
 import { HeaderContainer, HeaderStyle, HeroContainer } from "./Header.style";
 import { Button } from "../Button/Button";
 
 const Header = () => {
+  const [showEvent, setShowEvent] = useState(false);
+
+  const handleShowEvent = () => {
+    setShowEvent(!showEvent);
+  };
   return (
     <>
       <HeaderContainer>
@@ -13,14 +18,30 @@ const Header = () => {
           </div>
 
           <div className="center-nav">
-            <p>Events</p>
+
+            <div onClick={handleShowEvent} className="events">
+              <div className="text">
+                <p>Events</p>
+                <Arrow_Down />
+              </div>
+              {showEvent && (
+                <>
+                  <div className="event">
+                    <span>Host an Event</span>
+                    <span>Attend an Event</span>
+                    <span>Manage Event</span>
+                  </div>
+                </>
+              )}
+            </div>
+
             <p>Blog</p>
             <p>Ticketing</p>
             <p>Designs</p>
           </div>
           <div className="right-nav">
             <p>Login</p>
-            <Button variant={"nav-button"}>Schedule a Demo</Button>
+            <p className={"nav-button"}>Schedule a Demo</p>
           </div>
         </HeaderStyle>
         <HeroContainer>

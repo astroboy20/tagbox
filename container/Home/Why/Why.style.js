@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const WhyContainer = styled.div`
-  margin: 2% 6%;
+  margin: 2% 6% 0% 6%;
   border: 1px solid #2f2e4133;
   box-shadow: 1px 1px #03193b;
   border-radius: 16px;
   position:relative ;
   background:#fff ;
-  top:-150px ;
+  top:-100px ;
   z-index:100 ;
 
   .text {
