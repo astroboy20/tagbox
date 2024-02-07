@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Why } from "@/container/Home/Why";
 import { MainFeature } from "@/container/Home/MainFeature";
 import { Choose } from "@/container/Home/Choose";
+import { UpcomingEvents } from "@/container/Home/UpcomingEvents";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function Home() {
         <Why />
         <MainFeature />
         <Choose />
+        <UpcomingEvents />
       </>
     </>
   );

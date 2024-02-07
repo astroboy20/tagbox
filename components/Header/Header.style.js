@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #fff;
-  padding: 3% 6% 12% 3%;
+  padding: 3% 6% 10% 3%;
 `;
 export const HeaderStyle = styled.nav`
   display: flex;
@@ -35,8 +35,7 @@ export const HeaderStyle = styled.nav`
     color: #020d1e;
     position: absolute;
     top: 115px;
-    /* padding:2% ; */
-    /* left:0 ; */
+    
   }
   .event span {
     border-bottom: 1.5px solid #03193b;
