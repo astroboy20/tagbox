@@ -27,14 +27,19 @@ const UpcomingEvents = () => {
           </p>
           <p className="span-a">Event Type: Physical & Virtual </p>
           <div className="time">
-            <div className="a"> 28 Feb , 2024</div>
-            <div className="b">10am GMT</div>
-          </div>
+            <div>
+              <div className="time-a">
+                {" "}
+                28 <p className="p">Feb,2024.</p>
+              </div>
+              <div className="time-b">10am GMT</div>
+            </div>
 
-          <div className="button">
-            <span className="button-span"> View Event</span>
+            <div className="button">
+              <span className="button-span"> View Event</span>
 
-            <Button variant={"dark-button"}> Buy Ticket </Button>
+              <Button variant={"dark-button"}> Buy Ticket </Button>
+            </div>
           </div>
         </div>
         <p></p>
