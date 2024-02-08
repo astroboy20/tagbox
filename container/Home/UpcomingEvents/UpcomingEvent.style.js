@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const UpcomingStyle = styled.div`
-  padding: 3% 6%;
+  padding: 0% 6% 6% 6%;
   text-align: center;
   display: flex;
   flex-direction: column;

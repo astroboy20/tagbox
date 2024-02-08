@@ -27,13 +27,13 @@ const UpcomingEvents = () => {
           </p>
           <p className="span-a">Event Type: Physical & Virtual </p>
           <div className="time">
-            <div>
+            {/* <div>
               <div className="time-a">
                 {" "}
                 28 <p className="p">Feb,2024.</p>
               </div>
               <div className="time-b">10am GMT</div>
-            </div>
+            </div> */}
 
             <div className="button">
               <span className="button-span"> View Event</span>
