@@ -1,14 +1,20 @@
 import React from "react";
-import { RegisterContainer } from "./Register.style";
-import { Logo, Logo_Blue, Register_Icon } from "@/assets";
+import { Login_Icon, Logo, Logo_Blue, Register_Icon } from "@/assets";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 import Link from "next/link"
+import { LoginContainer } from "./Login.style";
 
-const Register = () => {
+const Login = () => {
   return (
-    <RegisterContainer>
+    <LoginContainer>
+         <div className="right">
+        <div className="icon">
+          <Logo_Blue />
+        </div>
+        <Login_Icon/>
+      </div>
       <div className="left">
         {" "}
         <div className="header">
@@ -16,18 +22,10 @@ const Register = () => {
           <p>Register your account here...</p>
         </div>
         <form>
-          <div className="name">
-            <Input name={"firstname"} label={"First Name"} variant={"text"} />
-            <Input name={"firstname"} label={"Last Name"} variant={"text"} />
-          </div>
 
           <Input name={"firstname"} label={"Email"} variant={"text"} />
-          <Input name={"firstname"} label={"Password"} variant={"password"} />
-          <Input
-            name={"firstname"}
-            label={"Confirm Password"}
-            variant={"password"}
-          />
+          <Input name={"firstname"} label={"Enter Password"} variant={"password"} />
+          
           <Button variant={"dark-button"}>Sign Up</Button>
           <div className="links">
             <p
@@ -39,7 +37,7 @@ const Register = () => {
               }}
             >
               {" "}
-              Create an account with{" "}
+              Log In with
               <Image
                 src={"/images/google.png"}
                 width={24}
@@ -47,18 +45,13 @@ const Register = () => {
                 alt="google-logo"
               />
             </p>
-            <p> Already have an account? <Link className="link" href="/login">Sign in</Link></p>
+            <p> Don’t have an account? <Link className="link" href="/register">Sign Up</Link> </p>
           </div>
         </form>
       </div>
-      <div className="right">
-        <div className="icon">
-          <Logo_Blue />
-        </div>
-        <Register_Icon />
-      </div>
-    </RegisterContainer>
+     
+    </LoginContainer>
   );
 };
 
-export { Register };
+export { Login };

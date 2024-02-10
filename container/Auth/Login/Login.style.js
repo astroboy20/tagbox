@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const RegisterContainer = styled.div`
+export const LoginContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap:60px;
+  /* justify-content: space-between; */
   height: auto;
   padding-bottom:6% ;
   span {
@@ -18,8 +19,9 @@ export const RegisterContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-left: 6%;
+    /* padding-left: 6%; */
     padding-top: 3%;
+    width:40% ;
   }
   form {
     display: flex;
@@ -43,7 +45,7 @@ export const RegisterContainer = styled.div`
     gap: 40px;
     padding: 3% ;
     .icon {
-      text-align: right;
+      text-align: left;
     }
   }
 `;
