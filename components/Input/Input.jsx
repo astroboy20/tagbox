@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputDiv, InputStyle, PasswordStyle } from "./Input.style";
 import { Show } from "@/assets";
 
-const Input = ({ name, value, label, onChange, variant, type }) => {
+const Input = ({ name, value, label, onChange, variant, type, error }) => {
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -10,22 +10,23 @@ const Input = ({ name, value, label, onChange, variant, type }) => {
   };
   return variant === "text" ? (
     <InputStyle>
-      {label}
+      <label>{label}</label>
       <InputDiv type={type} value={value} onChange={onChange} name={name} />
+      <div style={{ color: "red" }}>{error}</div>
     </InputStyle>
   ) : variant === "password" ? (
     <InputStyle>
-      {label}
+      <label>{label}</label>
       <div className="password">
         <PasswordStyle
-          type={show?"text" :"password"}
+          type={show ? "text" : "password"}
           value={value}
           onChange={onChange}
           name={name}
         />
         <span onClick={handleShow}>{show ? <Show /> : <Show />} </span>
-       
       </div>
+      <div style={{ color: "red" }}>{error}</div>
     </InputStyle>
   ) : null;
 };

@@ -3,13 +3,18 @@ import styled from "styled-components";
 export const InputStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap:5px;
+  gap: 10px;
+  label {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+  }
   .password {
     display: flex;
     align-items: center;
     border-radius: 6px;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
-    padding-right:10px ;
+    padding-right: 10px;
     border: 1px solid rgba(47, 46, 65, 0.2);
   }
 `;
