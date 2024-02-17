@@ -33,3 +33,30 @@ export const PasswordStyle = styled.input`
   width: 100%;
   padding: 10px 20px;
 `;
+
+export const EventStyle = styled.div`
+  display: flex;
+  flex-direction:column ;
+  gap:20px;
+  
+  div{
+    display:flex ;
+    border-bottom: 2px solid #000;
+  }
+  label {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 32px;
+    text-align: left;
+  }
+`;
+export const EventDiv = styled.input`
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  /* border: 1px solid rgba(47, 46, 65, 0.2); */
+  width:100% ;
+  padding: 10px 20px;
+`;

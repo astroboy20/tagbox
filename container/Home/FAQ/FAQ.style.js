@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const FAQSContainer = styled.div`
-  padding: 2% 6%;
+  padding: 3% 6%;
   background: rgba(2, 13, 30, 1);
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
   span {
     font-size: 48px;
     font-weight: 500;

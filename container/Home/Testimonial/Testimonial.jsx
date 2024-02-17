@@ -6,7 +6,7 @@ const Testimonial = () => {
   return (
     <TestimonialStyle>
       {" "}
-      <span>Main Features</span>
+      <span>What Our Users Have To Say</span>
      
       <div className="box">
         <div className="sub-box">

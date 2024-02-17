@@ -54,8 +54,8 @@ const Login = () => {
       <div className="left">
         {" "}
         <div className="header">
-          <span>Welcome to Tagbox</span>
-          <p>Register your account here...</p>
+          <span>Welcome back to Tagbox</span>
+          <p>Login to your account here...</p>
         </div>
         <form onSubmit={formik.handleSubmit}>
           <Input

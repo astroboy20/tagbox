@@ -5,7 +5,7 @@ export const ChooseContainer = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
   span {
     font-size: 48px;
     font-weight: 500;

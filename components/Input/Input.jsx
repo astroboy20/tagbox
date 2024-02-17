@@ -1,8 +1,24 @@
 import React, { useState } from "react";
-import { InputDiv, InputStyle, PasswordStyle } from "./Input.style";
+import {
+  EventDiv,
+  EventStyle,
+  InputDiv,
+  InputStyle,
+  PasswordStyle,
+} from "./Input.style";
 import { Show } from "@/assets";
 
-const Input = ({ name, value, label, onChange, variant, type, error }) => {
+const Input = ({
+  name,
+  value,
+  label,
+  onChange,
+  variant,
+  type,
+  error,
+  icon,
+  placeholder
+}) => {
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -28,6 +44,14 @@ const Input = ({ name, value, label, onChange, variant, type, error }) => {
       </div>
       <div style={{ color: "red" }}>{error}</div>
     </InputStyle>
+  ) : variant === "event-input" ? (
+    <EventStyle>
+      <label>{label}</label>
+      <div>
+        <EventDiv type="text" value={value} name={name} onChange={onChange} placeholder={placeholder}/>
+        <span>{icon}</span>
+      </div>
+    </EventStyle>
   ) : null;
 };
 
