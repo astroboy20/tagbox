@@ -15,16 +15,17 @@ const Choose = () => {
           </p>
           <Button variant={"dark-button"}>Schedule Event</Button>
         </div>
-        <div className="image">
+       
           <Image
             src={"/images/Virtual-meeting.png"}
             width={500}
             height={500}
             objectFit="cover"
             alt="virtual-meeting"
+            className="image"
           />
         </div>
-      </div>
+      
     </ChooseContainer>
   );
 };

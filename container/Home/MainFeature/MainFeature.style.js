@@ -34,7 +34,6 @@ export const MainContainer = styled.div`
     align-items:center ;
     gap:20px;
     width: 30%;
-    /* margin:2% ; */
     background-color:rgba(230, 246, 255, 0.2) ;
     box-shadow:1px 1px rgba(3, 25, 59, 0.12) ;
   }
@@ -45,4 +44,33 @@ export const MainContainer = styled.div`
     letter-spacing: 0em;
     text-align: center;
   }
+
+  @media screen and (max-width: 786px) {
+   
+   
+    span {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-align: center;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .box{
+    justify-content:center ;
+  }
+  .sub-box{
+    width:auto ;
+
+  }
+  .sub-box p {
+    font-size: 18px;
+  }
+  }
 `;
+
+
+

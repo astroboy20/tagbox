@@ -46,4 +46,51 @@ export const RegisterContainer = styled.div`
       text-align: right;
     }
   }
+
+  @media screen and (max-width: 786px) {
+    flex-direction: column-reverse;
+    .name{
+      flex-direction:column ;
+      gap:20px;
+    }
+    .image {
+      width: 320px;
+      height: 220px;
+      padding-top: 50px;
+    }
+    .header {
+      text-align: left;
+    }
+    .left {
+      width: auto;
+      text-align: left;
+      padding: 6%;
+    }
+    .right {
+      width: auto;
+    }
+    .right .icon {
+      width: auto;
+      padding-right:5% ;
+    }
+    span {
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-align: center;
+    }
+    p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .box {
+      justify-content: center;
+    }
+    .sub-box {
+      width: auto;
+    }
+    .sub-box p {
+      font-size: 18px;
+    }
+  }
 `;

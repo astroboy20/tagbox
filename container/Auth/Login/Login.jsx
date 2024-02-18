@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Login_Icon, Logo, Logo_Blue, Register_Icon } from "@/assets";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
-import Image from "next/image";
 import Link from "next/link";
 import { LoginContainer } from "./Login.style";
 import { useFormik } from "formik";
@@ -10,6 +9,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { login, reset } from "@/features/authSlice";
+import Image from "next/image";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,14 @@ const Login = () => {
         <div className="icon">
           <Logo_Blue />
         </div>
-        <Login_Icon />
+
+        <Image
+          src={"/images/login.png"}
+          width={575}
+          height={380}
+          alt="login-image"
+          className="image"
+        />
       </div>
       <div className="left">
         {" "}

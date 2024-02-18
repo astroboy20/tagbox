@@ -33,4 +33,22 @@ export const FAQSContainer = styled.div`
     align-items: center;
     padding: 5px 20px;
   }
+
+  @media screen and (max-width: 786px) {
+    padding:  6%;
+   
+   span {
+   font-size: 24px;
+   font-weight: 700;
+   text-decoration: underline;
+   text-align: center;
+ }
+ p {
+   font-size: 16px;
+   font-weight: 400;
+   text-align: left;
+ }
+ 
+ 
+ }
 `;

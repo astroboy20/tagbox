@@ -7,6 +7,10 @@ export const NavButton = styled.button`
   color: #020d1e;
   border: none;
   cursor: pointer;
+  @media screen and (max-width: 786px) {
+   font-weight:500 ;
+   font-size:18px ;
+  }
 `;
 
 export const TransparentButton = styled.button`
@@ -16,6 +20,10 @@ export const TransparentButton = styled.button`
   background: none;
   color: #c1e8ff;
   cursor: pointer;
+  @media screen and (max-width: 786px) {
+   font-weight:500 ;
+   font-size:18px;
+  }
 `;
 
 export const DarkButton = styled.button`
@@ -25,4 +33,8 @@ export const DarkButton = styled.button`
   background-color: #020d1e;
   color: #c1e8ff;
   cursor: pointer;
+  @media screen and (max-width: 786px) {
+   font-weight:500 ;
+   font-size:18px;
+  }
 `;

@@ -31,4 +31,22 @@ export const WhyContainer = styled.div`
   .button {
     text-align: center;
   }
+  @media screen and (max-width: 786px) {
+    top:-70px ;
+    .text {
+    gap: 10px;
+    padding: 3% 4%;
+  }
+    span {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-align: center;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: justify;
+  }
+  }
 `;

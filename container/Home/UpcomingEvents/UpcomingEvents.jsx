@@ -8,15 +8,14 @@ const UpcomingEvents = () => {
       <span>Upcoming Events</span>
       <div className="body">
         {" "}
-        <div className="image">
           <Image
             src={"/images/product.png"}
             width={600}
             height={320}
             objectFit="cover"
             alt="upcoming-event"
+            className="image"
           />
-        </div>
         <div className="text">
           <span className="span-header"> Product Conference”24</span>
           <p>

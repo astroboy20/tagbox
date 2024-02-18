@@ -169,7 +169,13 @@ const Register = () => {
         <div className="icon">
           <Logo_Blue />
         </div>
-        <Register_Icon />
+        <Image
+          src={"/images/register.png"}
+          width={575}
+          height={380}
+          alt="login-image"
+          className="image"
+        />
       </div>
     </RegisterContainer>
   );

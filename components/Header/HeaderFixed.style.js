@@ -6,7 +6,12 @@ export const HeaderFixedContainer = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #fff;
-  padding: 3% 6% ;
+  padding: 4% 3% ;
+  position:fixed ;
+  width:100% ;
+ box-sizing:border-box ;
+ left:0 ;
+ right:0 ;
 `;
 export const HeaderFixedStyle = styled.nav`
   display: flex;
@@ -55,5 +60,38 @@ export const HeaderFixedStyle = styled.nav`
     color: #020d1e;
     border: none;
     cursor: pointer;
+  }
+  .hamburger{
+    display:none ;
+  }
+
+  @media screen and (max-width:786px ) {
+    padding:4% 3% ;
+    .center-nav,.right-nav{
+      display:none ;
+    }
+    .hamburger{
+      display:block ;
+    }
+  }
+`;
+
+export const MobileNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #13171efa;
+  height: 925vh;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  left: 0;
+  padding: 6%;
+  gap: 30px;
+  .link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
   }
 `;

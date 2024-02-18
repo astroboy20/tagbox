@@ -6,7 +6,17 @@ export const HeaderContainer = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #fff;
-  padding: 3% 6% 10% 3%;
+  padding: 4% 6% 10% 3%;
+  .link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  @media screen and (max-width: 786px) {
+    padding: 6% 6% 35% 3%;
+  }
 `;
 export const HeaderStyle = styled.nav`
   display: flex;
@@ -35,7 +45,6 @@ export const HeaderStyle = styled.nav`
     color: #020d1e;
     position: absolute;
     top: 115px;
-    
   }
   .event span {
     border-bottom: 1.5px solid #03193b;
@@ -55,6 +64,18 @@ export const HeaderStyle = styled.nav`
     color: #020d1e;
     border: none;
     cursor: pointer;
+  }
+  .hamburger {
+    display: none;
+  }
+  @media screen and (max-width: 786px) {
+    .center-nav,
+    .right-nav {
+      display: none;
+    }
+    .hamburger {
+      display: block;
+    }
   }
 `;
 export const HeroContainer = styled.div`
@@ -77,5 +98,40 @@ export const HeroContainer = styled.div`
     display: flex;
     gap: 35px;
     justify-content: center;
+    font-weight: 500;
+  }
+  @media screen and (max-width: 786px) {
+    padding: 4% 0;
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 40px;
+      text-align: center;
+    }
+    p {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+  }
+`;
+
+export const MobileNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #13171efa;
+  height: 925vh;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  left: 0;
+  padding: 6%;
+  gap: 30px;
+  .link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
   }
 `;

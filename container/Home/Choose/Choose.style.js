@@ -35,4 +35,30 @@ export const ChooseContainer = styled.div`
   .image {
     width: 60%;
   }
+  @media screen and (max-width: 786px) {
+   
+   .slider-body{
+    flex-direction:column-reverse ;
+   }
+   .image{
+    width:300px ;
+    height:240px ;
+   }
+   .text{
+    width:100% ;
+    text-align:center ;
+   }
+   span {
+   font-size: 24px;
+   font-weight: 700;
+   text-decoration: underline;
+   text-align: center;
+ }
+ p {
+   font-size: 18px;
+   font-weight: 400;
+   text-align: center;
+ }
+ 
+ }
 `;

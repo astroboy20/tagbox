@@ -15,6 +15,7 @@ const Testimonial = () => {
             width={160}
             height={160}
             alt="user-image"
+            className="image"
           />
           <p>
             I'm impressed with the product's functionality and the range of
@@ -28,6 +29,7 @@ const Testimonial = () => {
             width={160}
             height={160}
             alt="user-image"
+            className="image"
           />
           <p>
             I'm impressed with the product's functionality and the range of
@@ -41,6 +43,7 @@ const Testimonial = () => {
             width={160}
             height={160}
             alt="user-image"
+            className="image"
           />
           <p>
             I'm impressed with the product's functionality and the range of

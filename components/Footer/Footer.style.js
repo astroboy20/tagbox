@@ -28,13 +28,35 @@ export const FooterContainer = styled.div`
     display: flex;
     padding: 5px 0 5px 3%;
     background-color: #fff;
-    border-radius:4px ;
+    border-radius: 4px;
   }
   input {
     width: 85%;
     border: none;
     outline: none;
     color: rgba(3, 5, 59, 0.4);
+  }
+
+  @media screen and (max-width: 786px) {
+    .top {
+      height: 300px;
+    }
+    .top span {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .top p {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .input {
+      width: 80%;
+      margin: 0 auto;
+    }
+    input {
+      width: 65%;
+      padding: 5px 0 5px;
+    }
   }
 `;
 export const TopContainer = styled.div`
@@ -61,6 +83,21 @@ export const TopContainer = styled.div`
     display: flex;
     gap: 10px;
   }
+
+  @media screen and (max-width: 786px) {
+    flex-direction: column;
+    gap: 30px;
+    span {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
 `;
 export const BottomContainer = styled.div`
   background-color: #03193b;
@@ -73,5 +110,12 @@ export const BottomContainer = styled.div`
     line-height: 28px;
     letter-spacing: 0em;
     color: #fff;
+  }
+
+  @media screen and (max-width: 786px) {
+    p {
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
 `;

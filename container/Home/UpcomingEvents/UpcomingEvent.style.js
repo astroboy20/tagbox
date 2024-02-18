@@ -37,6 +37,10 @@ export const UpcomingStyle = styled.div`
     text-align: justify;
     gap: 30px;
   }
+  .image{
+    width:600px ;
+    height:320px ;
+  }
   .time {
     display: flex;
     text-align: center;
@@ -71,4 +75,28 @@ export const UpcomingStyle = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
+
+  @media screen and (max-width: 786px) {
+   
+   
+   span {
+   font-size: 24px;
+   font-weight: 700;
+   text-decoration: underline;
+   text-align: center;
+ }
+ p {
+   font-size: 18px;
+   font-weight: 400;
+   text-align: center;
+ }
+ .body{
+  flex-direction:column ;
+  text-align:center ;
+ }
+ .image{
+    width:340px ;
+    height:230px ;
+  }
+ }
 `;
