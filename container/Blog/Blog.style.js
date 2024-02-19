@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const BlogContainer = styled.div`
+  padding-top: 110px;
   .header {
     background: url("images/blog-bg.png");
     height: 400px;
@@ -20,14 +21,33 @@ export const BlogContainer = styled.div`
     display: flex;
     gap: 20px;
     text-align: justify;
-    flex-direction:column ;
-    padding:3% 6% ;
+    flex-direction: column;
+    padding: 3% 6%;
   }
 
   .body span {
     font-size: 32px;
     font-weight: 500;
     line-height: 36px;
-    text-decoration:underline ;
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 786px) {
+    .header {
+      padding-top: 100px;
+      height: 180px;
+      width: 100%;
+    }
+    .header span {
+      font-size: 24px;
+      line-height: 24px;
+    }
+    .body {
+      padding: 6%;
+    }
+    .body span {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 `;

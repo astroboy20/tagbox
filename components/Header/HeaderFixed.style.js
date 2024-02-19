@@ -6,7 +6,7 @@ export const HeaderFixedContainer = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #fff;
-  padding: 4% 3% ;
+  padding: 2% 3% ;
   position:fixed ;
   width:100% ;
  box-sizing:border-box ;

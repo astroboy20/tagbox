@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const EventContainer = styled.div`
   text-align: center;
   padding: 3% 6%;
-  display:flex ;
+  display: flex;
   flex-direction: column;
-  gap:30px;
+  gap: 30px;
   span {
     font-size: 28px;
     font-weight: 400;
@@ -16,27 +16,57 @@ export const EventContainer = styled.div`
   .box {
     display: flex;
     flex-wrap: wrap;
-    text-align:justify ;
-    gap:20px;
-    padding-top:10px ;
-    width:100% ;
-    
+    text-align: justify;
+    gap: 20px;
+    padding-top: 10px;
+    width: 100%;
   }
   .sub-box {
     display: flex;
     flex-direction: column;
-    align-items:center ;
-    gap:10px;
+    align-items: center;
+    gap: 10px;
     width: 28%;
-    padding:2% ;
+    padding: 2%;
     /* margin:2% ; */
-    background-color:rgba(230, 246, 255, 0.2) ;
-    box-shadow:1px 1px rgba(3, 25, 59, 0.12) ;
+    background-color: rgba(230, 246, 255, 0.2);
+    box-shadow: 1px 1px rgba(3, 25, 59, 0.12);
   }
   .sub-box p {
     font-size: 32px;
     font-weight: 500;
     line-height: 32px;
     text-align: center;
+  }
+  .image {
+    width: 220px;
+    height: 220px;
+  }
+
+  @media screen and (max-width: 786px) {
+    padding: 6%;
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+    }
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
+    }
+    /* .special{
+  width:70% ;
+ } */
+    .sub-box {
+      width: 42%;
+    }
+    .sub-box p {
+      font-size: 16px;
+    }
+    .image {
+      width: 100px;
+      height: 80px;
+    }
   }
 `;

@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   line-height: 24px;
   color: #fff;
   padding: 4% 6% 10% 3%;
-  .link {
+  .links {
     text-decoration: none;
     color: #fff;
     font-size: 24px;

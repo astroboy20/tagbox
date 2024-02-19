@@ -54,7 +54,7 @@ export const FooterContainer = styled.div`
       margin: 0 auto;
     }
     input {
-      width: 65%;
+      width: 60%;
       padding: 5px 0 5px;
     }
   }

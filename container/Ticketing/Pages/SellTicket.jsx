@@ -17,7 +17,7 @@ const SellTicket = () => {
   const { option } = useOptionContext();
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
-  const [visibility, setVisibility] = useState("");
+  const [visibility, setVisibility] = useState(true);
   const [uniqueId, setUniqueId] = useState("");
   const [eventDetails, setEventDetails] = useState({
     event_type: event_type,
@@ -34,18 +34,17 @@ const SellTicket = () => {
 
   const [loading, setLoading] = useState(false);
   const token = user ? user.data : "";
-  console.log("token",token);
+  console.log("token", token);
 
   const generateId = () => {
     const id = uuidv4();
     setUniqueId(id);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: id, // Update qr_code field when generating a new QR code
+      qr_code: id,
     }));
   };
 
-  // Additional function to handle QR code change
   const handleQrCodeChange = (event) => {
     const { value } = event.target;
     setUniqueId(value);
@@ -115,10 +114,10 @@ const SellTicket = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          toast.success(response.data.message);
         })
         .catch((error) => {
-          console.log(error);
+          toast.error(error);
         });
     } else {
       toast.warning("Enter the required field");
@@ -324,8 +323,8 @@ const SellTicket = () => {
                     id="yes"
                     value="Yes"
                     name="visibility"
-                    checked={visibility === "Yes"}
-                    onChange={() => handleVisibilityTypeChange("Yes")}
+                    // checked={visibility === true}
+                    onChange={() => handleVisibilityTypeChange(true)}
                   />
                   <label htmlFor="yes">Agree</label>
                 </div>
@@ -335,8 +334,8 @@ const SellTicket = () => {
                     id="no"
                     value="No"
                     name="visibility"
-                    checked={visibility === "No"}
-                    onChange={() => handleVisibilityTypeChange("No")}
+                    // checked={visibility === false}
+                    onChange={() => handleVisibilityTypeChange(false)}
                   />
                   <label htmlFor="no">Disagree</label>
                 </div>

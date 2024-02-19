@@ -18,6 +18,8 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
           <p>Wedding</p>
           <Button variant={"dark-button"}>Make it happen</Button>
@@ -28,6 +30,8 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
           <p>Birthday</p>
           <Button variant={"dark-button"}>Make it happen</Button>
@@ -35,9 +39,11 @@ const Events = () => {
         <div className="sub-box">
           <Image
             src={"/images/Graduation.png"}
-            width={150}
-            height={150}
+            width={220}
+            height={180}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
           <p>Graduation</p>
           <Button variant={"dark-button"}>Make it happen</Button>
@@ -58,8 +64,10 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
-          <p>Conference and Meetings</p>
+          <p className="special">Conference and Meetings</p>
           <Button variant={"dark-button"}>Make it happen</Button>
         </div>
         <div className="sub-box">
@@ -68,6 +76,8 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
           <p>Baby Shower</p>
           <Button variant={"dark-button"}>Make it happen</Button>
@@ -78,8 +88,10 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
-          <p>Baby Shower</p>
+          <p>Hangout</p>
           <Button variant={"dark-button"}>Hangout</Button>
         </div>
         <div className="sub-box">
@@ -88,6 +100,8 @@ const Events = () => {
             width={150}
             height={150}
             alt="weeding"
+            className="image"
+            objectFit = "cover"
           />
           <p>Others</p>
           <Button variant={"dark-button"}>Make it happen</Button>
