@@ -26,7 +26,7 @@ export const ChooseContainer = styled.div`
     padding: 3%;
     background-color: rgba(193, 232, 255, 0.2);
     justify-content: center;
-    gap:20px;
+    gap:60px;
   }
   .text {
     text-align: left;

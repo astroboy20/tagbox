@@ -26,12 +26,13 @@ export const FooterContainer = styled.div`
   .input {
     width: 100%;
     display: flex;
-    padding: 5px 0 5px 3%;
+    justify-content:space-between ;
+    padding: 5px;
     background-color: #fff;
     border-radius: 4px;
   }
   input {
-    width: 85%;
+    /* width: 85%; */
     border: none;
     outline: none;
     color: rgba(3, 5, 59, 0.4);
@@ -54,8 +55,8 @@ export const FooterContainer = styled.div`
       margin: 0 auto;
     }
     input {
-      width: 60%;
-      padding: 5px 0 5px;
+      /* width: 60%; */
+      /* padding: 5px 0 5px; */
     }
   }
 `;

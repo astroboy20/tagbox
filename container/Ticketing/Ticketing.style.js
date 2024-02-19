@@ -97,6 +97,14 @@ export const TicketingStyle = styled.div`
     gap: 40px;
   }
 
+  //buy ticket style
+  .latest-event span,
+  .other-event span {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 48px;
+  }
+
   @media screen and (max-width: 786px) {
     .header {
       margin-top: 100px;
@@ -141,6 +149,117 @@ export const TicketingStyle = styled.div`
     }
     .payment-method .input {
       flex-wrap: wrap;
+    }
+
+    //buy ticket style
+  .latest-event span,
+  .other-event span {
+    font-size: 24px;
+  }
+  }
+`;
+
+export const BodyStyle = styled.div`
+  display: flex;
+  gap: 60px;
+  border: 1px solid #020d1e4d;
+  padding: 3%;
+  margin:2% 0  3% 0 ;
+  .text .span-header {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-decoration: none;
+  }
+
+ .text  p {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+  }
+  .span-a {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+  }
+  .body {
+    display: flex;
+    text-align: justify;
+    gap: 30px;
+  }
+  .image {
+    width: 600px;
+    height: 320px;
+  }
+  .time {
+    display: flex;
+    text-align: center;
+    gap: 15px;
+  }
+  .time-a {
+    border: 1px solid black;
+    padding: 10px;
+    background-color: rgba(243, 250, 255, 1);
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .time-b {
+    background-color: rgba(3, 25, 59, 1);
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    padding: 10px;
+  }
+  .p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .button .button-span {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  @media screen and (max-width: 786px) {
+    flex-direction:column ;
+    gap:20px;
+    margin:5% 0  3% 0 ;
+    span {
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-align: center;
+    }
+    .text .span-header {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-decoration: none;
+  }
+    .text p {
+      font-size: 18px;
+      font-weight: 400;
+      text-align: justify;
+    }
+    .body {
+      flex-direction: column;
+      text-align: center;
+    }
+    .image {
+      width: 320px;
+      height: 230px;
     }
   }
 `;

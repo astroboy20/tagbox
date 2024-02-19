@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const HeaderFixedContainer = styled.div`
   background: #020d1e;
@@ -6,17 +6,35 @@ export const HeaderFixedContainer = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #fff;
-  padding: 2% 3% ;
-  position:fixed ;
-  width:100% ;
- box-sizing:border-box ;
- left:0 ;
- right:0 ;
+  padding: 2% 3%;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  .link{
+    text-decoration:none ;
+    color:#fff ;
+  }
+  .link-event{
+    text-decoration:none ;
+    color:#000 ;
+  }
+  .active{
+    text-decoration:underline ;
+  }
 `;
 export const HeaderFixedStyle = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .link{
+    text-decoration:none ;
+    color:#fff ;
+  }
+  .active{
+    text-decoration:underline ;
+  }
   .center-nav {
     display: flex;
     gap: 40px;
@@ -40,7 +58,6 @@ export const HeaderFixedStyle = styled.nav`
     color: #020d1e;
     position: absolute;
     top: 115px;
-    
   }
   .event span {
     border-bottom: 1.5px solid #03193b;
@@ -61,17 +78,18 @@ export const HeaderFixedStyle = styled.nav`
     border: none;
     cursor: pointer;
   }
-  .hamburger{
-    display:none ;
+  .hamburger {
+    display: none;
   }
 
-  @media screen and (max-width:786px ) {
-    padding:4% 3% ;
-    .center-nav,.right-nav{
-      display:none ;
+  @media screen and (max-width: 786px) {
+    padding: 4% 3%;
+    .center-nav,
+    .right-nav {
+      display: none;
     }
-    .hamburger{
-      display:block ;
+    .hamburger {
+      display: block;
     }
   }
 `;
