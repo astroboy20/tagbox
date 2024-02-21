@@ -8,7 +8,7 @@ import {
 } from "./Header.style";
 import { Button } from "../Button/Button";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 
 const Header = () => {
   const [showEvent, setShowEvent] = useState(false);
@@ -26,7 +26,14 @@ const Header = () => {
       <HeaderContainer>
         <HeaderStyle>
           <div>
-            <Image src={"/image/tagbox.png"} className="logo" width={167} height={48} alt="logo" objectFit="contain"/>
+            <Image
+              src={"/images/tagbox.png"}
+              className="logo"
+              width={167}
+              height={48}
+              alt="logo"
+              objectFit="contain"
+            />
           </div>
 
           <div className="hamburger" onClick={handleNav}>
@@ -75,7 +82,6 @@ const Header = () => {
         </HeaderStyle>
         {show && (
           <MobileNav>
-            
             <Link href={"/blog"} className="link">
               Host an event
             </Link>
@@ -88,11 +94,8 @@ const Header = () => {
             <Link href={"/designs"} className="link">
               Designs
             </Link>
-            <Link href={"/notification"} className="link">
-              Notifications (3)
-            </Link>
-            <Link href={"/profile"} className="link">
-              Profile
+            <Link href={"/login"} className="link">
+              Login
             </Link>
           </MobileNav>
         )}

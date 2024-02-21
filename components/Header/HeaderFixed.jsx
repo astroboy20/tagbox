@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { reset } from "@/features/authSlice";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
+import {toast} from "react-toastify"
 
 const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
@@ -38,6 +39,8 @@ const HeaderFixed = () => {
   };
   const handleLogout = () => {
     dispatch(reset());
+    toast.success("successful")
+    router.push("/login")
   };
 
   return (

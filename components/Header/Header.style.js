@@ -23,8 +23,8 @@ export const HeaderStyle = styled.nav`
   justify-content: space-between;
   align-items: center;
   .logo{
-    width:100px ;
-    height:30px;
+    width:167px ;
+    height:45px;
   }
   .center-nav {
     display: flex;
@@ -73,6 +73,11 @@ export const HeaderStyle = styled.nav`
     display: none;
   }
   @media screen and (max-width: 786px) {
+    padding:6% ;
+    .logo{
+    width:100px ;
+    height:30px;
+  }
     .center-nav,
     .right-nav {
       display: none;

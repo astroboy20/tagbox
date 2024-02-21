@@ -87,6 +87,11 @@ export const HeaderFixedStyle = styled.nav`
   }
 
   @media screen and (max-width: 786px) {
+    /* padding:6% ; */
+    .logo{
+    width:100px ;
+    height:30px;
+  }
     padding: 4% 3%;
     .center-nav,
     .right-nav {
@@ -95,6 +100,8 @@ export const HeaderFixedStyle = styled.nav`
     .hamburger {
       display: block;
     }
+
+
   }
 `;
 

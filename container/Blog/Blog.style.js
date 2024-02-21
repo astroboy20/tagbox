@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BlogContainer = styled.div`
-  padding-top: 110px;
+  padding-top: 100px;
   .header {
     background: url("images/blog-bg.png");
     height: 400px;
@@ -33,11 +33,14 @@ export const BlogContainer = styled.div`
   }
 
   @media screen and (max-width: 786px) {
-    padding-top: 100px;
+    padding-top: 60px;
     .header {
       padding-top: 100px;
       height: 180px;
       width: 100%;
+      justify-content: center;
+    align-items: center;
+    color: #fff;
       
     }
     .header span {

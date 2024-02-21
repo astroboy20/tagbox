@@ -6,7 +6,7 @@ export const DesignStyle = styled.div`
   gap: 20px;
 
   .header {
-    margin-top: 110px;
+    margin-top: 100px;
     background: url("/images/design-bg.png");
     height: 400px;
     display: flex;
@@ -59,7 +59,7 @@ export const DesignStyle = styled.div`
 
   @media screen and (max-width: 786px) {
     .header {
-      margin-top: 100px;
+      margin-top: 60px;
       height: 180px;
       width: 100%;
     }
