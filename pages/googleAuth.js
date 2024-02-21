@@ -19,11 +19,11 @@ const GoogleAuth = () => {
     }
   }, [router]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.push("/");
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     router.push("/");
+  //   }
+  // }, [router]);
 
   return (
     <div
