@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const GoogleAuth = () => {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
+  const router = useRouter()
 
   useEffect(() => {
     const token = searchParams.get("token");
