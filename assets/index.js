@@ -2384,8 +2384,8 @@ export const Show = () => {
 export const Notification = () => {
   return (
     <svg
-      width="48"
-      height="48"
+      width="40px"
+      height="40px"
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -2409,8 +2409,8 @@ export const Notification = () => {
 export const ProfilePicture = () => {
   return (
     <svg
-      width={48}
-      height={48}
+    width="40px"
+    height="40px"
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -2440,8 +2440,8 @@ export const ProfilePicture = () => {
 export const Location = () => {
   return (
     <svg
-      width="48"
-      height="48"
+    width="30px"
+    height="30px"
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -2460,8 +2460,8 @@ export const Location = () => {
 export const Date = () => {
   return (
     <svg
-      width="50"
-      height="50"
+    width="30px"
+    height="30px"
       viewBox="0 0 50 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -2479,8 +2479,8 @@ export const Date = () => {
 export const Upload = () => {
   return (
     <svg
-      width="48"
-      height="48"
+      width="30px"
+      height="30px"
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

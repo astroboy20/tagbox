@@ -62,9 +62,12 @@ export const EventStyle = styled.div`
     text-align: left;
   }
   span {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
-    line-height: 32px;
+  }
+  p{
+    font-size: 28px;
+    font-weight: 500;
   }
   @media screen and (max-width: 786px) {
     label {

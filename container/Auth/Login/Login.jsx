@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { login, reset } from "@/features/authSlice";
+import { login, login_with_google, reset } from "@/features/authSlice";
 import Image from "next/image";
 
 const Login = () => {
@@ -43,6 +43,15 @@ const Login = () => {
     }
     // dispatch(reset());
   }, [isSuccess, router]);
+
+  const loginWithgoogle = async () => {
+    dispatch(login_with_google());
+    // router.push("/googleAuth")
+
+    // const response = await axios.post("https://tagbox.onrender.com/v1/google")
+    // const data = response.json()
+    // navigate(data.url)
+  };
   return (
     <LoginContainer>
       <div className="right">
@@ -107,6 +116,8 @@ const Login = () => {
                 width={24}
                 height={24}
                 alt="google-logo"
+                style={{ cursor: "pointer" }}
+                onClick={loginWithgoogle}
               />
             </p>
             <p>

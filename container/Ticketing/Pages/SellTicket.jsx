@@ -33,7 +33,7 @@ const SellTicket = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const token = user ? user.data||user : "";
+  const token = user ? user.data || user : "";
   console.log("token", token);
 
   const generateId = () => {
@@ -213,11 +213,28 @@ const SellTicket = () => {
             <Input
               variant={"event-input"}
               label={"Date of event?"}
-              icon={<Date />}
+              // icon={}
               value={eventDetails.date}
               name="date"
               onChange={handleChange}
             />
+
+            <EventStyle>
+              <label>Date of event?</label>
+              <div>
+                <input
+                  id="date"
+                  type="date"
+                  name="date"
+                  value={eventDetails.date}
+                  onChange={handleChange}
+                />
+                <p>
+                  <Date />
+                </p>
+              </div>
+            </EventStyle>
+
             <Input
               variant={"event-input"}
               value={eventDetails.dress_code}
