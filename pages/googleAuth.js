@@ -10,7 +10,7 @@ const GoogleAuth = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [redirecting, setRedirecting] = useState(false); // State to manage redirection
-  const { isSuccess } = useSelector((state) => state.auth);
+  const { isSuccess, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const token = searchParams.get("token");
@@ -21,7 +21,7 @@ const GoogleAuth = () => {
   }, [router]);
 
   useEffect(() => {
-    if (isSuccess && redirecting) {
+    if (user && redirecting) {
       router.push("/"); // Redirect to homepage when isSuccess is true and redirecting is true
     }
   }, [isSuccess, redirecting, router]);
