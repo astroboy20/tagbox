@@ -28,6 +28,10 @@ export const HeaderFixedStyle = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .logo{
+    width:167px ;
+    height:48px ;
+  }
   .link{
     text-decoration:none ;
     color:#fff ;

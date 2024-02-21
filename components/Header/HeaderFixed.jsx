@@ -17,13 +17,14 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { reset } from "@/features/authSlice";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
+import Image from "next/image";
 
 const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
   };
@@ -35,17 +36,22 @@ const HeaderFixed = () => {
   const ActiveLink = (href) => {
     return router.pathname === href;
   };
-  const handleLogout = ()=>{
-    dispatch(reset())
-  }
+  const handleLogout = () => {
+    dispatch(reset());
+  };
 
   return (
     <>
       <HeaderFixedContainer>
         <HeaderFixedStyle>
-          <div>
-            <Logo />
-          </div>
+          <Image
+            src={"/images/tagbox.png"}
+            className="logo"
+            width={167}
+            height={48}
+            alt="logo"
+            objectFit="contain"
+          />
           <div className="hamburger" onClick={handleNav}>
             {show ? <Close /> : <Hamburger />}
           </div>
@@ -102,7 +108,6 @@ const HeaderFixed = () => {
           </div>
         </HeaderFixedStyle>
         {show && (
-          
           <MobileNav>
             <span onClick={handleShowEvent} className="events">
               <span className="text">

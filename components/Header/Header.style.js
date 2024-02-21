@@ -22,6 +22,10 @@ export const HeaderStyle = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .logo{
+    width:100px ;
+    height:30px ;
+  }
   .center-nav {
     display: flex;
     gap: 40px;

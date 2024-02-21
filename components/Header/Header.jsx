@@ -8,6 +8,7 @@ import {
 } from "./Header.style";
 import { Button } from "../Button/Button";
 import Link from "next/link";
+import Image from "next/image"
 
 const Header = () => {
   const [showEvent, setShowEvent] = useState(false);
@@ -25,7 +26,7 @@ const Header = () => {
       <HeaderContainer>
         <HeaderStyle>
           <div>
-            <Logo />
+            <Image src={"/image/tagbox.png"} className="logo" width={167} height={48} alt="logo" objectFit="contain"/>
           </div>
 
           <div className="hamburger" onClick={handleNav}>

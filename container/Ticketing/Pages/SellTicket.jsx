@@ -33,7 +33,7 @@ const SellTicket = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const token = user ? user.data : "";
+  const token = user ? user.data||user : "";
   console.log("token", token);
 
   const generateId = () => {
