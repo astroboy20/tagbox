@@ -1,11 +1,11 @@
 import {useEffect} from 'react'
 import { useSearchParams } from 'next/navigation'
-import {Dispatch, useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { updateUser } from '@/features/authSlice'
 
 const GoogleAuth = () => {
     const searchParams = useSearchParams()
-    const dispatch = Dispatch()
+    const dispatch = useDispatch()
     const token = searchParams.get("token")
     console.log(token)
 
