@@ -67,7 +67,8 @@ export const authSlice = createSlice({
       state.message = "";
     },
     updateUser: (state,action)=>{
-      state.user = action.payload
+      state.user = {data:action.payload}
+      // state.message = 
     }
   },
   extraReducers: (builder) => {
