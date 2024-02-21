@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "@/features/authSlice";
@@ -9,21 +9,22 @@ const GoogleAuth = () => {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [redirecting, setRedirecting] = useState(false); // State to manage redirection
   const { isSuccess } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const token = searchParams.get("token");
     if (token) {
       dispatch(updateUser(token));
-      // router.push("/");
+      setRedirecting(true); // Set redirecting to true when token is received
     }
   }, [router]);
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     router.push("/");
-  //   }
-  // }, [router]);
+  useEffect(() => {
+    if (isSuccess && redirecting) {
+      router.push("/"); // Redirect to homepage when isSuccess is true and redirecting is true
+    }
+  }, [isSuccess, redirecting, router]);
 
   return (
     <div
