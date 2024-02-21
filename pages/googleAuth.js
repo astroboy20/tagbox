@@ -4,25 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "@/features/authSlice";
 import { useRouter } from "next/router";
 import { RotatingLines, ThreeCircles } from "react-loader-spinner";
+import {toast} from "react-toastify"
 
 const GoogleAuth = () => {
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const router = useRouter();
-  const [redirecting, setRedirecting] = useState(false); // State to manage redirection
+  const [redirecting, setRedirecting] = useState(false); 
   const { isSuccess, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const token = searchParams.get("token");
     if (token) {
       dispatch(updateUser(token));
-      setRedirecting(true); // Set redirecting to true when token is received
+      setRedirecting(true); 
     }
   }, [router]);
 
   useEffect(() => {
     if (user && redirecting) {
-      router.push("/"); // Redirect to homepage when isSuccess is true and redirecting is true
+      router.push("/"); 
+      toast.success("Request was successul")
     }
   }, [isSuccess, redirecting, router]);
 
