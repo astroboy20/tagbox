@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSearchParams } from 'next/navigation'
 
-const googleAuth = () => {
+const GoogleAuth = () => {
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
     console.log(token)
@@ -10,4 +10,4 @@ const googleAuth = () => {
   )
 }
 
-export default googleAuth
+export default GoogleAuth

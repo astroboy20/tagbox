@@ -62,7 +62,7 @@ const Register = () => {
   }, [isSuccess, router]);
 
   const loginWithgoogle =async ()=>{
-    dispatch(loginWithGoogle())
+    dispatch(login_with_google())
     router.push("/googleAuth")
   }
   return (
