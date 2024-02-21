@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { register, reset,login_with_google } from "@/features/authSlice";
+import axios from "axios"
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -60,10 +61,16 @@ const Register = () => {
     }
     // dispatch(reset());
   }, [isSuccess, router]);
-
+  const navigate = (href) =>{
+    window.location.href = url
+  }
   const loginWithgoogle =async ()=>{
     dispatch(login_with_google())
-    router.push("/googleAuth")
+    // router.push("/googleAuth")
+
+    // const response = await axios.post("https://tagbox.onrender.com/v1/google")
+    // const data = response.json()
+    // navigate(data.url)
   }
   return (
     <RegisterContainer>
@@ -157,6 +164,7 @@ const Register = () => {
                 width={24}
                 height={24}
                 alt="google-logo"
+                style={{cursor:"pointer"}}
                 onClick={loginWithgoogle}
               />
             </p>

@@ -118,7 +118,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         state.isError = false;
-        state.message = action.payload.message;
+        state.message = action.payload;
         toast.success(state.message)
       })
       .addCase(login_with_google.rejected, (state, action) => {

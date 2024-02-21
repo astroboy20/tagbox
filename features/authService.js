@@ -16,8 +16,8 @@ const login = async (userData) => {
 
 //login user
 const loginWithGoogle = async () => {
-  const response = await axios.post(`${API_URL}/google`);
-  return response.data;
+ window.location.href = ("https://tagbox.onrender.com/v1/google");
+ 
 };
 
 const authService = {
