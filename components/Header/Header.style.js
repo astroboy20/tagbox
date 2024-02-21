@@ -24,7 +24,7 @@ export const HeaderStyle = styled.nav`
   align-items: center;
   .logo{
     width:100px ;
-    height:30px ;
+    height:30px;
   }
   .center-nav {
     display: flex;
