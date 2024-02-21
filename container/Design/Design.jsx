@@ -17,7 +17,7 @@ const Design = () => {
         <div className="input-button">
           <div className="input">
             <input placeholder="Email" />
-            <Button variant={"dark-button"}>Enter E-mail</Button>
+            <Button variant={"dark-button"}>Search Here</Button>
           </div>
           <button className="button">Upload Photo</button>
         </div>

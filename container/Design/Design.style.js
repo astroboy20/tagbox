@@ -28,13 +28,16 @@ export const DesignStyle = styled.div`
     font-weight: 400;
     line-height: 28px;
     text-align: center;
+    padding:0 6% ;
   }
   .input-button{
     display:flex ;
+    text-align:center ;
+    justify-content:center ;
     gap: 10px;
   }
   .body .input {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content:space-between ;
     padding: 5px;
@@ -70,13 +73,19 @@ export const DesignStyle = styled.div`
     .body p{
         font-size:18px ;
     }
+    .input-button{
+        width:auto ;
+    }
     .input {
       width: 80%;
       margin: 0 auto;
     }
     input {
-      /* width: 60%; */
-      /* padding: 5px 0 5px; */
+      width: 60%;
+      padding: 5px 0 5px;
+    }
+    .button{
+        font-size:14px ;
     }
   }
 `;

@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { register, reset } from "@/features/authSlice";
+import { register, reset,login_with_google } from "@/features/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -61,6 +61,10 @@ const Register = () => {
     // dispatch(reset());
   }, [isSuccess, router]);
 
+  const loginWithgoogle =async ()=>{
+    dispatch(loginWithGoogle())
+    router.push("/googleAuth")
+  }
   return (
     <RegisterContainer>
       <div className="left">
@@ -153,6 +157,7 @@ const Register = () => {
                 width={24}
                 height={24}
                 alt="google-logo"
+                onClick={loginWithgoogle}
               />
             </p>
             <p>

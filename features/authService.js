@@ -14,9 +14,16 @@ const login = async (userData) => {
   return response.data;
 };
 
+//login user
+const loginWithGoogle = async () => {
+  const response = await axios.post(`${API_URL}/google`, );
+  return response.data;
+};
+
 const authService = {
   register,
   login,
+  loginWithGoogle
 };
 
 export default authService;

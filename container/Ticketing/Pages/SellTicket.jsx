@@ -244,7 +244,7 @@ const SellTicket = () => {
                   type="file"
                   onChange={handleImageChange}
                 />
-                <p>
+                <h1>
                   {loading ? (
                     <InfinitySpin
                       visible={true}
@@ -255,7 +255,7 @@ const SellTicket = () => {
                   ) : (
                     <Upload />
                   )}
-                </p>
+                </h1>
               </div>
             </EventStyle>
 
@@ -342,7 +342,7 @@ const SellTicket = () => {
               </div>
             </div>
 
-            <Button variant="dark-button">Sell Ticket</Button>
+            <Button variant="dark-button">Submit</Button>
           </form>
         </TicketingStyle>
       )}

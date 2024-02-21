@@ -99,17 +99,40 @@ export const MobileNav = styled.div`
   flex-direction: column;
   background-color: #13171efa;
   height: 925vh;
-  position: absolute;
+  position: relative;
   z-index: 1000;
   width: 100%;
   left: 0;
   padding: 6%;
-  gap: 30px;
+  gap: 40px;
   .link {
     text-decoration: none;
     color: #fff;
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
+  }
+  .text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+  }
+   .event {
+    display: flex;
+    flex-direction:column ;
+    gap: 20px;
+    /* background-color: #c1e8ff; */
+    /* color: #020d1e; */
+    color:#fff ;
+   
+  }
+  .event span {
+    /* border-bottom: 1.5px solid #03193b; */
+    padding: 10px;
+    text-align: left;
+  }
+  .event .link-event{
+    color: #fff;
   }
 `;

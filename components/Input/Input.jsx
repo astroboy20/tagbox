@@ -6,7 +6,7 @@ import {
   InputStyle,
   PasswordStyle,
 } from "./Input.style";
-import { Show } from "@/assets";
+import { Dont_Show, Show } from "@/assets";
 
 const Input = ({
   name,
@@ -40,7 +40,7 @@ const Input = ({
           onChange={onChange}
           name={name}
         />
-        <span onClick={handleShow}>{show ? <Show /> : <Show />} </span>
+        <span onClick={handleShow}>{show ? <Show /> : <Dont_Show />} </span>
       </div>
       <div style={{ color: "red" }}>{error}</div>
     </InputStyle>

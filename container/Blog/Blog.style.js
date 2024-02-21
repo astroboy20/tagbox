@@ -33,10 +33,12 @@ export const BlogContainer = styled.div`
   }
 
   @media screen and (max-width: 786px) {
+    padding-top: 100px;
     .header {
       padding-top: 100px;
       height: 180px;
       width: 100%;
+      
     }
     .header span {
       font-size: 24px;

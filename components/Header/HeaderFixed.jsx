@@ -53,7 +53,11 @@ const HeaderFixed = () => {
               {showEvent && (
                 <>
                   <div className="event">
-                    <span><Link href={"/host-event"} className="link-event">Host an Event</Link></span>
+                    <span>
+                      <Link href={"/host-event"} className="link-event">
+                        Host an Event
+                      </Link>
+                    </span>
                     <span>Attend an Event</span>
                     <span>Manage Event</span>
                   </div>
@@ -92,10 +96,27 @@ const HeaderFixed = () => {
           </div>
         </HeaderFixedStyle>
         {show && (
+          
           <MobileNav>
-            <Link href={"/blog"} className="link">
-              Host an event
-            </Link>
+            <span onClick={handleShowEvent} className="events">
+              <span className="text">
+                <p>Host an Event</p>
+                <Arrow_Down />
+              </span>
+              {showEvent && (
+                <>
+                  <div className="event">
+                    <span>
+                      <Link href={"/host-event"} className="link-event">
+                        Host an Event
+                      </Link>
+                    </span>
+                    <span>Attend an Event</span>
+                    <span>Manage Event</span>
+                  </div>
+                </>
+              )}
+            </span>
             <Link href={"/blog"} className="link">
               Blog
             </Link>

@@ -47,7 +47,7 @@ export const PasswordStyle = styled.input`
 export const EventStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 
   div {
     display: flex;
@@ -77,6 +77,9 @@ export const EventStyle = styled.div`
     }
     p{
       font-size:16px ;
+    }
+    h1{
+      display:none ;
     }
   }
 `;
