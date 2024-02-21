@@ -67,7 +67,7 @@ export const authSlice = createSlice({
       state.message = "";
     },
     updateUser: (state,action)=>{
-      state.user = action.payload
+      state.user = {token: action.payload}
     }
   },
   extraReducers: (builder) => {
