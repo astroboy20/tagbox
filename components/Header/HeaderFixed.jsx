@@ -16,11 +16,14 @@ import {
 } from "./HeaderFixed.style";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { reset } from "@/features/authSlice";
+import {useDispatch} from "react-redux"
 
 const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch()
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
   };
@@ -32,6 +35,9 @@ const HeaderFixed = () => {
   const ActiveLink = (href) => {
     return router.pathname === href;
   };
+  const handleLogout = ()=>{
+    dispatch(reset())
+  }
 
   return (
     <>
@@ -132,6 +138,7 @@ const HeaderFixed = () => {
             <Link href={"/profile"} className="link">
               Profile
             </Link>
+            <span onClick={handleLogout}>Logout</span>
           </MobileNav>
         )}
       </HeaderFixedContainer>
