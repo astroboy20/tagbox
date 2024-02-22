@@ -11,6 +11,7 @@ import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
+import Color from "./Color";
 
 const SingleEvent = ({ name }) => {
   const { user } = useSelector((state) => state.auth);
@@ -257,7 +258,7 @@ const SingleEvent = ({ name }) => {
 
           {/* QR code */}
           <EventStyle>
-            <label>Generate QR code and customized link for your eventt</label>
+            <label>Generate QR code and customized link for your event</label>
 
             <div>
               <div className="qr-input">
@@ -267,6 +268,7 @@ const SingleEvent = ({ name }) => {
                     margin: "2px 0",
                     maxWidth: 64,
                     width: "100%",
+                    textAlign: "left",
                   }}
                 >
                   {uniqueId && (
@@ -349,31 +351,21 @@ const SingleEvent = ({ name }) => {
             </div>
           </EventStyle>
 
-          <EventStyle>
+          {/* <EventStyle>
             <label>
               If No, we have varieties of matching colour that you can pick from
             </label>
+            <Color />
+          </EventStyle> */}
+
+          <div className="event-display">
             <div>
-              <input
-                id="image"
-                accept="image/*"
-                type="file"
-                onChange={handleImageChange}
-              />
-              <h1>
-                {loading ? (
-                  <InfinitySpin
-                    visible={true}
-                    width="50"
-                    color="#000"
-                    ariaLabel="infinity-spin-loading"
-                  />
-                ) : (
-                  <Upload />
-                )}
-              </h1>
+              {" "}
+              If No, we have varieties of matching colour that you can pick from
             </div>
-          </EventStyle>
+
+            <Color />
+          </div>
 
           <div className="event-display">
             <div>Consultation and Planning</div>
@@ -535,49 +527,34 @@ const SingleEvent = ({ name }) => {
             </div>
           </div>
 
-          <Input
-            variant={"event-input"}
-            label={"Event Tag Line "}
-            placeholder={"Write your tagline here..."}
-            value={eventDetails.tag_line}
-            name="tag_line"
-            onChange={handleChange}
-          />
-
-          <Input
-            variant={"event-input"}
-            label={"Ticket price"}
-            placeholder={"Enter Your Ticket price here..."}
-            value={eventDetails.ticket_price}
-            name="ticket_price"
-            onChange={handleChange}
-          />
-
-          <div className="event-display">
-            <span>Do you want to display this event publicly?</span>
-            <div className="input">
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Agree</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="no"
-                  value="No"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(false)}
-                />
-                <label htmlFor="no">Disagree</label>
-              </div>
+          <EventStyle>
+            <label>Wishlist</label>
+            <label>
+              Curate your wishlist here and have well wishers gift you with ease
+              and without stress
+            </label>
+            <label>Upload image of preferred items</label>
+            <div>
+              <input
+                id="image"
+                accept="image/*"
+                type="file"
+                onChange={handleImageChange}
+              />
+              <h1>
+                {loading ? (
+                  <InfinitySpin
+                    visible={true}
+                    width="50"
+                    color="#000"
+                    ariaLabel="infinity-spin-loading"
+                  />
+                ) : (
+                  ""
+                )}
+              </h1>
             </div>
-          </div>
+          </EventStyle>
 
           <Button variant="dark-button">Submit Response</Button>
         </form>
