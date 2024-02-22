@@ -26,6 +26,12 @@ const Header = () => {
   const handleNav = () => {
     setShow(!show);
   };
+
+  const handleLogout = () => {
+    dispatch(reset());
+    toast.success("successful")
+    router.push("/login")
+  };
   return (
     <>
       <HeaderContainer>
@@ -78,7 +84,7 @@ const Header = () => {
           </div>
           <div className="right-nav">
             {token ? (
-              <p>Logout</p>
+              <p onClick={handleLogout}>Logout</p>
             ) : (
               <p>
                 <Link href={"/login"} className="links">
@@ -105,7 +111,7 @@ const Header = () => {
               Designs
             </Link>
             {token ? (
-              <p>Logout</p>
+              <p onClick={handleLogout}>Logout</p>
             ) : (
               <Link href={"/login"} className="links">
                 Login

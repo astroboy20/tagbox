@@ -1,9 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { EventContainer } from "./Events.style";
 import Image from "next/image";
 import { Button } from "@/components/Button/Button";
-
+import axios from "axios";
+import { useSelector } from "react-redux";
+import Link from "next/link";
+import { EventImages } from "./Images";
 const Events = () => {
+  const [eventTypes, setEventType] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const token = user ? user.data || user : "";
+
+  const fetchEventTypes = async () => {
+    try {
+      const response = await axios.get(
+        "https://tagbox.onrender.com/v1/event-types",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setEventType(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEventTypes();
+  }, []);
+
+  const getEventImage = (eventType) => {
+    const eventImageMap = {
+      Wedding: "Wedding",
+      Birthday: "Birthday",
+      Graduation: "Graduation",
+      "House Warming": "House_Warming",
+      "Conference and Meetings": "Conference",
+      "Baby Shower": "Shower",
+      Hangout: "Hangout",
+      Others: "Others",
+    };
+
+    const mappedEventType = eventImageMap[eventType] || eventType;
+    return EventImages[mappedEventType];
+  };
+
   return (
     <EventContainer>
       <span>
@@ -12,101 +56,18 @@ const Events = () => {
         best to give you the ease you deserve.
       </span>
       <div className="box">
-        <div className="sub-box">
-          <Image
-            src={"/images/wedding.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Wedding</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/birthday.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Birthday</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/Graduation.png"}
-            width={220}
-            height={180}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Graduation</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/house-warming.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-          />
-          <p>House Warming</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/meetings.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p className="special">Conference and Meetings</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/baby-showers.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Baby Shower</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/hangout.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Hangout</p>
-          <Button variant={"dark-button"}>Hangout</Button>
-        </div>
-        <div className="sub-box">
-          <Image
-            src={"/images/Others.png"}
-            width={150}
-            height={150}
-            alt="weeding"
-            className="image"
-            objectFit = "cover"
-          />
-          <p>Others</p>
-          <Button variant={"dark-button"}>Make it happen</Button>
-        </div>
-        
+        {eventTypes.map((eventType) => (
+          <div className="sub-box" key={eventType._id}>
+            {getEventImage(eventType.event_type)}
+            <p>{eventType?.event_type}</p>
+            <Button variant={"dark-button"}>
+              <Link className="link" href={`host-event/${eventType?._id}`}>
+                {" "}
+                Make it happen
+              </Link>
+            </Button>
+          </div>
+        ))}
       </div>
     </EventContainer>
   );

@@ -42,6 +42,10 @@ export const EventContainer = styled.div`
     width: 220px;
     height: 220px;
   }
+  .link{
+    text-decoration: none;
+    color:#C1E8FF ;
+  }
 
   @media screen and (max-width: 786px) {
     padding: 6%;

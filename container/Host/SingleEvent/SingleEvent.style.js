@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TicketingStyle = styled.div`
+export const SingleEventStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -90,20 +90,14 @@ export const TicketingStyle = styled.div`
     line-height: 24px;
   }
 
-  .payment-method .input,
-  .event-display .input {
-    display: flex;
-    padding: 20px 0;
-    gap: 40px;
+  
+  .copy-generate, .qr-input{
+    display:flex ;
+    flex-direction:column ;
+    justify-content:left ;
   }
 
-  //buy ticket style
-  .latest-event span,
-  .other-event span {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 48px;
-  }
+  
 
   @media screen and (max-width: 786px) {
     .header {

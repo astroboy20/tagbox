@@ -19,6 +19,8 @@ export const HeroContainer = styled.div`
 
   @media screen and (max-width: 786px) {
     padding-top:110px ;
+    height:200px ;
+    background-size:cover ;
     span {
       font-size: 24px;
       font-weight: 700;

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { register, reset,login_with_google } from "@/features/authSlice";
 import axios from "axios"
+import Spinner from "@/components/Spinner/Spinner";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -146,7 +147,8 @@ const Register = () => {
             error={passwordError}
           />
           <Button type variant={"dark-button"} disabled={!!passwordError}>
-            Sign Up
+            {isLoading ? <Spinner/> : "Sign Up"}
+            
           </Button>
           <div className="links">
             <p

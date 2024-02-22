@@ -12,6 +12,7 @@ import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
+import Spinner from "@/components/Spinner/Spinner";
 
 const SellTicket = () => {
   const { option } = useOptionContext();
@@ -33,6 +34,7 @@ const SellTicket = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [isloading, setisLoading] = useState(false);
   const token = user ? user.data || user : "";
   console.log("token", token);
 
@@ -55,7 +57,7 @@ const SellTicket = () => {
   };
 
   const handleEventTypeChange = (type) => {
-    setVisibility(type);
+    setEventType(type);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
       event_type: type,
@@ -105,6 +107,7 @@ const SellTicket = () => {
   };
 
   const handleSubmit = (e) => {
+    setisLoading(true);
     e.preventDefault();
     if (eventDetails) {
       axios
@@ -115,9 +118,11 @@ const SellTicket = () => {
         })
         .then((response) => {
           toast.success(response.data.message);
+          setisLoading(false);
         })
         .catch((error) => {
           toast.error(error);
+          setisLoading(false);
         });
     } else {
       toast.warning("Enter the required field");
@@ -136,7 +141,7 @@ const SellTicket = () => {
                   width={340}
                   height={340}
                   alt="meeting"
-                  // objectFit="cover"
+                  objectFit="contain"
                   className="image-box"
                 />
                 <div className="radio-input">
@@ -145,7 +150,7 @@ const SellTicket = () => {
                     id="physical"
                     value="Physical"
                     name="eventType"
-                    checked={visibility === "Physical"}
+                    checked={event_type === "Physical"}
                     onChange={() => handleEventTypeChange("Physical")}
                   />
                   <label>Physical</label>
@@ -210,10 +215,9 @@ const SellTicket = () => {
               name="location"
               onChange={handleChange}
             />
-           
 
             <EventStyle>
-              <label>Date and Tome of event?</label>
+              <label>Date and Time of event?</label>
               <div>
                 <input
                   id="date"
@@ -221,7 +225,7 @@ const SellTicket = () => {
                   name="date"
                   value={eventDetails.date}
                   onChange={handleChange}
-                  style={{border:"none"}}
+                  style={{ border: "none" }}
                 />
                 <span>
                   <Date />
@@ -236,15 +240,6 @@ const SellTicket = () => {
               onChange={handleChange}
               label={"Dress Code, if any"}
             />
-            {/* <Input
-              variant={"event-input"}
-              label={" "}
-              icon={<Upload />}
-              value={eventDetails.image}
-              name="image"
-              type={"file"}
-              onChange={handleImageChange}
-            /> */}
 
             <EventStyle>
               <label>Upload Image</label>
@@ -259,7 +254,7 @@ const SellTicket = () => {
                   {loading ? (
                     <InfinitySpin
                       visible={true}
-                      width="200"
+                      width="50"
                       color="#000"
                       ariaLabel="infinity-spin-loading"
                     />
@@ -334,7 +329,6 @@ const SellTicket = () => {
                     id="yes"
                     value="Yes"
                     name="visibility"
-                    // checked={visibility === true}
                     onChange={() => handleVisibilityTypeChange(true)}
                   />
                   <label htmlFor="yes">Agree</label>
@@ -345,7 +339,6 @@ const SellTicket = () => {
                     id="no"
                     value="No"
                     name="visibility"
-                    // checked={visibility === false}
                     onChange={() => handleVisibilityTypeChange(false)}
                   />
                   <label htmlFor="no">Disagree</label>
@@ -353,7 +346,9 @@ const SellTicket = () => {
               </div>
             </div>
 
-            <Button variant="dark-button">Submit</Button>
+            <Button variant="dark-button">
+              {isloading ? <Spinner /> : "Submit"}
+            </Button>
           </form>
         </TicketingStyle>
       )}

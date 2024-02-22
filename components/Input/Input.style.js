@@ -52,8 +52,8 @@ export const EventStyle = styled.div`
   div {
     display: flex;
     border-bottom: 1px solid #000;
-    align-items:center ;
     justify-content:space-between ;
+    
   }
   label {
     font-size: 32px;
@@ -68,6 +68,12 @@ export const EventStyle = styled.div`
   p{
     font-size: 28px;
     font-weight: 500;
+    padding:0 ;
+  }
+  .copy-generate, .qr-input{
+    display:flex ;
+    flex-direction:column ;
+    gap:0;
   }
   @media screen and (max-width: 786px) {
     label {
@@ -80,6 +86,8 @@ export const EventStyle = styled.div`
     }
     p{
       font-size:16px ;
+      font-weight: 500;
+
     }
     h1{
       display:none ;
@@ -93,7 +101,9 @@ export const EventDiv = styled.input`
   outline: none;
   border: none;
   /* border: 1px solid rgba(47, 46, 65, 0.2); */
-  width: 100%;
+  border:none ;
+  width: auto;
   padding: 10px 0px;
+  text-align:left ;
   
 `;

@@ -52,7 +52,21 @@ const Input = ({
         <span>{icon}</span>
       </div>
     </EventStyle>
-  ) : null;
+  ) :variant === "qr-input" ? (
+    <EventStyle>
+      <label>{label}</label>
+      <div>
+        <div className="input-qr">
+        <EventDiv type="text" value={value} name={name} onChange={onChange} placeholder={placeholder}/>
+        <span>{icon}</span>
+        </div>
+        <div className="copy-generate">
+        <span></span>
+        </div>
+       
+
+      </div>
+    </EventStyle>) : null ;
 };
 
 export { Input };

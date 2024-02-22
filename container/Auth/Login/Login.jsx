@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { login, login_with_google, reset } from "@/features/authSlice";
 import Image from "next/image";
+import Spinner from "@/components/Spinner/Spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -99,7 +100,10 @@ const Login = () => {
             }
           />
 
-          <Button variant={"dark-button"}>Sign Up</Button>
+          <Button variant={"dark-button"}>
+            {" "}
+            {isLoading ? <Spinner /> : "Log in"}
+          </Button>
           <div className="links">
             <p
               style={{
