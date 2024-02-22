@@ -210,28 +210,22 @@ const SellTicket = () => {
               name="location"
               onChange={handleChange}
             />
-            <Input
-              variant={"event-input"}
-              label={"Date of event?"}
-              // icon={}
-              value={eventDetails.date}
-              name="date"
-              onChange={handleChange}
-            />
+           
 
             <EventStyle>
-              <label>Date of event?</label>
+              <label>Date and Tome of event?</label>
               <div>
                 <input
                   id="date"
-                  type="date"
+                  type="datetime-local"
                   name="date"
                   value={eventDetails.date}
                   onChange={handleChange}
+                  style={{border:"none"}}
                 />
-                <p>
+                <span>
                   <Date />
-                </p>
+                </span>
               </div>
             </EventStyle>
 

@@ -9,10 +9,15 @@ import {
 import { Button } from "../Button/Button";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
+  const token = user ? user.token || user : "";
+  console.log(token)
 
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
@@ -72,17 +77,22 @@ const Header = () => {
             </p>
           </div>
           <div className="right-nav">
-            <p>
-              <Link href={"/login"} className="links">
-                Login
-              </Link>
-            </p>
+            {token ? (
+              <p>Logout</p>
+            ) : (
+              <p>
+                <Link href={"/login"} className="links">
+                  Login
+                </Link>
+              </p>
+            )}
+
             <p className={"nav-button"}>Schedule a Demo</p>
           </div>
         </HeaderStyle>
         {show && (
           <MobileNav>
-            <Link href={"/blog"} className="link">
+            <Link href={"/host-event"} className="link">
               Host an event
             </Link>
             <Link href={"/blog"} className="link">
@@ -94,9 +104,13 @@ const Header = () => {
             <Link href={"/designs"} className="link">
               Designs
             </Link>
-            <Link href={"/login"} className="link">
-              Login
-            </Link>
+            {token ? (
+              <p>Logout</p>
+            ) : (
+              <Link href={"/login"} className="links">
+                Login
+              </Link>
+            )}
           </MobileNav>
         )}
 

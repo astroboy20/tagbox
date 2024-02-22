@@ -32,15 +32,15 @@ export const ChooseContainer = styled.div`
     text-align: left;
     width: 40%;
   }
-  .image {
-    width: 60%;
-  }
+ 
   @media screen and (max-width: 786px) {
    
    .slider-body{
     flex-direction:column-reverse ;
+    justify-content:center ;
    }
    .image{
+    text-align:center ;
     width:300px ;
     height:240px ;
    }
