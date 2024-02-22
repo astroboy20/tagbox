@@ -22,9 +22,9 @@ const GoogleAuth = () => {
   }, [router]);
 
   useEffect(() => {
-    if (user && redirecting) {
+    if (user ) {
       router.push("/"); 
-      toast.success("Request was successul")
+      toast.success("Login Successful")
     }
   }, [isSuccess, redirecting, router]);
 
