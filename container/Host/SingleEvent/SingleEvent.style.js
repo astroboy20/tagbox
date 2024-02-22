@@ -56,6 +56,11 @@ export const SingleEventStyle = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
+  .input{
+    display:flex ;
+    flex-direction:column ;
+    gap:20px;
+  }
   .radio-input {
     display: flex;
     gap: 10px;
@@ -67,12 +72,15 @@ export const SingleEventStyle = styled.div`
     gap: 60px;
   }
 
-  .payment-method label {
+  .event-display {
     display: flex;
-    gap: 10px;
-    font-size: 24px;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .event-display div {
+    font-size: 40px;
     font-weight: 500;
-    line-height: 24px;
+    line-height: 40px;
   }
   .event-display label {
     font-size: 24px;
@@ -90,21 +98,19 @@ export const SingleEventStyle = styled.div`
     line-height: 24px;
   }
 
-  
-  .copy-generate, .qr-input{
-    display:flex ;
-    flex-direction:column ;
-    justify-content:left ;
+  .copy-generate,
+  .qr-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
   }
-
-  
 
   @media screen and (max-width: 786px) {
     .header {
       margin-top: 60px;
       height: 200px;
       width: 100%;
-      background-size:cover ;
+      background-size: cover;
     }
     .header span {
       font-size: 24px;
@@ -147,10 +153,10 @@ export const SingleEventStyle = styled.div`
     }
 
     //buy ticket style
-  .latest-event span,
-  .other-event span {
-    font-size: 24px;
-  }
+    .latest-event span,
+    .other-event span {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -159,7 +165,7 @@ export const BodyStyle = styled.div`
   gap: 60px;
   border: 1px solid #020d1e4d;
   padding: 3%;
-  margin:2% 0  3% 0 ;
+  margin: 2% 0 3% 0;
   .text .span-header {
     font-size: 40px;
     font-weight: 500;
@@ -169,7 +175,7 @@ export const BodyStyle = styled.div`
     text-decoration: none;
   }
 
- .text  p {
+  .text p {
     font-size: 24px;
     font-weight: 400;
     line-height: 24px;
@@ -226,9 +232,9 @@ export const BodyStyle = styled.div`
   }
 
   @media screen and (max-width: 786px) {
-    flex-direction:column ;
-    gap:20px;
-    margin:5% 0  3% 0 ;
+    flex-direction: column;
+    gap: 20px;
+    margin: 5% 0 3% 0;
     span {
       font-size: 24px;
       font-weight: 700;
@@ -236,13 +242,13 @@ export const BodyStyle = styled.div`
       text-align: center;
     }
     .text .span-header {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 38px;
-    letter-spacing: 0em;
-    text-align: left;
-    text-decoration: none;
-  }
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: 0em;
+      text-align: left;
+      text-decoration: none;
+    }
     .text p {
       font-size: 18px;
       font-weight: 400;

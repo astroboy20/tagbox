@@ -298,14 +298,6 @@ const SingleEvent = ({ name }) => {
 
           {/* end */}
 
-          <Input
-            variant={"event-input"}
-            value={eventDetails.dress_code}
-            name="dress_code"
-            onChange={handleChange}
-            label={""}
-          />
-
           <div className="event-display">
             <div>Dress & Colour code</div>
             <span>Do you have any dress or colour code? </span>
@@ -410,6 +402,135 @@ const SingleEvent = ({ name }) => {
                   onChange={() => handleVisibilityTypeChange(false)}
                 />
                 <label htmlFor="no">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div className="event-display">
+            <div>If yes, what type of consultation?</div>
+            <div className="event-box">
+              <div className="sub-box">
+                <Image
+                  src={"/images/meetings.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="contain"
+                  className="image-box"
+                />
+                <div className="radio-input">
+                  <input
+                    type="radio"
+                    id="physical"
+                    value="Physical"
+                    name="eventType"
+                    checked={event_type === "Physical"}
+                    onChange={() => handleEventTypeChange("Physical")}
+                  />
+                  <label>Physical (one-on-one) consultation.</label>
+                </div>
+              </div>
+              <div className="sub-box">
+                <Image
+                  src={"/images/Virtual-meeting.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box"
+                />
+
+                <div className="radio-input">
+                  <input
+                    type="radio"
+                    id="virtual"
+                    value="Virtual"
+                    name="eventType"
+                    checked={event_type === "Virtual"}
+                    onChange={() => handleEventTypeChange("Virtual")}
+                  />
+                  <label>Virtual (via calls and emails) consultation. </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Input
+            variant={"event-input"}
+            label={
+              "For physical consultation, check here for your nearest location "
+            }
+            placeholder={"Ikeja"}
+            value={eventDetails.tag_line}
+            name="tag_line"
+            onChange={handleChange}
+          />
+
+          <div className="event-display">
+            <div>Tick the frequency of your consultation.</div>
+
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Monday</label>
+              </div>
+
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Tuesdays</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Wednesdays</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Thursdays</label>
+              </div>
+
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Fridays</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Saturdays</label>
               </div>
             </div>
           </div>

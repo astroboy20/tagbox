@@ -9,12 +9,13 @@ import {
 import { Button } from "../Button/Button";
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
   const token = user ? user.token || user : "";
   console.log(token)
