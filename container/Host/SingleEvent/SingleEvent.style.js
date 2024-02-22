@@ -144,9 +144,13 @@ export const SingleEventStyle = styled.div`
       font-size: 18px;
     }
     .event-display div {
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 40px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+
+    .color-picker{
+        display:flex ;
     }
   }
 `;
@@ -154,21 +158,27 @@ export const SingleEventStyle = styled.div`
 export const ColorStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding-top: 10px;
-  width: 100%;
-  
+  gap:75px;
+  position:relative ;
+    left:0 ;
+    right:0 ;
+    z-index:10 ;
+
   .sub-box {
     display: flex;
     flex-direction: column;
-    width:23% ;
-    
+    width: 20%;
    
   }
-   .a {
+
+  .sub-box .a {
     background-color: #3976a2;
     height: 120px;
     border-radius: 8px;
+    display:flex ;
+    width:100% ;
+    
   }
   .sub-box .b {
     background-color: #e9e6dd;
@@ -178,7 +188,13 @@ export const ColorStyle = styled.div`
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    width:100% ;
+    position:absolute ;
+    top:80px ;
+    right:0 ;
+    left:0 ;
+    width:100% ;
   }
   .sub-box .c {
     background-color: #274140;
@@ -186,73 +202,88 @@ export const ColorStyle = styled.div`
     border-radius: 8px;
   }
   .sub-box .d {
-    background-color: #99BC44;
+    background-color: #99bc44;
     height: 100px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    position:absolute ;
+    top:80px ;
+    width:100% ;
   }
   .sub-box .e {
-    background-color: #3F4D98;
+    background-color: #3f4d98;
     height: 120px;
     border-radius: 8px;
   }
   .sub-box .f {
-    background-color: #E47178;
+    background-color: #e47178;
     height: 100px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    position:absolute ;
+    top:80px ;
+    width:100% ;
   }
   .sub-box .g {
-    background-color: #E09BAD;
+    background-color: #e09bad;
     height: 120px;
     border-radius: 8px;
   }
   .sub-box .h {
-    background-color: #DCDDDF;
+    background-color: #dcdddf;
     top: -90px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    position:absolute ;
+    top:80px ;
+    width:100% ;
   }
   .sub-box .e {
-    background-color: #3F4D98;
+    background-color: #3f4d98;
     height: 120px;
     border-radius: 8px;
   }
   .sub-box .f {
-    background-color: #E47178;
+    background-color: #e47178;
     top: -90px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    position:absolute ;
+    top:80px ;
+    width:100% ;
   }
   .sub-box .e {
-    background-color: #3F4D98;
+    background-color: #3f4d98;
     height: 120px;
     border-radius: 8px;
   }
   .sub-box .f {
-    background-color: #E47178;
+    background-color: #e47178;
     top: -90px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    padding-top:20px ;
+    padding-top: 20px;
+    position:absolute ;
+    top:80px ;
+    width:100% ;
   }
 `;

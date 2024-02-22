@@ -1,5 +1,5 @@
 import { Date, Location, Upload } from "@/assets";
-import { SingleEventStyle } from "./SingleEvent.style";
+import { ColorStyle, SingleEventStyle } from "./SingleEvent.style";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/Input/Input";
@@ -239,7 +239,7 @@ const SingleEvent = ({ name }) => {
                 name="date"
                 value={eventDetails.date}
                 onChange={handleChange}
-                style={{ border: "none" }}
+                // style={{ border: "none" }}
               />
               <span>
                 <Date />
@@ -363,8 +363,47 @@ const SingleEvent = ({ name }) => {
               {" "}
               If No, we have varieties of matching colour that you can pick from
             </div>
+           
+            {/* <ColorStyle>
+              <div className="sub-box" >
+                <section className="a">a</section>
+                <section className="b">Pacific blue & Linen</section>
+              </div>
+              <div className="sub-box">
+                <div className="c"></div>
+                <div className="d">Pine & Aloe green</div>
+              </div>
 
-            <Color />
+              <div className="sub-box">
+                <div className="e"></div>
+                <div className="f">Indigo & Salmon</div>
+              </div>
+
+              <div className="sub-box">
+                <div className="g"></div>
+                <div className="h">Bubblegum & Harbor</div>
+              </div>
+
+              <div className="sub-box">
+                <div className="a"></div>
+                <div className="b">Pacific blue & Linen</div>
+              </div>
+
+              <div className="sub-box">
+                <div className="a"></div>
+                <div className="b">Pacific blue & Linen</div>
+              </div>
+
+              <div className="sub-box">
+                <div className="a"></div>
+                <div className="b">Pacific blue & Linen</div>
+              </div>
+
+              <div className="sub-box">
+                <div className="a"></div>
+                <div className="b">Pacific blue & Linen</div>
+              </div>
+            </ColorStyle> */}
           </div>
 
           <div className="event-display">

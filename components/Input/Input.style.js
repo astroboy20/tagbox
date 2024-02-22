@@ -94,6 +94,14 @@ export const EventStyle = styled.div`
     h1{
       display:none ;
     }
+    .copy-generate, .qr-input{
+    display:flex ;
+    flex-direction:column ;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    
+  }
   }
 `;
 export const EventDiv = styled.input`
@@ -107,5 +115,9 @@ export const EventDiv = styled.input`
   padding: 10px 0;
   font-size:16px ;
   text-align:left ;
+
+  @media screen and (max-width: 786px) {
+    width: 100%;
+  }
   
 `;

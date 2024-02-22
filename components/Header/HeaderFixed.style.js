@@ -111,7 +111,7 @@ export const MobileNav = styled.div`
   background-color: #13171efa;
   height: 925vh;
   position: relative;
-  z-index: 1000000000000000;
+  z-index: 100000000;
   width: 100%;
   left: 0;
   padding: 6%;
