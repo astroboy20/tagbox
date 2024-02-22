@@ -146,4 +146,11 @@ export const MobileNav = styled.div`
   .event .link-event{
     color: #fff;
   }
+  .links {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
 `;

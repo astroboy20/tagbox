@@ -17,7 +17,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { reset } from "@/features/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import {toast} from "react-toastify"
 
@@ -26,6 +26,12 @@ const HeaderFixed = () => {
   const [show, setShow] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  
+
+  const token = user ? user.token || user : "";
+  console.log(token)
+
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
   };
@@ -146,7 +152,13 @@ const HeaderFixed = () => {
             <Link href={"/profile"} className="link">
               Profile
             </Link>
-            <span onClick={handleLogout}>Logout</span>
+            {token ? (
+              <p onClick={handleLogout}>Logout</p>
+            ) : (
+              <Link href={"/login"} className="links">
+                Login
+              </Link>
+            )}
           </MobileNav>
         )}
       </HeaderFixedContainer>
