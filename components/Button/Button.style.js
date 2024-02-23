@@ -33,11 +33,47 @@ export const DarkButton = styled.button`
   background-color: #020d1e;
   color: #c1e8ff;
   cursor: pointer;
+
   @media screen and (max-width: 786px) {
     font-weight: 500;
     font-size: 16px;
     padding: 8px, 10px, 8px, 10px;
     border-radius: 4px;
     gap: 8px;
+  }
+`;
+export const DarkTransparent = styled.button`
+  padding: 14px 12px;
+  border-radius: 4px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+
+  border: 1px solid #000;
+  background: none;
+  color: #000;
+  cursor: pointer;
+  @media screen and (max-width: 786px) {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+  }
+`;
+
+export const DarkWhite = styled.button`
+  border: none;
+  padding: 16px 12px;
+  border-radius: 4px;
+  background-color: #020d1e;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+
+  color: #fff;
+  cursor: pointer;
+  @media screen and (max-width: 786px) {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
   }
 `;

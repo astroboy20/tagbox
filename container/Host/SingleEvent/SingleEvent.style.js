@@ -25,7 +25,7 @@ export const SingleEventStyle = styled.div`
     text-decoration: underline;
   }
   .body {
-    padding: 0% 6%;
+    padding: 0% 3%;
   }
 
   .body .options p {
@@ -81,10 +81,10 @@ export const SingleEventStyle = styled.div`
   .event-display {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
   }
   .event-display div {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 500;
     line-height: 40px;
   }
@@ -97,6 +97,55 @@ export const SingleEventStyle = styled.div`
   .event-display span {
     font-size: 24px;
     font-weight: 400;
+    line-height: 24px;
+  }
+  .event-display .colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+  .event-display .color {
+    width: 294px;
+    height: 200px;
+  }
+  .event-display .sub-color {
+    width: 294px;
+    height: 140px;
+  }
+
+  .event-display .images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    text-align: center;
+  }
+  .event-display .image {
+    width: 400px;
+    height: 500px;
+  }
+  .event-display .image-button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    gap: 150px;
+    text-align: center;
+  }
+  .event-display .image-button .image {
+    width: 600px;
+    height: 400px;
+  }
+  .event-display .image-button .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .event-display .image-button .buttons p {
+    text-decoration: underline;
+    font-size: 24px;
+    font-weight: 500;
     line-height: 24px;
   }
 
@@ -148,142 +197,49 @@ export const SingleEventStyle = styled.div`
       font-weight: 500;
       line-height: 18px;
     }
-
-    .color-picker{
-        display:flex ;
+    .event-display .colors {
+      gap: 10px;
+      /* justify-content:center ; */
+    }
+    .event-display .color {
+      width: 150px;
+      height: 70px;
+    }
+    .event-display .sub-color {
+      width: 150px;
+      height: 60px;
+    }
+    .event-display .images {
+      justify-content: center;
+      gap: 5px;
+    }
+    .event-display .image {
+      width: 110px;
+      height: 150px;
+    }
+    .event-display .image-button {
+      gap: 10px;
+    }
+    .event-display .image-button .image {
+      width: 150px;
+      height: 100px;
+    }
+    .event-display .image-button .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+    .event-display .image-button .buttons p {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 12px;
+    }
+    .copy-generate p {
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
     }
   }
 `;
 
-export const ColorStyle = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 10px;
-  gap:75px;
-  position:relative ;
-    left:0 ;
-    right:0 ;
-    z-index:10 ;
-
-  .sub-box {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-   
-  }
-
-  .sub-box .a {
-    background-color: #3976a2;
-    height: 120px;
-    border-radius: 8px;
-    display:flex ;
-    width:100% ;
-    
-  }
-  .sub-box .b {
-    background-color: #e9e6dd;
-    height: 120px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    width:100% ;
-    position:absolute ;
-    top:80px ;
-    right:0 ;
-    left:0 ;
-    width:100% ;
-  }
-  .sub-box .c {
-    background-color: #274140;
-    height: 120px;
-    border-radius: 8px;
-  }
-  .sub-box .d {
-    background-color: #99bc44;
-    height: 100px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    position:absolute ;
-    top:80px ;
-    width:100% ;
-  }
-  .sub-box .e {
-    background-color: #3f4d98;
-    height: 120px;
-    border-radius: 8px;
-  }
-  .sub-box .f {
-    background-color: #e47178;
-    height: 100px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    position:absolute ;
-    top:80px ;
-    width:100% ;
-  }
-  .sub-box .g {
-    background-color: #e09bad;
-    height: 120px;
-    border-radius: 8px;
-  }
-  .sub-box .h {
-    background-color: #dcdddf;
-    top: -90px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    position:absolute ;
-    top:80px ;
-    width:100% ;
-  }
-  .sub-box .e {
-    background-color: #3f4d98;
-    height: 120px;
-    border-radius: 8px;
-  }
-  .sub-box .f {
-    background-color: #e47178;
-    top: -90px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    position:absolute ;
-    top:80px ;
-    width:100% ;
-  }
-  .sub-box .e {
-    background-color: #3f4d98;
-    height: 120px;
-    border-radius: 8px;
-  }
-  .sub-box .f {
-    background-color: #e47178;
-    top: -90px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    padding-top: 20px;
-    position:absolute ;
-    top:80px ;
-    width:100% ;
-  }
-`;

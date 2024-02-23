@@ -351,59 +351,77 @@ const SingleEvent = ({ name }) => {
             </div>
           </EventStyle>
 
-          {/* <EventStyle>
-            <label>
-              If No, we have varieties of matching colour that you can pick from
-            </label>
-            <Color />
-          </EventStyle> */}
-
           <div className="event-display">
             <div>
               {" "}
               If No, we have varieties of matching colour that you can pick from
             </div>
-           
-            {/* <ColorStyle>
-              <div className="sub-box" >
-                <section className="a">a</section>
-                <section className="b">Pacific blue & Linen</section>
-              </div>
-              <div className="sub-box">
-                <div className="c"></div>
-                <div className="d">Pine & Aloe green</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="e"></div>
-                <div className="f">Indigo & Salmon</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="g"></div>
-                <div className="h">Bubblegum & Harbor</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="a"></div>
-                <div className="b">Pacific blue & Linen</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="a"></div>
-                <div className="b">Pacific blue & Linen</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="a"></div>
-                <div className="b">Pacific blue & Linen</div>
-              </div>
-
-              <div className="sub-box">
-                <div className="a"></div>
-                <div className="b">Pacific blue & Linen</div>
-              </div>
-            </ColorStyle> */}
+            <div className="colors">
+              <Image
+                src={"/images/Pacificblue&Linen.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Pacificblue&Linen.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Indigo & Salmon.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Bubblegum & Harbor.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Sapphire & Dandelion.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Navy Blue & Light pink.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/Denim & Peach.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="color"
+                objectFit="cover"
+              />
+              <Image
+                src={"/images/browse colours.png"}
+                width={294}
+                height={200}
+                alt="color"
+                className="sub-color"
+                objectFit="cover"
+              />
+            </div>
           </div>
 
           <div className="event-display">
@@ -594,6 +612,104 @@ const SingleEvent = ({ name }) => {
               </h1>
             </div>
           </EventStyle>
+
+          <div className="event-display">
+            <div>Invitation Card</div>
+            <div className="images">
+              <Image
+                src={"/images/1.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/3.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/2.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+            </div>
+
+            <div className="image-button">
+              <Image
+                src={"/images/4.png"}
+                width={600}
+                height={400}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <div className="buttons">
+                <Button variant={"dark-transparent"}>
+                  Upload invitation card
+                </Button>
+                <Button variant={"dark-white"}>Customize to your style</Button>
+                <p>Browse More Template</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="event-display">
+            <div>Souvenir Ideas</div>
+            <div>A list of souvenir ideas have been put in place to help you gift your guests.</div>
+            <div className="images">
+              <Image
+                src={"/images/1.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/3.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/2.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+            </div>
+
+            <div className="image-button">
+              <Image
+                src={"/images/4.png"}
+                width={600}
+                height={400}
+                className="image"
+                objectFit="cover"
+                alt="invitation-card"
+              />
+              <div className="buttons">
+                <Button variant={"dark-transparent"}>
+                  Upload invitation card
+                </Button>
+                <Button variant={"dark-white"}>Customize to your style</Button>
+                <p>Browse More Template</p>
+              </div>
+            </div>
+          </div>
 
           <Button variant="dark-button">Submit Response</Button>
         </form>

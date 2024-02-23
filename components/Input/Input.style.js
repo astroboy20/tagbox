@@ -102,6 +102,12 @@ export const EventStyle = styled.div`
     cursor: pointer;
     
   }
+    .copy-generate p {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    
+  }
   }
 `;
 export const EventDiv = styled.input`
