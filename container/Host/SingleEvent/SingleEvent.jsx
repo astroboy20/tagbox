@@ -366,7 +366,7 @@ const SingleEvent = ({ name }) => {
                 objectFit="cover"
               />
               <Image
-                src={"/images/Pacificblue&Linen.png"}
+                src={"/images/Pine & Aloe green.png"}
                 width={294}
                 height={200}
                 alt="color"
@@ -665,50 +665,145 @@ const SingleEvent = ({ name }) => {
           <div className="event-display">
             <div>Souvenir Ideas</div>
             <div>A list of souvenir ideas have been put in place to help you gift your guests.</div>
-            <div className="images">
+            <div className="event-box-gift">
+            <div className="sub-box-gift">
               <Image
-                src={"/images/1.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
+                src={"/images/bag.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="contain"
+                className="image-box-gift"
               />
-              <Image
-                src={"/images/3.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-              <Image
-                src={"/images/2.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-            </div>
-
-            <div className="image-button">
-              <Image
-                src={"/images/4.png"}
-                width={600}
-                height={400}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-              <div className="buttons">
-                <Button variant={"dark-transparent"}>
-                  Upload invitation card
-                </Button>
-                <Button variant={"dark-white"}>Customize to your style</Button>
-                <p>Browse More Template</p>
+              <div className="radio-input">
+               
+                <label>Birkin Bag</label>
               </div>
             </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/laptopstand.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Laptop Stand</label>
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/phone.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Iphone 15</label>
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/airpod.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Apple Airpods </label>
+                {/* pro (2nd Gen) */}
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/wig.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>12 inch bone straight wig</label>
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/laptop.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Macbook Air 2020</label>
+              </div>
+            </div>
+           
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/journal.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Customized Journal</label>
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/shoe.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Dr. Marten Loafers</label>
+              </div>
+            </div>
+            <div className="sub-box-gift">
+              <Image
+                src={"/images/glasses.png"}
+                width={340}
+                height={340}
+                alt="meeting"
+                objectFit="cover"
+                className="image-box-gift"
+              />
+
+              <div className="radio-input">
+               
+                <label>Anti glare glasses</label>
+              </div>
+            </div>
+            
+          </div>
           </div>
 
           <Button variant="dark-button">Submit Response</Button>
