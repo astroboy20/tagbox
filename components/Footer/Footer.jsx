@@ -13,11 +13,10 @@ const Footer = () => {
             Stay a step ahead by making a reservation for that event. <br /> You
             book us, we help you!{" "}
           </p>
-
-          <div className="input">
-            <input placeholder="Email" />
-            <Button variant={"dark-button"}>Enter E-mail</Button>
-          </div>
+        </div>
+        <div className="input">
+          <input placeholder="Email" />
+          <Button variant={"dark-button"}>Enter E-mail</Button>
         </div>
       </div>
       <TopContainer>

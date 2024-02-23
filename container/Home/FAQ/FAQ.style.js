@@ -31,7 +31,7 @@ export const FAQSContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px;
+    padding: 20px 20px;
   }
 
   @media screen and (max-width: 786px) {

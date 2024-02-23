@@ -1,6 +1,6 @@
 import { Date, Location, Upload } from "@/assets";
 import { ColorStyle, SingleEventStyle } from "./SingleEvent.style";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/Input/Input";
 import { EventDiv, EventStyle } from "@/components/Input/Input.style";
@@ -16,18 +16,22 @@ import Color from "./Color";
 const SingleEvent = ({ name }) => {
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
+  const [event_dressCode, setEvent_Dresscode] = useState("");
   const [visibility, setVisibility] = useState(true);
   const [uniqueId, setUniqueId] = useState("");
+  const [consultation, setConsultation] = useState("")
   const [eventDetails, setEventDetails] = useState({
     event_type: event_type,
-    theme: "",
+    wedding_hashtag: "",
     location: "",
-    date: "",
-    dress_code: "",
+    event_date: "",
+    dress_code: event_dressCode,
     image: null,
     tag_line: "",
-    qr_code: uniqueId,
-    ticket_price: "",
+    qr_code: "",
+    consultation: "",
+    type_of_consultation:"",
+    frequency_of_consultation:"",
     visibility: visibility,
   });
 
@@ -36,21 +40,27 @@ const SingleEvent = ({ name }) => {
   console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
 
+  useEffect(() => {
+    generateId(); // Generate ID on initial render
+  }, [name]);
+
+  // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
     setUniqueId(id);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: id,
+      qr_code: `https://tagbox.com/${name}/${id}`,
     }));
   };
 
-  const handleQrCodeChange = (event) => {
+  // Function to handle changes in the unique ID
+  const handleUniqueIdChange = (event) => {
     const { value } = event.target;
     setUniqueId(value);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: value,
+      qr_code: `https://tagbox.com/${name}/${value}`,
     }));
   };
 
@@ -59,6 +69,14 @@ const SingleEvent = ({ name }) => {
     setEventDetails((prevDetails) => ({
       ...prevDetails,
       event_type: type,
+    }));
+  };
+
+  const handleDressCodeChange = (type) => {
+    setEvent_Dresscode(type);
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      dress_code: type,
     }));
   };
 
@@ -127,22 +145,23 @@ const SingleEvent = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (eventDetails) {
-      axios
-        .post("https://tagbox.onrender.com/v1/user/ticket", eventDetails, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          toast.success(response.data.message);
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
-    } else {
-      toast.warning("Enter the required field");
-    }
+    // if (eventDetails) {
+    //   axios
+    //     .post("https://tagbox.onrender.com/v1/user/ticket", eventDetails, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       toast.success(response.data.message);
+    //     })
+    //     .catch((error) => {
+    //       toast.error(error);
+    //     });
+    // } else {
+    //   toast.warning("Enter the required field");
+    // }
+    console.log(eventDetails);
   };
 
   return (
@@ -225,8 +244,8 @@ const SingleEvent = ({ name }) => {
             variant={"event-input"}
             label={`Insert your ${name} hashtag `}
             placeholder={"E.g, Concerts, get-together, graduation, etc."}
-            value={eventDetails.theme}
-            name="theme"
+            value={eventDetails.wedding_hashtag}
+            name="wedding_hashtag"
             onChange={handleChange}
           />
 
@@ -236,8 +255,8 @@ const SingleEvent = ({ name }) => {
               <input
                 id="date"
                 type="datetime-local"
-                name="date"
-                value={eventDetails.date}
+                name="event_date"
+                value={eventDetails.event_date}
                 onChange={handleChange}
                 // style={{ border: "none" }}
               />
@@ -277,17 +296,17 @@ const SingleEvent = ({ name }) => {
                       style={{
                         height: "auto",
                       }}
-                      value={`https://tagbox.com${name}/${uniqueId}`}
+                      value={eventDetails.qr_code}
                       viewBox={`0 0 256 256`}
                     />
                   )}
                 </div>
                 <EventDiv
                   type="text"
-                  value={`https://tagbox.com/${name}${uniqueId}`}
+                  value={`https://tagbox.com/${name}/${uniqueId}`}
                   name="qr_code"
                   id="url"
-                  onChange={handleQrCodeChange}
+                  onChange={handleUniqueIdChange}
                 />
               </div>
 
@@ -309,8 +328,9 @@ const SingleEvent = ({ name }) => {
                   type="radio"
                   id="yes"
                   value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
+                  name="dress_code"
+                  checked={event_dressCode === "Yes"}
+                  onChange={() => handleDressCodeChange("Yes")}
                 />
                 <label htmlFor="yes">Yes</label>
               </div>
@@ -319,110 +339,116 @@ const SingleEvent = ({ name }) => {
                   type="radio"
                   id="no"
                   value="No"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(false)}
+                  name="dress_code"
+                  checked={event_dressCode === "No"}
+                  onChange={() => handleDressCodeChange("No")}
                 />
                 <label htmlFor="no">No</label>
               </div>
             </div>
           </div>
 
-          <EventStyle>
-            <label>If yes, upload dress code(Asoebi) </label>
-            <div>
-              <input
-                id="image"
-                accept="image/*"
-                type="file"
-                onChange={handleImageChange}
-              />
-              <h1>
-                {loading ? (
-                  <InfinitySpin
-                    visible={true}
-                    width="50"
-                    color="#000"
-                    ariaLabel="infinity-spin-loading"
-                  />
-                ) : (
-                  <Upload />
-                )}
-              </h1>
-            </div>
-          </EventStyle>
+          {eventDetails.dress_code == "Yes" && (
+            <EventStyle>
+              <label>If yes, upload dress code(Asoebi) </label>
+              <div>
+                <input
+                  id="image"
+                  accept="image/*"
+                  type="file"
+                  onChange={handleImageChange}
+                />
+                <h1>
+                  {loading ? (
+                    <InfinitySpin
+                      visible={true}
+                      width="50"
+                      color="#000"
+                      ariaLabel="infinity-spin-loading"
+                    />
+                  ) : (
+                    <Upload />
+                  )}
+                </h1>
+              </div>
+            </EventStyle>
+          )}
 
-          <div className="event-display">
-            <div>
-              {" "}
-              If No, we have varieties of matching colour that you can pick from
+          {eventDetails.dress_code == "No" && (
+            <div className="event-display">
+              <div>
+                {" "}
+                If No, we have varieties of matching colour that you can pick
+                from
+              </div>
+              <div className="colors">
+                <Image
+                  src={"/images/Pacificblue&Linen.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Pine & Aloe green.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Indigo & Salmon.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Bubblegum & Harbor.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Sapphire & Dandelion.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Navy Blue & Light pink.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/Denim & Peach.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="color"
+                  objectFit="cover"
+                />
+                <Image
+                  src={"/images/browse colours.png"}
+                  width={294}
+                  height={200}
+                  alt="color"
+                  className="sub-color"
+                  objectFit="cover"
+                />
+              </div>
             </div>
-            <div className="colors">
-              <Image
-                src={"/images/Pacificblue&Linen.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Pine & Aloe green.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Indigo & Salmon.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Bubblegum & Harbor.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Sapphire & Dandelion.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Navy Blue & Light pink.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/Denim & Peach.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="color"
-                objectFit="cover"
-              />
-              <Image
-                src={"/images/browse colours.png"}
-                width={294}
-                height={200}
-                alt="color"
-                className="sub-color"
-                objectFit="cover"
-              />
-            </div>
-          </div>
+          )}
 
           <div className="event-display">
             <div>Consultation and Planning</div>
@@ -661,149 +687,141 @@ const SingleEvent = ({ name }) => {
             </div>
           </div>
 
-
           <div className="event-display">
             <div>Souvenir Ideas</div>
-            <div>A list of souvenir ideas have been put in place to help you gift your guests.</div>
+            <div>
+              A list of souvenir ideas have been put in place to help you gift
+              your guests.
+            </div>
             <div className="event-box-gift">
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/bag.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="contain"
-                className="image-box-gift"
-              />
-              <div className="radio-input">
-               
-                <label>Birkin Bag</label>
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/bag.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="contain"
+                  className="image-box-gift"
+                />
+                <div className="radio-input">
+                  <label>Birkin Bag</label>
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/laptopstand.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/laptopstand.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Laptop Stand</label>
+                <div className="radio-input">
+                  <label>Laptop Stand</label>
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/phone.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/phone.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Iphone 15</label>
+                <div className="radio-input">
+                  <label>Iphone 15</label>
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/airpod.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/airpod.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Apple Airpods </label>
-                {/* pro (2nd Gen) */}
+                <div className="radio-input">
+                  <label>Apple Airpods </label>
+                  {/* pro (2nd Gen) */}
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/wig.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/wig.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>12 inch bone straight wig</label>
+                <div className="radio-input">
+                  <label>12 inch bone straight wig</label>
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/laptop.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/laptop.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Macbook Air 2020</label>
+                <div className="radio-input">
+                  <label>Macbook Air 2020</label>
+                </div>
               </div>
-            </div>
-           
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/journal.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
 
-              <div className="radio-input">
-               
-                <label>Customized Journal</label>
-              </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/shoe.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/journal.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Dr. Marten Loafers</label>
+                <div className="radio-input">
+                  <label>Customized Journal</label>
+                </div>
               </div>
-            </div>
-            <div className="sub-box-gift">
-              <Image
-                src={"/images/glasses.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box-gift"
-              />
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/shoe.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
 
-              <div className="radio-input">
-               
-                <label>Anti glare glasses</label>
+                <div className="radio-input">
+                  <label>Dr. Marten Loafers</label>
+                </div>
+              </div>
+              <div className="sub-box-gift">
+                <Image
+                  src={"/images/glasses.png"}
+                  width={340}
+                  height={340}
+                  alt="meeting"
+                  objectFit="cover"
+                  className="image-box-gift"
+                />
+
+                <div className="radio-input">
+                  <label>Anti glare glasses</label>
+                </div>
               </div>
             </div>
-            
-          </div>
           </div>
 
           <Button variant="dark-button">Submit Response</Button>

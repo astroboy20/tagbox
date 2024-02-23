@@ -17,9 +17,9 @@ const Choose = () => {
         </div>
        
           <Image
-            src={"/images/Virtual-meeting.png"}
-            width={500}
-            height={500}
+            src={"/images/event.png"}
+            width={620}
+            height={460}
             objectFit="cover"
             alt="virtual-meeting"
             className="image"

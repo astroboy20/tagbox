@@ -24,7 +24,8 @@ export const FooterContainer = styled.div`
     text-align: center;
   }
   .input {
-    width: 100%;
+    width: 80%;
+    margin:0 20% ;
     display: flex;
     justify-content:space-between ;
     padding: 5px;
@@ -67,7 +68,17 @@ export const TopContainer = styled.div`
   .left {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 40px;
+  }
+  .center{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
   span {
     font-size: 28px;

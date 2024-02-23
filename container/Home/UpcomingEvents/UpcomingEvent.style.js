@@ -11,6 +11,13 @@ export const UpcomingStyle = styled.div`
     font-weight: 500;
     text-decoration: underline;
   }
+  .text{
+    display:flex ;
+    flex-direction:column ;
+    gap:30px;
+  }
+
+
 
   .span-header {
     font-size: 32px;
@@ -85,6 +92,11 @@ export const UpcomingStyle = styled.div`
    text-decoration: underline;
    text-align: center;
  }
+ .span-header {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+  }
  p {
    font-size: 18px;
    font-weight: 400;
