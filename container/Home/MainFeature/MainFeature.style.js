@@ -7,13 +7,13 @@ export const MainContainer = styled.div`
   flex-direction:column ;
   gap:10px;
   span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     text-decoration: underline;
     text-align: center;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 29px;
     letter-spacing: 0em;
@@ -22,7 +22,7 @@ export const MainContainer = styled.div`
   .box {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items:center ;
     gap:20px;
     padding-top:10px ;
@@ -32,13 +32,14 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items:center ;
+    justify-content:left ;
     gap:20px;
-    width: 30%;
+    width: 32%;
     background-color:rgba(230, 246, 255, 0.2) ;
     box-shadow:1px 1px rgba(3, 25, 59, 0.12) ;
   }
   .sub-box p {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 32px;
     letter-spacing: 0em;

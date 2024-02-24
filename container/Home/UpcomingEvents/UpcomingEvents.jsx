@@ -2,10 +2,14 @@ import React from "react";
 import Image from "next/image";
 import { UpcomingStyle } from "./UpcomingEvent.style";
 import { Button } from "@/components/Button/Button";
+import { Test } from "@/assets";
+
 const UpcomingEvents = () => {
   return (
     <UpcomingStyle>
       <span>Upcoming Events</span>
+      {/* <Test/> */}
+      <Image src={"/images/test.svg"} width={500} height={500}/>
       <div className="body">
         {" "}
           <Image

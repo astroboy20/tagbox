@@ -9,16 +9,16 @@ import {
 import { Button } from "../Button/Button";
 import Link from "next/link";
 import Image from "next/image";
-import {useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const token = user ? user.token || user : "";
-  console.log(token)
+  console.log(token);
 
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
@@ -30,8 +30,8 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(reset());
-    toast.success("successful")
-    router.push("/login")
+    toast.success("successful");
+    router.push("/login");
   };
   return (
     <>
@@ -39,7 +39,7 @@ const Header = () => {
         <HeaderStyle>
           <div>
             <Image
-              src={"/images/tagbox.png"}
+              src={"/images/logo-white.png"}
               className="logo"
               width={167}
               height={48}
@@ -94,7 +94,15 @@ const Header = () => {
               </p>
             )}
 
-            <p className={"nav-button"}>Schedule a Demo</p>
+            {token ? (
+             ""
+            ) : (
+              <p className={"nav-button"}> <Link href={"/register"} className="nav-link">
+              Sign up
+            </Link></p>
+
+            )}
+
           </div>
         </HeaderStyle>
         {show && (

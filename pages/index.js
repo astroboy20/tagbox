@@ -27,7 +27,7 @@ export default function Home() {
         <Why />
         <MainFeature />
         <Choose />
-        <UpcomingEvents />
+        {/* <UpcomingEvents /> */}
         <FAQ />
         <Testimonial />
         <Footer/>

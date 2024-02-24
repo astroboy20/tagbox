@@ -7,13 +7,13 @@ export const TestimonialStyle = styled.div`
   flex-direction: column;
   gap: 10px;
   span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     text-decoration: underline;
     text-align: center;
   }
   .box .sub-box p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;

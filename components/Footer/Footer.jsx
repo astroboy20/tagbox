@@ -8,20 +8,28 @@ const Footer = () => {
     <FooterContainer>
       <div className="top">
         <div className="text">
-          <span>Make Your Event Reservations Here</span>
+          <span>Stay connected with us!</span>
           <p>
-            Stay a step ahead by making a reservation for that event. <br /> You
-            book us, we help you!{" "}
+            Ready to stay ahead of the curve? <br />
+            Subscribe now to receive our exclusive weekly updates and ensure you
+            never miss a beat!
           </p>
         </div>
         <div className="input">
           <input placeholder="Email" />
-          <Button variant={"dark-button"}>Enter E-mail</Button>
+          <Button variant={"dark-button"}>Subscribe</Button>
         </div>
       </div>
       <TopContainer>
         <div className="left">
-          <Logo_Blue />
+          <Image
+            src={"/images/logo-blue.png"}
+            className="logo"
+            width={167}
+            height={55}
+            alt="logo"
+            objectFit="contain"
+          />
           <p>
             Event hosting and management <br /> made easy and seamless. Choose{" "}
             <br />
@@ -34,20 +42,20 @@ const Footer = () => {
               {" "}
               <Image
                 src={"/images/x.png"}
-                width={40}
-                height={40}
+                width={24}
+                height={24}
                 alt="x-logo"
               />
               <Image
                 src={"/images/whatsapp.png"}
-                width={40}
-                height={40}
+                width={24}
+                height={24}
                 alt="x-logo"
               />
               <Image
                 src={"/images/instagram.png"}
-                width={40}
-                height={40}
+                width={24}
+                height={24}
                 alt="x-logo"
               />
             </div>
@@ -62,10 +70,11 @@ const Footer = () => {
         </div>
         <div className="right">
           <span>Features</span>
-          <p>Event Hosting and Management</p>
+          <p> Personal event website</p>
           <p>Onsite inspection </p>
-          <p>Payment processing</p>
-          <p>Ticketing</p>
+          <p>Create wishlist</p>
+          <p>Sell a merch (Aso-ebi)</p>
+          <p>Event consultation</p>
         </div>
       </TopContainer>
       <BottomContainer>

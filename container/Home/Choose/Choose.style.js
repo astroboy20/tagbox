@@ -7,21 +7,21 @@ export const ChooseContainer = styled.div`
   flex-direction: column;
   gap: 40px;
   span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     text-decoration: underline;
     text-align: center;
   }
   h2 {
     font-family: Space Grotesk;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
     text-align: left;
   }
   .text p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 29px;
     letter-spacing: 0em;

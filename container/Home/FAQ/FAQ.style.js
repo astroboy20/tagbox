@@ -8,7 +8,7 @@ export const FAQSContainer = styled.div`
   flex-direction: column;
   gap: 40px;
   span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     line-height: 48px;
     letter-spacing: 0em;
@@ -16,7 +16,7 @@ export const FAQSContainer = styled.div`
     color: #fff;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 24px;
   }

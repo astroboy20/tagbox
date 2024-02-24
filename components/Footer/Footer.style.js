@@ -13,15 +13,16 @@ export const FooterContainer = styled.div`
     gap: 30px;
   }
   .top span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     line-height: 48px;
   }
   .top p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 29px;
     text-align: center;
+    padding:1% 0 ;
   }
   .input {
     width: 80%;
@@ -81,13 +82,13 @@ export const TopContainer = styled.div`
     gap: 20px;
   }
   span {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0em;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
   }
@@ -117,7 +118,7 @@ export const BottomContainer = styled.div`
   justify-content: space-between;
   padding: 1% 6%;
   p {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0em;

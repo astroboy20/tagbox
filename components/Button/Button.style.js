@@ -20,6 +20,7 @@ export const TransparentButton = styled.button`
   background: none;
   color: #c1e8ff;
   cursor: pointer;
+  font-size: 20px;
   @media screen and (max-width: 786px) {
     font-weight: 500;
     font-size: 16px;

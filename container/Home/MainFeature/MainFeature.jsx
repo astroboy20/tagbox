@@ -20,29 +20,31 @@ const MainFeature = () => {
       <div className="box">
         <div className="sub-box">
           <Pre_Event />
-          <p>Pre Event</p>
+          <p>  Card Customization</p>
         </div>
         <div className="sub-box">
           <During_Event />
-          <p>During Event</p>
+          <p>Personal Event website</p>
         </div>
         <div className="sub-box">
         <During_Event />
-          <p>Post Event</p>
+          <p>Sell a Merch(Aso-ebi)</p>
         </div>
         <div className="sub-box">
           <Consultation />
           <p>Event Consultation</p>
         </div>
-        <div className="sub-box">
-          <Checklist />
-          <p>Event Checklist</p>
-        </div>
+       
         <div className="sub-box">
           <Customization />
-          <p>Card Customization</p>
+          <p>Create Wishlist</p>
         </div>
       </div>
+    
+
+
+
+
     </MainContainer>
   );
 };

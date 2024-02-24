@@ -3,14 +3,21 @@ import styled from "styled-components";
 export const HeaderContainer = styled.div`
   background: #020d1e;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 24px;
   color: #fff;
   padding: 4% 6% 10% 3%;
   .links {
     text-decoration: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
     font-weight: 500;
     line-height: 24px;
   }
@@ -23,8 +30,8 @@ export const HeaderStyle = styled.nav`
   justify-content: space-between;
   align-items: center;
   .logo{
-    width:167px ;
-    height:45px;
+    width:140px ;
+    height:48px;
   }
   .center-nav {
     display: flex;
@@ -62,7 +69,7 @@ export const HeaderStyle = styled.nav`
     align-items: center;
   }
   .right-nav .nav-button {
-    padding: 16px 12px;
+    padding: 10px 12px;
     border-radius: 4px;
     background-color: #c1e8ff;
     color: #020d1e;
@@ -94,12 +101,12 @@ export const HeroContainer = styled.div`
   gap: 30px;
   padding: 2% 0;
   h1 {
-    font-size: 64px;
+    font-size: 40px;
     font-weight: 700;
     line-height: 80px;
   }
   p {
-    font-size: 40px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 30px;
   }

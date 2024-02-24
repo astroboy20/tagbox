@@ -18,13 +18,13 @@ export const WhyContainer = styled.div`
     padding: 3% 4%;
   }
   span {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     text-decoration: underline;
     text-align: center;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     text-align: justify;
   }
