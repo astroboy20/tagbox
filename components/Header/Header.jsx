@@ -130,7 +130,7 @@ const Header = () => {
           </MobileNav>
         )}
 
-        <HeroContainer>
+        <HeroContainer data-aos="fade-up">
           <div className="text">
             <h1>
               Welcome To A <br />

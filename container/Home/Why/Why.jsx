@@ -4,7 +4,7 @@ import { Button } from "@/components/Button/Button";
 
 const Why = () => {
   return (
-    <WhyContainer>
+    <WhyContainer >
       <div className="text">
         <span>Why Tagbox?</span>
         <p>
@@ -22,5 +22,7 @@ const Why = () => {
     </WhyContainer>
   );
 };
+
+// data-aos="fade-up"
 
 export { Why };
