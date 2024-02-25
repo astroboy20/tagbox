@@ -5,7 +5,7 @@ export const InputStyle = styled.div`
   flex-direction: column;
   gap: 10px;
   label {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
   }
@@ -56,24 +56,30 @@ export const EventStyle = styled.div`
     
   }
   label {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 32px;
     text-align: left;
   }
   span {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
   }
   p{
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
     padding:0 ;
   }
+  .qr-code p{
+    font-size:20px ;
+    font-weight: 500;
+    padding:0 ;
+  }
+   
   .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
     cursor: pointer;
     

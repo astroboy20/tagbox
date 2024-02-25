@@ -14,8 +14,7 @@ const MainFeature = () => {
     <MainContainer>
       <span>Main Features</span>
       <p>
-        Delve into the primary features of our product, compelling you to
-        consistently choose and use it.
+      Explore the primary features of our product informing your decision on what works best for you!
       </p>
       <div className="box">
         <div className="sub-box">

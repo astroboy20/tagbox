@@ -40,7 +40,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push("/");
+      router.push("/host-event");
     }
     // dispatch(reset());
   }, [isSuccess, router]);

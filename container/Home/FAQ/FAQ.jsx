@@ -8,15 +8,11 @@ const FAQ = () => {
       <span>Frequently Asked Questions</span>
       <div className="box">
         <div className="sub-box">
-          <p> What is special about Tagbox?</p>
+          <p>  Can i customize to my preferred style and taste?</p>
           <Arrow_Blue />
         </div>
         <div className="sub-box">
-          <p> Can i customize to my preferred style and taste? </p>
-          <Arrow_Blue />
-        </div>
-        <div className="sub-box">
-          <p> Can i host a concert with this product?</p>
+          <p> Can i host a concert with this product? </p>
           <Arrow_Blue />
         </div>
         <div className="sub-box">
@@ -28,6 +24,10 @@ const FAQ = () => {
           <Arrow_Blue />
         </div>
       </div>
+     
+
+
+
     </FAQSContainer>
   );
 };

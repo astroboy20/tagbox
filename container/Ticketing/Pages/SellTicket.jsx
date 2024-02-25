@@ -134,16 +134,9 @@ const SellTicket = () => {
       {option === "Sell" && (
         <TicketingStyle>
           <form onSubmit={handleSubmit}>
-            <div className="event-box">
-              <div className="sub-box">
-                <Image
-                  src={"/images/meetings.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="contain"
-                  className="image-box"
-                />
+            <div className="event-display">
+              <div>What kind of event are you hosting</div>
+              <div className="input">
                 <div className="radio-input">
                   <input
                     type="radio"
@@ -155,17 +148,6 @@ const SellTicket = () => {
                   />
                   <label>Physical</label>
                 </div>
-              </div>
-              <div className="sub-box">
-                <Image
-                  src={"/images/Virtual-meeting.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box"
-                />
-
                 <div className="radio-input">
                   <input
                     type="radio"
@@ -177,15 +159,6 @@ const SellTicket = () => {
                   />
                   <label>Virtual</label>
                 </div>
-              </div>
-              <div className="sub-box">
-                <Image
-                  src={"/images/hybrid-meeting.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  className="image-box"
-                />
                 <div className="radio-input">
                   <input
                     type="radio"
@@ -199,6 +172,7 @@ const SellTicket = () => {
                 </div>
               </div>
             </div>
+
             <Input
               variant={"event-input"}
               label={" What is the theme of your event?"}
@@ -305,7 +279,7 @@ const SellTicket = () => {
                   name="qr_code"
                   onChange={handleQrCodeChange}
                 />
-                <p onClick={generateId}>Generate</p>
+                <p className="qr-code-p" onClick={generateId}>Generate</p>
               </div>
             </EventStyle>
 

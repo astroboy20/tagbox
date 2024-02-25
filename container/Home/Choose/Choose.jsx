@@ -8,12 +8,11 @@ const Choose = () => {
       <span>Choose Your Event Type</span>
       <div className="slider-body">
         <div className="text">
-          <h2>Leverage digital platforms to connect beyond expectations.</h2>
+          <h2> Get Your Attendees To Experience the Thrill in Person! </h2>
           <p>
-            Our virtual events has everything needed to aid connectivity as well
-            as engagements during the event.
+          Host physical event endearing your event attendees to your brand and organization.
           </p>
-          <Button variant={"dark-button"}>Schedule Event</Button>
+          <Button variant={"dark-button"}>Host an Event</Button>
         </div>
        
           <Image
@@ -25,7 +24,8 @@ const Choose = () => {
             className="image"
           />
         </div>
-      
+       
+
     </ChooseContainer>
   );
 };

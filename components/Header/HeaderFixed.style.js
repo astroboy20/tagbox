@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const HeaderFixedContainer = styled.div`
   background: #020d1e;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 20px;
   color: #fff;
-  padding: 2% 3%;
+  padding: 2% 6%;
   position: fixed;
   width: 100%;
   box-sizing: border-box;
@@ -29,7 +29,7 @@ export const HeaderFixedStyle = styled.nav`
   justify-content: space-between;
   align-items: center;
   .logo{
-    width:167px ;
+    width:140px ;
     height:48px ;
   }
   .link{

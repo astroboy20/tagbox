@@ -18,9 +18,9 @@ export const TicketingStyle = styled.div`
     align-items: center;
   }
   .header span {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 700;
-    line-height: 64px;
+    line-height: 48px;
     color: #fff;
     text-decoration: underline;
   }
@@ -31,6 +31,7 @@ export const TicketingStyle = styled.div`
     padding-bottom: 2%;
     display: flex;
     gap: 25px;
+    font-size:24px ;
   }
   .event-box {
     display: flex;
@@ -56,9 +57,20 @@ export const TicketingStyle = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size:20px ;
+  }
   .radio-input {
     display: flex;
     gap: 10px;
+  }
+  .radio-input label{
+    font-size:20px ;
+    font-weight:400 ;
   }
   form {
     padding: 3% 0 2% 0;
@@ -67,35 +79,23 @@ export const TicketingStyle = styled.div`
     gap: 60px;
   }
 
-  .payment-method label {
-    display: flex;
-    gap: 10px;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-  .event-display label {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-  .payment-method span {
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 32px;
-  }
   .event-display span {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
   }
 
-  .payment-method .input,
-  .event-display .input {
+  .event-display {
     display: flex;
-    padding: 20px 0;
-    gap: 40px;
+    flex-direction: column;
+    gap: 20px;
   }
+  .event-display div {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 40px;
+  }
+  
 
   //buy ticket style
   .latest-event span,
@@ -136,21 +136,9 @@ export const TicketingStyle = styled.div`
       width: 45%;
       justify-content: none;
     }
-    .radio-input label {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 16px;
-    }
-    .payment-method {
-      padding: 20px 0px;
-    }
-    .payment-method span,
-    .event-display span {
-      font-size: 18px;
-    }
-    .payment-method .input {
-      flex-wrap: wrap;
-    }
+  
+    
+    
 
     //buy ticket style
   .latest-event span,

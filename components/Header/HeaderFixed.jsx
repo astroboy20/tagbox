@@ -54,7 +54,7 @@ const HeaderFixed = () => {
       <HeaderFixedContainer>
         <HeaderFixedStyle>
           <Image
-            src={"/images/tagbox.png"}
+            src={"/images/logo-white.png"}
             className="logo"
             width={167}
             height={48}

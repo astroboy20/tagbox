@@ -8,17 +8,17 @@ const Why = () => {
       <div className="text">
         <span>Why Tagbox?</span>
         <p>
-          We offer features or capabilities that fulfill specific needs or solve
-          event hosting problems more quickly and with little or no effort
-          compared to alternative solutions. It allows users to to customize
-          their events to their respective tastes and preference. Also all
-          messages and activities done with this product are encrypted.
+          At Tagbox, we believe in the power of unforgettable moments. Our
+          mission is to transform ordinary events into extraordinary
+          experiences, where every detail is carefully curated to leave a
+          lasting impression. We're not just planners; we're storytellers,
+          weaving magic into every event to create memories that will be
+          cherished for a lifetime.
         </p>
         <div className="button">
-        <Button variant={"dark-button"}>Know More</Button>
+          <Button variant={"dark-button"}>Know More</Button>
+        </div>
       </div>
-      </div>
-     
     </WhyContainer>
   );
 };

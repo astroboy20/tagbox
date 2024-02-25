@@ -95,14 +95,15 @@ const Header = () => {
             )}
 
             {token ? (
-             ""
+              ""
             ) : (
-              <p className={"nav-button"}> <Link href={"/register"} className="nav-link">
-              Sign up
-            </Link></p>
-
+              <p className={"nav-button"}>
+                {" "}
+                <Link href={"/register"} className="nav-link">
+                  Sign up
+                </Link>
+              </p>
             )}
-
           </div>
         </HeaderStyle>
         {show && (
@@ -132,8 +133,8 @@ const Header = () => {
         <HeroContainer>
           <div className="text">
             <h1>
-              Effortless Hosting,
-              <br /> Unforgettable Experiences!
+              Welcome To A <br />
+              Seamless Event Hosting Experience!
             </h1>
             <p>Host beyond limits, connect beyond expectations.</p>
           </div>
@@ -141,7 +142,7 @@ const Header = () => {
           <div className="button">
             {" "}
             <Button variant={"nav-button"}>Schedule a Demo</Button>
-            <Button variant={"transparent-button"}>Explore Tagbox</Button>
+            <Button variant={"transparent-button"}>Host an Event</Button>
           </div>
         </HeroContainer>
       </HeaderContainer>

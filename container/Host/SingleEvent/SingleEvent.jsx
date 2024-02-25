@@ -19,7 +19,7 @@ const SingleEvent = ({ name }) => {
   const [event_dressCode, setEvent_Dresscode] = useState("");
   const [visibility, setVisibility] = useState(true);
   const [uniqueId, setUniqueId] = useState("");
-  const [consultation, setConsultation] = useState("")
+  const [consultation, setConsultation] = useState("");
   const [eventDetails, setEventDetails] = useState({
     event_type: event_type,
     wedding_hashtag: "",
@@ -30,8 +30,8 @@ const SingleEvent = ({ name }) => {
     tag_line: "",
     qr_code: "",
     consultation: "",
-    type_of_consultation:"",
-    frequency_of_consultation:"",
+    type_of_consultation: "",
+    frequency_of_consultation: "",
     visibility: visibility,
   });
 
@@ -170,21 +170,11 @@ const SingleEvent = ({ name }) => {
         <span>{name}</span>
       </div>
       <div className="body">
-        <div className="options">
-          <p>General</p>
-        </div>
-
         <form onSubmit={handleSubmit}>
-          <div className="event-box">
-            <div className="sub-box">
-              <Image
-                src={"/images/meetings.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="contain"
-                className="image-box"
-              />
+          <div className="event-display">
+            <div>What kind of event are you hosting?</div>
+
+            <div className="input">
               <div className="radio-input">
                 <input
                   type="radio"
@@ -196,17 +186,6 @@ const SingleEvent = ({ name }) => {
                 />
                 <label>Physical</label>
               </div>
-            </div>
-            <div className="sub-box">
-              <Image
-                src={"/images/Virtual-meeting.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                objectFit="cover"
-                className="image-box"
-              />
-
               <div className="radio-input">
                 <input
                   type="radio"
@@ -218,15 +197,6 @@ const SingleEvent = ({ name }) => {
                 />
                 <label>Virtual</label>
               </div>
-            </div>
-            <div className="sub-box">
-              <Image
-                src={"/images/hybrid-meeting.png"}
-                width={340}
-                height={340}
-                alt="meeting"
-                className="image-box"
-              />
               <div className="radio-input">
                 <input
                   type="radio"
@@ -238,8 +208,19 @@ const SingleEvent = ({ name }) => {
                 />
                 <label>Hybrid (Both Virtual & Physical)</label>
               </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="no"
+                  value="No"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(false)}
+                />
+                <label htmlFor="no">No</label>
+              </div>
             </div>
           </div>
+
           <Input
             variant={"event-input"}
             label={`Insert your ${name} hashtag `}
@@ -374,81 +355,7 @@ const SingleEvent = ({ name }) => {
             </EventStyle>
           )}
 
-          {eventDetails.dress_code == "No" && (
-            <div className="event-display">
-              <div>
-                {" "}
-                If No, we have varieties of matching colour that you can pick
-                from
-              </div>
-              <div className="colors">
-                <Image
-                  src={"/images/Pacificblue&Linen.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Pine & Aloe green.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Indigo & Salmon.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Bubblegum & Harbor.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Sapphire & Dandelion.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Navy Blue & Light pink.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/Denim & Peach.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="color"
-                  objectFit="cover"
-                />
-                <Image
-                  src={"/images/browse colours.png"}
-                  width={294}
-                  height={200}
-                  alt="color"
-                  className="sub-color"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-          )}
+        
 
           <div className="event-display">
             <div>Consultation and Planning</div>
@@ -687,142 +594,7 @@ const SingleEvent = ({ name }) => {
             </div>
           </div>
 
-          <div className="event-display">
-            <div>Souvenir Ideas</div>
-            <div>
-              A list of souvenir ideas have been put in place to help you gift
-              your guests.
-            </div>
-            <div className="event-box-gift">
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/bag.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="contain"
-                  className="image-box-gift"
-                />
-                <div className="radio-input">
-                  <label>Birkin Bag</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/laptopstand.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Laptop Stand</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/phone.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Iphone 15</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/airpod.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Apple Airpods </label>
-                  {/* pro (2nd Gen) */}
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/wig.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>12 inch bone straight wig</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/laptop.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Macbook Air 2020</label>
-                </div>
-              </div>
-
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/journal.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Customized Journal</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/shoe.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Dr. Marten Loafers</label>
-                </div>
-              </div>
-              <div className="sub-box-gift">
-                <Image
-                  src={"/images/glasses.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box-gift"
-                />
-
-                <div className="radio-input">
-                  <label>Anti glare glasses</label>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <Button variant="dark-button">Submit Response</Button>
         </form>

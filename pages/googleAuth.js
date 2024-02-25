@@ -23,7 +23,7 @@ const GoogleAuth = () => {
 
   useEffect(() => {
     if (user ) {
-      router.push("/"); 
+      router.push("/host-event"); 
       toast.success("Login Successful")
     }
   }, [isSuccess, redirecting, router]);

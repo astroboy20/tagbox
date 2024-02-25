@@ -18,9 +18,9 @@ export const SingleEventStyle = styled.div`
     align-items: center;
   }
   .header span {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 700;
-    line-height: 64px;
+    line-height: 48px;
     color: #fff;
     text-decoration: underline;
   }
@@ -33,7 +33,7 @@ export const SingleEventStyle = styled.div`
   }
 
   form {
-    padding: 2% 0 2% 0;
+    padding: 2% 4%;
     display: flex;
     flex-direction: column;
     gap: 65px;
@@ -96,11 +96,13 @@ export const SingleEventStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-size:20px ;
   }
 
   .radio-input {
     display: flex;
     gap: 10px;
+    
   }
 
   .event-box-gift {
@@ -115,21 +117,21 @@ export const SingleEventStyle = styled.div`
   .event-display {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
   }
   .event-display div {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 40px;
   }
   .event-display label {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 24px;
   }
 
   .event-display span {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
   }

@@ -7,7 +7,6 @@ const Testimonial = () => {
     <TestimonialStyle>
       {" "}
       <span>What Our Users Have To Say</span>
-     
       <div className="box">
         <div className="sub-box">
           <Image
@@ -18,9 +17,8 @@ const Testimonial = () => {
             className="image"
           />
           <p>
-            I'm impressed with the product's functionality and the range of
-            features it offers. My guests were pleased and they enjoyed the
-            event.
+            Tagbox made my event absolutely incredible! Their attention to
+            detail and creative touch really set them apart. Highly recommend!
           </p>
         </div>
         <div className="sub-box">
@@ -32,9 +30,9 @@ const Testimonial = () => {
             className="image"
           />
           <p>
-            I'm impressed with the product's functionality and the range of
-            features it offers. My guests were pleased and they enjoyed the
-            event.
+            Working with Tagbox was a game-changer for us. They took care of
+            everything seamlessly, allowing us to enjoy our event stress-free.
+            Can't thank them enough
           </p>
         </div>
         <div className="sub-box">
@@ -46,9 +44,9 @@ const Testimonial = () => {
             className="image"
           />
           <p>
-            I'm impressed with the product's functionality and the range of
-            features it offers. My guests were pleased and they enjoyed the
-            event.
+            Tagbox truly understands the importance of creating memorable
+            experiences. They transformed our vision into reality and left our
+            guests raving about the event.
           </p>
         </div>
       </div>

@@ -7,7 +7,7 @@ export const EventContainer = styled.div`
   flex-direction: column;
   gap: 30px;
   span {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 28px;
     letter-spacing: 0em;
@@ -17,7 +17,8 @@ export const EventContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     text-align: justify;
-    gap: 20px;
+    /* justify-content:space-evenly ; */
+    gap: 50px;
     padding-top: 10px;
     width: 100%;
   }
@@ -26,14 +27,14 @@ export const EventContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    width: 28%;
+    width: 30%;
     padding: 2%;
     /* margin:2% ; */
     background-color: rgba(230, 246, 255, 0.2);
     box-shadow: 1px 1px rgba(3, 25, 59, 0.12);
   }
   .sub-box p {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 32px;
     text-align: center;
@@ -63,7 +64,8 @@ export const EventContainer = styled.div`
   width:70% ;
  } */
     .sub-box {
-      width: 42%;
+      width: 100%;
+      padding:4% ;
     }
     .sub-box p {
       font-size: 16px;

@@ -8,9 +8,9 @@ export const HeroContainer = styled.div`
   align-items: center;
   padding-top:100px ;
   span {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 500;
-    line-height: 64px;
+    line-height: 48px;
     letter-spacing: 0em;
     text-align: center;
     color: #fff;
