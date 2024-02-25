@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Testimonial = () => {
   return (
-    <TestimonialStyle>
+    <TestimonialStyle data-aos="fade-up" data-aos-delay="1000">
       {" "}
       <span>What Our Users Have To Say</span>
       <div className="box">

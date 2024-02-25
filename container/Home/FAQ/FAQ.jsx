@@ -4,7 +4,7 @@ import { Arrow_Blue } from "@/assets";
 
 const FAQ = () => {
   return (
-    <FAQSContainer>
+    <FAQSContainer data-aos="fade-up" data-aos-delay="1000">
       <span>Frequently Asked Questions</span>
       <div className="box">
         <div className="sub-box">

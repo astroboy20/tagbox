@@ -10,12 +10,18 @@ import { ThemeProvider } from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     AOS.init({
       offset: 100,
     });
+  }, []);
+
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
   return (

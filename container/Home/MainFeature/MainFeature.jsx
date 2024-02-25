@@ -11,7 +11,7 @@ import {
 
 const MainFeature = () => {
   return (
-    <MainContainer>
+    <MainContainer data-aos="fade-up" data-aos-delay="1000">
       <span>Main Features</span>
       <p>
       Explore the primary features of our product informing your decision on what works best for you!

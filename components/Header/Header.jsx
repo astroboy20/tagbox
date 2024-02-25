@@ -130,7 +130,7 @@ const Header = () => {
           </MobileNav>
         )}
 
-        <HeroContainer data-aos="fade-up">
+        <HeroContainer data-aos="fade-up" data-aos-delay="1000">
           <div className="text">
             <h1>
               Welcome To A <br />
