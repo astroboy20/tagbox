@@ -6,7 +6,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { EventImages } from "./Images";
-import { BigSpinner } from "@/components/Spinner/Spinner";
+import { BigSpinner } from "@/components/Spinner/BigSpinner";
+// import { BigSpinner } from "@/components/Spinner/Spinner";
 const Events = () => {
   const [eventTypes, setEventType] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,13 +15,13 @@ const Events = () => {
   const token = user ? user.data || user : "";
 
   const fetchEventTypes = async () => {
-    setIsLoading = true;
+    setIsLoading(true); 
     try {
       const response = await axios.get(
         "https://tagbox.onrender.com/v1/event-types",
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            // Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -28,9 +29,10 @@ const Events = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); 
     }
   };
+  
 
   useEffect(() => {
     fetchEventTypes();
