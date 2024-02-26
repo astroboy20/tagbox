@@ -10,6 +10,7 @@ import { UpcomingEvents } from "@/container/Home/UpcomingEvents";
 import { FAQ } from "@/container/Home/FAQ";
 import { Testimonial } from "@/container/Home/Testimonial";
 import { Footer } from "@/components/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

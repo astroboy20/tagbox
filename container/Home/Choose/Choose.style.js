@@ -58,7 +58,7 @@ export const ChooseContainer = styled.div`
 
     .image {
       text-align: center;
-      width: 310px;
+      width: auto;
       height: 240px;
     }
     h2{

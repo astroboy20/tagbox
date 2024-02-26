@@ -4,36 +4,15 @@ import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 const Choose = () => {
   return (
+    
     <ChooseContainer data-aos="fade-up" data-aos-delay="1000">
       <span>Choose Your Event Type</span>
 
       <div
-        id="carouselExampleIndicators"
+        id="carouselExampleSlidesOnly"
         class="carousel slide"
         data-bs-ride="carousel"
       >
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div className="slider-body">
@@ -64,17 +43,18 @@ const Choose = () => {
               <div className="text">
                 <h2>
                   {" "}
-                  Get Your Attendees To Experience the Thrill in Person!{" "}
+                  Allow your attendees be a part of this by connecting
+                  virtually!
                 </h2>
                 <p>
-                  Host physical event endearing your event attendees to your
-                  brand and organization.
+                  No one is expected to miss out not even your attendees. Get
+                  them to attend virtually.
                 </p>
                 <Button variant={"dark-button"}>Host an Event</Button>
               </div>
 
               <Image
-                src={"/images/event.png"}
+                src={"/images/allow.png"}
                 width={620}
                 height={460}
                 objectFit="cover"
@@ -86,19 +66,16 @@ const Choose = () => {
           <div class="carousel-item">
             <div className="slider-body">
               <div className="text">
-                <h2>
-                  {" "}
-                  Get Your Attendees To Experience the Thrill in Person!{" "}
-                </h2>
+                <h2> Connect both your physical and virtual attendees. !</h2>
                 <p>
-                  Host physical event endearing your event attendees to your
-                  brand and organization.
+                  The thrill of hybrid events? Its one your attendees should be
+                  a part of
                 </p>
                 <Button variant={"dark-button"}>Host an Event</Button>
               </div>
 
               <Image
-                src={"/images/event.png"}
+                src={"/images/connect.png"}
                 width={620}
                 height={460}
                 objectFit="cover"
@@ -108,24 +85,6 @@ const Choose = () => {
             </div>
           </div>
         </div>
-        {/* <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button> */}
       </div>
     </ChooseContainer>
   );

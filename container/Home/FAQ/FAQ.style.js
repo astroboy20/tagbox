@@ -33,6 +33,9 @@ export const FAQSContainer = styled.div`
     align-items: center;
     padding: 20px 20px;
   }
+  .content-show{
+    color:#fff ;
+  }
 
   @media screen and (max-width: 786px) {
     padding:  6%;

@@ -41,8 +41,12 @@ export const FooterContainer = styled.div`
   }
 
   @media screen and (max-width: 786px) {
+    
     .top {
       height: 300px;
+      background-position:center ;
+      background-size:cover ;
+      
     }
     .top span {
       font-size: 20px;
@@ -51,10 +55,11 @@ export const FooterContainer = styled.div`
     .top p {
       font-size: 16px;
       font-weight: 400;
+      padding:0 2% ;
     }
     .input {
       width: 80%;
-      margin: 0 auto;
+      margin: 0 20%;
     }
     input {
       /* width: 60%; */

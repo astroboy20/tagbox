@@ -1,33 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { FAQSContainer } from "./FAQ.style";
-import { Arrow_Blue } from "@/assets";
+import { Arrow_Blue, Arrow_Down } from "@/assets";
+import { Data } from "./data";
 
 const FAQ = () => {
+  const [select, setSelect] = useState(null);
+  const handelSelect = (e) => {
+    if (select === e) {
+      return setSelect(null);
+    }
+    setSelect(e);
+  };
   return (
     <FAQSContainer data-aos="fade-up" data-aos-delay="1000">
       <span>Frequently Asked Questions</span>
       <div className="box">
-        <div className="sub-box">
-          <p>  Can i customize to my preferred style and taste?</p>
-          <Arrow_Blue />
-        </div>
-        <div className="sub-box">
-          <p> Can i host a concert with this product? </p>
-          <Arrow_Blue />
-        </div>
-        <div className="sub-box">
-          <p> Can i trust this product with my security passcodes?</p>
-          <Arrow_Blue />
-        </div>
-        <div className="sub-box">
-          <p> Is there a payment plan?</p>
-          <Arrow_Blue />
-        </div>
+        {Data.map((data) => (
+          <>
+            <div className="sub-box">
+            <p> {data.title}</p>
+            <span>{select ? <Arrow_Down /> : <Arrow_Blue />}</span>
+          </div>
+          <p className={select === e ? "content-show" : "content"}>{data.content}</p>
+          </>
+        
+        ))}
       </div>
-     
-
-
-
     </FAQSContainer>
   );
 };

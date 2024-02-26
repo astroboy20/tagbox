@@ -17,15 +17,17 @@ export const MainContainer = styled.div`
     font-weight: 400;
     line-height: 29px;
     letter-spacing: 0em;
-    text-align: justify;
+    text-align: center;
   }
   .box {
     display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    overflow-x:auto ;
+    width:100% ;
     align-items:center ;
     gap:20px;
-    padding-top:10px ;
+    padding-top:30px ;
     
   }
   .sub-box {
@@ -34,16 +36,26 @@ export const MainContainer = styled.div`
     align-items:center ;
     justify-content:left ;
     gap:20px;
-    width: 32%;
+    width: 100%;
     background-color:rgba(230, 246, 255, 0.2) ;
     box-shadow:1px 1px rgba(3, 25, 59, 0.12) ;
   }
+  .box::-webkit-scrollbar{
+    display:none ;
+  }
   .sub-box p {
-    font-size: 24px;
+    font-size: 16px;
+    padding-bottom:2% ;
     font-weight: 500;
     line-height: 32px;
     letter-spacing: 0em;
     text-align: center;
+  }
+
+  .image {
+    text-align: center;
+    width: auto;
+    height: 300px;
   }
 
   @media screen and (max-width: 786px) {
@@ -61,10 +73,10 @@ export const MainContainer = styled.div`
     text-align: center;
   }
   .box{
-    justify-content:center ;
+    /* justify-content:center ; */
   }
   .sub-box{
-    width:auto ;
+    width:100% ;
 
   }
   .sub-box p {

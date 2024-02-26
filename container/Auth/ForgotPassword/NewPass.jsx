@@ -3,7 +3,6 @@ import { Login_Icon, Logo, Logo_Blue, Register_Icon } from "@/assets";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
 import Link from "next/link";
-import { LoginContainer } from "./Login.style";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +10,9 @@ import { useRouter } from "next/router";
 import { login, login_with_google, reset } from "@/features/authSlice";
 import Image from "next/image";
 import Spinner from "@/components/Spinner/Spinner";
+import { ForgotContainer } from "./ForgotPass.style";
 
-const Login = () => {
+const NewPass = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { message, isLoading, isError, isSuccess } = useSelector(
@@ -20,12 +20,19 @@ const Login = () => {
   );
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      new_password: "",
+      confirm_new: "",
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
+     
+      new_password: Yup.string()
+        .required("Required")
+        .min(8, "Must be at least 8 characters")
+        .matches(
+          /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\[\]:;<>.,?])[A-Za-z0-9!@#$%^&*()_+={}\[\]:;<>.,?]{8,}$/,
+          "Must contain at least one uppercase letter and one special character"
+        ),
+      confirm_new: Yup.string()
         .required("Required")
         .min(8, "Must be at least 8 characters")
         .matches(
@@ -54,14 +61,14 @@ const Login = () => {
     // navigate(data.url)
   };
   return (
-    <LoginContainer>
+    <ForgotContainer>
       <div className="right">
         <div className="icon">
           <Logo_Blue />
         </div>
 
         <Image
-          src={"/images/login.png"}
+          src={"/images/forgot_password.png"}
           width={575}
           height={380}
           alt="login-image"
@@ -75,72 +82,41 @@ const Login = () => {
           <p>Login to your account here...</p>
         </div>
         <form onSubmit={formik.handleSubmit}>
+       
           <Input
-            name={"email"}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            label={"Email"}
-            variant={"text"}
-            error={
-              formik.errors?.email && formik.errors.email
-                ? `${formik.errors.email}`
-                : null
-            }
-          />
-          <div >
-          <Input
-            name={"password"}
-            label={"Enter Password"}
-            value={formik.values.password}
+            name={"new_password"}
+            label={"Enter New Password"}
+            value={formik.values.new_password}
             onChange={formik.handleChange}
             variant={"password"}
             error={
-              formik.errors?.password && formik.errors.password
-                ? `${formik.errors.password}`
+              formik.errors?.new_password && formik.errors.new_password
+                ? `${formik.errors.new_password}`
                 : null
             }
           />
-          <p  style={{textAlign:"right"}}><Link style={{color:"red", fontSize:"16px"}} href={"forgot-password/email"}>Forgot password</Link></p>
-          
-          </div>
-          
+          <Input
+            name={"password"}
+            label={"Confirm New Password"}
+            value={formik.values.confirm_new}
+            onChange={formik.handleChange}
+            variant={"password"}
+            error={
+              formik.errors?.confirm_new && formik.errors.confirm_new
+                ? `${formik.errors.confirm_new}`
+                : null
+            }
+          />
 
           <Button variant={"dark-button"}>
             {" "}
-            {isLoading ? <Spinner /> : "Log in"}
+            {"Save"}
           </Button>
-          <div className="links">
-            <p
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              Log In with
-              <Image
-                src={"/images/google.png"}
-                width={24}
-                height={24}
-                alt="google-logo"
-                style={{ cursor: "pointer" }}
-                onClick={loginWithgoogle}
-              />
-            </p>
-            <p>
-              {" "}
-              Don’t have an account?{" "}
-              <Link className="link" href="/register">
-                Sign Up
-              </Link>{" "}
-            </p>
-          </div>
+         
         </form>
       </div>
-    </LoginContainer>
+    </ForgotContainer>
   );
 };
 
-export { Login };
+export { NewPass };
