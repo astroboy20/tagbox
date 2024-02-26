@@ -25,7 +25,8 @@ export const FAQSContainer = styled.div`
     flex-direction: column;
     gap: 20px;
   }
-  .sub-box {
+
+  .sub-box .header {
     color: rgba(2, 13, 30, 1);
     background: #f3faff;
     display: flex;
@@ -33,25 +34,36 @@ export const FAQSContainer = styled.div`
     align-items: center;
     padding: 20px 20px;
   }
-  .content-show{
-    color:#fff ;
+  .sub-box .content-show {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+
+    /* display:block ; */
   }
 
   @media screen and (max-width: 786px) {
-    padding:  6%;
+    padding: 6%;
+
+    span {
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-align: center;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    .sub-box .content-show {
    
-   span {
-   font-size: 24px;
-   font-weight: 700;
-   text-decoration: underline;
-   text-align: center;
- }
- p {
-   font-size: 16px;
-   font-weight: 400;
-   text-align: left;
- }
- 
- 
- }
+    font-size: 14px;
+    
+
+    /* display:block ; */
+  }
+  }
 `;

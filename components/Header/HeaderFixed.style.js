@@ -86,7 +86,7 @@ export const HeaderFixedStyle = styled.nav`
     display: none;
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     /* padding:6% ; */
     .logo{
     width:100px ;

@@ -49,7 +49,7 @@ export const ChooseContainer = styled.div`
     height: 460px;
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     .slider-body {
       flex-direction: column-reverse;
       justify-content: center;
@@ -79,6 +79,7 @@ export const ChooseContainer = styled.div`
       font-size: 18px;
       font-weight: 400;
       text-align: center;
+      padding:10px ;
     }
   }
 `;
