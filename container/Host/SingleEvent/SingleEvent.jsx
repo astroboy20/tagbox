@@ -205,16 +205,7 @@ const SingleEvent = ({ name }) => {
                 />
                 <label>Hybrid (Both Virtual & Physical)</label>
               </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="no"
-                  value="No"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(false)}
-                />
-                <label htmlFor="no">No</label>
-              </div>
+            
             </div>
           </div>
 
@@ -261,14 +252,7 @@ const SingleEvent = ({ name }) => {
             name="location"
             onChange={handleChange}
           />
-          <Input
-            variant={"event-input"}
-            label={"Add email address of invitees manually"}
-            icon={<Location />}
-            value={eventDetails.location}
-            name="location"
-            onChange={handleChange}
-          />
+         
 
          
 
@@ -317,7 +301,7 @@ const SingleEvent = ({ name }) => {
           <Input
             variant={"event-input"}
             label={"Upload CSV file containing attendees email address"}
-            icon={  <p onClick={generateId}>Generate</p>}
+            icon={  <p onClick={generateId}>Upload</p>}
             value={eventDetails.location}
             name="location"
             onChange={handleChange}
