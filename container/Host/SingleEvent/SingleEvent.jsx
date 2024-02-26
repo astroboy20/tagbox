@@ -28,9 +28,11 @@ const SingleEvent = ({ name }) => {
     image: null,
     tag_line: "",
     qr_code: "",
-    consultation: "",
+    consultation: consultation,
     type_of_consultation: "",
     frequency_of_consultation: "",
+    no_invitee: "",
+    upload_cvs: "",
     visibility: visibility,
   });
 
@@ -38,8 +40,6 @@ const SingleEvent = ({ name }) => {
   const token = user ? user.data || user : "";
   console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
-
-  
 
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
@@ -84,6 +84,16 @@ const SingleEvent = ({ name }) => {
       visibility: type,
     }));
   };
+  const [consultationType, setConsultationType] = useState("");
+
+const handleConsultationTypeChange = (type) => {
+  setConsultationType(type);
+  setEventDetails((prevDetails) => ({
+    ...prevDetails,
+    consultation: type ? "Yes" : "No", // Update consultation value in eventDetails
+  }));
+};
+
 
   const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
@@ -205,7 +215,6 @@ const SingleEvent = ({ name }) => {
                 />
                 <label>Hybrid (Both Virtual & Physical)</label>
               </div>
-            
             </div>
           </div>
 
@@ -252,12 +261,6 @@ const SingleEvent = ({ name }) => {
             name="location"
             onChange={handleChange}
           />
-         
-
-         
-
-
-
 
           <div className="event-display">
             <div>How would you like to input the details of your invitees?</div>
@@ -291,19 +294,18 @@ const SingleEvent = ({ name }) => {
           <Input
             variant={"event-input"}
             label={"Input your estimated amount of attendees"}
-            icon={<Location />}
-            value={eventDetails.location}
-            name="location"
+            icon={<p>Add</p>}
+            value={eventDetails.no_invitee}
+            name="no_invitee"
             onChange={handleChange}
-            
           />
 
           <Input
             variant={"event-input"}
             label={"Upload CSV file containing attendees email address"}
-            icon={  <p onClick={generateId}>Upload</p>}
-            value={eventDetails.location}
-            name="location"
+            icon={<p onClick={generateId}>Upload</p>}
+            value={eventDetails.upload_cvs}
+            name="upload_cvs"
             onChange={handleChange}
           />
 
@@ -335,7 +337,6 @@ const SingleEvent = ({ name }) => {
               </div>
             </div>
           </div>
-
 
           {eventDetails.dress_code == "Yes" && (
             <EventStyle>
@@ -374,39 +375,38 @@ const SingleEvent = ({ name }) => {
               <div className="radio-input">
                 <input
                   type="radio"
-                  id="yes"
+                  id="consultation-yes"
                   value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
+                  name="consultationType"
+                  checked={consultationType === "Yes"}
+                  onChange={() => handleConsultationTypeChange(true)}
                 />
-                <label htmlFor="yes">Yes</label>
+                <label htmlFor="consultation-yes">Yes</label>
               </div>
               <div className="radio-input">
                 <input
                   type="radio"
-                  id="no"
+                  id="consultation-no"
                   value="No"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(false)}
+                  name="consultationType"
+                  checked={consultationType === "No"}
+                  onChange={() => handleConsultationTypeChange(false)}
                 />
-                <label htmlFor="no">No</label>
+                <label htmlFor="consultation-no">No</label>
               </div>
             </div>
           </div>
-          <Input
-            variant={"event-input"}
-            label={"If yes, what type of consultation?"}
-            icon={<Location />}
-            value={eventDetails.location}
-            name="location"
-            onChange={handleChange}
-            
-          />
-         
 
-         
+          {consultationType === "Yes" && (
+            <Input
+              variant={"event-input"}
+              label={"If yes, what type of consultation?"}
+              value={eventDetails.type_of_consultation}
+              name="type_of_consultation"
+              onChange={handleChange}
+            />
+          )}
 
-        
           <EventStyle>
             <label>Wishlist</label>
             <label>
@@ -467,7 +467,7 @@ const SingleEvent = ({ name }) => {
 
             <div className="image-button">
               <Image
-               src={"/images/2.png"}
+                src={"/images/2.png"}
                 width={400}
                 height={500}
                 className="image"
