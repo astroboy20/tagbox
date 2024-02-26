@@ -21,11 +21,8 @@ export const HeaderContainer = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  @media screen and (max-width: 786px) {
     padding: 6% 6% 35% 3%;
-  }
-  @media screen and (min-width: 768px) {
-    padding: 6% 6% 20% 3%;
   }
 `;
 export const HeaderStyle = styled.nav`
@@ -82,8 +79,8 @@ export const HeaderStyle = styled.nav`
   .hamburger {
     display: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    padding:6% ;
+  @media screen and (max-width: 1024px) {
+    padding:3% 6% ;
     .logo{
     width:100px ;
     height:30px;
@@ -119,7 +116,7 @@ export const HeroContainer = styled.div`
     justify-content: center;
     font-weight: 500;
   }
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  @media screen and (max-width: 1024px) {
     padding: 4% 0;
     h1 {
       font-size: 28px;

@@ -3,7 +3,7 @@ import Image from "next/image";
 export const EventImages = {
   Wedding: (
     <Image
-      src={"/images/wedding.png"}
+      src={"/images/Wedding.png"}
       width={150}
       height={150}
       alt="weeding"

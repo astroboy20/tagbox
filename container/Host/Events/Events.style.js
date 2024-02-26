@@ -48,7 +48,7 @@ export const EventContainer = styled.div`
     color:#C1E8FF ;
   }
 
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  @media screen and (max-width: 1024px) {
     padding: 6%;
     span {
       font-size: 16px;
