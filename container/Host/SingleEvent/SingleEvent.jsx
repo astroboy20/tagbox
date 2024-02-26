@@ -244,14 +244,7 @@ const handleConsultationTypeChange = (type) => {
             </div>
           </EventStyle>
 
-          <Input
-            variant={"event-input"}
-            label={"Input your estimated amount of attendees"}
-            icon={<Location />}
-            value={eventDetails.location}
-            name="location"
-            onChange={handleChange}
-          />
+          
 
           <Input
             variant={"event-input"}
