@@ -8,7 +8,7 @@ export const EventImages = {
       height={150}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
   Birthday: (
@@ -18,7 +18,7 @@ export const EventImages = {
       height={150}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
   Graduation: (
@@ -36,7 +36,9 @@ export const EventImages = {
       src={"/images/house-warming.png"}
       width={150}
       height={100}
+      className="image"
       alt="weeding"
+      objectFit="contain"
     />
   ),
   Conference: (
@@ -46,7 +48,7 @@ export const EventImages = {
       height={150}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
   Shower: (
@@ -56,7 +58,7 @@ export const EventImages = {
       height={200}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
   Hangout: (
@@ -66,7 +68,7 @@ export const EventImages = {
       height={150}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
   Others: (
@@ -76,7 +78,7 @@ export const EventImages = {
       height={150}
       alt="weeding"
       className="image"
-      objectFit="cover"
+      objectFit="contain"
     />
   ),
 };

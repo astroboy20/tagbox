@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { EventImages } from "./Images";
 import { BigSpinner } from "@/components/Spinner/BigSpinner";
+import { UpcomingEvents } from "@/container/Home/UpcomingEvents";
 // import { BigSpinner } from "@/components/Spinner/Spinner";
 const Events = () => {
   const [eventTypes, setEventType] = useState([]);
@@ -21,7 +22,7 @@ const Events = () => {
         "https://tagbox.onrender.com/v1/event-types",
         {
           headers: {
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -82,6 +83,7 @@ const Events = () => {
           </>
         )}
       </div>
+      {/* <UpcomingEvents/> */}
     </EventContainer>
   );
 };

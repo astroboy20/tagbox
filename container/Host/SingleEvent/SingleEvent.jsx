@@ -11,7 +11,6 @@ import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
-import Color from "./Color";
 
 const SingleEvent = ({ name }) => {
   const { user } = useSelector((state) => state.auth);
@@ -40,9 +39,7 @@ const SingleEvent = ({ name }) => {
   console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
 
-  useEffect(() => {
-    generateId(); // Generate ID on initial render
-  }, [name]);
+  
 
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
@@ -50,7 +47,7 @@ const SingleEvent = ({ name }) => {
     setUniqueId(id);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: `https://tagbox.com/${name}/${id}`,
+      qr_code: `${id}`,
     }));
   };
 
@@ -60,7 +57,7 @@ const SingleEvent = ({ name }) => {
     setUniqueId(value);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: `https://tagbox.com/${name}/${value}`,
+      qr_code: `${value}`,
     }));
   };
 
@@ -223,15 +220,15 @@ const SingleEvent = ({ name }) => {
 
           <Input
             variant={"event-input"}
-            label={`Insert your ${name} hashtag `}
-            placeholder={"E.g, Concerts, get-together, graduation, etc."}
+            label={`Input your ${name} hashtag `}
+            placeholder={"E.g, #Loveunbeaten23, #TayTay24"}
             value={eventDetails.wedding_hashtag}
             name="wedding_hashtag"
             onChange={handleChange}
           />
 
           <EventStyle>
-            <label>Date and Time of event?</label>
+            <label>Date of event?</label>
             <div>
               <input
                 id="date"
@@ -249,13 +246,259 @@ const SingleEvent = ({ name }) => {
 
           <Input
             variant={"event-input"}
-            label={"Add event Location of event if any"}
+            label={"Input your estimated amount of attendees"}
             icon={<Location />}
             value={eventDetails.location}
             name="location"
             onChange={handleChange}
           />
 
+          <Input
+            variant={"event-input"}
+            label={"Enter event Location"}
+            icon={<Location />}
+            value={eventDetails.location}
+            name="location"
+            onChange={handleChange}
+          />
+          <Input
+            variant={"event-input"}
+            label={"Add email address of invitees manually"}
+            icon={<Location />}
+            value={eventDetails.location}
+            name="location"
+            onChange={handleChange}
+          />
+
+         
+
+
+
+
+          <div className="event-display">
+            <div>How would you like to input the details of your invitees?</div>
+
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="physical"
+                  value="Physical"
+                  name="eventType"
+                  checked={event_type === "Physical"}
+                  onChange={() => handleEventTypeChange("Physical")}
+                />
+                <label>Manually (add email of invitees manually)</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="virtual"
+                  value="Virtual"
+                  name="eventType"
+                  checked={event_type === "Virtual"}
+                  onChange={() => handleEventTypeChange("Virtual")}
+                />
+                <label>Upload the csv file of all invitees</label>
+              </div>
+            </div>
+          </div>
+
+          <Input
+            variant={"event-input"}
+            label={"Input your estimated amount of attendees"}
+            icon={<Location />}
+            value={eventDetails.location}
+            name="location"
+            onChange={handleChange}
+            
+          />
+
+          <Input
+            variant={"event-input"}
+            label={"Upload CSV file containing attendees email address"}
+            icon={  <p onClick={generateId}>Generate</p>}
+            value={eventDetails.location}
+            name="location"
+            onChange={handleChange}
+          />
+
+          <div className="event-display">
+            <div>Dress & Colour code</div>
+            <span>Do you have any dress or colour code? </span>
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="dress_code"
+                  checked={event_dressCode === "Yes"}
+                  onChange={() => handleDressCodeChange("Yes")}
+                />
+                <label htmlFor="yes">Yes</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="no"
+                  value="No"
+                  name="dress_code"
+                  checked={event_dressCode === "No"}
+                  onChange={() => handleDressCodeChange("No")}
+                />
+                <label htmlFor="no">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          {eventDetails.dress_code == "Yes" && (
+            <EventStyle>
+              <label>If yes, upload dress code(Asoebi) </label>
+              <div>
+                <input
+                  id="image"
+                  accept="image/*"
+                  type="file"
+                  onChange={handleImageChange}
+                />
+                <h1>
+                  {loading ? (
+                    <InfinitySpin
+                      visible={true}
+                      width="50"
+                      color="#000"
+                      ariaLabel="infinity-spin-loading"
+                    />
+                  ) : (
+                    <Upload />
+                  )}
+                </h1>
+              </div>
+            </EventStyle>
+          )}
+
+          <div className="event-display">
+            <div>Consultation and Planning</div>
+            <span>
+              We have put in place consultation services with various options to
+              help with the proper planning of your event. Would you like to
+              book us?{" "}
+            </span>
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="yes"
+                  value="Yes"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(true)}
+                />
+                <label htmlFor="yes">Yes</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="no"
+                  value="No"
+                  name="visibility"
+                  onChange={() => handleVisibilityTypeChange(false)}
+                />
+                <label htmlFor="no">No</label>
+              </div>
+            </div>
+          </div>
+          <Input
+            variant={"event-input"}
+            label={"If yes, what type of consultation?"}
+            icon={<Location />}
+            value={eventDetails.location}
+            name="location"
+            onChange={handleChange}
+            
+          />
+         
+
+         
+
+        
+          <EventStyle>
+            <label>Wishlist</label>
+            <label>
+              Curate your wishlist here and have well wishers gift you with ease
+              and without stress
+            </label>
+            <label>Upload image of preferred items</label>
+            <div>
+              <input
+                id="image"
+                accept="image/*"
+                type="file"
+                onChange={handleImageChange}
+              />
+              <h1>
+                {loading ? (
+                  <InfinitySpin
+                    visible={true}
+                    width="50"
+                    color="#000"
+                    ariaLabel="infinity-spin-loading"
+                  />
+                ) : (
+                  ""
+                )}
+              </h1>
+            </div>
+          </EventStyle>
+
+          <div className="event-display">
+            <div>Invitation Card</div>
+            <div className="images">
+              <Image
+                src={"/images/1.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="contain"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/3.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="contain"
+                alt="invitation-card"
+              />
+              <Image
+                src={"/images/2.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="contain"
+                alt="invitation-card"
+              />
+            </div>
+
+            <div className="image-button">
+              <Image
+               src={"/images/2.png"}
+                width={400}
+                height={500}
+                className="image"
+                objectFit="contain"
+                alt="invitation-card"
+              />
+              <div className="buttons">
+                <Button variant={"dark-transparent"}>
+                  Upload invitation card
+                </Button>
+                <Button variant={"dark-white"}>Customize to your style</Button>
+                <p>Browse More Template</p>
+              </div>
+            </div>
+          </div>
           {/* QR code */}
           <EventStyle>
             <label>Generate QR code and customized link for your event</label>
@@ -299,303 +542,6 @@ const SingleEvent = ({ name }) => {
           </EventStyle>
 
           {/* end */}
-
-          <div className="event-display">
-            <div>Dress & Colour code</div>
-            <span>Do you have any dress or colour code? </span>
-            <div className="input">
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="dress_code"
-                  checked={event_dressCode === "Yes"}
-                  onChange={() => handleDressCodeChange("Yes")}
-                />
-                <label htmlFor="yes">Yes</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="no"
-                  value="No"
-                  name="dress_code"
-                  checked={event_dressCode === "No"}
-                  onChange={() => handleDressCodeChange("No")}
-                />
-                <label htmlFor="no">No</label>
-              </div>
-            </div>
-          </div>
-
-          {eventDetails.dress_code == "Yes" && (
-            <EventStyle>
-              <label>If yes, upload dress code(Asoebi) </label>
-              <div>
-                <input
-                  id="image"
-                  accept="image/*"
-                  type="file"
-                  onChange={handleImageChange}
-                />
-                <h1>
-                  {loading ? (
-                    <InfinitySpin
-                      visible={true}
-                      width="50"
-                      color="#000"
-                      ariaLabel="infinity-spin-loading"
-                    />
-                  ) : (
-                    <Upload />
-                  )}
-                </h1>
-              </div>
-            </EventStyle>
-          )}
-
-        
-
-          <div className="event-display">
-            <div>Consultation and Planning</div>
-            <span>
-              We have put in place consultation services with various options to
-              help with the proper planning of your event. Would you like to
-              book us?{" "}
-            </span>
-            <div className="input">
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Yes</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="no"
-                  value="No"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(false)}
-                />
-                <label htmlFor="no">No</label>
-              </div>
-            </div>
-          </div>
-
-          <div className="event-display">
-            <div>If yes, what type of consultation?</div>
-            <div className="event-box">
-              <div className="sub-box">
-                <Image
-                  src={"/images/meetings.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="contain"
-                  className="image-box"
-                />
-                <div className="radio-input">
-                  <input
-                    type="radio"
-                    id="physical"
-                    value="Physical"
-                    name="eventType"
-                    checked={event_type === "Physical"}
-                    onChange={() => handleEventTypeChange("Physical")}
-                  />
-                  <label>Physical (one-on-one) consultation.</label>
-                </div>
-              </div>
-              <div className="sub-box">
-                <Image
-                  src={"/images/Virtual-meeting.png"}
-                  width={340}
-                  height={340}
-                  alt="meeting"
-                  objectFit="cover"
-                  className="image-box"
-                />
-
-                <div className="radio-input">
-                  <input
-                    type="radio"
-                    id="virtual"
-                    value="Virtual"
-                    name="eventType"
-                    checked={event_type === "Virtual"}
-                    onChange={() => handleEventTypeChange("Virtual")}
-                  />
-                  <label>Virtual (via calls and emails) consultation. </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <Input
-            variant={"event-input"}
-            label={
-              "For physical consultation, check here for your nearest location "
-            }
-            placeholder={"Ikeja"}
-            value={eventDetails.tag_line}
-            name="tag_line"
-            onChange={handleChange}
-          />
-
-          <div className="event-display">
-            <div>Tick the frequency of your consultation.</div>
-
-            <div className="input">
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Monday</label>
-              </div>
-
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Tuesdays</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Wednesdays</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Thursdays</label>
-              </div>
-
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Fridays</label>
-              </div>
-              <div className="radio-input">
-                <input
-                  type="radio"
-                  id="yes"
-                  value="Yes"
-                  name="visibility"
-                  onChange={() => handleVisibilityTypeChange(true)}
-                />
-                <label htmlFor="yes">Saturdays</label>
-              </div>
-            </div>
-          </div>
-
-          <EventStyle>
-            <label>Wishlist</label>
-            <label>
-              Curate your wishlist here and have well wishers gift you with ease
-              and without stress
-            </label>
-            <label>Upload image of preferred items</label>
-            <div>
-              <input
-                id="image"
-                accept="image/*"
-                type="file"
-                onChange={handleImageChange}
-              />
-              <h1>
-                {loading ? (
-                  <InfinitySpin
-                    visible={true}
-                    width="50"
-                    color="#000"
-                    ariaLabel="infinity-spin-loading"
-                  />
-                ) : (
-                  ""
-                )}
-              </h1>
-            </div>
-          </EventStyle>
-
-          <div className="event-display">
-            <div>Invitation Card</div>
-            <div className="images">
-              <Image
-                src={"/images/1.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-              <Image
-                src={"/images/3.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-              <Image
-                src={"/images/2.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-            </div>
-
-            <div className="image-button">
-              <Image
-                src={"/images/4.png"}
-                width={600}
-                height={400}
-                className="image"
-                objectFit="cover"
-                alt="invitation-card"
-              />
-              <div className="buttons">
-                <Button variant={"dark-transparent"}>
-                  Upload invitation card
-                </Button>
-                <Button variant={"dark-white"}>Customize to your style</Button>
-                <p>Browse More Template</p>
-              </div>
-            </div>
-          </div>
-
-          
-
           <Button variant="dark-button">Submit Response</Button>
         </form>
       </div>

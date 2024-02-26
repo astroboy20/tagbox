@@ -185,7 +185,7 @@ export const SingleEventStyle = styled.div`
     line-height: 24px;
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
     .header {
       margin-top: 60px;
       height: 200px;
@@ -265,11 +265,11 @@ export const SingleEventStyle = styled.div`
     }
     .event-display .images {
       justify-content: center;
-      gap: 5px;
+      gap: 10px;
     }
     .event-display .image {
-      width: 110px;
-      height: 150px;
+      width: 200px;
+      height: 250px;
     }
     .event-display .image-button {
       gap: 10px;

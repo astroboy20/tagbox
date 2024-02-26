@@ -28,7 +28,7 @@ export const EventContainer = styled.div`
     align-items: center;
     gap: 10px;
     width: 30%;
-    padding: 2%;
+    padding-bottom: 2%;
     /* margin:2% ; */
     background-color: rgba(230, 246, 255, 0.2);
     box-shadow: 1px 1px rgba(3, 25, 59, 0.12);
@@ -40,8 +40,8 @@ export const EventContainer = styled.div`
     text-align: center;
   }
   .image {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    height: 264px;
   }
   .link{
     text-decoration: none;
@@ -63,16 +63,18 @@ export const EventContainer = styled.div`
     /* .special{
   width:70% ;
  } */
+ .box{
+  justify-content:center ;
+ }
     .sub-box {
-      width: 100%;
-      padding:4% ;
+      width: 80%;
     }
     .sub-box p {
       font-size: 16px;
     }
     .image {
-      width: 100px;
-      height: 80px;
+      width: 100%;
+      height: 220px;
     }
   }
 `;

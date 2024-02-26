@@ -17,7 +17,7 @@ export const InputStyle = styled.div`
     padding-right: 10px;
     border: 1px solid rgba(47, 46, 65, 0.2);
   }
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
     label {
       font-size: 18px;
       font-weight: 500;
@@ -85,7 +85,7 @@ export const EventStyle = styled.div`
     
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
     label {
       font-size: 18px;
       font-weight: 500;
@@ -128,7 +128,7 @@ export const EventDiv = styled.input`
   font-size:16px ;
   text-align:left ;
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
     width: 100%;
   }
   
