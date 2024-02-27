@@ -115,7 +115,7 @@ export const MobileNav = styled.div`
   z-index: 100000000;
   width: 100%;
   left: 0;
-  padding: 6%;
+  padding:3% 3%;
   gap: 40px;
   .link {
     text-decoration: none;
@@ -147,7 +147,8 @@ export const MobileNav = styled.div`
   .event .link-event{
     color: #fff;
   }
-  .links {
+
+  .links,p {
     text-decoration: none;
     color: #fff;
     font-size: 24px;

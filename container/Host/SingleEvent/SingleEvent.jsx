@@ -279,6 +279,19 @@ const SingleEvent = ({ name, id }) => {
     console.log(eventDetails);
   };
 
+  axios
+  .get(`https://tagbox.onrender.com/v1/user/events`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
   return (
     <SingleEventStyle>
       <div className="header">

@@ -58,8 +58,8 @@ export const FooterContainer = styled.div`
       padding:0 2% ;
     }
     .input {
-      width: 80%;
-      margin: 0 20%;
+      width: fit-content;
+      padding:5px ;
     }
     input {
       /* width: 60%; */

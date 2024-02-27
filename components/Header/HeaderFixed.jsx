@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import { reset } from "@/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
@@ -28,10 +28,9 @@ const HeaderFixed = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  
 
   const token = user ? user.token || user : "";
-  console.log(token)
+  console.log(token);
 
   const handleShowEvent = () => {
     setShowEvent(!showEvent);
@@ -46,8 +45,8 @@ const HeaderFixed = () => {
   };
   const handleLogout = () => {
     dispatch(reset());
-    toast.success("successful")
-    router.push("/login")
+    toast.success("successful");
+    router.push("/login");
   };
 
   return (
@@ -80,9 +79,11 @@ const HeaderFixed = () => {
                         Host an Event
                       </Link>
                     </span>
-                    <span><Link href={"/attend-event"} className="link-event">
-                    Attend an Event
-                      </Link></span>
+                    <span>
+                      <Link href={"/attend-event"} className="link-event">
+                        Attend an Event
+                      </Link>
+                    </span>
                     {/* <span>Manage Event</span> */}
                   </div>
                 </>
@@ -134,8 +135,11 @@ const HeaderFixed = () => {
                         Host an Event
                       </Link>
                     </span>
-                    <span>Attend an Event</span>
-                    <span>Manage Event</span>
+                    <span>
+                      <Link href={"/host-event"} className="link-event">
+                        Attend an Event
+                      </Link>
+                    </span>
                   </div>
                 </>
               )}
