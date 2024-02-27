@@ -229,9 +229,26 @@ const SingleEvent = ({ name, id }) => {
   };
 
   const handleAddWishlistItem = () => {
+    const isAnyEmpty = eventDetails.wishlist.some(
+      (item) => item.item_name.trim() === "" || item.item_link.trim() === ""
+    );
+
+    if (isAnyEmpty) {
+      toast.error("Please fill out all the fields before adding another item.");
+      return;
+    }
     setEventDetails((prevState) => ({
       ...prevState,
-      wishlist: [...prevState.wishlist, { item_name: "", item_image: "" }],
+      wishlist: [...prevState.wishlist, { item_name: "", item_link: "" }],
+    }));
+  };
+
+  const handleRemoveWishlistItem = (indexToRemove) => {
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      wishlist: prevDetails.wishlist.filter(
+        (_, index) => index !== indexToRemove
+      ),
     }));
   };
 
@@ -260,37 +277,37 @@ const SingleEvent = ({ name, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (eventDetails) {
-      axios
-        .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          toast.success(response.data.message);
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
-    } else {
-      toast.warning("Enter the required field");
-    }
+    // if (eventDetails) {
+    //   axios
+    //     .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       toast.success(response.data.message);
+    //     })
+    //     .catch((error) => {
+    //       toast.error(error);
+    //     });
+    // } else {
+    //   toast.warning("Enter the required field");
+    // }
     console.log(eventDetails);
   };
 
   axios
-  .get(`https://tagbox.onrender.com/v1/user/events`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+    .get(`https://tagbox.onrender.com/v1/user/events`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   return (
     <SingleEventStyle>
@@ -455,8 +472,8 @@ const SingleEvent = ({ name, id }) => {
           </EventStyle>
 
           <div className="event-display">
-            <div>Dress & Colour code</div>
-            <span>Do you have any dress or colour code? </span>
+            <div>Dress code</div>
+            <span>Do you have any dress code? </span>
             <div className="input">
               <div className="radio-input">
                 <input
@@ -589,6 +606,14 @@ const SingleEvent = ({ name, id }) => {
                     placeholder={"Item Link"}
                     onChange={(e) => handleWishlistChange(e, index)}
                   />
+                  <button
+                    variant={"danger-button"}
+                    type="button"
+                    onClick={() => handleRemoveWishlistItem(index)}
+                    style={{background:"none", border:"none"}}
+                  >
+                    X
+                  </button>
                 </div>
               ))}
               <br />
