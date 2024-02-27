@@ -4,7 +4,7 @@ export const ProfileContainer = styled.div`
   margin-top: 100px;
   display: inline-flex;
   width: 100%;
-  padding: 0% 6% 3% 0;
+  /* padding: 0% 6% 3% 0; */
   .left {
     width: 40%;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.15);

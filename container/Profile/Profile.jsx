@@ -7,6 +7,7 @@ import Options from "./Options/Options";
 import EditProfile from "./Pages/EditProfile";
 import Settings from "./Pages/Settings";
 import AccountSetting from "./Pages/AccountSetting";
+import Notification from "./Pages/Notification";
 
 const Profile = () => {
   const { option, switchOption } = useOptionContext();

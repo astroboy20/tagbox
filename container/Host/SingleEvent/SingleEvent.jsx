@@ -584,7 +584,7 @@ const SingleEvent = ({ name, id }) => {
                   <Input
                     variant={"text"}
                     type="text"
-                    name="item_image"
+                    name="item_link"
                     value={item.item_image}
                     placeholder={"Item Link"}
                     onChange={(e) => handleWishlistChange(e, index)}
