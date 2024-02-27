@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
@@ -11,6 +11,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { ProfileOptionProvider } from "@/features/Axios/ProfileOptionContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {

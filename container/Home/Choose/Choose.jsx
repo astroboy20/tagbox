@@ -3,6 +3,8 @@ import { ChooseContainer } from "./Choose.style";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 import Carousel from "react-bootstrap/Carousel";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Choose = () => {
   return (
     <ChooseContainer data-aos="fade-up" data-aos-delay="1500">
