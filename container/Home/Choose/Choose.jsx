@@ -7,10 +7,10 @@ import Carousel from "react-bootstrap/Carousel";
 
 const Choose = () => {
   return (
-    <ChooseContainer data-aos="fade-up" data-aos-delay="1500">
+    <ChooseContainer data-aos="fade-up" data-aos-delay="1000">
       <span>Choose Your Event Type</span>
       <Carousel controls={false}>
-        <Carousel.Item interval={900}>
+        <Carousel.Item interval={1000}>
           <div className="slider-body">
             <div className="text">
               <h2> Get Your Attendees To Experience the Thrill in Person! </h2>
@@ -31,7 +31,7 @@ const Choose = () => {
             />
           </div>
         </Carousel.Item>
-        <Carousel.Item interval={700}>
+        <Carousel.Item interval={1000}>
           <div className="slider-body">
             <div className="text">
               <h2>
@@ -55,7 +55,7 @@ const Choose = () => {
             />
           </div>
         </Carousel.Item>
-        <Carousel.Item interval={800}>
+        <Carousel.Item interval={1000}>
           <div className="slider-body">
             <div className="text">
               <h2> Connect both your physical and virtual attendees. !</h2>

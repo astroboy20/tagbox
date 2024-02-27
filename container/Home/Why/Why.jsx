@@ -4,7 +4,7 @@ import { Button } from "@/components/Button/Button";
 
 const Why = () => {
   return (
-    <WhyContainer data-aos="fade-up" data-aos-delay="1700">
+    <WhyContainer data-aos="fade-up" data-aos-delay="1500">
       <div className="text">
         <span>Why Tagbox?</span>
         <p>
