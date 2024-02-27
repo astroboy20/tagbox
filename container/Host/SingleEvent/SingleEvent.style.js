@@ -186,15 +186,40 @@ export const SingleEventStyle = styled.div`
   .wishlist {
     display: flex;
     flex-direction: column;
+    gap: 20px;
   }
-
+  .wishlist label {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+  .wishlist p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+  }
   .wishlist .input {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;
     margin-bottom: 10px;
-    width:100%; 
+    width: 100%;
   }
+
+  
+
+
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: transparent;
+  border:1px solid black ;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 
   @media screen and (max-width: 1024px) {
     .header {
@@ -304,6 +329,28 @@ export const SingleEventStyle = styled.div`
       font-weight: 500;
       cursor: pointer;
     }
+
+    .event-display label {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .event-display span {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  .wishlist label {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+  .wishlist p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 
     .wishlist .input {
       display: flex;
