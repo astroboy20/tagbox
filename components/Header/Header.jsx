@@ -1,4 +1,4 @@
-import { Arrow_Down, Close, Hamburger, Logo } from "@/assets";
+import { Arrow, Arrow_Down, Close, Hamburger, Logo } from "@/assets";
 import { useState } from "react";
 import {
   HeaderContainer,
@@ -11,7 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "@/features/authSlice";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const token = user ? user.token || user : "";
   console.log(token);
@@ -58,15 +58,23 @@ const Header = () => {
           <div className="center-nav">
             <div onClick={handleShowEvent} className="events">
               <div className="text">
-                <p>Events</p>
-                <Arrow_Down />
+                <p>Host Events</p>
+                <Arrow />
               </div>
               {showEvent && (
                 <>
                   <div className="event">
-                    <span>Host an Event</span>
-                    <span>Attend an Event</span>
-                    <span>Manage Event</span>
+                    <span>
+                      {" "}
+                      <Link className="nav-link" href={"host-event"}>
+                        Host an Event
+                      </Link>
+                    </span>
+                    <span>
+                      <Link className="nav-link" href={"attend-event"}>
+                        Attend an Event
+                      </Link>
+                    </span>
                   </div>
                 </>
               )}
@@ -89,7 +97,9 @@ const Header = () => {
           </div>
           <div className="right-nav">
             {token ? (
-              <p style={{cursor:"pointer"}} onClick={handleLogout}>Logout</p>
+              <p style={{ cursor: "pointer" }} onClick={handleLogout}>
+                Logout
+              </p>
             ) : (
               <p>
                 <Link href={"/login"} className="links">

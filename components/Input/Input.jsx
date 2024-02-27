@@ -17,7 +17,8 @@ const Input = ({
   type,
   error,
   icon,
-  placeholder
+  placeholder,
+  id
 }) => {
   const [show, setShow] = useState(false);
 
@@ -27,7 +28,7 @@ const Input = ({
   return variant === "text" ? (
     <InputStyle>
       <label>{label}</label>
-      <InputDiv type={type} value={value} onChange={onChange} name={name} />
+      <InputDiv type={type} placeholder={placeholder} value={value} onChange={onChange} name={name} id="email" />
       <div style={{ color: "red" }}>{error}</div>
     </InputStyle>
   ) : variant === "password" ? (

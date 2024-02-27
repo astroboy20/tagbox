@@ -39,6 +39,7 @@ export const FAQSContainer = styled.div`
     font-size: 20px;
     font-weight: 500;
     line-height: 20px;
+    text-align:left ;
 
     /* display:block ; */
   }

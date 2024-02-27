@@ -61,7 +61,8 @@ export const HeaderFixedStyle = styled.nav`
     background-color: #c1e8ff;
     color: #020d1e;
     position: absolute;
-    top: 115px;
+    top: 100px;
+    z-index:100 ;
   }
   .event span {
     border-bottom: 1.5px solid #03193b;

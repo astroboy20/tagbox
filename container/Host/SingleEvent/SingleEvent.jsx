@@ -1,6 +1,6 @@
 import { Date, Location, Upload } from "@/assets";
 import { ColorStyle, SingleEventStyle } from "./SingleEvent.style";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Input } from "@/components/Input/Input";
 import { EventDiv, EventStyle } from "@/components/Input/Input.style";
@@ -13,28 +13,29 @@ import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
 
 const SingleEvent = ({ name }) => {
+  const inputRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
-  const [event_dressCode, setEvent_Dresscode] = useState("");
+  const [event_dressCode, setEvent_Dresscode] = useState(null);
+  const [image, setImage] = useState(null);
   const [uniqueId, setUniqueId] = useState("");
   const [consultationTime, setConsultationTime] = useState("");
-  const [consultation_date, setConsultationDate] = useState("");
-  const [invitee, setInvitee] = useState("");
+  const [consultation_date] = useState("");
+  const [dressCode, setDresscode] = useState("");
+  const [inviteeInput, setInviteeInput] = useState("");
   const [eventDetails, setEventDetails] = useState({
-    event_type: event_type,
-    wedding_hashtag: "",
+    hosting_type: event_type,
+    event_hashtag: "",
     location: "",
-    event_date: "",
-    dress_code: event_dressCode,
-    tag_line: "",
+    date: "",
+    color_code: "",
+    dress_code: event_dressCode || "No",
+    invitation_card: "",
+    amount_of_invitee: "",
+    invitee_emails: [],
     qr_code: "",
     consultation: consultation_date || "No",
-    type_of_consultation: "",
-    frequency_of_consultation: "",
-    invitee: invitee,
-    no_invitee: "",
-    upload_cvs: "",
-    color_code:"",
+    wishlist: [],
   });
 
   const [loading, setLoading] = useState(false);
@@ -66,34 +67,97 @@ const SingleEvent = ({ name }) => {
     setEventType(type);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      event_type: type,
+      hosting_type: type,
     }));
   };
 
   const handleDressCodeChange = (type) => {
-    setEvent_Dresscode(type);
-    setEventDetails((prevDetails) => ({
-      ...prevDetails,
-      dress_code: type,
-    }));
+    if (type === "Yes") {
+      setDresscode("Yes");
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        dress_code: null,
+      }));
+    } else {
+      setDresscode("No");
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        dress_code: "No",
+      }));
+    }
   };
 
   const handleConsultationChange = (type) => {
+    if (type === "Yes") {
+      setConsultationTime("Yes");
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        consultation: consultation_date,
+      }));
+    } else {
+      setConsultationTime("No");
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        consultation: "No",
+      }));
+    }
     setConsultationTime(type);
-    setEventDetails((prevDetails) => ({
-      ...prevDetails,
-      consultation: type,
-    }));
   };
-  const handleInviteeChange = (type) => {
-    setInvitee(type);
-    setEventDetails((prevDetails) => ({
-      ...prevDetails,
-      invitee: type,
-    }));
+  const handleInviteeChange = (inputType) => {
+    setInviteeInput(inputType);
   };
 
-  
+  const handleManualSubmit = () => {
+    const enteredEmail = document.getElementById("email");
+    console.log("email", enteredEmail);
+    if (enteredEmail) {
+      const email = enteredEmail.value.trim();
+      if (email !== "") {
+        setEventDetails((prevDetails) => ({
+          ...prevDetails,
+          invitee_emails: [...prevDetails.invitee_emails, email],
+        }));
+      }
+    } else {
+      console.error("Input element not found.");
+    }
+  };
+
+  const parseCSV = (csvContent) => {
+    const rows = csvContent.split("\n");
+    const emails = [];
+
+    rows.forEach((row) => {
+      const values = row.split(",");
+
+      const email = values[0].trim();
+
+      if (email) {
+        emails.push(email);
+      }
+    });
+
+    return emails;
+  };
+
+  const handleCvsUpload = async () => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const text = e.target.result;
+
+      const emails = parseCSV(text);
+
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        invitee_emails: emails,
+      }));
+    };
+
+    reader.readAsText(file);
+  };
+
   const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
     try {
@@ -110,7 +174,32 @@ const SingleEvent = ({ name }) => {
 
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        image: imageUrl,
+        dressCode: imageUrl,
+      }));
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Something went wrong!!");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleInviteImageChange = async (event) => {
+    const imageFile = event.target.files[0];
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("upload_preset", "za8tsrje");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
+        formData
+      );
+      toast.success("Image upload successful");
+      const imageUrl = res.data.secure_url;
+
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        invitation_card: imageUrl,
       }));
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -127,6 +216,24 @@ const SingleEvent = ({ name }) => {
       [name]: value,
     }));
   };
+
+  const handleWishlistChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedWishList = [...eventDetails.wishlist];
+    updatedWishList[index][name] = value;
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      wishlist: updatedWishList,
+    }));
+  };
+
+  const handleAddWishlistItem = () => {
+    setEventDetails((prevState) => ({
+      ...prevState,
+      wishlist: [...prevState.wishlist, { item_name: "", item_image: "" }],
+    }));
+  };
+
   const copyTextToClipboard = async (text) => {
     if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(text);
@@ -134,6 +241,7 @@ const SingleEvent = ({ name }) => {
       return document.execCommand("copy", true, text);
     }
   };
+
   const handleCopyClick = () => {
     const inputField = document.getElementById("url");
     const textToCopy = inputField.value;
@@ -221,9 +329,10 @@ const SingleEvent = ({ name }) => {
             variant={"event-input"}
             label={`Input your ${name} hashtag `}
             placeholder={"E.g, #Loveunbeaten23, #TayTay24"}
-            value={eventDetails.wedding_hashtag}
-            name="wedding_hashtag"
+            value={eventDetails.event_hashtag}
+            name="event_hashtag"
             onChange={handleChange}
+            event
           />
 
           <EventStyle>
@@ -231,9 +340,9 @@ const SingleEvent = ({ name }) => {
             <div>
               <input
                 id="date"
-                type="datetime-local"
-                name="event_date"
-                value={eventDetails.event_date}
+                type="date"
+                name="date"
+                value={eventDetails.date}
                 onChange={handleChange}
                 // style={{ border: "none" }}
               />
@@ -252,6 +361,14 @@ const SingleEvent = ({ name }) => {
             onChange={handleChange}
           />
 
+          <Input
+            variant={"event-input"}
+            label={"Input your estimated amount of attendees"}
+            value={eventDetails.amount_of_invitee}
+            name="amount_of_invitee"
+            onChange={handleChange}
+          />
+
           <div className="event-display">
             <div>How would you like to input the details of your invitees?</div>
 
@@ -262,7 +379,7 @@ const SingleEvent = ({ name }) => {
                   id="manual"
                   value="Manual"
                   name="invitee"
-                  checked={invitee === "Manual"}
+                  checked={inviteeInput === "Manual"}
                   onChange={() => handleInviteeChange("Manual")}
                 />
                 <label>Manually (add email of invitees manually)</label>
@@ -270,47 +387,51 @@ const SingleEvent = ({ name }) => {
               <div className="radio-input">
                 <input
                   type="radio"
-                  id="cbs"
-                  value="CVS"
+                  id="cvs"
+                  value="CSV"
                   name="invitee"
-                  checked={invitee === "CVS"}
-                  onChange={() => handleInviteeChange("CVS")}
+                  checked={inviteeInput === "CSV"} // Check if CSV upload is selected
+                  onChange={() => handleInviteeChange("CSV")} // Update inviteeInput state
                 />
                 <label>Upload the csv file of all invitees</label>
               </div>
             </div>
           </div>
 
-          {invitee === "Manual" && (
-            <Input
-              variant={"event-input"}
-              label={"Input your estimated amount of attendees"}
-              icon={<p className="button">Add</p>}
-              value={eventDetails.no_invitee}
-              name="no_invitee"
-              onChange={handleChange}
-            />
+          {inviteeInput === "Manual" && (
+            <EventStyle>
+              <label>Add email address of invitees manually</label>
+
+              <div>
+                <div className="qr-input">
+                  <EventDiv type="text" id="email" />
+                </div>
+
+                <div className="copy-generate">
+                  <p className="button" onClick={handleManualSubmit}>
+                    Add
+                  </p>
+                </div>
+              </div>
+            </EventStyle>
           )}
 
-          {invitee === "CVS" && (
-            <Input
-              variant={"event-input"}
-              label={"Upload CSV file containing attendees email address"}
-              icon={<p onClick={generateId}>Upload</p>}
-              value={eventDetails.upload_cvs}
-              name="upload_cvs"
-              onChange={handleChange}
-            />
+          {inviteeInput === "CSV" && (
+            <EventStyle>
+              <label>Upload CSV file containing attendees email address</label>
+              <div>
+                <input type="file" accept=".csv" onChange={handleCvsUpload} />
+              </div>
+            </EventStyle>
           )}
 
-        
           <EventStyle>
             <label>Color Code</label>
             <p>Input your color code</p>
 
             <div>
               <input
-                style={{ border: "none", width:"100%" }}
+                style={{ border: "none", width: "100%" }}
                 type="text"
                 value={eventDetails.color_code}
                 name="color_code"
@@ -328,8 +449,8 @@ const SingleEvent = ({ name }) => {
                   type="radio"
                   id="yes"
                   value="Yes"
-                  name="dress_code"
-                  checked={event_dressCode === "Yes"}
+                  name="dressCode"
+                  checked={dressCode === "Yes"}
                   onChange={() => handleDressCodeChange("Yes")}
                 />
                 <label htmlFor="yes">Yes</label>
@@ -339,8 +460,8 @@ const SingleEvent = ({ name }) => {
                   type="radio"
                   id="no"
                   value="No"
-                  name="dress_code"
-                  checked={event_dressCode === "No"}
+                  name="dressCode"
+                  checked={dressCode === "No"}
                   onChange={() => handleDressCodeChange("No")}
                 />
                 <label htmlFor="no">No</label>
@@ -348,9 +469,9 @@ const SingleEvent = ({ name }) => {
             </div>
           </div>
 
-          {eventDetails.dress_code == "Yes" && (
+          {dressCode == "Yes" && (
             <EventStyle>
-              <label>If yes, upload dress code(Asoebi) </label>
+              <label>Upload dress code(Asoebi) </label>
               <div>
                 <input
                   id="image"
@@ -408,54 +529,64 @@ const SingleEvent = ({ name }) => {
           </div>
 
           {consultationTime === "Yes" && (
-            
-
             <EventStyle>
-            <label>If yes, choose your preferred day and time of your consultation.</label>
-            <div>
-              <input
-                id="date"
-                type="date"
-                name="event_date"
-                value={eventDetails.consultation}
-                onChange={handleChange}
-                // style={{ border: "none" }}
-              />
-              <span>
-                <Date />
-              </span>
-            </div>
-          </EventStyle>
+              <label>
+                Choose your preferred day and time of your consultation.
+              </label>
+              <div>
+                <input
+                  id="date"
+                  type="date"
+                  name="consultation"
+                  value={eventDetails.consultation}
+                  onChange={handleChange}
+                  // style={{ border: "none" }}
+                />
+                <span>
+                  <Date />
+                </span>
+              </div>
+            </EventStyle>
           )}
 
-          <EventStyle>
+          <div className="wishlist">
             <label>Wishlist</label>
             <label>
               Curate your wishlist here and have well wishers gift you with ease
               and without stress
             </label>
             <label>Upload image of preferred items</label>
-            <div>
-              <input
-                id="image"
-                accept="image/*"
-                type="file"
-                onChange={handleImageChange}
-              />
-              <h1>
-                {loading ? (
-                  <InfinitySpin
-                    visible={true}
-                    width="50"
-                    color="#000"
-                    ariaLabel="infinity-spin-loading"
+            <div className="input-container">
+              {eventDetails.wishlist.map((item, index) => (
+                <div className="input" key={index}>
+                  <Input
+                    variant={"text"}
+                    type="text"
+                    name="item_name"
+                    placeholder={"Item Name"}
+                    value={item.item_name}
+                    onChange={(e) => handleWishlistChange(e, index)}
                   />
-                ) : (
-                  ""
-                )}
-              </h1>
+                  <Input
+                    variant={"text"}
+                    type="text"
+                    name="item_image"
+                    value={item.item_image}
+                    placeholder={"Item Link"}
+                    onChange={(e) => handleWishlistChange(e, index)}
+                  />
+                </div>
+              ))}
+              <br />
+              <Button
+                variant={"dark-button"}
+                type="button"
+                onClick={handleAddWishlistItem}
+              >
+                Add Wishlist Item
+              </Button>
             </div>
-          </EventStyle>
+          </div>
 
           <div className="event-display">
             <div>Invitation Card</div>
@@ -496,10 +627,16 @@ const SingleEvent = ({ name }) => {
                 alt="invitation-card"
               />
               <div className="buttons">
-                <Button variant={"dark-transparent"}>
-                  Upload invitation card
-                </Button>
-                <Button variant={"dark-white"}>Customize to your style</Button>
+                <input
+                  onClick={handleInviteImageChange}
+                  id="image"
+                  accept="image/*"
+                  type="file"
+                  placeholder="Upload invitation card"
+                />
+                {/* Upload invitation card
+                 
+                <Button variant={"dark-white"}>Customize to your style</Button> */}
                 <p>Browse More Template</p>
               </div>
             </div>

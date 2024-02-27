@@ -1,4 +1,5 @@
 import {
+  Arrow,
   Arrow_Down,
   Close,
   Hamburger,
@@ -69,7 +70,7 @@ const HeaderFixed = () => {
             <div onClick={handleShowEvent} className="events">
               <div className="text">
                 <p>Host an Event</p>
-                <Arrow_Down />
+                <Arrow />
               </div>
               {showEvent && (
                 <>
@@ -79,8 +80,10 @@ const HeaderFixed = () => {
                         Host an Event
                       </Link>
                     </span>
-                    <span>Attend an Event</span>
-                    <span>Manage Event</span>
+                    <span><Link href={"/attend-event"} className="link-event">
+                    Attend an Event
+                      </Link></span>
+                    {/* <span>Manage Event</span> */}
                   </div>
                 </>
               )}

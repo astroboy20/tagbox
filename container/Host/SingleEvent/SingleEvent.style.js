@@ -11,7 +11,7 @@ export const SingleEventStyle = styled.div`
   }
   .header {
     margin-top: 100px;
-    background: url("/images/ticket-bg.png");
+    background: url("/images/event-bg.png");
     height: 400px;
     display: flex;
     justify-content: center;
@@ -96,13 +96,12 @@ export const SingleEventStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size:20px ;
+    font-size: 20px;
   }
 
   .radio-input {
     display: flex;
     gap: 10px;
-    
   }
 
   .event-box-gift {
@@ -184,6 +183,18 @@ export const SingleEventStyle = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
+  .wishlist {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wishlist .input {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    margin-bottom: 10px;
+    width:100%; 
+  }
 
   @media screen and (max-width: 1024px) {
     .header {
@@ -232,7 +243,6 @@ export const SingleEventStyle = styled.div`
       justify-content: center;
       padding: 20px 10px;
     }
-    
 
     form {
       gap: 50px;
@@ -293,6 +303,13 @@ export const SingleEventStyle = styled.div`
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
+    }
+
+    .wishlist .input {
+      display: flex;
+      flex-direction: column; /* Display input fields horizontally */
+      align-items: center; /* Align input fields vertically in the center */
+      margin-bottom: 10px; /* Add margin between input fields */
     }
   }
 `;

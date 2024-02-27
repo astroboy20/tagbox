@@ -76,13 +76,7 @@ export const EventStyle = styled.div`
     font-weight: 500;
     padding:0 ;
   }
-  .button{
-    background-color:black ;
-    color:white ;
-    border-radius:4px ;
-    padding:5px 30px ;
-    margin-bottom:5px ;
-  }
+ 
   .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
@@ -90,6 +84,13 @@ export const EventStyle = styled.div`
     font-weight: 500;
     cursor: pointer;
     
+  }
+  .button{
+    background-color:black ;
+    color:white ;
+    border-radius:4px ;
+    padding:5px 30px ;
+    margin-bottom:5px ;
   }
 
   @media screen and (max-width: 1024px) {
@@ -99,7 +100,7 @@ export const EventStyle = styled.div`
       line-height: 18px;
     }
     span{
-      display:none ;
+      /* display:none ; */
     }
     p{
       font-size:16px ;
@@ -136,7 +137,7 @@ export const EventDiv = styled.input`
   text-align:left ;
 
   @media screen and (max-width: 1024px) {
-    width: 100%;
+    width: auto;
   }
   
 `;
