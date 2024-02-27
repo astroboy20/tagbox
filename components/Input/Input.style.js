@@ -36,6 +36,7 @@ export const InputDiv = styled.input`
   outline: none;
   border: 1px solid rgba(47, 46, 65, 0.2);
   padding: 16px 20px;
+  /* width: 100%; */
 `;
 export const PasswordStyle = styled.input`
   border: none;
@@ -75,7 +76,13 @@ export const EventStyle = styled.div`
     font-weight: 500;
     padding:0 ;
   }
-   
+  .button{
+    background-color:black ;
+    color:white ;
+    border-radius:4px ;
+    padding:5px 30px ;
+    margin-bottom:5px ;
+  }
   .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
@@ -123,7 +130,7 @@ export const EventDiv = styled.input`
   outline: none;
   border: none;
   /* border: 1px solid rgba(47, 46, 65, 0.2); */
-  width: 1000px;
+  width: 500px;
   padding: 10px 0;
   font-size:16px ;
   text-align:left ;

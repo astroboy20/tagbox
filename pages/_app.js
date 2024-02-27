@@ -10,6 +10,7 @@ import { ThemeProvider } from "styled-components";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { ProfileOptionProvider } from "@/features/Axios/ProfileOptionContext";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -18,19 +19,19 @@ export default function App({ Component, pageProps }) {
     });
   }, []);
 
-
-
   return (
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <OptionProvider>
-            <ThemeProvider theme={theme}>
-              <GlobalStyles />
-              <ToastContainer />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </OptionProvider>
+          <ProfileOptionProvider>
+            <OptionProvider>
+              <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <ToastContainer />
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </OptionProvider>
+          </ProfileOptionProvider>
         </PersistGate>
       </Provider>
     </>

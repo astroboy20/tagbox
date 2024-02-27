@@ -16,24 +16,25 @@ const SingleEvent = ({ name }) => {
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
   const [event_dressCode, setEvent_Dresscode] = useState("");
-  const [visibility, setVisibility] = useState(true);
   const [uniqueId, setUniqueId] = useState("");
-  const [consultation, setConsultation] = useState("");
+  const [consultationTime, setConsultationTime] = useState("");
+  const [consultation_date, setConsultationDate] = useState("");
+  const [invitee, setInvitee] = useState("");
   const [eventDetails, setEventDetails] = useState({
     event_type: event_type,
     wedding_hashtag: "",
     location: "",
     event_date: "",
     dress_code: event_dressCode,
-    image: null,
     tag_line: "",
     qr_code: "",
-    consultation: consultation,
+    consultation: consultation_date || "No",
     type_of_consultation: "",
     frequency_of_consultation: "",
+    invitee: invitee,
     no_invitee: "",
     upload_cvs: "",
-    visibility: visibility,
+    color_code:"",
   });
 
   const [loading, setLoading] = useState(false);
@@ -77,24 +78,22 @@ const SingleEvent = ({ name }) => {
     }));
   };
 
-  const handleVisibilityTypeChange = (type) => {
-    setVisibility(type);
+  const handleConsultationChange = (type) => {
+    setConsultationTime(type);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      visibility: type,
+      consultation: type,
     }));
   };
-  const [consultationType, setConsultationType] = useState("");
+  const handleInviteeChange = (type) => {
+    setInvitee(type);
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      invitee: type,
+    }));
+  };
 
-const handleConsultationTypeChange = (type) => {
-  setConsultationType(type);
-  setEventDetails((prevDetails) => ({
-    ...prevDetails,
-    consultation: type ? "Yes" : "No", // Update consultation value in eventDetails
-  }));
-};
-
-
+  
   const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
     try {
@@ -244,8 +243,6 @@ const handleConsultationTypeChange = (type) => {
             </div>
           </EventStyle>
 
-          
-
           <Input
             variant={"event-input"}
             label={"Enter event Location"}
@@ -262,45 +259,65 @@ const handleConsultationTypeChange = (type) => {
               <div className="radio-input">
                 <input
                   type="radio"
-                  id="physical"
-                  value="Physical"
-                  name="eventType"
-                  checked={event_type === "Physical"}
-                  onChange={() => handleEventTypeChange("Physical")}
+                  id="manual"
+                  value="Manual"
+                  name="invitee"
+                  checked={invitee === "Manual"}
+                  onChange={() => handleInviteeChange("Manual")}
                 />
                 <label>Manually (add email of invitees manually)</label>
               </div>
               <div className="radio-input">
                 <input
                   type="radio"
-                  id="virtual"
-                  value="Virtual"
-                  name="eventType"
-                  checked={event_type === "Virtual"}
-                  onChange={() => handleEventTypeChange("Virtual")}
+                  id="cbs"
+                  value="CVS"
+                  name="invitee"
+                  checked={invitee === "CVS"}
+                  onChange={() => handleInviteeChange("CVS")}
                 />
                 <label>Upload the csv file of all invitees</label>
               </div>
             </div>
           </div>
 
-          <Input
-            variant={"event-input"}
-            label={"Input your estimated amount of attendees"}
-            icon={<p>Add</p>}
-            value={eventDetails.no_invitee}
-            name="no_invitee"
-            onChange={handleChange}
-          />
+          {invitee === "Manual" && (
+            <Input
+              variant={"event-input"}
+              label={"Input your estimated amount of attendees"}
+              icon={<p className="button">Add</p>}
+              value={eventDetails.no_invitee}
+              name="no_invitee"
+              onChange={handleChange}
+            />
+          )}
 
-          <Input
-            variant={"event-input"}
-            label={"Upload CSV file containing attendees email address"}
-            icon={<p onClick={generateId}>Upload</p>}
-            value={eventDetails.upload_cvs}
-            name="upload_cvs"
-            onChange={handleChange}
-          />
+          {invitee === "CVS" && (
+            <Input
+              variant={"event-input"}
+              label={"Upload CSV file containing attendees email address"}
+              icon={<p onClick={generateId}>Upload</p>}
+              value={eventDetails.upload_cvs}
+              name="upload_cvs"
+              onChange={handleChange}
+            />
+          )}
+
+        
+          <EventStyle>
+            <label>Color Code</label>
+            <p>Input your color code</p>
+
+            <div>
+              <input
+                style={{ border: "none", width:"100%" }}
+                type="text"
+                value={eventDetails.color_code}
+                name="color_code"
+                onChange={handleChange}
+              />
+            </div>
+          </EventStyle>
 
           <div className="event-display">
             <div>Dress & Colour code</div>
@@ -371,8 +388,8 @@ const handleConsultationTypeChange = (type) => {
                   id="consultation-yes"
                   value="Yes"
                   name="consultationType"
-                  checked={consultationType === "Yes"}
-                  onChange={() => handleConsultationTypeChange(true)}
+                  checked={consultationTime === "Yes"}
+                  onChange={() => handleConsultationChange("Yes")}
                 />
                 <label htmlFor="consultation-yes">Yes</label>
               </div>
@@ -382,22 +399,33 @@ const handleConsultationTypeChange = (type) => {
                   id="consultation-no"
                   value="No"
                   name="consultationType"
-                  checked={consultationType === "No"}
-                  onChange={() => handleConsultationTypeChange(false)}
+                  checked={consultationTime === "No"}
+                  onChange={() => handleConsultationChange("No")}
                 />
                 <label htmlFor="consultation-no">No</label>
               </div>
             </div>
           </div>
 
-          {consultationType === "Yes" && (
-            <Input
-              variant={"event-input"}
-              label={"If yes, what type of consultation?"}
-              value={eventDetails.type_of_consultation}
-              name="type_of_consultation"
-              onChange={handleChange}
-            />
+          {consultationTime === "Yes" && (
+            
+
+            <EventStyle>
+            <label>If yes, choose your preferred day and time of your consultation.</label>
+            <div>
+              <input
+                id="date"
+                type="date"
+                name="event_date"
+                value={eventDetails.consultation}
+                onChange={handleChange}
+                // style={{ border: "none" }}
+              />
+              <span>
+                <Date />
+              </span>
+            </div>
+          </EventStyle>
           )}
 
           <EventStyle>
