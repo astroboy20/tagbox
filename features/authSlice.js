@@ -67,6 +67,7 @@ export const authSlice = createSlice({
       state.message = "";
     },
     updateUser: (state,action)=>{
+      state.isLoading = false
       state.user = {data:action.payload}
       // state.message = 
     }
@@ -115,7 +116,7 @@ export const authSlice = createSlice({
       })
       //login-with-google
       .addCase(login_with_google.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
       })
       .addCase(login_with_google.fulfilled, (state, action) => {
         state.user = action.payload;

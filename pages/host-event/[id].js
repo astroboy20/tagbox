@@ -29,7 +29,7 @@ const EventId = () => {
     return (
       <>
         <HeaderFixed />
-        <SingleEvent name={name} />
+        <SingleEvent name={name} id={id} />
         <Footer />
       </>
     );

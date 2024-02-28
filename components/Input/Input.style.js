@@ -49,6 +49,14 @@ export const EventStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  .email{
+    display:flex ;
+    flex-direction:column ;
+  }
+  .email-details{
+    display:flex ;
+    border:none ;
+  }
   .input-p{
     font-size: 20px !important;
     font-weight: 500 !important;

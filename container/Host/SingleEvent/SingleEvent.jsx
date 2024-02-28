@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
 
-const SingleEvent = ({ name }) => {
+const SingleEvent = ({ name,id }) => {
   const inputRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
@@ -109,18 +109,28 @@ const SingleEvent = ({ name }) => {
 
   const handleManualSubmit = () => {
     const enteredEmail = document.getElementById("email");
-    console.log("email", enteredEmail);
-    if (enteredEmail) {
+    if (enteredEmail && enteredEmail.value.trim() !== "") {
       const email = enteredEmail.value.trim();
-      if (email !== "") {
+      if (!eventDetails.invitee_emails.includes(email)) {
         setEventDetails((prevDetails) => ({
           ...prevDetails,
           invitee_emails: [...prevDetails.invitee_emails, email],
         }));
+        enteredEmail.value = ""
+      } else {
+        toast.error("Email already exists.");
       }
     } else {
-      console.error("Input element not found.");
+      toast.error("Field cannot be empty");
     }
+  };
+  
+
+  const handleDeleteEmail = (email) => {
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      invitee_emails: prevDetails.invitee_emails.filter((e) => e !== email),
+    }));
   };
 
   const parseCSV = (csvContent) => {
@@ -275,22 +285,22 @@ const SingleEvent = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (eventDetails) {
-    //   axios
-    //     .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       toast.success(response.data.message);
-    //     })
-    //     .catch((error) => {
-    //       toast.error(error);
-    //     });
-    // } else {
-    //   toast.warning("Enter the required field");
-    // }
+    if (eventDetails) {
+      axios
+        .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          toast.success(response.data.message);
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } else {
+      toast.warning("Enter the required field");
+    }
     console.log(eventDetails);
   };
 
@@ -419,10 +429,24 @@ const SingleEvent = ({ name }) => {
               <label>Add email address of invitees manually</label>
               <div>
                 <EventDiv type="text" id="email" />
+
                 <p className="button" onClick={handleManualSubmit}>
                   Add
                 </p>
               </div>
+              <div className="email">
+            {eventDetails.invitee_emails.map((email, index) => (
+              <div className="email-details" key={index}>
+                {email}
+                <span
+                    onClick={() => handleDeleteEmail(email)}
+                    style={{ background: "black", borderRadius: "10%" }}
+                  >
+                    <Close />
+                  </span>
+              </div>
+            ))}
+          </div>
             </EventStyle>
           )}
 
@@ -584,7 +608,7 @@ const SingleEvent = ({ name }) => {
                   />
                   <span
                     onClick={() => handleRemoveWishlistItem(index)}
-                    style={{ background: "black", borderRadius:"50%" }}
+                    style={{ background: "black", borderRadius: "50%" }}
                   >
                     <Close />
                   </span>

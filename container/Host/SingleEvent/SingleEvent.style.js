@@ -135,7 +135,7 @@ export const SingleEventStyle = styled.div`
     }
 
     form {
-      gap: 50px;
+      gap: 100px;
     }
     .radio-input label {
       font-size: 16px;
