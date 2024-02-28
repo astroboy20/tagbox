@@ -217,7 +217,7 @@ export const SingleEventStyle = styled.div`
       line-height: 24px;
     }
     .body {
-      padding: 6%;
+      padding: 1%;
     }
     .options p {
       justify-content: space-between;

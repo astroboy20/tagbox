@@ -204,7 +204,7 @@ const SingleEvent = ({ name, id }) => {
       }));
     } catch (error) {
       toast.error("Error uploading image:", error);
-      // toast.error("Something went wrong!!");
+      
     } finally {
       setLoading(false);
     }

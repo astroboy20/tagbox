@@ -9,13 +9,11 @@ import  {useRouter} from "next/router"
 const EventId = () => {
     const router = useRouter();
     const {id} = router.query
-    console.log(id)
     const [name, setName] = useState("");
   
     const fetchEventName = async () => {
       try {
         const response = await axios.get(`https://tagbox.onrender.com/v1/event-type/${id}`);
-        console.log(response.data);
         setName(response.data.data.event_type);
       } catch (error) {
         console.log(error);
