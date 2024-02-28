@@ -11,9 +11,8 @@ import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
-import Spinner from "@/components/Spinner/Spinner";
 
-const SingleEvent = ({ name, id }) => {
+const SingleEvent = ({ name }) => {
   const inputRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
@@ -178,8 +177,8 @@ const SingleEvent = ({ name, id }) => {
         dressCode: imageUrl,
       }));
     } catch (error) {
-      toast.error("Error uploading image:", error);
-      // toast.error("Something went wrong!!");
+      console.error("Error uploading image:", error);
+      toast.error("Something went wrong!!");
     } finally {
       setLoading(false);
     }
@@ -204,7 +203,7 @@ const SingleEvent = ({ name, id }) => {
       }));
     } catch (error) {
       toast.error("Error uploading image:", error);
-      
+      // toast.error("Something went wrong!!");
     } finally {
       setLoading(false);
     }
@@ -277,37 +276,24 @@ const SingleEvent = ({ name, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (eventDetails) {
-    //   axios
-    //     .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       toast.success(response.data.message);
-    //     })
-    //     .catch((error) => {
-    //       toast.error(error);
-    //     });
-    // } else {
-    //   toast.warning("Enter the required field");
-    // }
+    if (eventDetails) {
+      axios
+        .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          toast.success(response.data.message);
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } else {
+      toast.warning("Enter the required field");
+    }
     console.log(eventDetails);
   };
-
-  axios
-    .get(`https://tagbox.onrender.com/v1/user/events`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 
   return (
     <SingleEventStyle>
@@ -458,7 +444,7 @@ const SingleEvent = ({ name, id }) => {
 
           <EventStyle>
             <label>Color Code</label>
-            <span>Input your color code</span>
+            <p>Input your color code</p>
 
             <div>
               <input
@@ -582,11 +568,11 @@ const SingleEvent = ({ name, id }) => {
 
           <div className="wishlist">
             <label>Wishlist</label>
-            <p>
+            <label>
               Curate your wishlist here and have well wishers gift you with ease
               and without stress
-            </p>
-            <p>Upload image of preferred items</p>
+            </label>
+            <label>Upload image of preferred items</label>
             <div className="input-container">
               {eventDetails.wishlist.map((item, index) => (
                 <div className="input" key={index}>
@@ -629,7 +615,7 @@ const SingleEvent = ({ name, id }) => {
 
           <div className="event-display">
             <div>Invitation Card</div>
-            {/* <div className="images">
+            <div className="images">
               <Image
                 src={"/images/1.png"}
                 width={400}
@@ -654,32 +640,29 @@ const SingleEvent = ({ name, id }) => {
                 objectFit="contain"
                 alt="invitation-card"
               />
-            </div> */}
+            </div>
 
             <div className="image-button">
-              {/* <Image
+              <Image
                 src={"/images/2.png"}
                 width={400}
                 height={500}
                 className="image"
                 objectFit="contain"
                 alt="invitation-card"
-              /> */}
+              />
               <div className="buttons">
                 <input
-                  className="upload-button"
-                  type="file"
+                  onClick={handleInviteImageChange}
+                  id="image"
                   accept="image/*"
-                  onChange={handleInviteImageChange}
+                  type="file"
+                  placeholder="Upload invitation card"
                 />
-                {/* <label htmlFor="upload-input" className="upload-label">
-                  Upload Invitation Card
-                </label> */}
-
                 {/* Upload invitation card
                  
                 <Button variant={"dark-white"}>Customize to your style</Button> */}
-                {/* <p>Browse More Template</p> */}
+                <p>Browse More Template</p>
               </div>
             </div>
           </div>
@@ -726,9 +709,7 @@ const SingleEvent = ({ name, id }) => {
           </EventStyle>
 
           {/* end */}
-          <Button variant="dark-button">
-            {loading ? <Spinner /> : "Submit Response"}
-          </Button>
+          <Button variant="dark-button">Submit Response</Button>
         </form>
       </div>
     </SingleEventStyle>
