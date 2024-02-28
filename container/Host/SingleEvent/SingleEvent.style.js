@@ -4,7 +4,7 @@ export const SingleEventStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width:100% ;
+  width: 100%;
   p {
     font-size: 32px;
     font-weight: 500;
@@ -52,6 +52,12 @@ export const SingleEventStyle = styled.div`
     gap: 10px;
   }
 
+  .event-display .radio-input label {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
   .event-box-gift {
     display: flex;
     flex-wrap: wrap;
@@ -82,66 +88,36 @@ export const SingleEventStyle = styled.div`
     font-weight: 400;
     line-height: 24px;
   }
-  .event-display .colors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-  }
-  .event-display .color {
-    width: 294px;
-    height: 200px;
-  }
-  .event-display .sub-color {
-    width: 294px;
-    height: 140px;
-  }
 
-  .event-display .images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    text-align: center;
-  }
-  .event-display .image {
-    width: 400px;
-    height: 500px;
-  }
-  .event-display .image-button {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    gap: 150px;
-    text-align: center;
-  }
-  .event-display .image-button .image {
-    width: 600px;
-    height: 400px;
-  }
-  .event-display .image-button .buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .event-display .image-button .buttons p {
-    text-decoration: underline;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-  }
   .wishlist {
     display: flex;
     flex-direction: column;
+    gap: 25px;
+  }
+  .wishlist span {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .wishlist label {
+    font-size: 20px;
+    /* font-weight: 500; */
+    line-height: 24px;
   }
 
   .wishlist .input {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;
     margin-bottom: 10px;
-    width:100%; 
+  }
+  .wishlist input {
+    border-radius: 6px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
+    outline: none;
+    border: 1px solid rgba(47, 46, 65, 0.2);
+    padding: 16px 20px;
+    width: 100%;
   }
 
   @media screen and (max-width: 1024px) {
@@ -175,7 +151,7 @@ export const SingleEventStyle = styled.div`
       font-weight: 500;
       line-height: 18px;
     }
-  
+
     .event-display .images {
       justify-content: center;
       gap: 10px;
@@ -210,9 +186,11 @@ export const SingleEventStyle = styled.div`
 
     .wishlist .input {
       display: flex;
-      flex-direction: column;
-      align-items: center; 
-      margin-bottom: 10px; 
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .wishlist input {
+      width: 100%;
     }
   }
 `;

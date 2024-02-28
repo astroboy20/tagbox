@@ -1,4 +1,4 @@
-import { Date, Location, Upload } from "@/assets";
+import { Close, Date, Location, Upload } from "@/assets";
 import { ColorStyle, SingleEventStyle } from "./SingleEvent.style";
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
@@ -203,7 +203,6 @@ const SingleEvent = ({ name }) => {
       }));
     } catch (error) {
       toast.error("Error uploading image:", error);
-      // toast.error("Something went wrong!!");
     } finally {
       setLoading(false);
     }
@@ -276,22 +275,22 @@ const SingleEvent = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (eventDetails) {
-      axios
-        .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          toast.success(response.data.message);
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
-    } else {
-      toast.warning("Enter the required field");
-    }
+    // if (eventDetails) {
+    //   axios
+    //     .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       toast.success(response.data.message);
+    //     })
+    //     .catch((error) => {
+    //       toast.error(error);
+    //     });
+    // } else {
+    //   toast.warning("Enter the required field");
+    // }
     console.log(eventDetails);
   };
 
@@ -418,17 +417,11 @@ const SingleEvent = ({ name }) => {
           {inviteeInput === "Manual" && (
             <EventStyle>
               <label>Add email address of invitees manually</label>
-
               <div>
-                <div className="qr-input">
-                  <EventDiv type="text" id="email" />
-                </div>
-
-                <div className="copy-generate">
-                  <p className="button" onClick={handleManualSubmit}>
-                    Add
-                  </p>
-                </div>
+                <EventDiv type="text" id="email" />
+                <p className="button" onClick={handleManualSubmit}>
+                  Add
+                </p>
               </div>
             </EventStyle>
           )}
@@ -444,8 +437,7 @@ const SingleEvent = ({ name }) => {
 
           <EventStyle>
             <label>Color Code</label>
-            <p>Input your color code</p>
-
+            <p className="input-p">Input your color code</p>
             <div>
               <input
                 style={{ border: "none", width: "100%" }}
@@ -567,42 +559,38 @@ const SingleEvent = ({ name }) => {
           )}
 
           <div className="wishlist">
-            <label>Wishlist</label>
+            <span>Wishlist</span>
             <label>
               Curate your wishlist here and have well wishers gift you with ease
               and without stress
             </label>
-            <label>Upload image of preferred items</label>
+            {/* <label>Upload image of preferred items</label> */}
             <div className="input-container">
               {eventDetails.wishlist.map((item, index) => (
                 <div className="input" key={index}>
-                  <Input
-                    variant={"text"}
+                  <input
                     type="text"
                     name="item_name"
                     placeholder={"Item Name"}
                     value={item.item_name}
                     onChange={(e) => handleWishlistChange(e, index)}
                   />
-                  <Input
-                    variant={"text"}
+                  <input
                     type="text"
                     name="item_link"
                     value={item.item_image}
                     placeholder={"Item Link"}
                     onChange={(e) => handleWishlistChange(e, index)}
                   />
-                  <button
-                    variant={"danger-button"}
-                    type="button"
+                  <span
                     onClick={() => handleRemoveWishlistItem(index)}
-                    style={{background:"none", border:"none"}}
+                    style={{ background: "black", borderRadius:"50%" }}
                   >
-                    X
-                  </button>
+                    <Close />
+                  </span>
                 </div>
               ))}
-              <br />
+              {/* <br /> */}
               <Button
                 variant={"dark-button"}
                 type="button"
@@ -615,7 +603,7 @@ const SingleEvent = ({ name }) => {
 
           <div className="event-display">
             <div>Invitation Card</div>
-            <div className="images">
+            {/* <div className="images">
               <Image
                 src={"/images/1.png"}
                 width={400}
@@ -640,29 +628,29 @@ const SingleEvent = ({ name }) => {
                 objectFit="contain"
                 alt="invitation-card"
               />
-            </div>
+            </div> */}
 
             <div className="image-button">
-              <Image
+              {/* <Image
                 src={"/images/2.png"}
                 width={400}
                 height={500}
                 className="image"
                 objectFit="contain"
                 alt="invitation-card"
-              />
+              /> */}
               <div className="buttons">
-                {/* <input
-                  onClick={handleInviteImageChange}
+                <input
+                  onChange={handleInviteImageChange}
                   id="image"
                   accept="image/*"
                   type="file"
                   placeholder="Upload invitation card"
-                /> */}
+                />
                 {/* Upload invitation card
                  
                 <Button variant={"dark-white"}>Customize to your style</Button> */}
-                <p>Browse More Template</p>
+                {/* <p>Browse More Template</p> */}
               </div>
             </div>
           </div>
@@ -702,8 +690,8 @@ const SingleEvent = ({ name }) => {
               </div>
 
               <div className="copy-generate">
-                <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
                 <p onClick={generateId}>Generate</p>
+                <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
               </div>
             </div>
           </EventStyle>

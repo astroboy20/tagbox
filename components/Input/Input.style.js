@@ -49,7 +49,10 @@ export const EventStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-
+  .input-p{
+    font-size: 20px !important;
+    font-weight: 500 !important;
+  }
   div {
     display: flex;
     border-bottom: 1px solid #000;
@@ -65,10 +68,11 @@ export const EventStyle = styled.div`
   span {
     font-size: 20px;
     font-weight: 500;
+    margin-bottom:10px ;
   }
   p{
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     padding:0 ;
   }
   .qr-code p{
@@ -77,13 +81,20 @@ export const EventStyle = styled.div`
     padding:0 ;
   }
  
-  .copy-generate, .qr-input{
+  .copy-generate{
     display:flex ;
-    flex-direction:column ;
-    font-size: 20px !important;
-    font-weight: 500 ! ;
+    gap:20px;
     cursor: pointer;
     
+  }
+  .qr-input{
+    display:flex ;
+    flex-direction:column ;
+  }
+  .copy-generate p {
+    font-size: 20px !important;
+    font-weight: 500 !important ;
+    cursor: pointer;
   }
   .button{
     background-color:black ;
@@ -91,6 +102,8 @@ export const EventStyle = styled.div`
     border-radius:4px ;
     padding:5px 30px ;
     margin-bottom:5px ;
+    font-size:20px ;
+    cursor: pointer;
   }
 
   @media screen and (max-width: 1024px) {
@@ -108,6 +121,8 @@ export const EventStyle = styled.div`
     h1{
       display:none ;
     }
+
+    
     .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
