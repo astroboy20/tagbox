@@ -652,13 +652,13 @@ const SingleEvent = ({ name }) => {
                 alt="invitation-card"
               />
               <div className="buttons">
-                <input
+                {/* <input
                   onClick={handleInviteImageChange}
                   id="image"
                   accept="image/*"
                   type="file"
                   placeholder="Upload invitation card"
-                />
+                /> */}
                 {/* Upload invitation card
                  
                 <Button variant={"dark-white"}>Customize to your style</Button> */}

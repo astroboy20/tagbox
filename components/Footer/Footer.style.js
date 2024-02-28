@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const FooterContainer = styled.div`
   .top {
     background-image: url("/images/footer-bg.png");
-    background-size:auto ;
     height: 450px;
     text-align: center;
     display: flex;
@@ -46,8 +45,8 @@ export const FooterContainer = styled.div`
     .top {
       height: 300px;
       background-position:center ;
-      background-size:cover ;
-      
+      background-size:auto ;
+
       
     }
     .top span {

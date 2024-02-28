@@ -4,6 +4,7 @@ export const SingleEventStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width:100% ;
   p {
     font-size: 32px;
     font-weight: 500;
@@ -37,59 +38,6 @@ export const SingleEventStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 65px;
-  }
-
-  .event-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    gap: 30px;
-    padding-top: 10px;
-    width: 100%;
-  }
-  .event-box-gift {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    padding-top: 10px;
-    width: 100%;
-  }
-
-  .sub-box {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 30%;
-  }
-  .sub-box-gift {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 30%;
-  }
-
-  .sub-box label {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-  .sub-box-gift label {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-    text-align: left;
-    padding-left: 10px;
-  }
-
-  .image-box {
-    padding: 20px 10px;
-    background-color: rgba(230, 246, 255, 0.2);
-    box-shadow: 1px 1px rgba(3, 25, 59, 0.12);
-  }
-  .image-box-gift {
-    width: 400px;
-    height: 380px;
   }
 
   .input {
@@ -207,40 +155,7 @@ export const SingleEventStyle = styled.div`
       line-height: 24px;
     }
     .body {
-      padding: 1%;
-    }
-    .options p {
-      justify-content: space-between;
-      gap: 0;
-      font-size: 24px;
-      line-height: 24px;
-    }
-    .event-box {
-      justify-content: left;
-    }
-    .event-box-gift {
-      justify-content: left;
-      gap: 20px;
-      align-items: center;
-    }
-    .image-box {
-      width: 120px;
-      height: 120px;
-    }
-    .image-box-gift {
-      width: 160px;
-      height: 160px;
-    }
-    .sub-box {
-      width: 45%;
-      justify-content: none;
-    }
-    .sub-box-gift {
-      align-items: center;
-      gap: 5px;
-      width: 45%;
-      justify-content: center;
-      padding: 20px 10px;
+      padding: 3%;
     }
 
     form {
@@ -260,18 +175,7 @@ export const SingleEventStyle = styled.div`
       font-weight: 500;
       line-height: 18px;
     }
-    .event-display .colors {
-      gap: 10px;
-      /* justify-content:center ; */
-    }
-    .event-display .color {
-      width: 150px;
-      height: 100px;
-    }
-    .event-display .sub-color {
-      width: 150px;
-      height: 60px;
-    }
+  
     .event-display .images {
       justify-content: center;
       gap: 10px;
@@ -306,9 +210,9 @@ export const SingleEventStyle = styled.div`
 
     .wishlist .input {
       display: flex;
-      flex-direction: column; /* Display input fields horizontally */
-      align-items: center; /* Align input fields vertically in the center */
-      margin-bottom: 10px; /* Add margin between input fields */
+      flex-direction: column;
+      align-items: center; 
+      margin-bottom: 10px; 
     }
   }
 `;
