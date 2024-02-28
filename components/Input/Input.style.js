@@ -72,7 +72,7 @@ export const EventStyle = styled.div`
     padding:0 ;
   }
   .qr-code p{
-    font-size:20px ;
+    font-size:20px  !important;
     font-weight: 500;
     padding:0 ;
   }
@@ -80,8 +80,8 @@ export const EventStyle = styled.div`
   .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 20px !important;
+    font-weight: 500 ! ;
     cursor: pointer;
     
   }
@@ -111,14 +111,14 @@ export const EventStyle = styled.div`
     .copy-generate, .qr-input{
     display:flex ;
     flex-direction:column ;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 16px !important;
+    font-weight: 500 !important;
     cursor: pointer;
     
   }
     .copy-generate p {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 16px !important;
+    font-weight: 500 !important;
     cursor: pointer;
     
   }
