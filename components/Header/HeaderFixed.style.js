@@ -120,7 +120,7 @@ export const MobileNav = styled.div`
   .link {
     text-decoration: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 24px;
   }
@@ -143,6 +143,7 @@ export const MobileNav = styled.div`
     /* border-bottom: 1.5px solid #03193b; */
     padding: 10px;
     text-align: left;
+    left:0 ;
   }
   .event .link-event{
     color: #fff;
@@ -151,7 +152,7 @@ export const MobileNav = styled.div`
   .links,p {
     text-decoration: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 24px;
   }

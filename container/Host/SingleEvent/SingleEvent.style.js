@@ -206,26 +206,10 @@ export const SingleEventStyle = styled.div`
     width: 100%;
   }
 
-  
-
-
-.upload-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: transparent;
-  border:1px solid black ;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
   @media screen and (max-width: 1024px) {
     .header {
       margin-top: 60px;
       height: 200px;
-      width: 100%;
       background-size: cover;
     }
     .header span {
