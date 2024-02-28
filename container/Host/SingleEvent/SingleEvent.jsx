@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
 
-const SingleEvent = ({ name,id }) => {
+const SingleEvent = ({ name, id }) => {
   const inputRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
@@ -34,7 +34,7 @@ const SingleEvent = ({ name,id }) => {
     amount_of_invitee: "",
     invitee_emails: [],
     qr_code: "",
-    consultation: consultation_date || "No",
+    consultation: consultation_date,
     wishlist: [],
   });
 
@@ -95,14 +95,15 @@ const SingleEvent = ({ name,id }) => {
         consultation: consultation_date,
       }));
     } else {
-      setConsultationTime("No");
+      setConsultationTime("");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        consultation: "No",
+        consultation: "",
       }));
     }
     setConsultationTime(type);
   };
+
   const handleInviteeChange = (inputType) => {
     setInviteeInput(inputType);
   };
@@ -116,7 +117,7 @@ const SingleEvent = ({ name,id }) => {
           ...prevDetails,
           invitee_emails: [...prevDetails.invitee_emails, email],
         }));
-        enteredEmail.value = ""
+        enteredEmail.value = "";
       } else {
         toast.error("Email already exists.");
       }
@@ -124,7 +125,6 @@ const SingleEvent = ({ name,id }) => {
       toast.error("Field cannot be empty");
     }
   };
-  
 
   const handleDeleteEmail = (email) => {
     setEventDetails((prevDetails) => ({
@@ -285,6 +285,29 @@ const SingleEvent = ({ name,id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "event_hashtag",
+      "location",
+      "date",
+      "amount_of_invitee",
+      "hosting_type",
+      "color_code",
+      "dress_code",
+      "invitation_card",
+      "invitee_emails",
+      "qr_code",
+      "wishlist",
+    ];
+    const missingFields = requiredFields.filter(
+      (field) => !eventDetails[field]
+    );
+    if (missingFields.length > 0) {
+      toast.warning(
+        `Please fill out the following fields: ${missingFields.join(", ")}`
+      );
+      return;
+    }
     if (eventDetails) {
       axios
         .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
@@ -298,8 +321,6 @@ const SingleEvent = ({ name,id }) => {
         .catch((error) => {
           toast.error(error);
         });
-    } else {
-      toast.warning("Enter the required field");
     }
     console.log(eventDetails);
   };
@@ -435,18 +456,18 @@ const SingleEvent = ({ name,id }) => {
                 </p>
               </div>
               <div className="email">
-            {eventDetails.invitee_emails.map((email, index) => (
-              <div className="email-details" key={index}>
-                {email}
-                <span
-                    onClick={() => handleDeleteEmail(email)}
-                    style={{ background: "black", borderRadius: "10%" }}
-                  >
-                    <Close />
-                  </span>
+                {eventDetails.invitee_emails.map((email, index) => (
+                  <div className="email-details" key={index}>
+                    {email}
+                    <span
+                      onClick={() => handleDeleteEmail(email)}
+                      style={{ background: "black", borderRadius: "10%" }}
+                    >
+                      <Close />
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
             </EventStyle>
           )}
 
@@ -706,7 +727,7 @@ const SingleEvent = ({ name,id }) => {
                 </div>
                 <EventDiv
                   type="text"
-                  value={`https://tagbox.com/${name}/${uniqueId}`}
+                  value={`https://tagbox.com/attend-event/${uniqueId}`}
                   name="qr_code"
                   id="url"
                   onChange={handleUniqueIdChange}
