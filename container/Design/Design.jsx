@@ -7,7 +7,7 @@ const Design = () => {
   return (
     <DesignStyle>
       <div className="header">
-        <span>Design</span>
+        <span>Customize</span>
       </div>
       <div className="body">
         <p>
@@ -19,7 +19,7 @@ const Design = () => {
             <input placeholder="Email" />
             <Button variant={"dark-button"}>Search Here</Button>
           </div>
-          <button className="button">Upload Photo</button>
+          <button className="button">Upload thumbnail</button>
         </div>
       </div>
     </DesignStyle>

@@ -37,9 +37,10 @@ export const FAQSContainer = styled.div`
   .sub-box .content-show {
     color: #fff;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 20px;
     text-align:left ;
+    padding-top:20px ;
 
     /* display:block ; */
   }

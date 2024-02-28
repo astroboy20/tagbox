@@ -12,7 +12,8 @@ import Image from "next/image";
 
 const MainFeature = () => {
   return (
-    <MainContainer data-aos="fade-up" data-aos-delay="1500">
+    <MainContainer  data-aos="fade-up"  data-aos-easing="ease-in"
+    data-aos-duration="1200">
       <span>Main Features</span>
       <p>
         Explore the primary features of our product informing your decision on

@@ -7,20 +7,20 @@ export const UpcomingStyle = styled.div`
   flex-direction: column;
   gap: 40px;
   span {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 500;
     text-decoration: underline;
   }
   .text{
     display:flex ;
     flex-direction:column ;
-    gap:30px;
+    gap:20px;
   }
 
 
 
   .span-header {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
@@ -28,14 +28,14 @@ export const UpcomingStyle = styled.div`
     text-decoration: none;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
   }
   .span-a {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
   }
@@ -87,27 +87,30 @@ export const UpcomingStyle = styled.div`
    
    
    span {
-   font-size: 24px;
+   font-size: 20px;
    font-weight: 700;
    text-decoration: underline;
    text-align: center;
  }
  .span-header {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
-    text-align: center;
+    text-align: left;
   }
  p {
-   font-size: 18px;
+   font-size: 16px;
    font-weight: 400;
-   text-align: center;
+   text-align: left;
+ }
+ .span-a{
+  font-size:16px ;
  }
  .body{
   flex-direction:column ;
-  text-align:center ;
+  text-align:left ;
  }
  .image{
-    width:340px ;
+    width:auto ;
     height:230px ;
   }
  }

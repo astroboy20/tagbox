@@ -7,7 +7,8 @@ import Carousel from "react-bootstrap/Carousel";
 
 const Choose = () => {
   return (
-    <ChooseContainer data-aos="fade-up" data-aos-delay="1000">
+    <ChooseContainer  data-aos="fade-up"  data-aos-easing="ease-in"
+    data-aos-duration="1200">
       <span>Choose Your Event Type</span>
       <Carousel controls={false}>
         <Carousel.Item interval={1000}>

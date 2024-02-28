@@ -53,14 +53,16 @@ const HeaderFixed = () => {
     <>
       <HeaderFixedContainer>
         <HeaderFixedStyle>
-          <Image
-            src={"/images/logo-white.png"}
-            className="logo"
-            width={167}
-            height={48}
-            alt="logo"
-            objectFit="contain"
-          />
+        <Link href={"/"}>
+            <Image
+              src={"/images/logo-white.png"}
+              className="logo"
+              width={167}
+              height={48}
+              alt="logo"
+              objectFit="contain"
+            />
+            </Link>
           <div className="hamburger" onClick={handleNav}>
             {show ? <Close /> : <Hamburger />}
           </div>
@@ -108,16 +110,19 @@ const HeaderFixed = () => {
             </p>
             <p>
               <Link
-                className={`link ${ActiveLink("/designs") && `active`}`}
-                href={"/designs"}
+                className={`link ${ActiveLink("/customize") && `active`}`}
+                href={"/customize"}
               >
-                Designs
+                Customize
               </Link>
             </p>
           </div>
           <div className="right-nav">
             <Notification />
+            <Link href={"/profile"}>
             <ProfilePicture />
+            </Link>
+          
           </div>
         </HeaderFixedStyle>
         {show && (
@@ -150,8 +155,8 @@ const HeaderFixed = () => {
             <Link href={"/ticketing"} className="link">
               Ticketing
             </Link>
-            <Link href={"/designs"} className="link">
-              Designs
+            <Link href={"/customize"} className="link">
+              Customize
             </Link>
             <Link href={"/notification"} className="link">
               Notifications (3)

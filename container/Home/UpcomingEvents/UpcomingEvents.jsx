@@ -9,7 +9,7 @@ const UpcomingEvents = () => {
     <UpcomingStyle>
       <span>Upcoming Events</span>
       {/* <Test/> */}
-      <Image src={"/images/test1.svg"} width={500} height={500}/>
+      {/* <Image src={"/images/test1.svg"} width={500} height={500}/> */}
       <div className="body">
         {" "}
           <Image
@@ -28,7 +28,11 @@ const UpcomingEvents = () => {
             is majorly for techies in the product industry; Product design,
             Product management and Product development.
           </p>
+          <div>
           <p className="span-a">Event Type: Physical & Virtual </p>
+          <p className="span-a">Event Date: February 28, 2024. </p>
+          </div>
+        
           <div className="time">
             {/* <div>
               <div className="time-a">

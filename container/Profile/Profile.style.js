@@ -54,7 +54,14 @@ export const EditContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 2%;
+    padding:4% 0%;
+    
+  }
+  .form-p {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding:8% 0%;
     
   }
   .name,
@@ -62,6 +69,14 @@ export const EditContainer = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+  }
+  select {
+    padding: 16px 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
+    outline: none;
+    border: 1px solid rgba(47, 46, 65, 0.2);
   }
   .input {
     display: flex;
@@ -98,6 +113,9 @@ export const EditContainer = styled.div`
     background-color: #020d1e;
     color: #fff;
     border: none;
+  }
+  .modal-style{
+    color:#020D1EE5 ;
   }
   @media screen and (max-width: 1024px) {
     .name,

@@ -1,9 +1,35 @@
-import React from 'react'
+
+
+import { Input } from "@/components/Input/Input";
+import React from "react";
+import { EditContainer, ProfileContainer } from "../Profile.style";
+import { Button } from "@/components/Button/Button";
+import Image from "next/image";
 
 const AccountSetting = () => {
   return (
-    <div>AccountSetting</div>
-  )
-}
+    <>
+      <EditContainer>
+        <div className="header">
+          <p>Account Settings</p>
+        </div>
+        <form className="form-p">
+        <div className="input-container">
+            <label>Choose Bank</label>
+           <select>
+            <option>1</option>
+            <option>1</option>
+            <option>1</option>
+           </select>
+          </div>
+          <Input variant={"password"} label={"Write New Password"} />
+          <Input variant={"password"} label={"Confirm New Password"} />
 
-export default AccountSetting
+          <button className="button">Save and Submit</button>
+        </form>
+      </EditContainer>
+    </>
+  );
+};
+
+export default AccountSetting;

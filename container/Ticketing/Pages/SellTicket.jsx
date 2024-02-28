@@ -279,7 +279,9 @@ const SellTicket = () => {
                   name="qr_code"
                   onChange={handleQrCodeChange}
                 />
-                <p className="qr-code-p" onClick={generateId}>Generate</p>
+               <div className="copy-generate">
+                <p onClick={generateId}>Generate</p>
+              </div>
               </div>
             </EventStyle>
 

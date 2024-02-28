@@ -29,16 +29,10 @@ const BuyTicket = () => {
                   this is majorly for techies in the product industry; Product
                   design, Product management and Product development.
                 </p>
-                <p className="span-a">Event Type: Physical & Virtual </p>
-                <div className="time">
-                  {/* <div>
-              <div className="time-a">
-                {" "}
-                28 <p className="p">Feb,2024.</p>
-              </div>
-              <div className="time-b">10am GMT</div>
-            </div> */}
 
+                <p className="span-a">Event Type: Physical & Virtual </p>
+                <p className="span-a">Event Date: February 28, 2024. </p>
+                <div className="time">
                   <div className="button">
                     <span className="button-span"> View Event</span>
 
@@ -69,6 +63,7 @@ const BuyTicket = () => {
                   design, Product management and Product development.
                 </p>
                 <p className="span-a">Event Type: Physical & Virtual </p>
+                <p className="span-a">Event Date: February 28, 2024. </p>
                 <div className="time">
                   {/* <div>
               <div className="time-a">
@@ -105,6 +100,7 @@ const BuyTicket = () => {
                   design, Product management and Product development.
                 </p>
                 <p className="span-a">Event Type: Physical & Virtual </p>
+                <p className="span-a">Event Date: February 28, 2024. </p>
                 <div className="time">
                   {/* <div>
               <div className="time-a">
@@ -141,6 +137,7 @@ const BuyTicket = () => {
                   design, Product management and Product development.
                 </p>
                 <p className="span-a">Event Type: Physical & Virtual </p>
+                <p className="span-a">Event Date: February 28, 2024. </p>
                 <div className="time">
                   {/* <div>
               <div className="time-a">

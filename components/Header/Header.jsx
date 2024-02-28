@@ -42,6 +42,7 @@ const Header = () => {
       <HeaderContainer>
         <HeaderStyle>
           <div>
+            <Link href={"/"}>
             <Image
               src={"/images/logo-white.png"}
               className="logo"
@@ -50,6 +51,8 @@ const Header = () => {
               alt="logo"
               objectFit="contain"
             />
+            </Link>
+           
           </div>
 
           <div className="hamburger" onClick={handleNav}>
@@ -90,8 +93,8 @@ const Header = () => {
               </Link>
             </p>
             <p>
-              <Link href={"/designs"} className="links">
-                Designs
+              <Link href={"/customize"} className="links">
+                Customize
               </Link>
             </p>
           </div>
@@ -131,8 +134,8 @@ const Header = () => {
             <Link href={"/ticketing"} className="link">
               Ticketing
             </Link>
-            <Link href={"/designs"} className="link">
-              Designs
+            <Link href={"/customize"} className="link">
+              Customize
             </Link>
             {token ? (
               <p onClick={handleLogout}>Logout</p>
@@ -144,7 +147,11 @@ const Header = () => {
           </MobileNav>
         )}
 
-        <HeroContainer data-aos="fade-up" data-aos-delay="1000">
+        <HeroContainer
+          data-aos="fade-up"
+          data-aos-easing="ease-in"
+          data-aos-duration="1200"
+        >
           <div className="text">
             <h1>
               Welcome To A <br />

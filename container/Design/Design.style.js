@@ -22,6 +22,9 @@ export const DesignStyle = styled.div`
   }
   .body{
     padding:2% 6% ;
+    display:flex ;
+    flex-direction:column ;
+    gap:50px;
   }
   .body p {
     font-size: 28px;
@@ -55,6 +58,7 @@ export const DesignStyle = styled.div`
     padding:10px 20px ;
     border:1px solid #020D1E80 ;
     background: none ;
+    width:fit-content ;
   }
 
   @media screen and (max-width: 786px) {
@@ -68,7 +72,8 @@ export const DesignStyle = styled.div`
       line-height: 24px;
     }
     .body {
-      padding:0% 6%;
+      padding:2% 6%;
+      gap:20px;
     }
     .body p{
         font-size:18px ;

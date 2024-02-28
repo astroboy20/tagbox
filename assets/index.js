@@ -4673,3 +4673,52 @@ export const Test = () => {
     </svg>
   );
 };
+
+export const On = () => {
+  return (
+    <svg
+    width="50px"
+    height="26px"
+      viewBox="0 0 50 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect x={1} y={1} width={48} height={24} rx={12} fill="#020D1E" />
+      <rect
+        x={0.5}
+        y={0.5}
+        width={49}
+        height={25}
+        rx={12.5}
+        stroke="#020D1E"
+        strokeOpacity={0.2}
+      />
+      <circle cx={36} cy={13} r={11.5} fill="#FAFDFF" stroke="#000" />
+    </svg>
+  );
+};
+
+export const Of = () => {
+  return (
+    <svg
+    width="50px"
+    height="26px"
+      viewBox="0 0 50 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect
+        x={0.5}
+        y={0.5}
+        width={49}
+        height={25}
+        rx={12.5}
+        fill="#FAFDFF"
+        stroke="#020D1E"
+      />
+      <circle cx={14} cy={13} r={12} fill="#020D1E" />
+    </svg>
+  )
+  
+};

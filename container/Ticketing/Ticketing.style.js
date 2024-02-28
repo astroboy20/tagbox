@@ -69,7 +69,7 @@ export const TicketingStyle = styled.div`
     gap: 10px;
   }
   .radio-input label{
-    font-size:20px ;
+    font-size:18px ;
     font-weight:400 ;
   }
   form {
@@ -81,7 +81,7 @@ export const TicketingStyle = styled.div`
 
   .event-display span {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px;
   }
 
@@ -100,7 +100,7 @@ export const TicketingStyle = styled.div`
   //buy ticket style
   .latest-event span,
   .other-event span {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 48px;
   }
@@ -151,11 +151,19 @@ export const TicketingStyle = styled.div`
 export const BodyStyle = styled.div`
   display: flex;
   gap: 60px;
+  box-shadow:2px 4px 4px 0px #0000001F;
+ ;
   border: 1px solid #020d1e4d;
   padding: 3%;
   margin:2% 0  3% 0 ;
+  .text{
+    display:flex ;
+    flex-direction:column ;
+
+    gap:20px;
+  }
   .text .span-header {
-    font-size: 40px;
+    font-size: 28px;
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
@@ -164,7 +172,7 @@ export const BodyStyle = styled.div`
   }
 
  .text  p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
@@ -179,6 +187,9 @@ export const BodyStyle = styled.div`
     display: flex;
     text-align: justify;
     gap: 30px;
+  }
+  .text .button{
+    margin-left:auto ;
   }
   .image {
     width: 600px;
@@ -247,7 +258,7 @@ export const BodyStyle = styled.div`
       text-align: center;
     }
     .image {
-      width: 320px;
+      width: auto;
       height: 230px;
     }
   }

@@ -83,7 +83,7 @@ const Events = () => {
           </>
         )}
       </div>
-      {/* <UpcomingEvents/> */}
+      <UpcomingEvents/>
     </EventContainer>
   );
 };

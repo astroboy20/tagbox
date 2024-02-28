@@ -14,7 +14,8 @@ const FAQ = () => {
   };
 
   return (
-    <FAQSContainer data-aos="fade-up" data-aos-delay="1000">
+    <FAQSContainer data-aos="fade-up"  data-aos-easing="ease-in"
+    data-aos-duration="1200">
       <span>Frequently Asked Questions</span>
       <div className="box">
         {Data.map((data, index) => (
