@@ -772,13 +772,13 @@ const SingleEvent = ({ name, id }) => {
             <Actions className="actions">
               <span>{message}</span>
               <Buttons className="buttons">
-                <Button variant={"white-btn"}>
+                <button className={"white-btn"}>
                   {" "}
-                  <Link href={`attend-event/${eventDetails.qr_code}}`}> View Event</Link>
-                </Button>
-                <Button variant={"dark-button"}>
-                  <Link href={"/host-event"}> Continue</Link>
-                </Button>
+                  <Link className="link-white" href={`/attend-event/${uniqueId}}`}> View Event</Link>
+                </button>
+                <button className={"dark-button"}>
+                  <Link className="link" href={"/host-event"}> Continue</Link>
+                </button>
               </Buttons>
             </Actions>
           </>

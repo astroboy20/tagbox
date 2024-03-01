@@ -120,8 +120,8 @@ export const SingleEventStyle = styled.div`
     width: 100%;
   }
 
-  .actions{
-    display:flex ;
+  .actions {
+    display: flex;
   }
   @media screen and (max-width: 1024px) {
     .header {
@@ -198,15 +198,70 @@ export const SingleEventStyle = styled.div`
   }
 `;
 
-
 export const Actions = styled.div`
-
-  display:flex ;
-  flex-direction:column ;
-  gap:20px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  span {
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 48px;
+  }
+  @media screen and (max-width: 786px) {
+    span {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 12px;
+    }
+  }
+`;
 export const Buttons = styled.div`
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  .white-btn {
+    border: none;
+    padding: 16px 12px;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
 
-  display:flex ;
-  gap:20px;
-`
+    color: #000;
+    cursor: pointer;
+  }
+  .dark-button {
+    border: none;
+    padding: 16px 12px;
+    border-radius: 4px;
+    background-color: #020d1e;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+
+    color: #fff;
+    cursor: pointer;
+  }
+  .link {
+    color: #fff;
+    /* font-size:24px ; */
+    font-weight: 400;
+    text-decoration: none;
+  }
+  .link-white {
+    color: #000;
+    /* font-size:24px ; */
+    font-weight: 400;
+    text-decoration: none;
+  }
+  @media screen and (max-width: 786px) {
+    .white-btn,
+    .dark-button {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 12px;
+    }
+  }
+`;

@@ -1,20 +1,18 @@
 import { Footer } from "@/components/Footer";
 import { HeaderFixed } from "@/components/Header";
-import { SingleEvent } from "@/container/Host/SingleEvent";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
 import { AttendEvent } from "@/container/Host/AttendEvent/AttendEvent";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const EventId = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
-  const [eventDetails, setEventDetails] = useState([]);
   const { user } = useSelector((state) => state.auth);
-  const token = user ? user.token || user : "";
+  const token = user ? (user.token || user) : "";
+
+  const [eventDetails, setEventDetails] = useState(null); // Initialize eventDetails as null
 
   const fetchEventDetails = async () => {
     try {
@@ -26,21 +24,23 @@ const EventId = () => {
           },
         }
       );
-      console.log(response.data.data);
+      setEventDetails(response.data.data); // Set eventDetails after fetching data
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchEventDetails();
-  }, []);
+    if (id) {
+      fetchEventDetails(); // Call fetchEventDetails only if id is defined
+    }
+  }, [id]); // Add id as a dependency to re-run useEffect when id changes
 
   return (
     <>
       <HeaderFixed />
-      {/* <SingleEvent name={name} id={id} /> */}
-      <AttendEvent />
+      {/* Check if eventDetails is not null before rendering AttendEvent */}
+      {eventDetails && <AttendEvent eventDetails={eventDetails} />}
       <Footer />
     </>
   );
