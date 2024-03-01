@@ -1,5 +1,10 @@
 import { Close, Date, Location, Upload } from "@/assets";
-import { ColorStyle, SingleEventStyle } from "./SingleEvent.style";
+import {
+  Actions,
+  Buttons,
+  ColorStyle,
+  SingleEventStyle,
+} from "./SingleEvent.style";
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Input } from "@/components/Input/Input";
@@ -11,6 +16,9 @@ import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
+import { Modal } from "@/components/Modal";
+import { EventSpinner } from "@/components/Spinner/EventSpinnner";
+import Link from "next/link";
 
 const SingleEvent = ({ name, id }) => {
   const inputRef = useRef(null);
@@ -39,6 +47,8 @@ const SingleEvent = ({ name, id }) => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
   console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
@@ -285,6 +295,7 @@ const SingleEvent = ({ name, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const requiredFields = [
       "event_hashtag",
@@ -309,6 +320,7 @@ const SingleEvent = ({ name, id }) => {
       return;
     }
     if (eventDetails) {
+      setModalShow(true);
       axios
         .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
           headers: {
@@ -317,9 +329,12 @@ const SingleEvent = ({ name, id }) => {
         })
         .then((response) => {
           toast.success(response.data.message);
+          setMessage(response?.data.message);
+          setLoading(false);
         })
         .catch((error) => {
           toast.error(error);
+          setLoading(false);
         });
     }
     console.log(eventDetails);
@@ -461,7 +476,11 @@ const SingleEvent = ({ name, id }) => {
                     {email}
                     <span
                       onClick={() => handleDeleteEmail(email)}
-                      style={{ background: "black", borderRadius: "10%" }}
+                      style={{
+                        background: "red",
+                        borderRadius: "10%",
+                        cursor: "pointer",
+                      }}
                     >
                       <Close />
                     </span>
@@ -629,7 +648,7 @@ const SingleEvent = ({ name, id }) => {
                   />
                   <span
                     onClick={() => handleRemoveWishlistItem(index)}
-                    style={{ background: "black", borderRadius: "50%" }}
+                    style={{ background: "red", borderRadius: "50%" }}
                   >
                     <Close />
                   </span>
@@ -745,6 +764,26 @@ const SingleEvent = ({ name, id }) => {
           <Button variant="dark-button">Submit Response</Button>
         </form>
       </div>
+      <Modal show={modalShow} onClose={() => setModalShow(false)}>
+        {loading ? (
+          <EventSpinner />
+        ) : (
+          <>
+            <Actions className="actions">
+              <span>{message}</span>
+              <Buttons className="buttons">
+                <Button variant={"white-btn"}>
+                  {" "}
+                  <Link href={`attend-event/${eventDetails.qr_code}}`}> View Event</Link>
+                </Button>
+                <Button variant={"dark-button"}>
+                  <Link href={"/host-event"}> Continue</Link>
+                </Button>
+              </Buttons>
+            </Actions>
+          </>
+        )}
+      </Modal>
     </SingleEventStyle>
   );
 };

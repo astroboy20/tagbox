@@ -5,6 +5,7 @@ import {
   DarkWhite,
   NavButton,
   TransparentButton,
+  WhiteBtn,
 } from "./Button.style";
 
 const Button = ({ variant, children, onClick, isDisabled }) => {
@@ -53,9 +54,15 @@ const Button = ({ variant, children, onClick, isDisabled }) => {
     >
       {children}
     </DarkWhite>
-  ) : (
-    ""
-  );
+  ) : variant === "white-btn" ? (
+    <WhiteBtn
+      variant={variant}
+      type="submit"
+      onClick={onClick}
+      disabled={isDisabled}
+    >
+      {children}
+    </WhiteBtn>) : null
 };
 
 export { Button };

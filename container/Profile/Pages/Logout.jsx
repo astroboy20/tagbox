@@ -1,17 +1,23 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+// import Modal from "react-bootstrap/Modal";
 import { EditContainer } from "../Profile.style";
+import { Modal } from "@/components/Modal";
 
 const Logout = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false)
   return (
     <>
      <EditContainer>
      <Button variant="primary" onClick={() => setModalShow(true)}>
         Launch vertically centered modal
       </Button>
-      <Modal
+    
+     
+      {/* <Modal
         show={modalShow}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -25,7 +31,9 @@ const Logout = () => {
             <Button>Logout</Button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
+
+      <Button variant="primary" onClick={()=>setModalShow(true)}>Submit Response</Button>
      </EditContainer>
     
     </>

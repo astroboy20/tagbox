@@ -78,3 +78,20 @@ export const DarkWhite = styled.button`
     line-height: 12px;
   }
 `;
+export const WhiteBtn = styled.button`
+  border: none;
+  padding: 16px 12px;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+
+  color: #000;
+  cursor: pointer;
+  @media screen and (max-width: 786px) {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+  }
+`;

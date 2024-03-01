@@ -120,6 +120,9 @@ export const SingleEventStyle = styled.div`
     width: 100%;
   }
 
+  .actions{
+    display:flex ;
+  }
   @media screen and (max-width: 1024px) {
     .header {
       margin-top: 60px;
@@ -194,3 +197,16 @@ export const SingleEventStyle = styled.div`
     }
   }
 `;
+
+
+export const Actions = styled.div`
+
+  display:flex ;
+  flex-direction:column ;
+  gap:20px;
+`
+export const Buttons = styled.div`
+
+  display:flex ;
+  gap:20px;
+`
