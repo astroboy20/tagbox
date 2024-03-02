@@ -13,6 +13,13 @@ import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/Spinner/Spinner";
+import { Modal } from "@/components/Modal";
+import {
+  Actions,
+  Buttons,
+} from "@/container/Host/SingleEvent/SingleEvent.style";
+import Link from  "next/link"
+import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 
 const SellTicket = () => {
   const { option } = useOptionContext();
@@ -35,6 +42,8 @@ const SellTicket = () => {
 
   const [loading, setLoading] = useState(false);
   const [isloading, setisLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const token = user ? user.data || user : "";
   console.log("token", token);
 
@@ -76,6 +85,7 @@ const SellTicket = () => {
     const imageFile = event.target.files[0];
     try {
       setLoading(true);
+
       const formData = new FormData();
       formData.append("file", imageFile);
       formData.append("upload_preset", "za8tsrje");
@@ -118,11 +128,14 @@ const SellTicket = () => {
         })
         .then((response) => {
           toast.success(response.data.message);
+          setMessage(response.data.message);
           setisLoading(false);
+          showModal(true);
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.response?.data?.message || "Something went wrong");
           setisLoading(false);
+          setShowModal(false);
         });
     } else {
       toast.warning("Enter the required field");
@@ -279,9 +292,9 @@ const SellTicket = () => {
                   name="qr_code"
                   onChange={handleQrCodeChange}
                 />
-               <div className="copy-generate">
-                <p onClick={generateId}>Generate</p>
-              </div>
+                <div className="copy-generate">
+                  <p onClick={generateId}>Generate</p>
+                </div>
               </div>
             </EventStyle>
 
@@ -326,6 +339,36 @@ const SellTicket = () => {
               {isloading ? <Spinner /> : "Submit"}
             </Button>
           </form>
+          <Modal show={showModal} onClose={() => setShowModal(false)}>
+            {isloading ? (
+              <EventSpinner />
+            ) : (
+              <>
+                <Actions className="actions">
+                  <span>{message}</span>
+                  <Buttons className="buttons">
+                    <button className={"white-btn"}>
+                      {" "}
+                      <Link
+                        className="link-white"
+                        href={`/host-event`}
+                        // href={`/attend-event/${uniqueId}}`}
+                      >
+                        {" "}
+                        View Event
+                      </Link>
+                    </button>
+                    <button className={"dark-button"}>
+                      <Link className="link" href={"/host-event"}>
+                        {" "}
+                        Continue
+                      </Link>
+                    </button>
+                  </Buttons>
+                </Actions>
+              </>
+            )}
+          </Modal>
         </TicketingStyle>
       )}
     </div>

@@ -138,7 +138,7 @@ const Header = () => {
               Customize
             </Link>
             {token ? (
-              <p onClick={handleLogout}>Logout</p>
+              <p className="link" onClick={handleLogout}>Logout</p>
             ) : (
               <Link href={"/login"} className="links">
                 Login

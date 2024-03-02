@@ -67,6 +67,7 @@ export const TicketingStyle = styled.div`
   .radio-input {
     display: flex;
     gap: 10px;
+    align-items:center ;
   }
   .radio-input label{
     font-size:18px ;
@@ -122,7 +123,7 @@ export const TicketingStyle = styled.div`
     .options p {
       justify-content: space-between;
       gap: 0;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 24px;
     }
     .event-box {

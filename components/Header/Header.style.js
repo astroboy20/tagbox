@@ -142,7 +142,7 @@ export const MobileNav = styled.div`
   z-index: 1000;
   width: 100%;
   left: 0;
-  padding: 6%;
+  padding: 2% 8%;
   gap: 30px;
   .link {
     text-decoration: none;
