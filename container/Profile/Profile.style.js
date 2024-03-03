@@ -123,6 +123,7 @@ export const EditContainer = styled.div`
       flex-direction: column;
       justify-content: center;
       width: 100%;
+      gap:20px;
     }
     .right {
       width: 100%;
@@ -135,6 +136,9 @@ export const EditContainer = styled.div`
     .input {
       width: 100%;
       padding: 5px;
+    }
+    form{
+      gap:20px;
     }
   }
 `;

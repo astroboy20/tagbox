@@ -320,7 +320,7 @@ const SingleEvent = ({ name, id }) => {
       return;
     }
     if (eventDetails) {
-      setModalShow(true);
+     
       axios
         .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
           headers: {
@@ -331,10 +331,12 @@ const SingleEvent = ({ name, id }) => {
           toast.success(response.data.message);
           setMessage(response?.data.message);
           setLoading(false);
+          setModalShow(true);
         })
         .catch((error) => {
           toast.error(error);
           setLoading(false);
+          setModalShow(false);
         });
     }
     console.log(eventDetails);

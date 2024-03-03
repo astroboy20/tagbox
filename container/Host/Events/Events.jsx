@@ -6,8 +6,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { EventImages } from "./Images";
-import { BigSpinner } from "@/components/Spinner/BigSpinner";
 import { UpcomingEvents } from "@/container/Home/UpcomingEvents";
+import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
 // import { BigSpinner } from "@/components/Spinner/Spinner";
 const Events = () => {
   const [eventTypes, setEventType] = useState([]);
@@ -16,7 +16,7 @@ const Events = () => {
   const token = user ? user.data || user : "";
 
   const fetchEventTypes = async () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     try {
       const response = await axios.get(
         "https://tagbox.ployco.com/v1/event-types",
@@ -30,10 +30,9 @@ const Events = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchEventTypes();
@@ -64,7 +63,16 @@ const Events = () => {
       </span>
       <div className="box">
         {isLoading ? (
-          <BigSpinner />
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BlackSpinner />
+          </div>
         ) : (
           <>
             {" "}
@@ -83,7 +91,7 @@ const Events = () => {
           </>
         )}
       </div>
-      <UpcomingEvents/>
+      <UpcomingEvents />
     </EventContainer>
   );
 };
