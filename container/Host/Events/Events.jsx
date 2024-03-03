@@ -92,6 +92,7 @@ const Events = () => {
         )}
       </div>
       <UpcomingEvents />
+      
     </EventContainer>
   );
 };

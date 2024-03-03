@@ -6,7 +6,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
-
+import { useRouter } from "next/router";
 const BuyTicket = () => {
   const { user } = useSelector((state) => state.auth);
   const [latestEvent, setLatestEvent] = useState([]);
@@ -42,12 +42,13 @@ const BuyTicket = () => {
   };
 
   const { option } = useOptionContext();
+  const router = useRouter()
   return (
     <div>
       {option === "Buy" && (
         <TicketingStyle>
           <div className="latest-event">
-            <span>Latest Event</span>
+            <span>{router.pathname === "host-event" ? "" : "Latest Event"} </span>
             {isLoading ? (
               <BlackSpinner />
             ) : (
@@ -81,11 +82,7 @@ const BuyTicket = () => {
                         <div className="text">
                           <span className="span-header">{event.theme}</span>
                           <p>
-                            {" "}
-                            For Tech sarvys as well as newbies transitioning
-                            into tech and this is majorly for techies in the
-                            product industry; Product design, Product management
-                            and Product development.
+                          {event.description}
                           </p>
 
                           <p className="span-a">

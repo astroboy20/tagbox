@@ -186,19 +186,19 @@ export const BodyStyle = styled.div`
   }
   .body {
     display: flex;
-    text-align: justify;
+    text-align: left;
     gap: 30px;
   }
   .text .button{
     margin-left:auto ;
   }
   .image {
-    width: 600px;
+    width: 500px;
     height: 320px;
   }
   .time {
     display: flex;
-    text-align: center;
+    text-align: left;
     gap: 15px;
   }
   .time-a {
@@ -231,7 +231,7 @@ export const BodyStyle = styled.div`
     line-height: 24px;
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
     flex-direction:column ;
     gap:20px;
     margin:5% 0  3% 0 ;
@@ -260,7 +260,7 @@ export const BodyStyle = styled.div`
     }
     .image {
       width: auto;
-      height: 230px;
+      height: 300px;
     }
   }
 `;
