@@ -1,16 +1,19 @@
-import { Footer } from '@/components/Footer'
-import { HeaderFixed } from '@/components/Header'
-import { Ticketing } from '@/container/Ticketing'
-import React from 'react'
+import { Footer } from "@/components/Footer";
+import { HeaderFixed } from "@/components/Header";
+import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
+import { Ticketing } from "@/container/Ticketing";
+import React from "react";
 
 const ticketing = () => {
   return (
     <>
-    <HeaderFixed/>
-    <Ticketing/>
-    <Footer/>
+      <ProtectedRoute>
+        <HeaderFixed />
+        <Ticketing />
+        <Footer />
+      </ProtectedRoute>
     </>
-  )
-}
+  );
+};
 
-export default ticketing
+export default ticketing;

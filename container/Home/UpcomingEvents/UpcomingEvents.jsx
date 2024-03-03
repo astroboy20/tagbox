@@ -9,7 +9,7 @@ const UpcomingEvents = () => {
     <UpcomingStyle>
       <span>Upcoming Events</span>
       {/* <Test/> */}
-      {/* <Image src={"/images/test1.svg"} width={500} height={500}/> */}
+      <Image src={"/images/test1.svg"} width={500} height={500}/>
       <div className="body">
         {" "}
           <Image

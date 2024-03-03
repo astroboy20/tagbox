@@ -22,8 +22,8 @@ const AccountSetting = () => {
             <option>1</option>
            </select>
           </div>
-          <Input variant={"password"} label={"Write New Password"} />
-          <Input variant={"password"} label={"Confirm New Password"} />
+          <Input variant={"text"} label={"Account Number"} />
+          <Input variant={"text"} label={"Account Name"} />
 
           <button className="button">Save and Submit</button>
         </form>

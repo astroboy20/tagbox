@@ -34,7 +34,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(reset());
-    toast.success("successful");
+    toast.success("You have been successfully logged out");
     router.push("/login");
   };
   return (
@@ -138,9 +138,9 @@ const Header = () => {
               Customize
             </Link>
             {token ? (
-              <p className="link" onClick={handleLogout}>Logout</p>
+              <p className="nav-p" onClick={handleLogout}>Logout</p>
             ) : (
-              <Link href={"/login"} className="links">
+              <Link href={"/login"} className="link">
                 Login
               </Link>
             )}

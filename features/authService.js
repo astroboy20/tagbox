@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://tagbox.onrender.com/v1/user";
+const API_URL = "https://tagbox.ployco.com/v1/user";
 
 //register user
 const register = async (userData) => {
@@ -16,7 +16,7 @@ const login = async (userData) => {
 
 //login user
 const loginWithGoogle = async () => {
- window.location.href = ("https://tagbox.onrender.com/v1/google");
+ window.location.href = ("https://tagbox.ployco.com/v1/google");
  
 };
 

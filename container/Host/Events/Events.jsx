@@ -19,7 +19,7 @@ const Events = () => {
     setIsLoading(true); 
     try {
       const response = await axios.get(
-        "https://tagbox.onrender.com/v1/event-types",
+        "https://tagbox.ployco.com/v1/event-types",
         {
           headers: {
             Authorization: `Bearer ${token}`,

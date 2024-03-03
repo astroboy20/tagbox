@@ -83,7 +83,7 @@ export const UpcomingStyle = styled.div`
     line-height: 24px;
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 1024px) {
    
    
    span {

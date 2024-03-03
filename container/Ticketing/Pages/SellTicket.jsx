@@ -121,7 +121,7 @@ const SellTicket = () => {
     e.preventDefault();
     if (eventDetails) {
       axios
-        .post("https://tagbox.onrender.com/v1/user/ticket", eventDetails, {
+        .post("https://tagbox.ployco.com/v1/user/ticket", eventDetails, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

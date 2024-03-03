@@ -322,7 +322,7 @@ const SingleEvent = ({ name, id }) => {
     if (eventDetails) {
       setModalShow(true);
       axios
-        .post(`https://tagbox.onrender.com/v1/user/event/${id}`, eventDetails, {
+        .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

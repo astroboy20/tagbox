@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { ProfileOptionProvider } from "@/features/Axios/ProfileOptionContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "@/styles/globals.css";
+import TokenExpirationHandler from "@/container/ProtectedRoute/TokenExpirationHandler";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -24,7 +25,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Provider store={store}>
+        <TokenExpirationHandler/>
         <PersistGate loading={null} persistor={persistor}>
+          
           <ProfileOptionProvider>
             <OptionProvider>
               <ThemeProvider theme={theme}>

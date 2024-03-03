@@ -45,7 +45,7 @@ const HeaderFixed = () => {
   };
   const handleLogout = () => {
     dispatch(reset());
-    toast.success("successful");
+    toast.success("You have been successfully logged out");
     router.push("/login");
   };
 

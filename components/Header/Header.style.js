@@ -151,4 +151,10 @@ export const MobileNav = styled.div`
     font-weight: 500;
     line-height: 24px;
   }
+  .nav-p{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
 `;

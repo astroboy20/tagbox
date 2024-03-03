@@ -5,12 +5,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
 
 const EventId = () => {
   const router = useRouter();
   const { id } = router.query;
   const { user } = useSelector((state) => state.auth);
-  const token = user ? (user.token || user) : "";
+  const token = user ? user.token || user : "";
 
   const [eventDetails, setEventDetails] = useState(null); // Initialize eventDetails as null
 
@@ -38,10 +39,12 @@ const EventId = () => {
 
   return (
     <>
-      <HeaderFixed />
-      {/* Check if eventDetails is not null before rendering AttendEvent */}
-      {eventDetails && <AttendEvent eventDetails={eventDetails} />}
-      <Footer />
+      <ProtectedRoute>
+        <HeaderFixed />
+        {/* Check if eventDetails is not null before rendering AttendEvent */}
+        {eventDetails && <AttendEvent eventDetails={eventDetails} />}
+        <Footer />
+      </ProtectedRoute>
     </>
   );
 };
