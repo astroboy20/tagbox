@@ -18,7 +18,7 @@ import {
   Actions,
   Buttons,
 } from "@/container/Host/SingleEvent/SingleEvent.style";
-import Link from  "next/link"
+import Link from "next/link";
 import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 
 const SellTicket = () => {
@@ -38,6 +38,7 @@ const SellTicket = () => {
     qr_code: uniqueId,
     ticket_price: "",
     visibility: visibility,
+    description:""
   });
 
   const [loading, setLoading] = useState(false);
@@ -117,9 +118,12 @@ const SellTicket = () => {
   };
 
   const handleSubmit = (e) => {
-    setisLoading(true);
+   
     e.preventDefault();
+    setisLoading(true);
+    // showModal(true);
     if (eventDetails) {
+      setShowModal(true);
       axios
         .post("https://tagbox.ployco.com/v1/user/ticket", eventDetails, {
           headers: {
@@ -127,10 +131,10 @@ const SellTicket = () => {
           },
         })
         .then((response) => {
-          toast.success(response.data.message);
+          // toast.success(response.data.message);
           setMessage(response.data.message);
           setisLoading(false);
-          showModal(true);
+         
         })
         .catch((error) => {
           toast.error(error.response?.data?.message || "Something went wrong");
@@ -192,6 +196,14 @@ const SellTicket = () => {
               placeholder={"E.g, Concerts, get-together, graduation, etc."}
               value={eventDetails.theme}
               name="theme"
+              onChange={handleChange}
+            />
+            <Input
+              variant={"event-input"}
+              label={" What is the Description of your event?"}
+              placeholder={""}
+              value={eventDetails.description}
+              name="description"
               onChange={handleChange}
             />
             <Input
@@ -335,9 +347,7 @@ const SellTicket = () => {
               </div>
             </div>
 
-            <Button variant="dark-button">
-              {isloading ? <Spinner /> : "Submit"}
-            </Button>
+            <Button variant="dark-button"> Submit</Button>
           </form>
           <Modal show={showModal} onClose={() => setShowModal(false)}>
             {isloading ? (
