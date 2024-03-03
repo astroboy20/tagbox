@@ -618,7 +618,7 @@
             <text class="cls-7" transform="translate(452.38 738.18)">TO CELEBRATE<tspan
                     class="cls-8"
                     x="129.73" y="0"></tspan><tspan x="145.05" y="0"></tspan></text>
-            <text class="cls-7" transform="translate(371.32 951.01)">SUNDAY FEBRUARY 17TH 2024<tspan class="cls-8">
+            <text class="cls-7 date" transform="translate(371.32 951.01)">SUNDAY FEBRUARY 17TH 2024<tspan class="cls-8">
                     <tspan x="-75.14" y="24">A</tspan>
                     <tspan class="cls-14" x="-59.81" y="24">T TWE</tspan>
                     <tspan class="cls-15" x="12.61" y="24">L</tspan>

@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Image from "next/image";
 import { UpcomingStyle } from "./UpcomingEvent.style";
 import { Button } from "@/components/Button/Button";
 import { Test } from "@/assets";
 
+
+
+
+ 
+
+
+
 const UpcomingEvents = () => {
+  const [name, setName] = useState('');
+  
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleApplyName = () => {
+    updateNameInSVG();
+  };
+
+  useEffect(() => {
+    updateNameInSVG();
+  }, [name]);
+  
+  const updateNameInSVG = () => {
+    const svgElement = document.getElementById('Test');
+    if (svgElement) {
+      const namePlaceholder = svgElement.getElementById('date');
+      if (namePlaceholder) {
+        namePlaceholder.textContent = name;
+      }
+    }
+  };
+;
   return (
     <UpcomingStyle>
       <span>Upcoming Events</span>
       {/* <Test/> */}
-      <Image src={"/images/test1.svg"} width={500} height={500}/>
+      {/* <Image id="test" src={"/images/test1.svg"} width={500} height={500}/>
+
+      <input
+        type="text"
+        placeholder="Enter Name"
+        value={name}
+        onChange={handleNameChange}
+      />
+      <button onClick={handleApplyName}>Apply Name</button> */}
       <div className="body">
         {" "}
           <Image

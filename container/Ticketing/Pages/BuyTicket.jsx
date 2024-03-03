@@ -5,7 +5,7 @@ import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Spinner, { BlackSpinner } from "@/components/Spinner/Spinner";
+import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
 
 const BuyTicket = () => {
   const { user } = useSelector((state) => state.auth);
@@ -53,7 +53,18 @@ const BuyTicket = () => {
             ) : (
               <>
                 {latestEvent.length === 0 ? (
-                  "No Event Available"
+                  <p
+                    style={{
+                      textAlign: "center",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding:"2% 0",
+                      fontSize:"20px",
+                    }}
+                  >
+                    No Event Available
+                  </p>
                 ) : (
                   <>
                     {latestEvent.map((event) => (
