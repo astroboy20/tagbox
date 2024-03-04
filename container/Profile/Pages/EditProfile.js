@@ -6,9 +6,12 @@ import Image from "next/image";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Spinner, { BlackSpinner } from "@/components/Spinner/Spinner";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 import { Modal } from "@/components/Modal";
-import { Actions, Buttons } from "@/container/Host/SingleEvent/SingleEvent.style";
+import {
+  Actions,
+  Buttons,
+} from "@/container/Host/SingleEvent/SingleEvent.style";
 import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 const EditProfile = () => {
   const { user } = useSelector((state) => state.auth);
@@ -59,10 +62,8 @@ const EditProfile = () => {
         mobile_number: "",
       });
     }
-  
   }, []);
   useEffect(() => {
-   
     if (details) {
       setEdited({
         firstname: details.first_name,
@@ -71,10 +72,7 @@ const EditProfile = () => {
         mobile_number: "",
       });
     }
-   
   }, [details]);
-
-
 
   const inputChange = (e) => {
     const { name, value } = e.target;
@@ -85,28 +83,29 @@ const EditProfile = () => {
   };
 
   const handleSubmit = async (e) => {
-    setIsLoading(true)
+    setIsLoading(true);
     setModalShow(true);
     e.preventDefault();
     try {
-      const response  = await axios.post("https://tagbox.ployco.com/v1/user/update-profile", edited, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      
-      setMessage(response?.data.message)
+      const response = await axios.post(
+        "https://tagbox.ployco.com/v1/user/update-profile",
+        edited,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setMessage(response?.data.message);
       fetchUserData();
     } catch (error) {
       console.log(error);
-    }
-    finally{
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
       // setModalShow(false);
     }
- 
   };
-
 
   return (
     <EditContainer>
@@ -141,18 +140,22 @@ const EditProfile = () => {
         <Input
           variant={"text"}
           label={"Mobile number "}
-          value={edited.mobile_number }
+          value={edited.mobile_number}
           name={"mobile_number"}
           onChange={inputChange}
         />
         <Input
           variant={"text"}
           label={"Email "}
-          value={edited.email }
+          value={edited.email}
           name={"email"}
           onChange={inputChange}
         />
-        <button className="button">{details?.isGoogleUser ? "" : "Save and Submit"} </button>
+        {details?.isGoogleUser ? (
+          ""
+        ) : (
+          <button className="button">"Save and Submit </button>
+        )}
       </form>
 
       <Modal show={modalShow} onClose={() => setModalShow(false)}>
@@ -163,10 +166,12 @@ const EditProfile = () => {
             <Actions className="actions">
               <span>{message}</span>
               <Buttons className="buttons">
-                <button onClick={()=>setModalShow(false)} className={"white-btn"}>
+                <button
+                  onClick={() => setModalShow(false)}
+                  className={"white-btn"}
+                >
                   Close
                 </button>
-              
               </Buttons>
             </Actions>
           </>

@@ -54,38 +54,43 @@ const UpcomingEvents = () => {
       ) : (
         <>
           {latestEvent.map((event, index) => (
-            <>{index === 0 ?    <div className="body">
-            {" "}
-            <Image
-              src={event.image}
-              width={600}
-              height={320}
-              objectFit="cover"
-              alt="upcoming-event"
-              className="image"
-            />
-            <div className="text">
-              <span className="span-header">{event.theme}</span>
-              <p> {event.description}</p>
-              <div>
-                <p className="span-a">Event Type: {event.event_type}</p>
-                <p className="span-a">
+            <>
+              {index === 0 ? (
+                <div className="body" >
                   {" "}
-                  Event Date: {formatDate(event.date)}{" "}
-                </p>
-              </div>
+                  <Image
+                    src={event.image}
+                    width={600}
+                    height={320}
+                    objectFit="cover"
+                    alt="upcoming-event"
+                    className="image"
+                  />
+                  <div className="text">
+                    <span className="span-header">{event.theme}</span>
+                    <p> {event.description}</p>
+                    <div>
+                      <p className="span-a">Event Type: {event.event_type}</p>
+                      <p className="span-a">
+                        {" "}
+                        Event Date: {formatDate(event.date)}{" "}
+                      </p>
+                    </div>
 
-              <div className="time">
-                <div className="button">
-                  <span className="button-span"> View Event</span>
+                    <div className="time">
+                      <div className="button">
+                        <span className="button-span"> View Event</span>
 
-                  <Button variant={"dark-button"}> Buy Ticket </Button>
+                        <Button variant={"dark-button"}> Buy Ticket </Button>
+                      </div>
+                    </div>
+                  </div>
+                  <p></p>
                 </div>
-              </div>
-            </div>
-            <p></p>
-          </div> : ""}</>
-         
+              ) : (
+                ""
+              )}
+            </>
           ))}
         </>
       )}
