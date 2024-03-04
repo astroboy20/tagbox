@@ -8,7 +8,7 @@ export const SingleEventStyle = styled.div`
   p {
     font-size: 32px;
     font-weight: 500;
-    line-height: 32px;
+    /* line-height: 32px; */
   }
   .header {
     margin-top: 100px;
@@ -21,7 +21,6 @@ export const SingleEventStyle = styled.div`
   .header span {
     font-size: 48px;
     font-weight: 700;
-    line-height: 48px;
     color: #fff;
     text-decoration: underline;
   }
@@ -55,7 +54,6 @@ export const SingleEventStyle = styled.div`
   .event-display .radio-input label {
     font-size: 18px;
     font-weight: 400;
-    line-height: 16px;
   }
 
   .event-box-gift {
@@ -75,12 +73,10 @@ export const SingleEventStyle = styled.div`
   .event-display div {
     font-size: 20px;
     font-weight: 500;
-    line-height: 40px;
   }
   .event-display label {
     font-size: 20px;
     font-weight: 500;
-    line-height: 24px;
   }
 
   .event-display span {
@@ -97,12 +93,9 @@ export const SingleEventStyle = styled.div`
   .wishlist span {
     font-size: 20px;
     font-weight: 500;
-    line-height: 24px;
   }
   .wishlist label {
     font-size: 20px;
-    /* font-weight: 500; */
-    line-height: 24px;
   }
 
   .wishlist .input {
@@ -123,6 +116,93 @@ export const SingleEventStyle = styled.div`
   .actions {
     display: flex;
   }
+.iv-image{
+  width:400px ;
+  height:560px ;
+}
+  .names .name-one {
+    position: absolute;
+    top: 165px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Elephant;
+    font-size: 35px;
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+    color: #3a0452;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
+    width: calc(200px + 20px);
+  }
+
+  .qr p {
+    position: absolute;
+    top: 310px;
+    left: 87%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff6e5;
+    display: flex;
+    gap: 20px;
+  }
+  .time p {
+    position: absolute;
+    top: 370px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff6e5;
+    display: flex;
+    gap: 20px;
+  }
+
+  .location p {
+    position: absolute;
+    top: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff6e5;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    width: calc(200px + 20px);
+  }
+
+  .ticket p {
+    position: absolute;
+    top: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff6e5;
+    text-align: center;
+    width: calc(200px + 20px);
+  }
+
+  .invitation-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
   @media screen and (max-width: 1024px) {
     .header {
       margin-top: 60px;
@@ -131,7 +211,6 @@ export const SingleEventStyle = styled.div`
     }
     .header span {
       font-size: 24px;
-      line-height: 24px;
     }
     .body {
       padding: 3%;
@@ -143,7 +222,6 @@ export const SingleEventStyle = styled.div`
     .radio-input label {
       font-size: 16px;
       font-weight: 400;
-      line-height: 16px;
     }
 
     .event-display span {
@@ -152,7 +230,6 @@ export const SingleEventStyle = styled.div`
     .event-display div {
       font-size: 18px;
       font-weight: 500;
-      line-height: 18px;
     }
 
     .event-display .images {
@@ -179,7 +256,6 @@ export const SingleEventStyle = styled.div`
     .event-display .image-button .buttons p {
       font-size: 12px;
       font-weight: 500;
-      line-height: 12px;
     }
     .copy-generate p {
       font-size: 16px;
@@ -195,9 +271,37 @@ export const SingleEventStyle = styled.div`
     .wishlist input {
       width: 100%;
     }
-  }
-`;
+    .iv-image{
+  width:170px ;
+  height:252px ;
+}
+    .names .name-one {
+      top:50px ;
+      left:10% ;
+      font-size: 2000px;
+      gap: 10px;
+      width: calc(100% - 40px); /* Adjust as needed */
+    }
 
+    .qr p,
+    .time p,
+    .location p,
+    .ticket p {
+      font-size: 14px;
+      gap: 10px;
+      width: calc(100% - 40px); /* Adjust as needed */
+    }
+    .invitation-card{
+      flex-direction:column ;
+      justify-content:center ;
+    }
+  }
+  
+`;
+export const Edit = styled.div`
+  position: relative;
+  z-index: -100;
+`;
 export const Actions = styled.div`
   display: flex;
   flex-direction: column;
@@ -206,13 +310,11 @@ export const Actions = styled.div`
   span {
     font-size: 48px;
     font-weight: 500;
-    line-height: 48px;
   }
   @media screen and (max-width: 786px) {
     span {
       font-size: 20px;
       font-weight: 500;
-      line-height: 12px;
     }
   }
 `;
@@ -227,7 +329,6 @@ export const Buttons = styled.div`
     background-color: #fff;
     font-size: 24px;
     font-weight: 500;
-    line-height: 24px;
 
     color: #000;
     cursor: pointer;
@@ -261,7 +362,6 @@ export const Buttons = styled.div`
     .dark-button {
       font-size: 12px;
       font-weight: 500;
-      line-height: 12px;
     }
   }
 `;

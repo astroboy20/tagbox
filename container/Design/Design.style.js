@@ -20,33 +20,33 @@ export const DesignStyle = styled.div`
     color: #fff;
     text-decoration: underline;
   }
-  .body{
-    padding:2% 6% ;
-    display:flex ;
-    flex-direction:column ;
-    gap:50px;
+  .body {
+    padding: 2% 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
   }
   .body p {
     font-size: 28px;
     font-weight: 400;
     line-height: 28px;
     text-align: center;
-    padding:0 6% ;
+    padding: 0 6%;
   }
-  .input-button{
-    display:flex ;
-    text-align:center ;
-    justify-content:center ;
+  .input-button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
     gap: 10px;
   }
   .body .input {
     width: 80%;
     display: flex;
-    justify-content:space-between ;
+    justify-content: space-between;
     padding: 5px;
     background-color: #fff;
     border-radius: 4px;
-    border:1px solid #000 ;
+    border: 1px solid #000;
   }
   .body input {
     /* width: 85%; */
@@ -54,11 +54,81 @@ export const DesignStyle = styled.div`
     outline: none;
     color: rgba(3, 5, 59, 0.4);
   }
-  .button{
-    padding:10px 20px ;
-    border:1px solid #020D1E80 ;
-    background: none ;
-    width:fit-content ;
+  .button {
+    padding: 10px 20px;
+    border: 1px solid #020d1e80;
+    background: none;
+    width: fit-content;
+  }
+
+  .edit {
+    position: relative;
+    z-index: -100;
+  }
+  .names .name-one {
+    position: absolute;
+    top: 165px;
+    left: 15%;
+    transform: translateX(-50%);
+    font-family: Elephant;
+    font-size: 35px;
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+    color: #3a0452;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    width: calc(200px + 20px);
+  }
+
+  .time p {
+    position: absolute;
+    top: 360px;
+    left: 15%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 44px;
+    text-align: center;
+    color: #fff6e5;
+    display: flex;
+    gap: 20px;
+  }
+
+  .location {
+    position: absolute;
+    top: 420px;
+    left: 15%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff6e5;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    width: calc(200px + 20px);
+  }
+
+  .ticket {
+    position: absolute;
+    top: 500px;
+    left: 15%;
+    transform: translateX(-50%);
+    font-family: Bell MT;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff6e5;
+    text-align: center;
+    width: calc(200px + 20px);
   }
 
   @media screen and (max-width: 786px) {
@@ -72,14 +142,14 @@ export const DesignStyle = styled.div`
       line-height: 24px;
     }
     .body {
-      padding:2% 6%;
-      gap:20px;
+      padding: 2% 6%;
+      gap: 20px;
     }
-    .body p{
-        font-size:18px ;
+    .body p {
+      font-size: 18px;
     }
-    .input-button{
-        width:auto ;
+    .input-button {
+      width: auto;
     }
     .input {
       width: 80%;
@@ -89,8 +159,8 @@ export const DesignStyle = styled.div`
       width: 60%;
       padding: 5px 0 5px;
     }
-    .button{
-        font-size:14px ;
+    .button {
+      font-size: 14px;
     }
   }
 `;

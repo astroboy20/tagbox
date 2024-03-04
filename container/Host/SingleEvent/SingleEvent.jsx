@@ -3,6 +3,7 @@ import {
   Actions,
   Buttons,
   ColorStyle,
+  Edit,
   SingleEventStyle,
 } from "./SingleEvent.style";
 import React, { useEffect, useState, useRef } from "react";
@@ -293,6 +294,21 @@ const SingleEvent = ({ name, id }) => {
       });
   };
 
+  const [details, setDetails] = useState({
+    firstName: "Fidel",
+    lastName: "Kairat",
+    date: "SAT, 23th OCT 2025",
+    time_location: "  12:00 PM, TRANSCORP  HILTON HOTEL",
+    ticket: " silviaandmatthew.com before Oct 10, 2025.",
+  });
+  const handleTextChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -320,7 +336,6 @@ const SingleEvent = ({ name, id }) => {
       return;
     }
     if (eventDetails) {
-     
       axios
         .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
           headers: {
@@ -667,8 +682,169 @@ const SingleEvent = ({ name, id }) => {
             </div>
           </div>
 
+          {/* QR code */}
+          <EventStyle>
+            <label>Generate QR code and customized link for your event</label>
+
+            <div>
+              <div className="qr-input">
+                <div
+                  style={{
+                    height: "100%",
+                    margin: "2px 0",
+                    maxWidth: 64,
+                    width: "100%",
+                    textAlign: "left",
+                  }}
+                >
+                  {uniqueId && (
+                    <QRCode
+                      size={256}
+                      style={{
+                        height: "auto",
+                      }}
+                      value={eventDetails.qr_code}
+                      viewBox={`0 0 256 256`}
+                    />
+                  )}
+                </div>
+                <EventDiv
+                  type="text"
+                  value={`https://tagbox.com/attend-event/${uniqueId}`}
+                  name="qr_code"
+                  id="url"
+                  onChange={handleUniqueIdChange}
+                />
+              </div>
+
+              <div className="copy-generate">
+                <p onClick={generateId}>Generate</p>
+                <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
+              </div>
+            </div>
+          </EventStyle>
+
+          {/* end */}
+
           <div className="event-display">
             <div>Invitation Card</div>
+            <div className="invitation-card">
+              <Edit>
+                <Image
+                  src={
+                    "https://res.cloudinary.com/dm42ixhsz/image/upload/v1709557796/edit-test_diyagi.svg"
+                  }
+                  width={400}
+                  height={560}
+                  alt="test"
+                  className="iv-image"
+                />
+                <div className="names">
+                  <div className="name-one">
+                    <p>{details.firstName}</p>
+                    <p>{details.lastName}</p>
+                  </div>
+                  <div className="name-two"></div>
+                </div>
+                <div className="qr">
+                  <p>
+                    {uniqueId && (
+                      <QRCode
+                        size={55}
+                        style={{
+                          height: "auto",
+                        }}
+                        value={`https://tagbox.com/attend-event/${uniqueId}`}
+                        viewBox={`0 0 256 256`}
+                      />
+                    )}
+                  </p>
+                </div>
+                <div className="time">
+                  <p>{details.date}</p>
+                </div>
+                <div className="location">
+                  <p>{details.time_location}</p>
+                </div>
+                <div className="ticket">
+                  <p>{details.ticket}</p>
+                </div>
+              </Edit>
+              <Edit>
+                <Image
+                  src={
+                    "https://res.cloudinary.com/dm42ixhsz/image/upload/v1709559781/Artboard_1_copy_2_v0esh4.svg"
+                  }
+                  width={400}
+                  height={560}
+                  alt="test"
+                  className="iv-image"
+                />
+                <div className="names">
+                  <div className="name-one">
+                    <p>{details.firstName}</p>
+                    <p>{details.lastName}</p>
+                  </div>
+                  <div className="name-two"></div>
+                </div>
+                <div className="qr">
+                  <p>
+                    {uniqueId && (
+                      <QRCode
+                        size={55}
+                        style={{
+                          height: "auto",
+                        }}
+                        value={`https://tagbox.com/attend-event/${uniqueId}`}
+                        viewBox={`0 0 256 256`}
+                      />
+                    )}
+                  </p>
+                </div>
+                <div className="time">
+                  <p>{details.date}</p>
+                </div>
+                <div className="location">
+                  <p>{details.time_location}</p>
+                </div>
+                <div className="ticket">
+                  <p>{details.ticket}</p>
+                </div>
+              </Edit>
+            </div>
+
+            <input
+              type="text"
+              value={details.firstName}
+              name="firstName"
+              onChange={handleTextChange}
+            />
+            <input
+              type="text"
+              value={details.lastName}
+              name="lastName"
+              onChange={handleTextChange}
+            />
+            <input
+              type="text"
+              value={details.date}
+              name="date"
+              onChange={handleTextChange}
+            />
+            <input
+              type="text"
+              value={details.time_location}
+              name="time_location"
+              onChange={handleTextChange}
+              placeholder="time and location"
+            />
+            <input
+              type="text"
+              value={details.ticket}
+              name="ticket"
+              onChange={handleTextChange}
+            />
+
             {/* <div className="images">
               <Image
                 src={"/images/1.png"}
@@ -720,49 +896,7 @@ const SingleEvent = ({ name, id }) => {
               </div>
             </div>
           </div>
-          {/* QR code */}
-          <EventStyle>
-            <label>Generate QR code and customized link for your event</label>
 
-            <div>
-              <div className="qr-input">
-                <div
-                  style={{
-                    height: "100%",
-                    margin: "2px 0",
-                    maxWidth: 64,
-                    width: "100%",
-                    textAlign: "left",
-                  }}
-                >
-                  {uniqueId && (
-                    <QRCode
-                      size={256}
-                      style={{
-                        height: "auto",
-                      }}
-                      value={eventDetails.qr_code}
-                      viewBox={`0 0 256 256`}
-                    />
-                  )}
-                </div>
-                <EventDiv
-                  type="text"
-                  value={`https://tagbox.com/attend-event/${uniqueId}`}
-                  name="qr_code"
-                  id="url"
-                  onChange={handleUniqueIdChange}
-                />
-              </div>
-
-              <div className="copy-generate">
-                <p onClick={generateId}>Generate</p>
-                <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
-              </div>
-            </div>
-          </EventStyle>
-
-          {/* end */}
           <Button variant="dark-button">Submit Response</Button>
         </form>
       </div>
@@ -776,10 +910,19 @@ const SingleEvent = ({ name, id }) => {
               <Buttons className="buttons">
                 <button className={"white-btn"}>
                   {" "}
-                  <Link className="link-white" href={`/attend-event/${uniqueId}}`}> View Event</Link>
+                  <Link
+                    className="link-white"
+                    href={`/attend-event/${uniqueId}}`}
+                  >
+                    {" "}
+                    View Event
+                  </Link>
                 </button>
                 <button className={"dark-button"}>
-                  <Link className="link" href={"/host-event"}> Continue</Link>
+                  <Link className="link" href={"/host-event"}>
+                    {" "}
+                    Continue
+                  </Link>
                 </button>
               </Buttons>
             </Actions>
