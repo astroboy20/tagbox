@@ -152,7 +152,7 @@ const EditProfile = () => {
           name={"email"}
           onChange={inputChange}
         />
-        <button className="button"> Save and Submit</button>
+        <button className="button">{details?.isGoogleUser ? "" : "Save and Submit"} </button>
       </form>
 
       <Modal show={modalShow} onClose={() => setModalShow(false)}>
