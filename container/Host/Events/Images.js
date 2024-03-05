@@ -3,7 +3,7 @@ import Image from "next/image";
 export const EventImages = {
   Wedding: (
     <Image
-      src={"/images/Wedding.png"}
+      src={"/images/wedding.svg"}
       width={150}
       height={150}
       alt="weeding"
@@ -13,7 +13,7 @@ export const EventImages = {
   ),
   Birthday: (
     <Image
-      src={"/images/birthday.png"}
+      src={"/images/birthday.svg"}
       width={150}
       height={150}
       alt="weeding"
@@ -23,7 +23,7 @@ export const EventImages = {
   ),
   Graduation: (
     <Image
-      src={"/images/Graduation.png"}
+      src={"/images/graduation.svg"}
       width={220}
       height={180}
       alt="weeding"
@@ -33,7 +33,7 @@ export const EventImages = {
   ),
   House_Warming: (
     <Image
-      src={"/images/house-warming.png"}
+      src={"/images/house-warming.svg"}
       width={150}
       height={100}
       className="image"
@@ -43,7 +43,7 @@ export const EventImages = {
   ),
   Conference: (
     <Image
-      src={"/images/meetings.png"}
+      src={"/images/meetings.svg"}
       width={150}
       height={150}
       alt="weeding"
@@ -53,7 +53,7 @@ export const EventImages = {
   ),
   Shower: (
     <Image
-      src={"/images/baby-showers.png"}
+      src={"/images/baby-shower.svg"}
       width={150}
       height={200}
       alt="weeding"
@@ -63,7 +63,7 @@ export const EventImages = {
   ),
   Hangout: (
     <Image
-      src={"/images/hangout.png"}
+      src={"/images/hangout.svg"}
       width={150}
       height={150}
       alt="weeding"
@@ -73,7 +73,7 @@ export const EventImages = {
   ),
   Others: (
     <Image
-      src={"/images/Others.png"}
+      src={"/images/Others.svg"}
       width={150}
       height={150}
       alt="weeding"

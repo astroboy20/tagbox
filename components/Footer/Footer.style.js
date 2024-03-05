@@ -82,6 +82,13 @@ export const TopContainer = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+  .link{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-decoration:none ;
+    color:#000 ;
+  }
   .right{
     display: flex;
     flex-direction: column;
@@ -112,6 +119,11 @@ export const TopContainer = styled.div`
       line-height: 28px;
     }
     p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+    .link {
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;

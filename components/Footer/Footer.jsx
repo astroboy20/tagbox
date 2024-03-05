@@ -3,6 +3,7 @@ import React from "react";
 import { BottomContainer, FooterContainer, TopContainer } from "./Footer.style";
 import { Button } from "../Button/Button";
 import Image from "next/image";
+import Link from "next/link";
 const Footer = () => {
   return (
     <FooterContainer>
@@ -63,23 +64,48 @@ const Footer = () => {
         </div>
         <div className="center">
           <span> Quick Links</span>
-          <p>About</p>
-          <p>Events</p>
-          <p>Designs</p>
-          <p>Blog</p>
+          <Link href="host-event" className="link">
+            <p>About</p>
+          </Link>
+          <Link href="host-event" className="link">
+            {" "}
+            <p>Events</p>
+          </Link>
+          <Link href="design" className="link">
+            <p>Designs</p>
+          </Link>
+
+          <Link href="blog" className="link">
+            {" "}
+            <p>Blog</p>
+          </Link>
         </div>
         <div className="right">
           <span>Features</span>
-          <p> Personal event website</p>
-          <p>Onsite inspection </p>
-          <p>Create wishlist</p>
-          <p>Sell a merch (Aso-ebi)</p>
-          <p>Event consultation</p>
+          <Link href="host-event" className="link">
+            {" "}
+            <p> Card Customization</p>
+          </Link>
+          <Link href="host-event" className="link">
+            {" "}
+            <p> Personal event website</p>
+          </Link>
+          <Link href="host-event" className="link">
+            {" "}
+            <p>Create wishlist </p>
+          </Link>
+          <Link href="host-event" className="link">
+            <p>Sell a merch (Aso-ebi)</p>
+          </Link>
+          <Link href="host-event" className="link">
+            {" "}
+            <p>Event consultation</p>
+          </Link>
         </div>
       </TopContainer>
       <BottomContainer>
         <p>Tagbox2024</p>
-        <p>Tagboxevents@outlook.com</p>
+        <p>hello@tagbox.co</p>
       </BottomContainer>
     </FooterContainer>
   );

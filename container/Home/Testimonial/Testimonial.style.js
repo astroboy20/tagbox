@@ -13,7 +13,7 @@ export const TestimonialStyle = styled.div`
     text-align: center;
   }
   .box .sub-box p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
@@ -30,7 +30,7 @@ export const TestimonialStyle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     padding: 10px;
     width: 29%;
     /* margin:2% ; */

@@ -3,6 +3,7 @@ import { ChooseContainer } from "./Choose.style";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 import Carousel from "react-bootstrap/Carousel";
+import Link from "next/link"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Choose = () => {
@@ -19,7 +20,8 @@ const Choose = () => {
                 Host physical event endearing your event attendees to your brand
                 and organization.
               </p>
-              <Button variant={"dark-button"}>Host an Event</Button>
+              <Link href={"host-event"}><Button variant={"dark-button"}>Host an Event</Button></Link>
+              
             </div>
 
             <Image
@@ -43,7 +45,7 @@ const Choose = () => {
                 No one is expected to miss out not even your attendees. Get them
                 to attend virtually.
               </p>
-              <Button variant={"dark-button"}>Host an Event</Button>
+              <Link href={"host-event"}><Button variant={"dark-button"}>Host an Event</Button></Link>
             </div>
 
             <Image
@@ -64,7 +66,7 @@ const Choose = () => {
                 The thrill of hybrid events? Its one your attendees should be a
                 part of
               </p>
-              <Button variant={"dark-button"}>Host an Event</Button>
+              <Link href={"host-event"}><Button variant={"dark-button"}>Host an Event</Button></Link>
             </div>
 
             <Image

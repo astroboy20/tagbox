@@ -18,6 +18,14 @@ export const SingleEventStyle = styled.div`
     justify-content: center;
     align-items: center;
   }
+  .birthday-header{
+    margin-top: 100px;
+    background: url("/images/birthday-bg.svg");
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .header span {
     font-size: 48px;
     font-weight: 700;

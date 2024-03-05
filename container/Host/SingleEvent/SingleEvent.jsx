@@ -20,9 +20,13 @@ import { useSelector } from "react-redux";
 import { Modal } from "@/components/Modal";
 import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SingleEvent = ({ name, id }) => {
+  const router = useRouter()
+
   const inputRef = useRef(null);
+  const [birthdayBg, setBirthdayBg] = useState("")
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
   const [event_dressCode, setEvent_Dresscode] = useState(null);
@@ -54,6 +58,14 @@ const SingleEvent = ({ name, id }) => {
   console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
 
+  //birthday header
+  useEffect(() => {
+   if (name === "Birthday"){
+    setBirthdayBg("header birthday-header")
+   }else{
+    setBirthdayBg("header")
+   }
+  }, [name])
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
@@ -358,8 +370,8 @@ const SingleEvent = ({ name, id }) => {
   };
 
   return (
-    <SingleEventStyle>
-      <div className="header">
+    <SingleEventStyle className="">
+      <div className={birthdayBg}>
         <span>{name}</span>
       </div>
       <div className="body">

@@ -7,7 +7,7 @@ export const UpcomingStyle = styled.div`
   flex-direction: column;
   gap: 40px;
   span {
-    font-size: 32px;
+    font-size: 32px !important;
     font-weight: 500;
     text-decoration: underline;
   }
@@ -20,7 +20,7 @@ export const UpcomingStyle = styled.div`
 
 
   .span-header {
-    font-size: 24px;
+    font-size: 24px !important;
     font-weight: 500;
     line-height: 38px;
     letter-spacing: 0em;
@@ -28,7 +28,7 @@ export const UpcomingStyle = styled.div`
     text-decoration: none;
   }
   p {
-    font-size: 20px;
+    font-size: 20px !important;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
@@ -77,8 +77,8 @@ export const UpcomingStyle = styled.div`
     align-items: center;
   }
   .button-span {
-    text-decoration: none;
-    font-size: 16px;
+    text-decoration: none !important;
+    font-size: 16px !important;
     font-weight: 500;
     line-height: 24px;
   }

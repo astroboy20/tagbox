@@ -31,6 +31,7 @@ export const ChooseContainer = styled.div`
 
   .slider-body {
     display: flex;
+    align-items:center ;
     padding: 3%;
     background-color: rgba(193, 232, 255, 0.2);
     justify-content: center;
