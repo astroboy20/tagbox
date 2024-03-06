@@ -58,7 +58,8 @@ const SingleEvent = ({ name, id }) => {
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
   const [isCopied, setIsCopied] = useState(false);
-
+  const imageInfo = typeof window !== "undefined" && localStorage.getItem("imageUrl")
+console.log("imageurrlr", imageInfo)
   //birthday header
   useEffect(() => {
     if (name === "Birthday") {
@@ -132,9 +133,14 @@ const SingleEvent = ({ name, id }) => {
     if (type === "Upload") {
       // If the user chooses to upload the card, set card type to "Upload"
       setCard("Upload");
+      
     } else if (type === "Customize") {
       // If the user chooses to customize the card, set card type to "Customize"
       setCard("Customize");
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        invitation_card: imageInfo ? imageInfo : ""
+      }));
     }
   };
 
@@ -317,61 +323,48 @@ const SingleEvent = ({ name, id }) => {
       });
   };
 
-  const [details, setDetails] = useState({
-    firstName: "Fidel",
-    lastName: "Kairat",
-    date: "SAT, 23th OCT 2025",
-    time_location: "  12:00 PM, TRANSCORP  HILTON HOTEL",
-    ticket: " silviaandmatthew.com before Oct 10, 2025.",
-  });
-  const handleTextChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const requiredFields = [
-      "event_hashtag",
-      "location",
-      "date",
-      "hosting_type",
-      "invitation_card",
-      "qr_code",
-    ];
-    const missingFields = requiredFields.filter(
-      (field) => !eventDetails[field]
-    );
-    if (missingFields.length > 0) {
-      toast.warning(
-        `Please fill out the following fields: ${missingFields.join(", ")}`
-      );
-      return;
-    }
-    if (eventDetails) {
-      axios
-        .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          toast.success(response.data.message);
-          setMessage(response?.data.message);
-          setLoading(false);
-          setModalShow(true);
-        })
-        .catch((error) => {
-          toast.error(error);
-          setLoading(false);
-          setModalShow(false);
-        });
-    }
+    // const requiredFields = [
+    //   "event_hashtag",
+    //   "location",
+    //   "date",
+    //   "hosting_type",
+    //   "invitation_card",
+    //   "qr_code",
+    // ];
+    // const missingFields = requiredFields.filter(
+    //   (field) => !eventDetails[field]
+    // );
+    // if (missingFields.length > 0) {
+    //   toast.warning(
+    //     `Please fill out the following fields: ${missingFields.join(", ")}`
+    //   );
+    //   return;
+    // }
+    // if (eventDetails) {
+    //   axios
+    //     .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       toast.success(response.data.message);
+    //       setMessage(response?.data.message);
+    //       setLoading(false);
+    //       setModalShow(true);
+    //     })
+    //     .catch((error) => {
+    //       toast.error(error);
+    //       setLoading(false);
+    //       setModalShow(false);
+    //     });
+    // }
     console.log(eventDetails);
   };
 
@@ -753,7 +746,7 @@ const SingleEvent = ({ name, id }) => {
                   id="iv"
                   value="Customize"
                   name="Customize"
-                  checked={card === "Yes"}
+                  checked={card === "Customize"}
                   onChange={() => handleCardChange("Customize")}
                 />
                 <label htmlFor="Customize">
@@ -774,7 +767,7 @@ const SingleEvent = ({ name, id }) => {
             </div>
             {card === "Customize" && (
               <>
-               {/* <EventIv name = {name} uniqueId={uniqueId}/> */}
+               <EventIv name = {name} uniqueId={uniqueId}/>
               </>
             )}
 
