@@ -73,7 +73,7 @@ export const EventImages = {
   ),
   Others: (
     <Image
-      src={"/images/Others.svg"}
+      src={"/images/others.svg"}
       width={150}
       height={150}
       alt="weeding"
