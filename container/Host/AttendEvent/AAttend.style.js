@@ -84,7 +84,25 @@ export const AttendStyle = styled.div`
     font-size: 20px;
   }
 
+  table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: black;
+      color: white; /* Text color */
+    }
+
   @media screen and (max-width: 1024px) {
+    tabel{
+      overflow-x:scroll;
+    }
     .header {
       margin-top: 75px;
       background: url("/images/event-bg.svg");

@@ -1,16 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AttendStyle } from "./AAttend.style";
 import { EventStyle } from "@/components/Input/Input.style";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
-
+import html2canvas from "html2canvas";
+import Table from "react-bootstrap/Table";
 const AttendEvent = ({ name, eventDetails }) => {
   const [availability, setAvailability] = useState("");
   const [eventBg, setEventBg] = useState("");
-
+  const [imageLoaded, setImageLoaded] = useState(false);
   const handleEventTypeChange = (type) => {
     setAvailability(type);
   };
+
+  const imageRef = useRef(null);
+
+  const downloadImage = () => {
+    if (imageRef.current && imageLoaded) {
+      // Check if image is loaded before capturing
+      html2canvas(imageRef.current).then((canvas) => {
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = image;
+        link.download = "captured_element.png";
+        link.click();
+      });
+    }
+  };
+
   useEffect(() => {
     if (name === "Wedding") {
       setEventBg("header ");
@@ -103,6 +120,29 @@ const AttendEvent = ({ name, eventDetails }) => {
         <div className="wishlist">
           <span>Wishlist</span>
           <p>Make a commitment by granting the wishes of the event host</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Serial No.</th>
+                <th>Item</th>
+                <th>Link to purchase item</th>
+                <th>Confirm commitment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {eventDetails?.wishlist?.items.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>{item.item_name}</td>
+                  <td>{item.item_link}</td>
+                  <td>
+                    <button>Confirm</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <EventStyle>
@@ -157,9 +197,13 @@ const AttendEvent = ({ name, eventDetails }) => {
               objectFit="contain"
               className="image"
               alt="invitation card"
+              ref={imageRef}
+              onLoad={() => setImageLoaded(true)}
             />
           </div>
-          <button className="button">Download Invitation Card</button>
+          <button onClick={downloadImage} className="button">
+            Download Invitation Card
+          </button>
         </div>
 
         <Button variant={"dark-button"}>Done</Button>
