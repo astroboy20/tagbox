@@ -13,7 +13,6 @@ export const SingleEventStyle = styled.div`
   .header {
     margin-top: 80px;
     background: url("/images/event-bg.svg");
-    background-position:center ;
     height: 400px;
     display: flex;
     justify-content: center;

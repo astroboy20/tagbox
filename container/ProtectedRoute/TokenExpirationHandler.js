@@ -8,7 +8,7 @@ const TokenExpirationHandler = () => {
     const router = useRouter()
     
     useEffect(() => {
-      const protectedRoute = ["host-event", "ticketing", "attend-event-event", "blog", "profile","customize"]
+      const protectedRoute = ["host-event", "ticketing", "blog", "profile","customize"]
         if (!user && protectedRoute.includes(router.pathname)) { // Token is null or undefined
           dispatch(reset());
           router.push('/login'); // Redirect to login page when token is null

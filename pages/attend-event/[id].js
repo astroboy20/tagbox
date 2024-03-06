@@ -13,38 +13,59 @@ const EventId = () => {
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.token || user : "";
 
-  const [eventDetails, setEventDetails] = useState(null); // Initialize eventDetails as null
+  const [eventDetails, setEventDetails] = useState(null); 
+  const [name, setName] = useState("");
 
   const fetchEventDetails = async () => {
     try {
       const response = await axios.get(
-        `https://tagbox.onrender.com/v1/event/${id}`,
+        `https://tagbox.ployco.com/v1/event/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setEventDetails(response.data.data); // Set eventDetails after fetching data
+      setEventDetails(response.data.data); 
+      console.log("jj",response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+const eventId = eventDetails?.event_type
+  const fetchEventName = async () => {
+    try {
+      const response = await axios.get(
+        `https://tagbox.ployco.com/v1/event-type/${eventId}`
+      );
+      setName(response.data.data.event_type);
     } catch (error) {
       console.log(error);
     }
   };
 
+
   useEffect(() => {
     if (id) {
-      fetchEventDetails(); // Call fetchEventDetails only if id is defined
+      fetchEventDetails(); 
     }
-  }, [id]); // Add id as a dependency to re-run useEffect when id changes
+  }, [id]); 
 
+  useEffect(() => {
+    if (eventId) {
+      fetchEventName();
+    }
+    
+   
+  }, [eventId]);
+  
   return (
     <>
-      <ProtectedRoute>
+      {/* <ProtectedRoute> */}
         <HeaderFixed />
-        {/* Check if eventDetails is not null before rendering AttendEvent */}
-        {eventDetails && <AttendEvent eventDetails={eventDetails} />}
+        {<AttendEvent name={name} eventDetails={eventDetails} />}
         <Footer />
-      </ProtectedRoute>
+      {/* </ProtectedRoute> */}
     </>
   );
 };

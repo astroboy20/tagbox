@@ -11,7 +11,7 @@ const Testimonial = () => {
       <div className="box">
         <div className="sub-box">
           <Image
-            src={"/images/female.png"}
+            src={"/images/1.svg"}
             width={160}
             height={160}
             alt="user-image"
@@ -24,7 +24,7 @@ const Testimonial = () => {
         </div>
         <div className="sub-box">
           <Image
-            src={"/images/female.png"}
+            src={"/images/2.svg"}
             width={160}
             height={160}
             alt="user-image"
@@ -38,7 +38,7 @@ const Testimonial = () => {
         </div>
         <div className="sub-box">
           <Image
-            src={"/images/female.png"}
+            src={"/images/3.svg"}
             width={160}
             height={160}
             alt="user-image"
