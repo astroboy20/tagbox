@@ -33,7 +33,7 @@ const MainFeature = () => {
         </div>
         <div className="sub-box">
         <Image
-            src={"/images/card.svg"}
+            src={"/images/peww.svg"}
             width={380}
             height={380}
             objectFit="cover"
@@ -44,7 +44,7 @@ const MainFeature = () => {
         </div>
         <div className="sub-box">
         <Image
-            src={"/images/asoebi.svg"}
+            src={"/images/aso-ebi.svg"}
             width={380}
             height={380}
             objectFit="cover"

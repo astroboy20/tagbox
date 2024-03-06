@@ -11,8 +11,9 @@ export const SingleEventStyle = styled.div`
     /* line-height: 32px; */
   }
   .header {
-    margin-top: 100px;
-    background: url("/images/event-bg.png");
+    margin-top: 80px;
+    background: url("/images/event-bg.svg");
+    background-position:center ;
     height: 400px;
     display: flex;
     justify-content: center;
@@ -213,7 +214,7 @@ export const SingleEventStyle = styled.div`
   }
   @media screen and (max-width: 1024px) {
     .header {
-      margin-top: 60px;
+      margin-top: 75px;
       height: 200px;
       background-size: cover;
     }

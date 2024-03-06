@@ -23,10 +23,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const SingleEvent = ({ name, id }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const inputRef = useRef(null);
-  const [birthdayBg, setBirthdayBg] = useState("")
+  const [birthdayBg, setBirthdayBg] = useState("");
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
   const [event_dressCode, setEvent_Dresscode] = useState(null);
@@ -35,6 +35,7 @@ const SingleEvent = ({ name, id }) => {
   const [consultationTime, setConsultationTime] = useState("");
   const [consultation_date] = useState("");
   const [dressCode, setDresscode] = useState("");
+  const [card, setCard] = useState("");
   const [inviteeInput, setInviteeInput] = useState("");
   const [eventDetails, setEventDetails] = useState({
     hosting_type: event_type,
@@ -55,17 +56,16 @@ const SingleEvent = ({ name, id }) => {
   const [message, setMessage] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
-  console.log("token", token);
   const [isCopied, setIsCopied] = useState(false);
 
   //birthday header
   useEffect(() => {
-   if (name === "Birthday"){
-    setBirthdayBg("header birthday-header")
-   }else{
-    setBirthdayBg("header")
-   }
-  }, [name])
+    if (name === "Birthday") {
+      setBirthdayBg("header birthday-header");
+    } else {
+      setBirthdayBg("header");
+    }
+  }, [name]);
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
@@ -125,6 +125,16 @@ const SingleEvent = ({ name, id }) => {
       }));
     }
     setConsultationTime(type);
+  };
+
+  const handleCardChange = (type) => {
+    if (type === "Upload") {
+      // If the user chooses to upload the card, set card type to "Upload"
+      setCard("Upload");
+    } else if (type === "Customize") {
+      // If the user chooses to customize the card, set card type to "Customize"
+      setCard("Customize");
+    }
   };
 
   const handleInviteeChange = (inputType) => {
@@ -329,14 +339,9 @@ const SingleEvent = ({ name, id }) => {
       "event_hashtag",
       "location",
       "date",
-      "amount_of_invitee",
       "hosting_type",
-      "color_code",
-      "dress_code",
       "invitation_card",
-      "invitee_emails",
       "qr_code",
-      "wishlist",
     ];
     const missingFields = requiredFields.filter(
       (field) => !eventDetails[field]
@@ -722,7 +727,7 @@ const SingleEvent = ({ name, id }) => {
                 </div>
                 <EventDiv
                   type="text"
-                  value={`https://tagbox.com/attend-event/${uniqueId}`}
+                  value={`https://thetagbox.com/attend-event/${uniqueId}`}
                   name="qr_code"
                   id="url"
                   onChange={handleUniqueIdChange}
@@ -740,173 +745,51 @@ const SingleEvent = ({ name, id }) => {
 
           <div className="event-display">
             <div>Invitation Card</div>
-            <div className="invitation-card">
-              <Edit>
-                <Image
-                  src={
-                    "https://res.cloudinary.com/dm42ixhsz/image/upload/v1709557796/edit-test_diyagi.svg"
-                  }
-                  width={400}
-                  height={560}
-                  alt="test"
-                  className="iv-image"
-                />
-                <div className="names">
-                  <div className="name-one">
-                    <p>{details.firstName}</p>
-                    <p>{details.lastName}</p>
-                  </div>
-                  <div className="name-two"></div>
-                </div>
-                <div className="qr">
-                  <p>
-                    {uniqueId && (
-                      <QRCode
-                        size={55}
-                        style={{
-                          height: "auto",
-                        }}
-                        value={`https://tagbox.com/attend-event/${uniqueId}`}
-                        viewBox={`0 0 256 256`}
-                      />
-                    )}
-                  </p>
-                </div>
-                <div className="time">
-                  <p>{details.date}</p>
-                </div>
-                <div className="location">
-                  <p>{details.time_location}</p>
-                </div>
-                <div className="ticket">
-                  <p>{details.ticket}</p>
-                </div>
-              </Edit>
-              <Edit>
-                <Image
-                  src={
-                    "https://res.cloudinary.com/dm42ixhsz/image/upload/v1709559781/Artboard_1_copy_2_v0esh4.svg"
-                  }
-                  width={400}
-                  height={560}
-                  alt="test"
-                  className="iv-image"
-                />
-                <div className="names">
-                  <div className="name-one">
-                    <p>{details.firstName}</p>
-                    <p>{details.lastName}</p>
-                  </div>
-                  <div className="name-two"></div>
-                </div>
-                <div className="qr">
-                  <p>
-                    {uniqueId && (
-                      <QRCode
-                        size={55}
-                        style={{
-                          height: "auto",
-                        }}
-                        value={`https://tagbox.com/attend-event/${uniqueId}`}
-                        viewBox={`0 0 256 256`}
-                      />
-                    )}
-                  </p>
-                </div>
-                <div className="time">
-                  <p>{details.date}</p>
-                </div>
-                <div className="location">
-                  <p>{details.time_location}</p>
-                </div>
-                <div className="ticket">
-                  <p>{details.ticket}</p>
-                </div>
-              </Edit>
-            </div>
-
-            <input
-              type="text"
-              value={details.firstName}
-              name="firstName"
-              onChange={handleTextChange}
-            />
-            <input
-              type="text"
-              value={details.lastName}
-              name="lastName"
-              onChange={handleTextChange}
-            />
-            <input
-              type="text"
-              value={details.date}
-              name="date"
-              onChange={handleTextChange}
-            />
-            <input
-              type="text"
-              value={details.time_location}
-              name="time_location"
-              onChange={handleTextChange}
-              placeholder="time and location"
-            />
-            <input
-              type="text"
-              value={details.ticket}
-              name="ticket"
-              onChange={handleTextChange}
-            />
-
-            {/* <div className="images">
-              <Image
-                src={"/images/1.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="contain"
-                alt="invitation-card"
-              />
-              <Image
-                src={"/images/3.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="contain"
-                alt="invitation-card"
-              />
-              <Image
-                src={"/images/2.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="contain"
-                alt="invitation-card"
-              />
-            </div> */}
-
-            <div className="image-button">
-              {/* <Image
-                src={"/images/2.png"}
-                width={400}
-                height={500}
-                className="image"
-                objectFit="contain"
-                alt="invitation-card"
-              /> */}
-              <div className="buttons">
+            <div className="input">
+              <div className="radio-input">
                 <input
-                  onChange={handleInviteImageChange}
-                  id="image"
-                  accept="image/*"
-                  type="file"
-                  placeholder="Upload invitation card"
+                  type="radio"
+                  id="iv"
+                  value="Customize"
+                  name="Customize"
+                  checked={card === "Yes"}
+                  onChange={() => handleCardChange("Customize")}
                 />
-                {/* Upload invitation card
-                 
-                <Button variant={"dark-white"}>Customize to your style</Button> */}
-                {/* <p>Browse More Template</p> */}
+                <label htmlFor="Customize">
+                  Select and Customize your invitation card
+                </label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="iv"
+                  value="Upload"
+                  name="invitation card"
+                  checked={card === "Upload"}
+                  onChange={() => handleCardChange("Upload")}
+                />
+                <label htmlFor="Upload">Upload your invitation card</label>
               </div>
             </div>
+            {card === "Customize" && (
+              <>
+               
+              </>
+            )}
+
+            {card === "Upload" && (
+              <div className="image-button">
+                <div className="buttons">
+                  <input
+                    onChange={handleInviteImageChange}
+                    id="image"
+                    accept="image/*"
+                    type="file"
+                    placeholder="Upload invitation card"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <Button variant="dark-button">Submit Response</Button>

@@ -43,14 +43,7 @@ const Header = () => {
         <HeaderStyle>
           <div>
             <Link href={"/"}>
-            <Image
-              src={"/images/logo-white.png"}
-              className="logo"
-              width={167}
-              height={48}
-              alt="logo"
-              objectFit="contain"
-            />
+           <Logo/>
             </Link>
            
           </div>

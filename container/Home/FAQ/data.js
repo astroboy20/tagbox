@@ -14,7 +14,7 @@ export const Data = [
   {
     id: 3,
     title: "What services does Tagbox provide beyond event planning?",
-    content: "",
+    content: "Currently we have evebt consultation and many interesting features coming soon",
   },
   {
     id: 4,

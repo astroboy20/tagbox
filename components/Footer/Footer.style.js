@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   .top {
-    background-image: url("/images/footer-bg.png");
+    background-image: url("/images/email-bg.svg");
     height: 450px;
     text-align: center;
     display: flex;

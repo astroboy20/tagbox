@@ -10,7 +10,7 @@ export const TicketingStyle = styled.div`
     line-height: 32px;
   }
   .header {
-    margin-top: 100px;
+    margin-top: 80px;
     background: url("/images/ticket-bg.png");
     height: 400px;
     display: flex;
