@@ -21,6 +21,7 @@ import { Modal } from "@/components/Modal";
 import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import EventIv from "./EventIV";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
@@ -773,7 +774,7 @@ const SingleEvent = ({ name, id }) => {
             </div>
             {card === "Customize" && (
               <>
-               
+               {/* <EventIv name = {name} uniqueId={uniqueId}/> */}
               </>
             )}
 

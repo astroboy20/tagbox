@@ -20,7 +20,7 @@ export const SingleEventStyle = styled.div`
     align-items: center;
   }
   .birthday-header{
-    margin-top: 100px;
+    margin-top: 80px;
     background: url("/images/birthday-bg.svg");
     height: 400px;
     display: flex;
@@ -218,6 +218,12 @@ export const SingleEventStyle = styled.div`
       height: 200px;
       background-size: cover;
     }
+    .birthday-header{
+    margin-top: 75px;
+    background: url("/images/birthday-bg.svg");
+    height: 200px;
+    background-size:cover ;
+  }
     .header span {
       font-size: 24px;
     }
