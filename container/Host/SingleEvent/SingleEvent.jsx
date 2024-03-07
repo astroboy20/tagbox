@@ -22,6 +22,7 @@ import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EventIv from "./EventIV";
+import { MdOutlineCancel } from "react-icons/md";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
@@ -58,8 +59,9 @@ const SingleEvent = ({ name, id }) => {
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
   const [isCopied, setIsCopied] = useState(false);
-  const imageInfo = typeof window !== "undefined" && localStorage.getItem("imageUrl")
-console.log("imageurrlr", imageInfo)
+  const imageInfo =
+    typeof window !== "undefined" && localStorage.getItem("imageUrl");
+  console.log("imageurrlr", imageInfo);
   //birthday header
   useEffect(() => {
     if (name === "Birthday") {
@@ -133,13 +135,12 @@ console.log("imageurrlr", imageInfo)
     if (type === "Upload") {
       // If the user chooses to upload the card, set card type to "Upload"
       setCard("Upload");
-      
     } else if (type === "Customize") {
       // If the user chooses to customize the card, set card type to "Customize"
       setCard("Customize");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        invitation_card: imageInfo ? imageInfo : ""
+        invitation_card: imageInfo ? imageInfo : "",
       }));
     }
   };
@@ -323,29 +324,20 @@ console.log("imageurrlr", imageInfo)
       });
   };
 
-  
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // const requiredFields = [
-    //   "event_hashtag",
-    //   "location",
-    //   "date",
-    //   "hosting_type",
-    //   "invitation_card",
-    //   "qr_code",
-    // ];
-    // const missingFields = requiredFields.filter(
-    //   (field) => !eventDetails[field]
-    // );
-    // if (missingFields.length > 0) {
-    //   toast.warning(
-    //     `Please fill out the following fields: ${missingFields.join(", ")}`
-    //   );
-    //   return;
-    // }
+    const requiredFields = ["event_hashtag", "location", "date", "qr_code"];
+    const missingFields = requiredFields.filter(
+      (field) => !eventDetails[field]
+    );
+    if (missingFields.length > 0) {
+      toast.warning(
+        `Please fill out the following fields: ${missingFields.join(", ")}`
+      );
+      return;
+    }
     if (eventDetails) {
       axios
         .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
@@ -502,16 +494,12 @@ console.log("imageurrlr", imageInfo)
                 {eventDetails.invitee_emails.map((email, index) => (
                   <div className="email-details" key={index}>
                     {email}
-                    <span
+
+                    <MdOutlineCancel
                       onClick={() => handleDeleteEmail(email)}
-                      style={{
-                        background: "red",
-                        borderRadius: "10%",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <Close />
-                    </span>
+                      fontSize={"30px"}
+                      color="red"
+                    />
                   </div>
                 ))}
               </div>
@@ -674,22 +662,22 @@ console.log("imageurrlr", imageInfo)
                     placeholder={"Item Link"}
                     onChange={(e) => handleWishlistChange(e, index)}
                   />
-                  <span
+
+                  <MdOutlineCancel
                     onClick={() => handleRemoveWishlistItem(index)}
-                    style={{ background: "red", borderRadius: "50%" }}
-                  >
-                    <Close />
-                  </span>
+                    fontSize={"60px"}
+                    color="red"
+                  />
                 </div>
               ))}
               {/* <br /> */}
-              <Button
-                variant={"dark-button"}
+              <button
+                className="dark-button"
                 type="button"
                 onClick={handleAddWishlistItem}
               >
                 Add Wishlist Item
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -767,7 +755,7 @@ console.log("imageurrlr", imageInfo)
             </div>
             {card === "Customize" && (
               <>
-               <EventIv name = {name} uniqueId={uniqueId}/>
+                <EventIv name={name} uniqueId={uniqueId} />
               </>
             )}
 

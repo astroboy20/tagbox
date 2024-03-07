@@ -18,7 +18,7 @@ export const SingleEventStyle = styled.div`
     justify-content: center;
     align-items: center;
   }
-  .birthday-header{
+  .birthday-header {
     margin-top: 80px;
     background: url("/images/birthday-bg.svg");
     height: 400px;
@@ -124,10 +124,10 @@ export const SingleEventStyle = styled.div`
   .actions {
     display: flex;
   }
-.iv-image{
-  width:400px ;
-  height:560px ;
-}
+  .iv-image {
+    width: 400px;
+    height: 560px;
+  }
   .names .name-one {
     position: absolute;
     top: 165px;
@@ -205,6 +205,14 @@ export const SingleEventStyle = styled.div`
     text-align: center;
     width: calc(200px + 20px);
   }
+  .dark-button {
+    border: none;
+    padding: 16px 12px;
+    border-radius: 4px;
+    background-color: #020d1e;
+    color: #c1e8ff;
+    cursor: pointer;
+  }
 
   .invitation-card {
     display: flex;
@@ -217,12 +225,12 @@ export const SingleEventStyle = styled.div`
       height: 200px;
       background-size: cover;
     }
-    .birthday-header{
-    margin-top: 75px;
-    background: url("/images/birthday-bg.svg");
-    height: 200px;
-    background-size:cover ;
-  }
+    .birthday-header {
+      margin-top: 75px;
+      background: url("/images/birthday-bg.svg");
+      height: 200px;
+      background-size: cover;
+    }
     .header span {
       font-size: 24px;
     }
@@ -285,13 +293,13 @@ export const SingleEventStyle = styled.div`
     .wishlist input {
       width: 100%;
     }
-    .iv-image{
-  width:170px ;
-  height:252px ;
-}
+    .iv-image {
+      width: 170px;
+      height: 252px;
+    }
     .names .name-one {
-      top:50px ;
-      left:10% ;
+      top: 50px;
+      left: 10%;
       font-size: 2000px;
       gap: 10px;
       width: calc(100% - 40px); /* Adjust as needed */
@@ -305,12 +313,11 @@ export const SingleEventStyle = styled.div`
       gap: 10px;
       width: calc(100% - 40px); /* Adjust as needed */
     }
-    .invitation-card{
-      flex-direction:column ;
-      justify-content:center ;
+    .invitation-card {
+      flex-direction: column;
+      justify-content: center;
     }
   }
-  
 `;
 export const Edit = styled.div`
   position: relative;

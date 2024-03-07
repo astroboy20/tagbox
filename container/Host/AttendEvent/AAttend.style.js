@@ -84,13 +84,50 @@ export const AttendStyle = styled.div`
     font-size: 20px;
   }
 
+  .wishlist .confirm{
+   /* width:fit-content ; */
+    padding: 10px 20px;
+    border-radius: 4px;
+    border:none ;
+    color:#fff ;
+    gap: 10px;
+    background: black;
+    font-family: Space Grotesk;
+    font-size: 16px;
+  
+  }
+  .wishlist .unconfirm{
+   /* width:fit-content ; */
+    padding: 10px 20px;
+    border-radius: 4px;
+    /* color:#fff ; */
+    gap: 10px;
+    border:1px solid black;
+    background: none;
+    font-family: Space Grotesk;
+    font-size: 16px;
+  
+  }
+  .input-input{
+    display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
+  outline: none;
+  border: 1px solid rgba(47, 46, 65, 0.2);
+  padding: 10px 20px;
+  font-size:16px ;
+  width:100% ;
+  }
+  
   table {
       width: 100%;
       border-collapse: collapse;
+      border: 1px solid black;
     }
     
     th, td {
-      border: 1px solid black;
+     
       padding: 8px;
       text-align: left;
     }
@@ -100,9 +137,15 @@ export const AttendStyle = styled.div`
     }
 
   @media screen and (max-width: 1024px) {
-    tabel{
+    .table{
       overflow-x:scroll;
+      width:100% ;
     }
+    th, td {
+     
+     padding:8px 30px;
+     text-align: left;
+   }
     .header {
       margin-top: 75px;
       background: url("/images/event-bg.svg");

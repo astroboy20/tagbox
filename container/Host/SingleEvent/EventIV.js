@@ -70,6 +70,17 @@ const EventIv = ({ name, uniqueId }) => {
       }
     }
   };
+
+  const darkButton = {
+   
+      border: "none"
+,      padding: "16px 12px",
+      borderRadius: "4px",
+      backgroundColor: "#020d1e",
+      color: "#c1e8ff",
+      cursor: "pointer",
+    
+  }
   return (
     <div>
       <>
@@ -157,9 +168,9 @@ const EventIv = ({ name, uniqueId }) => {
               value={detailsBirthDay01.address}
               onChange={handleBirthTextChange}
             />
-            <Button variant={"dark-button"} onClick={downloadQrCode}>
+            <button type="button" style={darkButton} onClick={downloadQrCode}>
               {loading ? <Spinner /> : "Save"}
-            </Button>
+            </button>
           </>
         )}
       </>

@@ -4,11 +4,48 @@ import { EventStyle } from "@/components/Input/Input.style";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
 import html2canvas from "html2canvas";
-import Table from "react-bootstrap/Table";
+import axios from "axios";
+import { toast } from "react-toastify";
+import Spinner from "@/components/Spinner/Spinner";
+
 const AttendEvent = ({ name, eventDetails }) => {
   const [availability, setAvailability] = useState("");
   const [eventBg, setEventBg] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [disabledItem, setDisabledItem] = useState([]);
+  const [nameInput, setNameInput] = useState("");
+  const [submissionDone, setSubmissionDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const handleButtonClick = (itemId) => {
+    setSelectedItemId(itemId);
+    setDisabledItem([...disabledItem, itemId]);
+  };
+
+  const handleConfirm = () => {
+    if (!nameInput || !selectedItemId) {
+      toast.warning("Please enter your name and select an item.");
+      return;
+    }
+    setLoading(true);
+    // Send data to backend
+    axios
+      .post("https://tagbox.ployco.com/v1/confirm", {
+        attendeeName: nameInput,
+        itemId: selectedItemId,
+      })
+      .then((response) => {
+        toast.success(response.data.message);
+        setSubmissionDone(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error confirming attendance:", error);
+        // Handle error here
+        setLoading(false);
+      });
+  };
+
   const handleEventTypeChange = (type) => {
     setAvailability(type);
   };
@@ -120,29 +157,65 @@ const AttendEvent = ({ name, eventDetails }) => {
         <div className="wishlist">
           <span>Wishlist</span>
           <p>Make a commitment by granting the wishes of the event host</p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Serial No.</th>
-                <th>Item</th>
-                <th>Link to purchase item</th>
-                <th>Confirm commitment</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventDetails?.wishlist?.items.map((item, index) => (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td>{item.item_name}</td>
-                  <td>{item.item_link}</td>
-                  <td>
-                    <button>Confirm</button>
-                  </td>
+          <div className="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Serial No.</th>
+                  <th>Item</th>
+                  <th>Link to purchase item</th>
+                  <th>Confirm commitment</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {eventDetails?.wishlist?.items.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}</td>
+                    <td>{item.item_name}</td>
+                    <td>{item.item_link}</td>
+                    <td>
+                      {!disabledItem.includes(item._id) ? (
+                        <button
+                          className="confirm"
+                          onClick={() => handleButtonClick(item._id)}
+                        >
+                          Confirm
+                        </button>
+                      ) : (
+                        <button className="unconfirm">Confirm</button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {!submissionDone && selectedItemId && (
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <div style={{ display: "flex", gap: "15px" }}>
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  className="input-input"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                />
+                <input
+                  type="text"
+                  value={selectedItemId}
+                  readOnly
+                  className="input-input"
+                />
+              </div>
+
+              <button className="confirm" onClick={handleConfirm}>
+                {loading ? <Spinner /> : "Confirm"}
+              </button>
+            </div>
+          )}
         </div>
 
         <EventStyle>

@@ -55,6 +55,7 @@ export const EventStyle = styled.div`
   }
   .email-details{
     display:flex ;
+    align-items:center ;
     border:none ;
   }
   .input-p{
