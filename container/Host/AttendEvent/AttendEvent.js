@@ -7,6 +7,7 @@ import html2canvas from "html2canvas";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Spinner from "@/components/Spinner/Spinner";
+import { useRouter } from "next/router";
 
 const AttendEvent = ({ name, eventDetails }) => {
   const [availability, setAvailability] = useState("");
@@ -17,6 +18,7 @@ const AttendEvent = ({ name, eventDetails }) => {
   const [nameInput, setNameInput] = useState("");
   const [submissionDone, setSubmissionDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
   const handleButtonClick = (itemId) => {
     setSelectedItemId(itemId);
     setDisabledItem([...disabledItem, itemId]);
@@ -64,7 +66,10 @@ const AttendEvent = ({ name, eventDetails }) => {
       });
     }
   };
-
+const handleSubmit = () =>{
+  toast.success("Information saved")
+  router.push("/")
+}
   useEffect(() => {
     if (name === "Wedding") {
       setEventBg("header ");
@@ -281,7 +286,7 @@ const AttendEvent = ({ name, eventDetails }) => {
           </button>
         </div>
 
-        <Button variant={"dark-button"}>Done</Button>
+        <Button variant={"dark-button"} onClick={handleSubmit}>Done</Button>
       </div>
     </AttendStyle>
   );
