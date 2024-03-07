@@ -347,7 +347,7 @@ const SingleEvent = ({ name, id }) => {
         })
         .then((response) => {
           toast.success(response.data.message);
-          setMessage(response?.data.message);
+          // setMessage(response?.data.message);
           setLoading(false);
           setModalShow(true);
         })

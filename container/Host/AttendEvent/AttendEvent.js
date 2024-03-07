@@ -84,19 +84,21 @@ const AttendEvent = ({ name, eventDetails }) => {
       setEventBg("header ");
     } else if (name === "Others") {
       setEventBg("header ");
+    }else{
+      setEventBg("header")
     }
   }, [name]);
   return (
     <AttendStyle>
       <div className={eventBg}>
         <span>
-          #{eventDetails?.event_hashtag} {name}
+          {eventDetails?.event_hashtag} 
         </span>
       </div>
       <div className="body">
         <div className="welcome">
           <span>
-            Welcome to #{eventDetails?.event_hashtag} {name}
+            Welcome to {eventDetails?.event_hashtag} {name}
           </span>
         </div>
         <div className="location">
