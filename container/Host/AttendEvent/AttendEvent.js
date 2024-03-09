@@ -66,6 +66,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
         setLoading(false);
         setShowModal(false);
       });
+      setNameInput("")
   };
 
   const handleEventTypeChange = (type) => {
