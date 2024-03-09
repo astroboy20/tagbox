@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { AttendStyle } from "./AAttend.style";
+import { Actions, AttendStyle } from "./AAttend.style";
 import { EventStyle } from "@/components/Input/Input.style";
 import { Button } from "@/components/Button/Button";
 import Image from "next/image";
@@ -8,8 +8,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Spinner from "@/components/Spinner/Spinner";
 import { useRouter } from "next/router";
+import { Modal } from "@/components/Modal";
+import { Input } from "@/components/Input/Input";
 
-const AttendEvent = ({ name, eventDetails }) => {
+const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
   const [availability, setAvailability] = useState("");
   const [eventBg, setEventBg] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -18,10 +20,26 @@ const AttendEvent = ({ name, eventDetails }) => {
   const [nameInput, setNameInput] = useState("");
   const [submissionDone, setSubmissionDone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+
   const handleButtonClick = (itemId) => {
     setSelectedItemId(itemId);
     setDisabledItem([...disabledItem, itemId]);
+    setShowModal(true)
+
+    const updatedWishlist = eventDetails?.wishlist?.items.map((item) => {
+      if (item._id === itemId) {
+        return { ...item, confirmed: true };
+      }
+      return item;
+    });
+
+    const updatedEventDetails = {
+      ...eventDetails,
+      wishlist: { ...eventDetails.wishlist, items: updatedWishlist },
+    };
+    setEventDetails(updatedEventDetails);
   };
 
   const handleConfirm = () => {
@@ -40,11 +58,13 @@ const AttendEvent = ({ name, eventDetails }) => {
         toast.success(response.data.message);
         setSubmissionDone(true);
         setLoading(false);
+        setShowModal(false);
       })
       .catch((error) => {
         console.error("Error confirming attendance:", error);
         // Handle error here
         setLoading(false);
+        setShowModal(false);
       });
   };
 
@@ -66,10 +86,10 @@ const AttendEvent = ({ name, eventDetails }) => {
       });
     }
   };
-const handleSubmit = () =>{
-  toast.success("Information saved")
-  router.push("/")
-}
+  const handleSubmit = () => {
+    toast.success("Information saved");
+    router.push("/");
+  };
   useEffect(() => {
     if (name === "Wedding") {
       setEventBg("header ");
@@ -89,16 +109,15 @@ const handleSubmit = () =>{
       setEventBg("header ");
     } else if (name === "Others") {
       setEventBg("header ");
-    }else{
-      setEventBg("header")
+    } else {
+      setEventBg("header");
     }
   }, [name]);
+
   return (
     <AttendStyle>
       <div className={eventBg}>
-        <span>
-          {eventDetails?.event_hashtag} 
-        </span>
+        <span>{eventDetails?.event_hashtag}</span>
       </div>
       <div className="body">
         <div className="welcome">
@@ -181,15 +200,16 @@ const handleSubmit = () =>{
                     <td>{item.item_name}</td>
                     <td>{item.item_link}</td>
                     <td>
-                      {!disabledItem.includes(item._id) ? (
+                      {item.confirmed ? (
+                        <button className="unconfirm">Confirmed</button>
+                      ) : (
                         <button
                           className="confirm"
                           onClick={() => handleButtonClick(item._id)}
+                          disabled={disabledItem.includes(item._id)}
                         >
                           Confirm
                         </button>
-                      ) : (
-                        <button className="unconfirm">Confirm</button>
                       )}
                     </td>
                   </tr>
@@ -197,34 +217,30 @@ const handleSubmit = () =>{
               </tbody>
             </table>
           </div>
-
-          {!submissionDone && selectedItemId && (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-            >
-              <div style={{ display: "flex", gap: "15px" }}>
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="input-input"
-                  value={nameInput}
-                  onChange={(e) => setNameInput(e.target.value)}
-                />
-                <input
-                  type="text"
-                  value={selectedItemId}
-                  readOnly
-                  className="input-input"
-                />
-              </div>
-
-              <button className="confirm" onClick={handleConfirm}>
-                {loading ? <Spinner /> : "Confirm"}
-              </button>
-            </div>
-          )}
         </div>
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Actions
+          >
+              <input
+                type="text"
+                placeholder="Enter your name"
+                className="input-input"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+              />
+              <input
+                type="hidden"
+                value={selectedItemId}
+                readOnly
+                className="input-input"
+              />
+          
 
+            <button className="dark-button" onClick={handleConfirm}>
+              {loading ? <Spinner /> : "Confirm"}
+            </button>
+          </Actions>
+        </Modal>
         <EventStyle>
           <label>Want to do a cash donation instead?</label>
           <div>
@@ -286,42 +302,12 @@ const handleSubmit = () =>{
           </button>
         </div>
 
-        <Button variant={"dark-button"} onClick={handleSubmit}>Done</Button>
+        <Button variant={"dark-button"} onClick={handleSubmit}>
+          Done
+        </Button>
       </div>
     </AttendStyle>
   );
 };
-// {
-//     "wishlist": {
-//         "items": [
-//             {
-//                 "item_name": "Apple watch ",
-//                 "item_link": "Apple.com",
-//                 "_id": "65e83893e748cc16acf56a22"
-//             },
-//             {
-//                 "item_name": "iPhone 15",
-//                 "item_link": "www.Apple.com",
-//                 "_id": "65e83893e748cc16acf56a23"
-//             }
-//         ]
-//     },
-//     "_id": "65e83893e748cc16acf56a21",
-//     "owner": "65d7ab3ecf8adf7612214bfb",
-//     "event_type": "65ca6fe1288b1af031600db6",
-//     "hosting_type": "Physical",
-//     "event_hashtag": "Seuns40th",
-//     "event_date": "2024-04-11T00:00:00.000Z",
-//     "location": "Manchester, United Kingdom ",
-//     "qr_code": "c5285842-723b-45e5-b587-bd5b12caa67b",
-//     "dress_code": "No",
-//     "invitation_card": "https://res.cloudinary.com/dm42ixhsz/image/upload/v1709717598/pmrnznhtw5htwmrvyofu.png",
-//     "amount_of_invitee": 150,
-//     "invitee_emails": [
-//         "Simipeterss@gmail.com",
-//         "Justxvxo@gmail.com"
-//     ],
-//     "consultation": null,
-//     "__v": 0
-// }
+
 export { AttendEvent };

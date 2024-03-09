@@ -6,7 +6,7 @@ import {
   Edit,
   SingleEventStyle,
 } from "./SingleEvent.style";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useId } from "react";
 import Image from "next/image";
 import { Input } from "@/components/Input/Input";
 import { EventDiv, EventStyle } from "@/components/Input/Input.style";
@@ -23,6 +23,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import EventIv from "./EventIV";
 import { MdOutlineCancel } from "react-icons/md";
+import Spinner from "@/components/Spinner/Spinner";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
@@ -61,7 +62,7 @@ const SingleEvent = ({ name, id }) => {
   const [isCopied, setIsCopied] = useState(false);
   const imageInfo =
     typeof window !== "undefined" && localStorage.getItem("imageUrl");
-  console.log("imageurrlr", imageInfo);
+
   //birthday header
   useEffect(() => {
     if (name === "Birthday") {
@@ -73,22 +74,14 @@ const SingleEvent = ({ name, id }) => {
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
-    setUniqueId(id);
+    const trimmed_id = encodeURIComponent(id.trim().slice(0, 8));
+    setUniqueId(trimmed_id);
     setEventDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: `${id}`,
+      qr_code: `${trimmed_id}`,
     }));
   };
-
-  // Function to handle changes in the unique ID
-  const handleUniqueIdChange = (event) => {
-    const { value } = event.target;
-    setUniqueId(value);
-    setEventDetails((prevDetails) => ({
-      ...prevDetails,
-      qr_code: `${value}`,
-    }));
-  };
+  console.log(uniqueId)
 
   const handleEventTypeChange = (type) => {
     setEventType(type);
@@ -338,7 +331,9 @@ const SingleEvent = ({ name, id }) => {
       );
       return;
     }
+    setLoading(true);
     if (eventDetails) {
+      setLoading(true);
       axios
         .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
           headers: {
@@ -346,8 +341,8 @@ const SingleEvent = ({ name, id }) => {
           },
         })
         .then((response) => {
-          toast.success(response.data.message);
-          // setMessage(response?.data.message);
+          // toast.success(response.data.message);
+          setMessage(response?.data.message);
           setLoading(false);
           setModalShow(true);
         })
@@ -712,7 +707,7 @@ const SingleEvent = ({ name, id }) => {
                   value={`https://thetagbox.com/attend-event/${uniqueId}`}
                   name="qr_code"
                   id="url"
-                  onChange={handleUniqueIdChange}
+                  onChange={generateId}
                 />
               </div>
 
@@ -779,7 +774,7 @@ const SingleEvent = ({ name, id }) => {
       </div>
       <Modal show={modalShow} onClose={() => setModalShow(false)}>
         {loading ? (
-          <EventSpinner />
+          <Spinner />
         ) : (
           <>
             <Actions className="actions">
@@ -789,7 +784,7 @@ const SingleEvent = ({ name, id }) => {
                   {" "}
                   <Link
                     className="link-white"
-                    href={`/attend-event/${uniqueId}}`}
+                    href={`/attend-event/${decodeURIComponent(uniqueId)}`}
                   >
                     {" "}
                     View Event

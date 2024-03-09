@@ -63,7 +63,7 @@ const eventId = eventDetails?.event_type
     <>
       {/* <ProtectedRoute> */}
         <HeaderFixed />
-        {<AttendEvent name={name} eventDetails={eventDetails} />}
+        {<AttendEvent name={name} eventDetails={eventDetails} setEventDetails={setEventDetails} />}
         <Footer />
       {/* </ProtectedRoute> */}
     </>
