@@ -28,18 +28,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
     setDisabledItem([...disabledItem, itemId]);
     setShowModal(true)
 
-    const updatedWishlist = eventDetails?.wishlist?.items.map((item) => {
-      if (item._id === itemId) {
-        return { ...item, confirmed: true };
-      }
-      return item;
-    });
-
-    const updatedEventDetails = {
-      ...eventDetails,
-      wishlist: { ...eventDetails.wishlist, items: updatedWishlist },
-    };
-    setEventDetails(updatedEventDetails);
+   
   };
 
   const handleConfirm = () => {
@@ -59,6 +48,19 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
         setSubmissionDone(true);
         setLoading(false);
         setShowModal(false);
+
+        const updatedWishlist = eventDetails?.wishlist?.items.map((item) => {
+          if (item._id === selectedItemId) {
+            return { ...item, confirmed: true };
+          }
+          return item;
+        });
+    
+        const updatedEventDetails = {
+          ...eventDetails,
+          wishlist: { ...eventDetails.wishlist, items: updatedWishlist },
+        };
+        setEventDetails(updatedEventDetails);
       })
       .catch((error) => {
         console.error("Error confirming attendance:", error);
