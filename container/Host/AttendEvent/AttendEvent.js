@@ -11,9 +11,11 @@ import { useRouter } from "next/router";
 import { Modal } from "@/components/Modal";
 import { Input } from "@/components/Input/Input";
 
-const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
+const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
   const [availability, setAvailability] = useState("");
   const [eventBg, setEventBg] = useState("");
+  const [wish, setWish] = useState("");
+  const [senderName, setSenderName] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [disabledItem, setDisabledItem] = useState([]);
@@ -26,9 +28,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
   const handleButtonClick = (itemId) => {
     setSelectedItemId(itemId);
     setDisabledItem([...disabledItem, itemId]);
-    setShowModal(true)
-
-   
+    setShowModal(true);
   };
 
   const handleConfirm = () => {
@@ -55,7 +55,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
           }
           return item;
         });
-    
+
         const updatedEventDetails = {
           ...eventDetails,
           wishlist: { ...eventDetails.wishlist, items: updatedWishlist },
@@ -68,7 +68,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
         setLoading(false);
         setShowModal(false);
       });
-      setNameInput("")
+    setNameInput("");
   };
 
   const handleEventTypeChange = (type) => {
@@ -89,9 +89,22 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
       });
     }
   };
-  const handleSubmit = () => {
-    toast.success("Information saved");
-    router.push("/");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const response = axios.post(
+        `https://tagbox.ployco.com/v1/attendee-response/${id}`,
+        {
+          attending: availability,
+          name: name,
+          Wish: wish,
+        }
+      );
+      toast.success("Response submitted sucessfully");
+      router.push("/")
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
   useEffect(() => {
     if (name === "Wedding") {
@@ -180,6 +193,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
               name="date"
               style={{ border: "none" }}
             />
+             <p>Copy</p>
           </div>
         </EventStyle>
 
@@ -222,22 +236,20 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
           </div>
         </div>
         <Modal show={showModal} onClose={() => setShowModal(false)}>
-          <Actions
-          >
-              <input
-                type="text"
-                placeholder="Enter your name"
-                className="input-input"
-                value={nameInput}
-                onChange={(e) => setNameInput(e.target.value)}
-              />
-              <input
-                type="hidden"
-                value={selectedItemId}
-                readOnly
-                className="input-input"
-              />
-          
+          <Actions>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              className="input-input"
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
+            />
+            <input
+              type="hidden"
+              value={selectedItemId}
+              readOnly
+              className="input-input"
+            />
 
             <button className="dark-button" onClick={handleConfirm}>
               {loading ? <Spinner /> : "Confirm"}
@@ -256,11 +268,14 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
             <p>Copy</p>
           </div>
         </EventStyle>
-
-        <div className="location">
-          <span>Merch (Aso-ebi)</span>
-          <p>{eventDetails?.dress_code}</p>
-        </div>
+        {eventDetails?.dress_code === "No" ? (
+          ""
+        ) : (
+          <div className="location">
+            <span>Merch (Aso-ebi)</span>
+            <p>{eventDetails?.dress_code}</p>
+          </div>
+        )}
 
         <EventStyle>
           <label>Write a wish to the couples</label>
@@ -269,6 +284,8 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
               id="date"
               type="text"
               name="date"
+              value={wish}
+              onChange={(e) => setWish(e.target.value)}
               style={{ border: "none" }}
             />
           </div>
@@ -282,28 +299,33 @@ const AttendEvent = ({ name, eventDetails, setEventDetails }) => {
               type="text"
               name="date"
               style={{ border: "none" }}
+              value={senderName}
+              onChange={(e) => setSenderName(e.target.value)}
             />
           </div>
         </EventStyle>
-
-        <div className="location">
-          <span>Invitation Card</span>
-          <div>
-            <Image
-              src={eventDetails?.invitation_card}
-              width={400}
-              height={560}
-              objectFit="contain"
-              className="image"
-              alt="invitation card"
-              ref={imageRef}
-              onLoad={() => setImageLoaded(true)}
-            />
+        {eventDetails?.invitation_card === "" ? (
+          ""
+        ) : (
+          <div className="location">
+            <span>Invitation Card</span>
+            <div className="imageRef" ref={imageRef}>
+              <Image
+                src={eventDetails?.invitation_card}
+                width={400}
+                height={560}
+                objectFit="contain"
+                className="image"
+                alt="invitation card"
+               
+                onLoad={() => setImageLoaded(true)}
+              />
+            </div>
+            <button onClick={downloadImage} className="button">
+              Download Invitation Card
+            </button>
           </div>
-          <button onClick={downloadImage} className="button">
-            Download Invitation Card
-          </button>
-        </div>
+        )}
 
         <Button variant={"dark-button"} onClick={handleSubmit}>
           Done

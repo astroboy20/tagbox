@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const WhyContainer = styled.div`
   margin: 2% 6% 0% 6%;
-  border: 1px solid #2f2e4133;
-  box-shadow: 1px 1px #03193b;
+  box-shadow: 2px 4px 4px 0px #0000001f;
   border-radius: 16px;
   position:relative ;
   background:#fff ;

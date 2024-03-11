@@ -155,8 +155,11 @@ const Header = () => {
 
           <div className="button">
             {" "}
-            <Button variant={"nav-button"}>Schedule a Demo</Button>
-            <Button variant={"transparent-button"}>Host an Event</Button>
+           
+           
+            <Button variant={"nav-button"}> <Link href={"/"} className="link">Schedule a Demo</Link></Button>
+            <Link href={"/host-event"} > <Button variant={"transparent-button"}>Host an Event</Button></Link>
+           
           </div>
         </HeroContainer>
       </HeaderContainer>

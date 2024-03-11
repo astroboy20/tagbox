@@ -74,7 +74,7 @@ export const AttendStyle = styled.div`
   .button {
     /* width: fit-content !important; */
     height: Hug (52px);
-    width: 32%;
+    width: fit-content;
     padding: 16px 20px;
     border-radius: 4px;
     border: 1px solid black;
@@ -133,6 +133,10 @@ export const AttendStyle = styled.div`
     background-color: black;
     color: white; /* Text color */
   }
+  .imageRef {
+      width: 400px;
+      height: 560px;
+    }
 
   @media screen and (max-width: 1024px) {
     .table {
@@ -174,6 +178,10 @@ export const AttendStyle = styled.div`
       font-size: 16px;
     }
     .image {
+      width: 200px;
+      height: 400px;
+    }
+    .imageRef {
       width: 200px;
       height: 400px;
     }

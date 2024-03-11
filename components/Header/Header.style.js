@@ -111,6 +111,16 @@ export const HeroContainer = styled.div`
     font-weight: 500;
     line-height: 30px;
   }
+  .text{
+      padding:3% 0 ;
+    }
+  .link {
+    text-decoration: none;
+    color: #020d1e;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
   .button {
     display: flex;
     gap: 35px;
@@ -130,6 +140,16 @@ export const HeroContainer = styled.div`
       font-weight: 500;
       line-height: 24px;
     }
+    .text{
+      padding:10% 0 ;
+    }
+    .link {
+    text-decoration: none;
+    color: #020d1e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
   }
 `;
 
