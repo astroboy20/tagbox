@@ -17,7 +17,12 @@ export const SingleEventStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
   }
+
   .birthday-header {
     margin-top: 80px;
     background: url("/images/birthday-bg.svg");
@@ -25,13 +30,61 @@ export const SingleEventStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .header span {
     font-size: 48px;
     font-weight: 700;
     color: #fff;
     text-decoration: underline;
   }
+
+  .graduation-header {
+    margin-top: 80px;
+    background: url("/images/graduation-bg.svg");
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .conference-header {
+    margin-top: 80px;
+    background: url("/images/conference-bg.svg");
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .shower-header {
+    margin-top: 80px;
+    background: url("/images/baby-bg.svg");
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .hangout-header {
+    margin-top: 80px;
+    background: url("/images/hangout-bg.svg");
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+  }
+ 
   .body {
     padding: 0% 3%;
   }
@@ -44,7 +97,7 @@ export const SingleEventStyle = styled.div`
     padding: 2% 4%;
     display: flex;
     flex-direction: column;
-    gap: 65px;
+    gap: 75px;
   }
 
   .input {
@@ -83,12 +136,12 @@ export const SingleEventStyle = styled.div`
     font-weight: 500;
   }
   .event-display label {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
   }
 
   .event-display span {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 24px;
   }
@@ -103,7 +156,7 @@ export const SingleEventStyle = styled.div`
     font-weight: 500;
   }
   .wishlist label {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .wishlist .input {
@@ -111,6 +164,17 @@ export const SingleEventStyle = styled.div`
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
+  }
+  .wishlist .upload-aso {
+    display: flex;
+    width: 25%;
+    border-radius: 4px;
+    padding: 16px 20px;
+    gap: 10px;
+    background: none;
+    font-family: Space Grotesk;
+    font-size: 16px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
   }
   .wishlist input {
     border-radius: 6px;
@@ -213,6 +277,34 @@ export const SingleEventStyle = styled.div`
     color: #c1e8ff;
     cursor: pointer;
   }
+  .bank {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .bank select {
+    /* width:20% ; */
+    border: 1px solid black;
+    padding: 16px 20px;
+    border-radius: 4px;
+  }
+  .bank .in-border {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bank .input-border {
+    box-shadow: none;
+    /* border:none ; */
+    border-bottom: 2px solid black;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0px;
+  }
+  .bank .input-border label {
+    font-size: 20px;
+  }
 
   .invitation-card {
     display: flex;
@@ -224,22 +316,45 @@ export const SingleEventStyle = styled.div`
       margin-top: 75px;
       height: 200px;
       background-size: cover;
+      font-size: 24px;
     }
     .birthday-header {
       margin-top: 75px;
-      background: url("/images/birthday-bg.svg");
       height: 200px;
       background-size: cover;
-    }
-    .header span {
       font-size: 24px;
     }
+    .graduation-header {
+      margin-top: 75px;
+      height: 200px;
+      background-size: cover;
+      font-size: 24px;
+    }
+    .conference-header {
+      margin-top: 75px;
+      height: 200px;
+      background-size: cover;
+      font-size: 24px;
+    }
+    .shower-header {
+      margin-top: 75px;
+      height: 200px;
+      background-size: cover;
+      font-size: 24px;
+    }
+    .hangout-header {
+      margin-top: 75px;
+      height: 200px;
+      background-size: cover;
+      font-size: 24px;
+    }
+  
     .body {
       padding: 3%;
     }
 
     form {
-      gap: 100px;
+      gap: 70px;
     }
     .radio-input label {
       font-size: 16px;
@@ -247,10 +362,11 @@ export const SingleEventStyle = styled.div`
     }
 
     .event-display span {
-      font-size: 18px;
+      font-size: 18px !important;
     }
+   
     .event-display div {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
     }
 
@@ -293,6 +409,43 @@ export const SingleEventStyle = styled.div`
     .wishlist input {
       width: 100%;
     }
+
+    .wishlist .upload-aso {
+      display: flex;
+      width: 100%;
+      font-size: 10px;
+      align-items: center;
+    }
+    .dark-button {
+      border: none;
+      padding: 16px 12px;
+      border-radius: 4px;
+      background-color: #020d1e;
+      color: #c1e8ff;
+      cursor: pointer;
+      width: 100%;
+    }
+    .wishlist .upload-aso label {
+      font-size: 10px;
+    }
+    .bank .in-border {
+    display: flex;
+    flex-direction:column ;
+    gap:30px;
+  }
+  .bank .input-border {
+    box-shadow: none;
+    /* border:none ; */
+    border-bottom: 2px solid black;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0px;
+  }
+  .bank .input-border label {
+    font-size: 18px;
+  }
     .iv-image {
       width: 170px;
       height: 252px;
@@ -386,4 +539,3 @@ export const Buttons = styled.div`
     }
   }
 `;
-

@@ -117,7 +117,7 @@ export const EventStyle = styled.div`
 
   @media screen and (max-width: 1024px) {
     label {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
       line-height: 18px;
     }

@@ -79,6 +79,11 @@ const HeaderFixed = () => {
                         Attend an Event
                       </Link>
                     </span>
+                    <span>
+                      <Link href={"/manage-event"} className="link-event">
+                       Manage Event
+                      </Link>
+                    </span>
                     {/* <span>Manage Event</span> */}
                   </div>
                 </>
@@ -136,6 +141,11 @@ const HeaderFixed = () => {
                     <span>
                       <Link href={"/host-event"} className="link-event">
                         Attend an Event
+                      </Link>
+                    </span>
+                    <span>
+                      <Link href={"/host-event"} className="link-event">
+                       Manage Event
                       </Link>
                     </span>
                   </div>

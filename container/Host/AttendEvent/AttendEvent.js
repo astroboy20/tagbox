@@ -268,7 +268,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
             <p>Copy</p>
           </div>
         </EventStyle>
-        {eventDetails?.dress_code === "No" ? (
+        {eventDetails?.dress_code === null ? (
           ""
         ) : (
           <div className="location">
@@ -328,7 +328,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
         )}
 
         <Button variant={"dark-button"} onClick={handleSubmit}>
-          Done
+          RSVP
         </Button>
       </div>
     </AttendStyle>

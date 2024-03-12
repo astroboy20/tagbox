@@ -71,6 +71,11 @@ const Header = () => {
                         Attend an Event
                       </Link>
                     </span>
+                    <span>
+                      <Link className="nav-link" href={"manage-event"}>
+                       Manage Event
+                      </Link>
+                    </span>
                   </div>
                 </>
               )}

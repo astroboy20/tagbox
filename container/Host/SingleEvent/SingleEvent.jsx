@@ -24,12 +24,14 @@ import { useRouter } from "next/router";
 import EventIv from "./EventIV";
 import { MdOutlineCancel } from "react-icons/md";
 import Spinner from "@/components/Spinner/Spinner";
+import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
+import { BankList } from "./Bank";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
 
   const inputRef = useRef(null);
-  const [birthdayBg, setBirthdayBg] = useState("");
+  const [eventBg, setEventBg] = useState("");
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
   const [event_dressCode, setEvent_Dresscode] = useState(null);
@@ -46,7 +48,7 @@ const SingleEvent = ({ name, id }) => {
     location: "",
     date: "",
     color_code: "",
-    dress_code: event_dressCode || "No",
+    dress_code: [],
     invitation_card: "",
     amount_of_invitee: "",
     invitee_emails: [],
@@ -54,8 +56,8 @@ const SingleEvent = ({ name, id }) => {
     consultation: consultation_date,
     wishlist: [],
   });
-
   const [loading, setLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
@@ -65,12 +67,27 @@ const SingleEvent = ({ name, id }) => {
 
   //birthday header
   useEffect(() => {
-    if (name === "Birthday") {
-      setBirthdayBg("header birthday-header");
+    if (name === "Wedding") {
+      setEventBg("header ");
+    } else if (name === "Birthday") {
+      setEventBg("birthday-header");
+    } else if (name === "Graduation") {
+      setEventBg("graduation-header ");
+    } else if (name === "House Warming") {
+      setEventBg("header ");
+    } else if (name === "Conference and Meetings") {
+      setEventBg("conference-header ");
+    } else if (name === "Baby Shower") {
+      setEventBg("shower-header ");
+    } else if (name === "Hangout") {
+      setEventBg("hangout-header ");
+    } else if (name === "Others") {
+      setEventBg("header ");
     } else {
-      setBirthdayBg("header");
+      setEventBg("header");
     }
   }, [name]);
+
   // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
@@ -81,7 +98,6 @@ const SingleEvent = ({ name, id }) => {
       qr_code: `${trimmed_id}`,
     }));
   };
-  console.log(uniqueId)
 
   const handleEventTypeChange = (type) => {
     setEventType(type);
@@ -96,13 +112,13 @@ const SingleEvent = ({ name, id }) => {
       setDresscode("Yes");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: null,
+        dress_code: [],
       }));
     } else {
-      setDresscode("No");
+      setDresscode("");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: "No",
+        dress_code: "",
       }));
     }
   };
@@ -294,6 +310,69 @@ const SingleEvent = ({ name, id }) => {
     }));
   };
 
+  const handleAsoItem = () => {
+    const isAnyEmpty = eventDetails.dress_code.some(
+      (item) => item.item_image === "" || item.item_price.trim() === ""
+    );
+
+    if (isAnyEmpty) {
+      toast.error("Please fill out all the fields before adding another item.");
+      return;
+    }
+    setEventDetails((prevState) => ({
+      ...prevState,
+      dress_code: [
+        ...prevState.dress_code,
+        { item_image: null, item_price: "" },
+      ],
+    }));
+  };
+  const handleAsoImageChange = async (event, index) => {
+    const imageFile = event.target.files[0];
+    try {
+      setImageLoading(true);
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("upload_preset", "za8tsrje");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
+        formData
+      );
+      toast.success("Image upload successful");
+      const imageUrl = res.data.secure_url;
+
+      const updatedDressCode = [...eventDetails.dress_code];
+      updatedDressCode[index].item_image = imageUrl;
+      setEventDetails((prevDetails) => ({
+        ...prevDetails,
+        dress_code: updatedDressCode,
+      }));
+    } catch (error) {
+      toast.error("Error uploading image:", error);
+    } finally {
+      setImageLoading(false);
+    }
+  };
+
+  const handleAsoPriceChange = (event, index) => {
+    const { value } = event.target;
+    const updatedDressCode = [...eventDetails.dress_code];
+    updatedDressCode[index].item_price = value;
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      dress_code: updatedDressCode,
+    }));
+  };
+
+  const handleRemoveAsoItem = (indexToRemove) => {
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      dress_code: prevDetails.dress_code.filter(
+        (_, index) => index !== indexToRemove
+      ),
+    }));
+  };
+
   const copyTextToClipboard = async (text) => {
     if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(text);
@@ -357,7 +436,7 @@ const SingleEvent = ({ name, id }) => {
 
   return (
     <SingleEventStyle className="">
-      <div className={birthdayBg}>
+      <div className={eventBg}>
         <span>{name}</span>
       </div>
       <div className="body">
@@ -554,29 +633,46 @@ const SingleEvent = ({ name, id }) => {
           </div>
 
           {dressCode == "Yes" && (
-            <EventStyle>
-              <label>Upload dress code(Asoebi) </label>
-              <div>
-                <input
-                  id="image"
-                  accept="image/*"
-                  type="file"
-                  onChange={handleImageChange}
-                />
-                <h1>
-                  {loading ? (
-                    <InfinitySpin
-                      visible={true}
-                      width="50"
-                      color="#000"
-                      ariaLabel="infinity-spin-loading"
+            <div className="wishlist">
+              <span>Upload dress-code (Aso-Ebi)</span>
+              <div className="input-container">
+                {eventDetails.dress_code.map((item, index) => (
+                  <div className="input" key={index}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleAsoImageChange(e, index)}
+                      hidden
+                      id="upload"
                     />
-                  ) : (
-                    <Upload />
-                  )}
-                </h1>
+                    <div className="upload-aso" for="upload">
+                      {" "}
+                      {imageLoading ? <BlackSpinner /> : <Upload />}
+                      <label for="upload">Choose file</label>
+                    </div>
+
+                    <input
+                      type="text"
+                      placeholder="Price"
+                      value={item.item_price}
+                      onChange={(e) => handleAsoPriceChange(e, index)}
+                    />
+                    <MdOutlineCancel
+                      onClick={() => handleRemoveAsoItem(index)}
+                      fontSize={"60px"}
+                      color="red"
+                    />
+                  </div>
+                ))}
+                <button
+                  className="dark-button"
+                  type="button"
+                  onClick={handleAsoItem}
+                >
+                  Add Aso-Ebi Item
+                </button>
               </div>
-            </EventStyle>
+            </div>
           )}
 
           <div className="event-display">
@@ -650,6 +746,7 @@ const SingleEvent = ({ name, id }) => {
                     value={item.item_name}
                     onChange={(e) => handleWishlistChange(e, index)}
                   />
+
                   <input
                     type="text"
                     name="item_link"
@@ -673,6 +770,26 @@ const SingleEvent = ({ name, id }) => {
               >
                 Add Wishlist Item
               </button>
+            </div>
+
+            <label>In lieu of cash donation, input account details</label>
+            <div className="bank">
+              <select>
+                <option>Choose Bank</option>
+                {BankList.map((bank) => (
+                  <option key={bank.id}>{bank.name}</option>
+                ))}
+              </select>
+              <div className="in-border">
+                <div>
+                  <label>Account Name</label>
+                  <input className="input-border" />
+                </div>
+                <div>
+                  <label>Account Number</label>
+                  <input className="input-border" />
+                </div>
+              </div>
             </div>
           </div>
 
