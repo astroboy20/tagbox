@@ -4,34 +4,36 @@ import { useSelector } from "react-redux";
 import { HeaderFixed } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const notification = () => {
+const Notification = () => {
   const { user } = useSelector((state) => state.auth);
-  const token = user ? user.token || user : "";
+  const token = user ? user.data || user : "";
 
-  console.log("user",user)
+  console.log("user", user);
   const fetchNotification = async () => {
     try {
       const response = await axios.get(
         "https://tagbox.ployco.com/v1/user/notification",
         {
-            headers: {
-              Authorization: `Bearer ${user.data}`,
-            },
-          }
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+        }
       );
       console.log(response.data);
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   };
   useEffect(() => {
     fetchNotification();
   }, []);
 
-  return( <div>
-    <HeaderFixed/>
-    <Footer/>
-  </div>)
+  return (
+    <div>
+      <HeaderFixed />
+      <Footer />
+    </div>
+  );
 };
 
-export default notification;
+export default Notification;
