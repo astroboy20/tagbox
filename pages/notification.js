@@ -37,7 +37,7 @@ const Notification = () => {
     <div>
       <HeaderFixed notificationCount={notificationCount}/>
       <NotificationContainer notifications={notifications}/>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

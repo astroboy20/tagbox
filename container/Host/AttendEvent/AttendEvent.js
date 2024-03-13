@@ -23,6 +23,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
   const [submissionDone, setSubmissionDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const router = useRouter();
 
   const handleButtonClick = (itemId) => {
@@ -89,6 +90,32 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
       });
     }
   };
+
+  const copyTextToClipboard = async (text) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  };
+
+  const handleCopyClick = () => {
+    const bankAccount = eventDetails?.bank_account;
+    if (bankAccount) {
+      const textToCopy = `Bank Name: ${bankAccount.bank_name}\nAcc Number: ${bankAccount.account_number}\nAcc Name: ${bankAccount.account_name}`;
+      copyTextToClipboard(textToCopy)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 1500);
+        })
+        .catch((error) => {
+          toast.warning(error);
+        });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -101,7 +128,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
         }
       );
       toast.success("Response submitted sucessfully");
-      router.push("/")
+      router.push("/");
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -184,7 +211,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
           </div>
         </div>
 
-        <EventStyle>
+        {/* <EventStyle>
           <label>Copy unique entrance code for this event</label>
           <div>
             <input
@@ -193,9 +220,9 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
               name="date"
               style={{ border: "none" }}
             />
-             <p>Copy</p>
+            <p>Copy</p>
           </div>
-        </EventStyle>
+        </EventStyle> */}
 
         <div className="wishlist">
           <span>Wishlist</span>
@@ -258,17 +285,22 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
         </Modal>
         <EventStyle>
           <label>Want to do a cash donation instead?</label>
-          <div>
-            <input
-              id="date"
-              type="text"
-              name="date"
-              style={{ border: "none" }}
-            />
-            <p>Copy</p>
+          <div style={{ display: "flex", alignItems: "flex-end" }}>
+            <div
+              id="account"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <p>Bank Name: {eventDetails?.bank_account.bank_name}</p>
+              <p>Acc Number: {eventDetails?.bank_account.account_number}</p>
+              <p>Acc Name: {eventDetails?.bank_account.account_name}</p>
+            </div>
+
+            <p style={{cursor:"pointer"}} onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
           </div>
+          {/* </div> */}
+          {/* {eventDetails?.bank_account.bank_name} */}
         </EventStyle>
-        {eventDetails?.dress_code === null ? (
+        {eventDetails?.dress_code === "" ? (
           ""
         ) : (
           <div className="location">
@@ -317,7 +349,6 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
                 objectFit="contain"
                 className="image"
                 alt="invitation card"
-               
                 onLoad={() => setImageLoaded(true)}
               />
             </div>
