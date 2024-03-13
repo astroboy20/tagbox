@@ -12,16 +12,16 @@ export const HeaderFixedContainer = styled.div`
   box-sizing: border-box;
   left: 0;
   right: 0;
-  .link{
-    text-decoration:none ;
-    color:#fff ;
+  .link {
+    text-decoration: none;
+    color: #fff;
   }
-  .link-event{
-    text-decoration:none ;
-    color:#000 ;
+  .link-event {
+    text-decoration: none;
+    color: #000;
   }
-  .active{
-    text-decoration:underline ;
+  .active {
+    text-decoration: underline;
   }
 `;
 export const HeaderFixedStyle = styled.nav`
@@ -87,6 +87,27 @@ export const HeaderFixedStyle = styled.nav`
     display: none;
   }
 
+  .notification{
+    display:flex ;
+    position:relative ;
+  }
+  .count{
+    position:absolute ;
+    width: 24px;
+height: 24px;
+top: -4px;
+left: 15px;
+background-color:#FE0707 ;
+display:flex ;
+justify-content:center ;
+align-items:center ;
+border-radius:100% ;
+color:white ;
+font-size:16px ;
+
+
+  }
+
   @media screen and  (max-width: 1024px) {
     /* padding:6% ; */
     .logo{
@@ -115,7 +136,7 @@ export const MobileNav = styled.div`
   z-index: 100000000;
   width: 100%;
   left: 0;
-  padding:3% 3%;
+  padding: 3% 3%;
   gap: 40px;
   .link {
     text-decoration: none;
@@ -128,28 +149,27 @@ export const MobileNav = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    
   }
-   .event {
+  .event {
     display: flex;
-    flex-direction:column ;
+    flex-direction: column;
     gap: 20px;
     /* background-color: #c1e8ff; */
     /* color: #020d1e; */
-    color:#fff ;
-   
+    color: #fff;
   }
   .event span {
     /* border-bottom: 1.5px solid #03193b; */
     padding: 10px;
     text-align: left;
-    left:0 ;
+    left: 0;
   }
-  .event .link-event{
+  .event .link-event {
     color: #fff;
   }
 
-  .links,p {
+  .links,
+  p {
     text-decoration: none;
     color: #fff;
     font-size: 20px;

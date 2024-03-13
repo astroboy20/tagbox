@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-const HeaderFixed = () => {
+const HeaderFixed = ({ notificationCount }) => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -53,9 +53,9 @@ const HeaderFixed = () => {
     <>
       <HeaderFixedContainer>
         <HeaderFixedStyle>
-        <Link href={"/"}>
-           <Logo/>
-            </Link>
+          <Link href={"/"}>
+            <Logo />
+          </Link>
           <div className="hamburger" onClick={handleNav}>
             {show ? <Close /> : <Hamburger />}
           </div>
@@ -81,7 +81,7 @@ const HeaderFixed = () => {
                     </span>
                     <span>
                       <Link href={"/manage-event"} className="link-event">
-                       Manage Event
+                        Manage Event
                       </Link>
                     </span>
                     {/* <span>Manage Event</span> */}
@@ -117,13 +117,15 @@ const HeaderFixed = () => {
           </div>
           <div className="right-nav">
             <Link href={"/notification"}>
-            <Notification />
+              <div className="notification">
+                {" "}
+                <Notification /> <p className="count">{notificationCount}</p>
+              </div>
             </Link>
-           
+
             <Link href={"/profile"}>
-            <ProfilePicture />
+              <ProfilePicture />
             </Link>
-          
           </div>
         </HeaderFixedStyle>
         {show && (
@@ -148,7 +150,7 @@ const HeaderFixed = () => {
                     </span>
                     <span>
                       <Link href={"/host-event"} className="link-event">
-                       Manage Event
+                        Manage Event
                       </Link>
                     </span>
                   </div>
@@ -164,8 +166,8 @@ const HeaderFixed = () => {
             <Link href={"/customize"} className="link">
               Customize
             </Link>
-            <Link href={"/notification"} className="link">
-              Notifications (3)
+            <Link href={"/notification"} className="link" style={{display:"flex", alignItems:"center", gap:"10px"}}>
+              Notifications <p style={{color:"#FE0707"}}>({notificationCount})</p>
             </Link>
             <Link href={"/profile"} className="link">
               Profile
