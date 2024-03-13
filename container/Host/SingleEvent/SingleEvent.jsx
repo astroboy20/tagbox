@@ -55,6 +55,9 @@ const SingleEvent = ({ name, id }) => {
     qr_code: "",
     consultation: consultation_date,
     wishlist: [],
+    bank_name: "",
+    account_number: "",
+    account_name: "",
   });
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
@@ -115,7 +118,7 @@ const SingleEvent = ({ name, id }) => {
         dress_code: [],
       }));
     } else {
-      setDresscode("");
+      setDresscode("No");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
         dress_code: "",
@@ -774,8 +777,8 @@ const SingleEvent = ({ name, id }) => {
 
             <label>In lieu of cash donation, input account details</label>
             <div className="bank">
-              <select>
-                <option>Choose Bank</option>
+              <select value={eventDetails.bank_name} onChange={handleChange} name="bank_name">
+                <option value={""} disabled hidden>Choose Bank</option>
                 {BankList.map((bank) => (
                   <option key={bank.id}>{bank.name}</option>
                 ))}
@@ -783,11 +786,21 @@ const SingleEvent = ({ name, id }) => {
               <div className="in-border">
                 <div>
                   <label>Account Name</label>
-                  <input className="input-border" />
+                  <input
+                    className="input-border"
+                    name="account_name"
+                    value={eventDetails.account_name}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div>
                   <label>Account Number</label>
-                  <input className="input-border" />
+                  <input
+                    className="input-border"
+                    name="account_number"
+                    value={eventDetails.account_number}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             </div>

@@ -116,7 +116,10 @@ const HeaderFixed = () => {
             </p>
           </div>
           <div className="right-nav">
+            <Link href={"/notification"}>
             <Notification />
+            </Link>
+           
             <Link href={"/profile"}>
             <ProfilePicture />
             </Link>

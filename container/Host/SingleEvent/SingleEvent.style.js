@@ -356,6 +356,9 @@ export const SingleEventStyle = styled.div`
     form {
       gap: 70px;
     }
+    .radio-input{
+      align-items:center ;
+    }
     .radio-input label {
       font-size: 16px;
       font-weight: 400;
