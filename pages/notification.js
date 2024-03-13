@@ -15,7 +15,7 @@ const Notification = () => {
         "https://tagbox.ployco.com/v1/user/notification",
         {
           headers: {
-            Authorization: `Bearer ${user}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
