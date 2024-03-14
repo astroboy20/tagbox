@@ -118,7 +118,7 @@ const SingleEvent = ({ name, id }) => {
         dress_code: [],
       }));
     } else {
-      setDresscode("No");
+      setDresscode("");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
         dress_code: "",
