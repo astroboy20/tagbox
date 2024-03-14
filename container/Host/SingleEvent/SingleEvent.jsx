@@ -117,11 +117,11 @@ const SingleEvent = ({ name, id }) => {
         ...prevDetails,
         dress_code: [],
       }));
-    } else {
-      setDresscode("");
+    } else if (type === "No") {
+      setDresscode("No");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: "",
+        dress_code: [],
       }));
     }
   };
@@ -429,7 +429,8 @@ const SingleEvent = ({ name, id }) => {
           setModalShow(true);
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.response.data?.status);
+          console.log(error.response.data?.message);
           setLoading(false);
           setModalShow(false);
         });

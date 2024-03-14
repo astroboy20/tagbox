@@ -299,7 +299,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
           </div>
          
         </EventStyle>
-        {eventDetails?.dress_code === "" ? (
+        {eventDetails?.dress_code?.items.length === 0 ? (
           ""
         ) : (
           <div className="location">
