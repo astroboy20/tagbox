@@ -30,8 +30,11 @@ const Notification = () => {
   console.log("d",notifications?.length)
   const notificationCount = notifications?.length
   useEffect(() => {
-    fetchNotification();
-  }, []);
+    if (token){
+        fetchNotification();
+    }
+  
+  }, [token, user]);
 
   return (
     <div>

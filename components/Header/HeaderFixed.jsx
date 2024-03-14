@@ -7,7 +7,7 @@ import {
   Notification,
   ProfilePicture,
 } from "@/assets";
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
 import { HeaderContainer, HeaderStyle, HeroContainer } from "./Header.style";
 import { Button } from "../Button/Button";
 import {
@@ -21,16 +21,44 @@ import { reset } from "@/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import axios from "axios"
 
-const HeaderFixed = ({ notificationCount }) => {
+const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const [notifications, setNotification] = useState([])
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const token = user ? user.token || user : "";
+  const token = user ? user.token || user  : "";
   console.log(token);
+
+  const fetchNotification = async () => {
+    try {
+      const response = await axios.get(
+        "https://tagbox.ployco.com/v1/user/notification",
+        {
+          headers: {
+            Authorization: `Bearer ${user.data}`,
+          },
+        }
+      );
+      console.log(response.data.data.notifications);
+      setNotification(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log("d",notifications?.length)
+  const notificationCount = notifications?.length
+  useEffect(() => {
+    if (token){
+        fetchNotification();
+        console.log("d",notifications?.length)
+    }
+  
+  }, [token, user]);
 
   const handleShowEvent = () => {
     setShowEvent(!showEvent);

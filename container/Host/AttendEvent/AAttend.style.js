@@ -137,6 +137,11 @@ export const AttendStyle = styled.div`
       width: 400px;
       height: 560px;
     }
+    .dress{
+      display:flex ;
+      gap:20px;
+      align-items:center ;
+    }
 
   @media screen and (max-width: 1024px) {
     .table {

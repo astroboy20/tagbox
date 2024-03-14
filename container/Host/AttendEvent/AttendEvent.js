@@ -297,15 +297,30 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
 
             <p style={{cursor:"pointer"}} onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
           </div>
-          {/* </div> */}
-          {/* {eventDetails?.bank_account.bank_name} */}
+         
         </EventStyle>
         {eventDetails?.dress_code === "" ? (
           ""
         ) : (
           <div className="location">
             <span>Merch (Aso-ebi)</span>
-            <p>{eventDetails?.dress_code}</p>
+            {/* <p>{eventDetails?.dress_code}</p> */}
+
+            {eventDetails?.dress_code?.items.map((item, index) => (
+                  <div key={item._id} className="dress">
+                   <Image
+                src={item.dress}
+                width={620}
+                height={400}
+                objectFit="contain"
+                className="image"
+                alt="invitation card"
+                onLoad={() => setImageLoaded(true)}
+              />
+                    <p>#{item.dress_price}</p>
+                   
+                  </div>
+                ))}
           </div>
         )}
 

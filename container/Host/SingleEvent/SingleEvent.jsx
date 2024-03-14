@@ -315,7 +315,7 @@ const SingleEvent = ({ name, id }) => {
 
   const handleAsoItem = () => {
     const isAnyEmpty = eventDetails.dress_code.some(
-      (item) => item.item_image === "" || item.item_price.trim() === ""
+      (item) => item.dress === "" || item.dress_price.trim() === ""
     );
 
     if (isAnyEmpty) {
@@ -326,7 +326,7 @@ const SingleEvent = ({ name, id }) => {
       ...prevState,
       dress_code: [
         ...prevState.dress_code,
-        { item_image: null, item_price: "" },
+        { dress: null, dress_price: "" },
       ],
     }));
   };
@@ -345,7 +345,7 @@ const SingleEvent = ({ name, id }) => {
       const imageUrl = res.data.secure_url;
 
       const updatedDressCode = [...eventDetails.dress_code];
-      updatedDressCode[index].item_image = imageUrl;
+      updatedDressCode[index].dress = imageUrl;
       setEventDetails((prevDetails) => ({
         ...prevDetails,
         dress_code: updatedDressCode,
@@ -360,7 +360,7 @@ const SingleEvent = ({ name, id }) => {
   const handleAsoPriceChange = (event, index) => {
     const { value } = event.target;
     const updatedDressCode = [...eventDetails.dress_code];
-    updatedDressCode[index].item_price = value;
+    updatedDressCode[index].dress_price = value;
     setEventDetails((prevDetails) => ({
       ...prevDetails,
       dress_code: updatedDressCode,
@@ -657,7 +657,7 @@ const SingleEvent = ({ name, id }) => {
                     <input
                       type="text"
                       placeholder="Price"
-                      value={item.item_price}
+                      value={item.dress_price}
                       onChange={(e) => handleAsoPriceChange(e, index)}
                     />
                     <MdOutlineCancel
