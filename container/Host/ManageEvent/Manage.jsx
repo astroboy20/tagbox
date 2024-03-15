@@ -1,7 +1,28 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { ManageStyle } from "./Manage.style";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Manage = () => {
+  const { user } = useSelector((state) => state.auth);
+  const [ticket, setTicket] = useState([])
+  const token = user ? user.token || user : "";
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("https://tagbox.ployco.com/v1/user/tickets", {
+        headers: {
+          Authorization: `Bearer ${user.data}`,
+        },
+      });
+     setTicket(response.data?.data)
+    } catch (error) {}
+  }; 
+
+  useEffect(() => {
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
   return (
     <ManageStyle>
       <div className="header">Manage Event</div>
@@ -18,7 +39,7 @@ const Manage = () => {
           </div>
           <div className="sub-box-3">
             <p className="heading">Tickets sold</p>
-            <p>128</p>
+            <p>{ticket.length}</p>
           </div>
         </div>
         <div className="events">

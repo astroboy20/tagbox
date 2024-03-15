@@ -153,7 +153,6 @@ export const BodyStyle = styled.div`
   display: flex;
   gap: 60px;
   box-shadow:2px 4px 4px 0px #0000001F;
- ;
   border: 1px solid #020d1e4d;
   padding: 3%;
   margin:2% 0  3% 0 ;

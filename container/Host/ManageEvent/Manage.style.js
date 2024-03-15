@@ -120,5 +120,24 @@ export const ManageStyle = styled.div`
   .wishes-created .b {
     font-size: 18px;
     font-weight: 400;
+    text-align:justify ;
+  }
+
+  @media screen and (max-width: 1024px){
+    .header {
+      margin-top: 75px;
+      /* background: url("/images/event-bg.svg"); */
+      height: 200px;
+      background-size: cover;
+      font-size: 24px;
+    }
+    .boxes{
+        flex-direction:column ;
+    }
+    .sub-box-1,.sub-box-2,.sub-box-3{
+        width:100% ;
+        padding:4% ;
+       
+    }
   }
 `;
