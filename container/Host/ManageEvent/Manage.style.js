@@ -43,6 +43,7 @@ export const ManageStyle = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     height: 180px;
+    border-radius:4px ;
   }
   .sub-box-2 {
     background-color: #fcf8ed;
@@ -55,6 +56,7 @@ export const ManageStyle = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     height: 180px;
+    border-radius:4px ;
   }
   .sub-box-3 {
     background-color: #fdf3f1;
@@ -66,6 +68,7 @@ export const ManageStyle = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 180px;
+    border-radius:4px ;
   }
 
   .sub-box-1 .heading,
