@@ -5,24 +5,47 @@ import { useSelector } from "react-redux";
 
 const Manage = () => {
   const { user } = useSelector((state) => state.auth);
-  const [ticket, setTicket] = useState([])
-  const token = user ? user.token || user : "";
-  const fetchData = async () => {
+  const [event, setEvent] = useState([]);
+  const [ticket, setTicket] = useState([]);
+  const token = user ? user.data || user : "";
+  const fetchEventData = async () => {
     try {
-      const response = await axios.get("https://tagbox.ployco.com/v1/user/tickets", {
-        headers: {
-          Authorization: `Bearer ${user.data}`,
-        },
-      });
-     setTicket(response.data?.data)
+      const response = await axios.get(
+        "https://tagbox.ployco.com/v1/user/events",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setEvent(response.data?.data);
     } catch (error) {}
-  }; 
+  };
+
+  const fetchTicketData = async () => {
+    try {
+      const response = await axios.get(
+        "https://tagbox.ployco.com/v1/user/tickets",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTicket(response.data?.data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     if (token) {
-      fetchData();
+      fetchEventData();
+      fetchTicketData();
     }
   }, [token]);
+
+  const eventCount = event.length;
+  const ticketCount = ticket.length;
+
   return (
     <ManageStyle>
       <div className="header">Manage Event</div>
@@ -30,7 +53,13 @@ const Manage = () => {
         <div className="boxes">
           <div className="sub-box-1">
             <p className="heading">Events created</p>
-            <p>02</p>
+            <p>
+              {eventCount === 0
+                ? "0"
+                : eventCount <= 9
+                ? `0${eventCount}`
+                : eventCount}
+            </p>
           </div>
           <div className="sub-box-2">
             {" "}
@@ -39,7 +68,11 @@ const Manage = () => {
           </div>
           <div className="sub-box-3">
             <p className="heading">Tickets sold</p>
-            <p>{ticket.length}</p>
+            <p> {ticketCount === 0
+                ? "0"
+                : ticketCount <= 9
+                ? `0${ticketCount}`
+                : ticketCount}</p>
           </div>
         </div>
         <div className="events">

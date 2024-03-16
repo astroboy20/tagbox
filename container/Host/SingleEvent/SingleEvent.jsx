@@ -6,17 +6,15 @@ import {
   Edit,
   SingleEventStyle,
 } from "./SingleEvent.style";
-import React, { useEffect, useState, useRef, useId } from "react";
-import Image from "next/image";
+import React, { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/Input/Input";
 import { EventDiv, EventStyle } from "@/components/Input/Input.style";
 import { v4 as uuidv4 } from "uuid";
 import QRCode from "react-qr-code";
 import axios from "axios";
-import { InfinitySpin, ProgressBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Button } from "@/components/Button/Button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "@/components/Modal";
 import { EventSpinner } from "@/components/Spinner/EventSpinnner";
 import Link from "next/link";
@@ -26,16 +24,14 @@ import { MdOutlineCancel } from "react-icons/md";
 import Spinner from "@/components/Spinner/Spinner";
 import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
 import { BankList } from "./Bank";
+import { reset } from "@/features/authSlice";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
 
-  const inputRef = useRef(null);
   const [eventBg, setEventBg] = useState("");
   const { user } = useSelector((state) => state.auth);
   const [event_type, setEventType] = useState("");
-  const [event_dressCode, setEvent_Dresscode] = useState(null);
-  const [image, setImage] = useState(null);
   const [uniqueId, setUniqueId] = useState("");
   const [consultationTime, setConsultationTime] = useState("");
   const [consultation_date] = useState("");
@@ -65,6 +61,8 @@ const SingleEvent = ({ name, id }) => {
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
   const [isCopied, setIsCopied] = useState(false);
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
   const imageInfo =
     typeof window !== "undefined" && localStorage.getItem("imageUrl");
 
@@ -221,31 +219,7 @@ const SingleEvent = ({ name, id }) => {
     reader.readAsText(file);
   };
 
-  const handleImageChange = async (event) => {
-    const imageFile = event.target.files[0];
-    try {
-      setLoading(true);
-      const formData = new FormData();
-      formData.append("file", imageFile);
-      formData.append("upload_preset", "za8tsrje");
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
-        formData
-      );
-      toast.success("Image upload successful");
-      const imageUrl = res.data.secure_url;
 
-      setEventDetails((prevDetails) => ({
-        ...prevDetails,
-        dressCode: imageUrl,
-      }));
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      toast.error("Something went wrong!!");
-    } finally {
-      setLoading(false);
-    }
-  };
   const handleInviteImageChange = async (event) => {
     const imageFile = event.target.files[0];
     try {
@@ -324,10 +298,7 @@ const SingleEvent = ({ name, id }) => {
     }
     setEventDetails((prevState) => ({
       ...prevState,
-      dress_code: [
-        ...prevState.dress_code,
-        { dress: null, dress_price: "" },
-      ],
+      dress_code: [...prevState.dress_code, { dress: null, dress_price: "" }],
     }));
   };
   const handleAsoImageChange = async (event, index) => {
@@ -401,8 +372,6 @@ const SingleEvent = ({ name, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-
     const requiredFields = ["event_hashtag", "location", "date", "qr_code"];
     const missingFields = requiredFields.filter(
       (field) => !eventDetails[field]
@@ -413,9 +382,10 @@ const SingleEvent = ({ name, id }) => {
       );
       return;
     }
+
     setLoading(true);
+    setModalShow(true);
     if (eventDetails) {
-      setLoading(true);
       axios
         .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
           headers: {
@@ -423,20 +393,26 @@ const SingleEvent = ({ name, id }) => {
           },
         })
         .then((response) => {
-          // toast.success(response.data.message);
           setMessage(response?.data.message);
           setLoading(false);
           setModalShow(true);
         })
         .catch((error) => {
-          toast.error(error.response.data?.status);
-          console.log(error.response.data?.message);
+          toast.error(error.response.data?.message);
+          setError(error.response.data?.message);
           setLoading(false);
           setModalShow(false);
         });
     }
     console.log(eventDetails);
   };
+
+  useEffect(() => {
+    if (error === "Unauthorised access, new session required") {
+      dispatch(reset());
+      router.push("/login");
+    }
+  }, [error, router]);
 
   return (
     <SingleEventStyle className="">
@@ -778,8 +754,14 @@ const SingleEvent = ({ name, id }) => {
 
             <label>In lieu of cash donation, input account details</label>
             <div className="bank">
-              <select value={eventDetails.bank_name} onChange={handleChange} name="bank_name">
-                <option value={""} disabled hidden>Choose Bank</option>
+              <select
+                value={eventDetails.bank_name}
+                onChange={handleChange}
+                name="bank_name"
+              >
+                <option value={""} disabled hidden>
+                  Choose Bank
+                </option>
                 {BankList.map((bank) => (
                   <option key={bank.id}>{bank.name}</option>
                 ))}

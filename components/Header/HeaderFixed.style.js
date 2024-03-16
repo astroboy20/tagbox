@@ -154,12 +154,10 @@ export const MobileNav = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* background-color: #c1e8ff; */
-    /* color: #020d1e; */
+   margin-top:20px ;
     color: #fff;
   }
   .event span {
-    /* border-bottom: 1.5px solid #03193b; */
     padding: 10px;
     text-align: left;
     left: 0;

@@ -161,7 +161,7 @@ const HeaderFixed = () => {
             <span onClick={handleShowEvent} className="events">
               <span className="text">
                 <p>Host an Event</p>
-                <Arrow_Down />
+                <Arrow/>
               </span>
               {showEvent && (
                 <>
@@ -177,7 +177,7 @@ const HeaderFixed = () => {
                       </Link>
                     </span>
                     <span>
-                      <Link href={"/host-event"} className="link-event">
+                      <Link href={"/manage-event"} className="link-event">
                         Manage Event
                       </Link>
                     </span>
