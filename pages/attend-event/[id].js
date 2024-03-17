@@ -27,7 +27,6 @@ const EventId = () => {
         }
       );
       setEventDetails(response.data.data); 
-      console.log("jj",response.data.data)
     } catch (error) {
       console.log(error);
     }

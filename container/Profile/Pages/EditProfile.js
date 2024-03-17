@@ -44,7 +44,6 @@ const EditProfile = () => {
           mobile_number: "",
         });
       }
-      console.log("edited", edited);
     } catch (error) {
       toast.error(error);
     } finally {

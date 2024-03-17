@@ -38,7 +38,6 @@ const UpcomingEvents = () => {
     fetchhData();
   }, []);
 
-  console.log(latestEvent);
 
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);

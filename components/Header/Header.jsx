@@ -22,7 +22,7 @@ const Header = () => {
   const router = useRouter();
 
   const token = user ? user.token || user : "";
-  console.log(token);
+
 
   const handleShowEvent = () => {
     setShowEvent(!showEvent);

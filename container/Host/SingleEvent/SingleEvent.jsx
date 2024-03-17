@@ -301,7 +301,6 @@ const SingleEvent = ({ name, id }) => {
     }));
   };
   const handleAsoImageChange = async (event, index) => {
-    console.log("handleAsoImageChange called with index:", index);
     const imageFile = event.target.files[0];
     try {
       setImageLoading((prevState) => {
@@ -316,7 +315,6 @@ const SingleEvent = ({ name, id }) => {
         "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
         formData
       );
-      console.log("Image upload response:", res.data);
       toast.success("Image upload successful");
       const imageUrl = res.data.secure_url;
 
@@ -415,7 +413,7 @@ const SingleEvent = ({ name, id }) => {
           setModalShow(false);
         });
     }
-    console.log(eventDetails);
+    // console.log(eventDetails);
   };
 
   useEffect(() => {

@@ -29,7 +29,6 @@ const EventId = () => {
     if (id) {
       fetchEventName();
     }
-    console.log(id)
    
   }, [id]);
 

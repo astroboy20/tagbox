@@ -1,4 +1,3 @@
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
@@ -11,9 +10,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { ProfileOptionProvider } from "@/features/Axios/ProfileOptionContext";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "@/styles/globals.css";
 import TokenExpirationHandler from "@/container/ProtectedRoute/TokenExpirationHandler";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -25,15 +25,16 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Provider store={store}>
-        <TokenExpirationHandler/>
+        <TokenExpirationHandler />
         <PersistGate loading={null} persistor={persistor}>
-          
           <ProfileOptionProvider>
             <OptionProvider>
               <ThemeProvider theme={theme}>
                 <GlobalStyles />
                 <ToastContainer />
-                <Component {...pageProps} />
+                <ChakraProvider>
+                  <Component {...pageProps} />
+                </ChakraProvider>
               </ThemeProvider>
             </OptionProvider>
           </ProfileOptionProvider>

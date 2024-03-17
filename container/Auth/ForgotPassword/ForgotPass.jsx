@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Login_Icon, Logo, Logo_Blue, Register_Icon } from "@/assets";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
@@ -11,35 +11,35 @@ import { login, login_with_google, reset } from "@/features/authSlice";
 import Image from "next/image";
 import Spinner from "@/components/Spinner/Spinner";
 import { ForgotContainer } from "./ForgotPass.style";
+import axios from "axios";
 
 const ForgotPass = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-//   const { message, isLoading, isError, isSuccess } = useSelector(
-//     (state) => state.auth
-//   );
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
-    
     },
     validationSchema: Yup.object().shape({
       email: Yup.string().email("Invalid email address").required("Required"),
-     
     }),
     onSubmit: async (values) => {
-      await dispatch(login(values));
+      setIsLoading(true);
+      await axios
+        .post("https://tagbox.ployco.com/v1/user/reset-password",values)
+        .then((response) => {
+          console.log(response.data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
+        });
     },
   });
 
-  useEffect(() => {
-//    if (isSuccess) {
-//       router.push("/host-event");
-//     } 
-    // dispatch(reset());
-  }, []);
-
-  
   return (
     <ForgotContainer>
       <div className="right">
@@ -76,7 +76,7 @@ const ForgotPass = () => {
 
           <Button variant={"dark-button"}>
             {" "}
-            {  "Log in"}
+            {isLoading ? <Spinner /> : "Submit"}
           </Button>
         </form>
       </div>

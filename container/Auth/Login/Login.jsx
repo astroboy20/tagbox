@@ -100,7 +100,7 @@ const Login = () => {
                 : null
             }
           />
-          <p  style={{textAlign:"right"}}><Link style={{color:"red", fontSize:"16px"}} href={"forgot-password/email"}>Forgot password</Link></p>
+          <p  style={{textAlign:"right"}}><Link style={{color:"red", fontSize:"16px"}} href={"reset-password"}>Forgot password</Link></p>
           
           </div>
           

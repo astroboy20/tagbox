@@ -32,7 +32,7 @@ const HeaderFixed = () => {
   const { user } = useSelector((state) => state.auth);
 
   const token = user ? user.token || user  : "";
-  console.log(token);
+
 
   const fetchNotification = async () => {
     try {
@@ -44,18 +44,17 @@ const HeaderFixed = () => {
           },
         }
       );
-      console.log(response.data.data.notifications);
+
       setNotification(response.data.data)
     } catch (error) {
       console.log(error);
     }
   };
-  console.log("d",notifications?.length)
+  
   const notificationCount = notifications?.length
   useEffect(() => {
     if (token){
         fetchNotification();
-        console.log("d",notifications?.length)
     }
   
   }, [token, user]);

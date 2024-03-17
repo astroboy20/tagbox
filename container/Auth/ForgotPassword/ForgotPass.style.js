@@ -28,6 +28,11 @@ export const ForgotContainer = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+  .form{
+    display: flex;
+    gap: 20px;
+    justify-content:center ;
+  }
   .name {
     display: flex;
     gap: 30px;

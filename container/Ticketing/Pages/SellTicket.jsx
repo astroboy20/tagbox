@@ -46,7 +46,7 @@ const SellTicket = () => {
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const token = user ? user.data || user : "";
-  console.log("token", token);
+
 
   const generateId = () => {
     const id = uuidv4();

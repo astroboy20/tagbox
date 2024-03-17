@@ -2,7 +2,6 @@ import React from "react";
 import { NotificationStyle } from "./Notification.style";
 
 const NotificationContainer = ({ notifications }) => {
-  console.log("objectsss", notifications);
   const getTimeDifference = (timeinterval) => {
     const currentTime = new Date();
     const previousTime = new Date(timeinterval);
