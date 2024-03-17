@@ -12,9 +12,9 @@ import Image from "next/image";
 import Spinner from "@/components/Spinner/Spinner";
 import { ForgotContainer } from "./ForgotPass.style";
 import axios from "axios";
+import {toast} from "react-toastify"
 
 const ForgotPass = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,11 +30,12 @@ const ForgotPass = () => {
       await axios
         .post("https://tagbox.ployco.com/v1/user/reset-password",values)
         .then((response) => {
-          console.log(response.data);
+          toast.success(response.data?.message);
           setIsLoading(false);
+          router.push("/confirm-otp")
         })
         .catch((error) => {
-          console.log(error);
+          toast.error(error.response.data?.message);
           setIsLoading(false);
         });
     },

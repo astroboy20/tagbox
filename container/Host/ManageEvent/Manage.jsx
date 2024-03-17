@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 const Manage = () => {
   const { user } = useSelector((state) => state.auth);
   const [event, setEvent] = useState([]);
+  const [wishes, setWishes] = useState([]);
   const [ticket, setTicket] = useState([]);
+  const [wisheshId, setWishesId] = useState([]);
   const token = user ? user.data || user : "";
   const fetchEventData = async () => {
     try {
@@ -35,15 +37,55 @@ const Manage = () => {
       setTicket(response.data?.data);
     } catch (error) {}
   };
+  const fetchWishestData = async () => {
+    try {
+      const response = await axios.get(
+        "https://tagbox.ployco.com/v1/user/wishes",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setWishes(response.data?.data);
+    } catch (error) {}
+  };
+  const fetchIndividualWishestData = (qr_code) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = axios.get(
+        `https://tagbox.ployco.com/v1/attendee/${qr_code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setWishesId(response.data?.data);
+    } catch (error) {
+      console.error("Error fetching individual wishes data:", error);
+    }
+  };
+
+  // Accessing qr_code for all events
+  const qrCodes = event.map((event) => event.qr_code);
+  console.log(qrCodes);
 
   useEffect(() => {
     if (token) {
       fetchEventData();
       fetchTicketData();
+      fetchWishestData();
+
+      // Loop through qr_codes and fetch individual wishes data
+      for (const qrCode of qrCodes) {
+        fetchIndividualWishestData(qrCode);
+      }
     }
   }, [token]);
 
   const eventCount = event.length;
+  //   const wishesCount = wishes.length;
   const ticketCount = ticket.length;
 
   return (
@@ -64,15 +106,25 @@ const Manage = () => {
           <div className="sub-box-2">
             {" "}
             <p className="heading">Wishes Recieved</p>
-            <p>40</p>
+            <p>
+              0
+              {/* {wishesCount === 0
+                ? "0"
+                : wishesCount <= 9
+                ? `0${wishesCount}`
+                : wishesCount} */}
+            </p>
           </div>
           <div className="sub-box-3">
             <p className="heading">Tickets sold</p>
-            <p> {ticketCount === 0
+            <p>
+              {" "}
+              {ticketCount === 0
                 ? "0"
                 : ticketCount <= 9
                 ? `0${ticketCount}`
-                : ticketCount}</p>
+                : ticketCount}
+            </p>
           </div>
         </div>
         <div className="events">

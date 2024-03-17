@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Login_Icon, Logo, Logo_Blue, Register_Icon } from "@/assets";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
@@ -11,28 +11,19 @@ import { login, login_with_google, reset } from "@/features/authSlice";
 import Image from "next/image";
 import Spinner from "@/components/Spinner/Spinner";
 import { ForgotContainer } from "./ForgotPass.style";
+import axios from "axios";
+import {toast} from "react-toastify"
 
 const NewPass = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
-  const { message, isLoading, isError, isSuccess } = useSelector(
-    (state) => state.auth
-  );
+const [isLoading, setIsLaoding] = useState(false)
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
   const formik = useFormik({
     initialValues: {
-      new_password: "",
-      confirm_new: "",
+      password: "",
     },
     validationSchema: Yup.object().shape({
-     
-      new_password: Yup.string()
-        .required("Required")
-        .min(8, "Must be at least 8 characters")
-        .matches(
-          /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\[\]:;<>.,?])[A-Za-z0-9!@#$%^&*()_+={}\[\]:;<>.,?]{8,}$/,
-          "Must contain at least one uppercase letter and one special character"
-        ),
-      confirm_new: Yup.string()
+      password: Yup.string()
         .required("Required")
         .min(8, "Must be at least 8 characters")
         .matches(
@@ -41,25 +32,26 @@ const NewPass = () => {
         ),
     }),
     onSubmit: async (values) => {
-      await dispatch(login(values));
+      setIsLaoding(true)
+      await axios.post(
+        "https://tagbox.ployco.com/v1/user/new-password",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      ).then((response)=>{
+        toast.success(response.data?.message)
+        router.push("/login")
+         setIsLaoding(false)
+      }).catch((error)=>{
+        toast.error(error.response.data?.message)
+         setIsLaoding(false)
+      })
     },
   });
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.push("/host-event");
-    }
-    // dispatch(reset());
-  }, [isSuccess, router]);
-
-  const loginWithgoogle = async () => {
-    dispatch(login_with_google());
-    // router.push("/googleAuth")
-
-    // const response = await axios.post("https://tagbox.onrender.com/v1/google")
-    // const data = response.json()
-    // navigate(data.url)
-  };
   return (
     <ForgotContainer>
       <div className="right">
@@ -78,41 +70,24 @@ const NewPass = () => {
       <div className="left">
         {" "}
         <div className="header">
-          <span>Welcome back to Tagbox</span>
-          <p>Login to your account here...</p>
+          <span>New Password</span>
+          <p>Enter a new password here...</p>
         </div>
         <form onSubmit={formik.handleSubmit}>
-       
-          <Input
-            name={"new_password"}
-            label={"Enter New Password"}
-            value={formik.values.new_password}
-            onChange={formik.handleChange}
-            variant={"password"}
-            error={
-              formik.errors?.new_password && formik.errors.new_password
-                ? `${formik.errors.new_password}`
-                : null
-            }
-          />
           <Input
             name={"password"}
-            label={"Confirm New Password"}
-            value={formik.values.confirm_new}
+            label={"Enter New Password"}
+            value={formik.values.password}
             onChange={formik.handleChange}
             variant={"password"}
             error={
-              formik.errors?.confirm_new && formik.errors.confirm_new
-                ? `${formik.errors.confirm_new}`
+              formik.errors?.password && formik.errors.password
+                ? `${formik.errors.password}`
                 : null
             }
           />
 
-          <Button variant={"dark-button"}>
-            {" "}
-            {"Save"}
-          </Button>
-         
+          <Button variant={"dark-button"}> {isLoading ? <Spinner/> : "Save"}</Button>
         </form>
       </div>
     </ForgotContainer>
