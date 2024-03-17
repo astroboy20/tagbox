@@ -175,6 +175,13 @@ export const SingleEventStyle = styled.div`
     font-family: Space Grotesk;
     font-size: 16px;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.15);
+    justify-content:center ;
+  }
+  .wishlist .upload-aso .success-image {
+    display: flex;
+   gap:10px;
+   align-items:center ;
+
   }
   .wishlist input {
     border-radius: 6px;
@@ -429,7 +436,7 @@ export const SingleEventStyle = styled.div`
       width: 100%;
     }
     .wishlist .upload-aso label {
-      font-size: 10px;
+      font-size: 12px;
     }
     .bank .in-border {
     display: flex;

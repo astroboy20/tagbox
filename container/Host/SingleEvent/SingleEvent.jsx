@@ -25,6 +25,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
 import { BankList } from "./Bank";
 import { reset } from "@/features/authSlice";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
 
 const SingleEvent = ({ name, id }) => {
   const router = useRouter();
@@ -56,7 +57,9 @@ const SingleEvent = ({ name, id }) => {
     account_name: "",
   });
   const [loading, setLoading] = useState(false);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(
+    Array(eventDetails.dress_code.length).fill(false)
+  );
   const [message, setMessage] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const token = user ? user.data || user : "";
@@ -143,10 +146,8 @@ const SingleEvent = ({ name, id }) => {
 
   const handleCardChange = (type) => {
     if (type === "Upload") {
-      // If the user chooses to upload the card, set card type to "Upload"
       setCard("Upload");
     } else if (type === "Customize") {
-      // If the user chooses to customize the card, set card type to "Customize"
       setCard("Customize");
       setEventDetails((prevDetails) => ({
         ...prevDetails,
@@ -219,7 +220,6 @@ const SingleEvent = ({ name, id }) => {
     reader.readAsText(file);
   };
 
-
   const handleInviteImageChange = async (event) => {
     const imageFile = event.target.files[0];
     try {
@@ -289,9 +289,8 @@ const SingleEvent = ({ name, id }) => {
 
   const handleAsoItem = () => {
     const isAnyEmpty = eventDetails.dress_code.some(
-      (item) => item.dress === "" || item.dress_price.trim() === ""
+      (item) => item.dress === null || item.dress_price.trim() === ""
     );
-
     if (isAnyEmpty) {
       toast.error("Please fill out all the fields before adding another item.");
       return;
@@ -302,9 +301,14 @@ const SingleEvent = ({ name, id }) => {
     }));
   };
   const handleAsoImageChange = async (event, index) => {
+    console.log("handleAsoImageChange called with index:", index);
     const imageFile = event.target.files[0];
     try {
-      setImageLoading(true);
+      setImageLoading((prevState) => {
+        const newState = [...prevState];
+        newState[index] = true;
+        return newState;
+      });
       const formData = new FormData();
       formData.append("file", imageFile);
       formData.append("upload_preset", "za8tsrje");
@@ -312,6 +316,7 @@ const SingleEvent = ({ name, id }) => {
         "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
         formData
       );
+      console.log("Image upload response:", res.data);
       toast.success("Image upload successful");
       const imageUrl = res.data.secure_url;
 
@@ -322,12 +327,17 @@ const SingleEvent = ({ name, id }) => {
         dress_code: updatedDressCode,
       }));
     } catch (error) {
+      console.error("Error uploading image:", error);
       toast.error("Error uploading image:", error);
     } finally {
-      setImageLoading(false);
+      setImageLoading((prevState) => {
+        const newState = [...prevState];
+
+        newState[index] = false;
+        return newState;
+      });
     }
   };
-
   const handleAsoPriceChange = (event, index) => {
     const { value } = event.target;
     const updatedDressCode = [...eventDetails.dress_code];
@@ -372,6 +382,7 @@ const SingleEvent = ({ name, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const requiredFields = ["event_hashtag", "location", "date", "qr_code"];
     const missingFields = requiredFields.filter(
       (field) => !eventDetails[field]
@@ -623,14 +634,22 @@ const SingleEvent = ({ name, id }) => {
                       accept="image/*"
                       onChange={(e) => handleAsoImageChange(e, index)}
                       hidden
-                      id="upload"
+                      id={`upload-${index}`}
                     />
-                    <div className="upload-aso" for="upload">
-                      {" "}
-                      {imageLoading ? <BlackSpinner /> : <Upload />}
-                      <label for="upload">Choose file</label>
+                    <div className="upload-aso" htmlFor={`upload-${index}`}>
+                      {imageLoading[index] ? <BlackSpinner /> : ""}
+                      <label htmlFor={`upload-${index}`}>
+                        {item?.dress ? (
+                          <div className="success-image">
+                            {" "}
+                            <IoCheckmarkDoneCircle size={"20px"} />
+                            Image Uploaded
+                          </div>
+                        ) : (
+                          " Choose Image"
+                        )}
+                      </label>{" "}
                     </div>
-
                     <input
                       type="text"
                       placeholder="Price"
@@ -644,6 +663,7 @@ const SingleEvent = ({ name, id }) => {
                     />
                   </div>
                 ))}
+
                 <button
                   className="dark-button"
                   type="button"
