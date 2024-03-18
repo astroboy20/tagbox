@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const Manage = () => {
   const { user } = useSelector((state) => state.auth);
-  const [event, setEvent] = useState([]);
+  const [events, setEvent] = useState([]);
   const [wishes, setWishes] = useState([]);
   const [ticket, setTicket] = useState([]);
   const [wisheshId, setWishesId] = useState([]);
@@ -50,10 +50,18 @@ const Manage = () => {
       setWishes(response.data?.data);
     } catch (error) {}
   };
-  const fetchIndividualWishestData = (qr_code) => {
+
+  useEffect(() => {
+    if (token) {
+      fetchEventData();
+      fetchTicketData();
+      fetchWishestData();
+    }
+  }, [token]);
+
+  const fetchIndividualWishestData = async (qr_code) => {
     try {
-      const token = localStorage.getItem("token");
-      const response = axios.get(
+      const response = await axios.get(
         `https://tagbox.ployco.com/v1/attendee/${qr_code}`,
         {
           headers: {
@@ -61,31 +69,27 @@ const Manage = () => {
           },
         }
       );
-      setWishesId(response.data?.data);
+      return response.data?.data;
     } catch (error) {
       console.error("Error fetching individual wishes data:", error);
+      return null;
     }
   };
 
-  // Accessing qr_code for all events
-  const qrCodes = event.map((event) => event.qr_code);
-  console.log(qrCodes);
-
   useEffect(() => {
-    if (token) {
-      fetchEventData();
-      fetchTicketData();
-      fetchWishestData();
-
-      // Loop through qr_codes and fetch individual wishes data
-      for (const qrCode of qrCodes) {
-        fetchIndividualWishestData(qrCode);
-      }
+    if (events.length > 0) {
+      const qrCodes = events.map((event) => event.qr_code);
+      const wishesPromises = qrCodes.map((qr_code) =>
+        fetchIndividualWishestData(qr_code)
+      );
+      Promise.all(wishesPromises).then((wishesData) => {
+        setWishesId(wishesData.flat().filter((wish) => wish !== null));
+      });
     }
-  }, [token]);
+  }, [events]);
 
-  const eventCount = event.length;
-  //   const wishesCount = wishes.length;
+  const eventCount = events.length;
+  const wishesCount = wishes.length;
   const ticketCount = ticket.length;
 
   return (
@@ -107,12 +111,11 @@ const Manage = () => {
             {" "}
             <p className="heading">Wishes Recieved</p>
             <p>
-              0
-              {/* {wishesCount === 0
+              {wishesCount === 0
                 ? "0"
                 : wishesCount <= 9
                 ? `0${wishesCount}`
-                : wishesCount} */}
+                : wishesCount}
             </p>
           </div>
           <div className="sub-box-3">
@@ -129,28 +132,34 @@ const Manage = () => {
         </div>
         <div className="events">
           <span>Events Created</span>
-          <div className="created-events">
-            <p>#Kafidel24’s Wedding</p>
-            <button className="button">Edit</button>
-          </div>
-          <div className="created-events">
-            <p>Simi@50 Birthday Party</p>
-            <button className="button">Edit</button>
-          </div>
+          {events.map((event) => (
+            <>
+              <div className="created-events">
+                <p>{event?.event_hashtag}</p>
+                <button className="button">Edit</button>
+              </div>
+            </>
+          ))}
         </div>
         <div className="wishes">
-          <span> Wishes Received (40)</span>
+          <span>
+            {" "}
+            Wishes Received ({" "}
+            {wishesCount === 0
+              ? "0"
+              : wishesCount <= 9
+              ? `0${wishesCount}`
+              : wishesCount}
+            )
+          </span>
           <div className="wishes-created">
-            <div className="items">
-              <p className="a"> Adedamola</p>
-              <p className="b">
-                As you embark on this beautiful journey together, may your
-                marriage be a tapestry woven with love, trust, and
-                understanding. Wishing you a lifetime of happiness, cherished
-                moments, and a love that grows stronger with each passing day.
-                Congratulations and best wishes for a blissful future!
-              </p>
+          {wisheshId.map((wish) => (
+            <div key={wish._id} className="items">
+              <p className="a">{wish.name}</p>
+              <p className="b">{wish.wish}</p>
             </div>
+          ))}
+            
           </div>
         </div>
       </div>

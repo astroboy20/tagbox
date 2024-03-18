@@ -118,20 +118,19 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = axios.post(
+    axios.post(
         `https://tagbox.ployco.com/v1/attendee-response/${id}`,
         {
           attending: availability,
-          name: name,
-          Wish: wish,
+          name: senderName,
+          wish: wish,
         }
-      );
-      toast.success("Response submitted sucessfully");
-      router.push("/");
-    } catch (error) {
-      toast.error("Something went wrong");
-    }
+      ).then((response)=>{
+        toast.success("Response submitted sucessfully");
+        router.push("/");
+      }).catch ((error )=>{
+        toast.error("Something went wrong");
+      }) 
   };
   useEffect(() => {
     if (name === "Wedding") {

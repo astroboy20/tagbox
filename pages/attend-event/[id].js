@@ -31,7 +31,9 @@ const EventId = () => {
       console.log(error);
     }
   };
+  
 const eventId = eventDetails?.event_type
+
   const fetchEventName = async () => {
     try {
       const response = await axios.get(
