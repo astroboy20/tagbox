@@ -11,7 +11,8 @@ const Details = ({eventDetails}) => {
         const dateObj = new Date(inputDate);
         const options = { month: "long", day: "numeric", year: "numeric" };
         return dateObj.toLocaleDateString("en-US", options);
-      };{formatDate(eventDetails?.event_date)}
+      };
+      
   return (
     <AttendStyle>
         <div className='header'>
@@ -190,9 +191,9 @@ const Details = ({eventDetails}) => {
           </div>
         )}
 
-        <Button variant={"dark-button"} >
+        {/* <Button variant={"dark-button"} >
           RSVP
-        </Button>
+        </Button> */}
       </div>
     </AttendStyle>
   )
