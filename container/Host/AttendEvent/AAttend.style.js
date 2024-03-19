@@ -7,7 +7,7 @@ export const AttendStyle = styled.div`
   width: 100%;
   .header {
     margin-top: 80px;
-    background: url("/images/event-bg.svg");
+    background: url("/images/manage-bg.svg");
     height: 400px;
     display: flex;
     justify-content: center;
@@ -134,15 +134,39 @@ export const AttendStyle = styled.div`
     color: white; /* Text color */
   }
   .imageRef {
-      width: 400px;
-      height: 560px;
-    }
-    .dress{
-      display:flex ;
-      gap:20px;
-      align-items:center ;
-    }
+    width: 400px;
+    height: 560px;
+  }
+  .dress {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 
+  .wishes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .wishes span {
+    font-size: 24px;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .wishes-created .a {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .wishes-created .b {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: justify;
+  }
   @media screen and (max-width: 1024px) {
     .table {
       overflow-x: scroll;
@@ -155,7 +179,7 @@ export const AttendStyle = styled.div`
     }
     .header {
       margin-top: 75px;
-      background: url("/images/event-bg.svg");
+      background: url("/images/manage-bg.svg");
       height: 200px;
       background-size: cover;
       font-size: 24px;
@@ -212,7 +236,6 @@ export const Actions = styled.div`
     font-size: 16px;
     width: 100%;
     font-family: Space Grotesk;
-
   }
   .dark-button {
     border: none;
@@ -223,7 +246,6 @@ export const Actions = styled.div`
     font-weight: 500;
     line-height: 16px;
     font-family: Space Grotesk;
-
 
     color: #fff;
     cursor: pointer;

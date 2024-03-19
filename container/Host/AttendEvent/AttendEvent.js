@@ -273,6 +273,7 @@ const AttendEvent = ({ name, eventDetails, setEventDetails, id }) => {
                   placeholder="Enter your name"
                   className="input-input"
                   value={nameInput}
+                  style={{color:"black"}}
                   onChange={(e) => setNameInput(e.target.value)}
                 />
                 <input

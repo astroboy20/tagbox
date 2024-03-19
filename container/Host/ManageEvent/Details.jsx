@@ -1,24 +1,22 @@
-import React from 'react'
-import { ManageStyle } from './Manage.style'
-import { EventStyle } from '@/components/Input/Input.style'
-import { Button } from '@/components/Button/Button'
-import Image from "next/image"
-import { AttendStyle } from '../AttendEvent/AAttend.style'
+import React from "react";
+import { ManageStyle } from "./Manage.style";
+import { EventStyle } from "@/components/Input/Input.style";
+import { Button } from "@/components/Button/Button";
+import Image from "next/image";
+import { AttendStyle } from "../AttendEvent/AAttend.style";
 
-const Details = ({eventDetails}) => {
-    console.log(eventDetails)
-    const formatDate = (inputDate) => {
-        const dateObj = new Date(inputDate);
-        const options = { month: "long", day: "numeric", year: "numeric" };
-        return dateObj.toLocaleDateString("en-US", options);
-      };
-      
+const Details = ({ eventDetails, wishes }) => {
+  console.log(eventDetails);
+  const formatDate = (inputDate) => {
+    const dateObj = new Date(inputDate);
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    return dateObj.toLocaleDateString("en-US", options);
+  };
+  const wishesCount = wishes.length;
   return (
     <AttendStyle>
-        <div className='header'>
-            {eventDetails?.event_hashtag}
-        </div>
-          <div className="body">
+      <div className="header">{eventDetails?.event_hashtag}</div>
+      <div className="body">
         <div className="welcome">
           <span>
             Welcome to {eventDetails?.event_hashtag} {name}
@@ -32,25 +30,33 @@ const Details = ({eventDetails}) => {
           <span>Event location</span>
           <p>{eventDetails?.location}</p>
         </div>
-        <div className="location">
-          <span>Event Date</span>
-          <p>{formatDate(eventDetails?.event_date)}</p>
-          
-        </div>
-      
 
-        {/* <EventStyle>
-          <label>Copy unique entrance code for this event</label>
-          <div>
-            <input
-              id="date"
-              type="text"
-              name="date"
-              style={{ border: "none" }}
-            />
-            <p>Copy</p>
+        <div className="location">
+          <span>Event Date </span>
+          <p>{formatDate(eventDetails?.event_date)}</p>
+        </div>
+        {eventDetails?.amount_of_invitee === null ? (
+          ""
+        ) : (
+          <div className="location">
+            <span>Amount of invitee</span>
+            <p>{eventDetails?.amount_of_invitee}</p>
           </div>
-        </EventStyle> */}
+        )}
+
+        {eventDetails?.invitee_emails?.length === 0 ? (
+          ""
+        ) : (
+          <div className="location">
+            <span>Invitee Emails</span>
+            {eventDetails?.invitee_emails?.map((email, index) => (
+              <p>
+                {index + 1 + "."} {email}
+                {index !== eventDetails.invitee_emails.length - 1 && <br />}
+              </p>
+            ))}
+          </div>
+        )}
 
         {eventDetails?.wishlist?.items.length === 0 ? (
           ""
@@ -67,7 +73,6 @@ const Details = ({eventDetails}) => {
                       <th>Serial No.</th>
                       <th>Item</th>
                       <th>Link to purchase item</th>
-                      <th>Confirm commitment</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -76,19 +81,6 @@ const Details = ({eventDetails}) => {
                         <td>{index + 1}</td>
                         <td>{item.item_name}</td>
                         <td>{item.item_link}</td>
-                        <td>
-                          {item.confirmed ? (
-                            <button className="unconfirm">Confirmed</button>
-                          ) : (
-                            <button
-                              className="confirm"
-                            //   onClick={() => handleButtonClick(item._id)}
-                            //   disabled={disabledItem.includes(item._id)}
-                            >
-                              Confirm
-                            </button>
-                          )}
-                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -132,7 +124,9 @@ const Details = ({eventDetails}) => {
                   style={{ display: "flex", flexDirection: "column" }}
                 >
                   <p>Bank Name: {eventDetails?.bank_account?.bank_name}</p>
-                  <p>Acc Number: {eventDetails?.bank_account?.account_number}</p>
+                  <p>
+                    Acc Number: {eventDetails?.bank_account?.account_number}
+                  </p>
                   <p>Acc Name: {eventDetails?.bank_account?.account_name}</p>
                 </div>
 
@@ -160,7 +154,7 @@ const Details = ({eventDetails}) => {
                   objectFit="contain"
                   className="image"
                   alt="invitation card"
-                //   onLoad={() => setImageLoaded(true)}
+                  //   onLoad={() => setImageLoaded(true)}
                 />
                 <p>#{item.dress_price}</p>
               </div>
@@ -168,7 +162,6 @@ const Details = ({eventDetails}) => {
           </div>
         )}
 
-       
         {eventDetails?.invitation_card === "" ? (
           ""
         ) : (
@@ -190,13 +183,37 @@ const Details = ({eventDetails}) => {
             </button> */}
           </div>
         )}
+        {wishesCount === 0 ? (
+          ""
+        ) : (
+          <div className="wishes">
+            <span>
+              {" "}
+              Wishes Received ({" "}
+              {wishesCount === 0
+                ? "0"
+                : wishesCount <= 9
+                ? `0${wishesCount}`
+                : wishesCount}
+              )
+            </span>
+            <div className="wishes-created">
+              {wishes.map((wish) => (
+                <div key={wish._id} className="items">
+                  <p className="a">{wish.name}</p>
+                  <p className="b">{wish.wish}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* <Button variant={"dark-button"} >
           RSVP
         </Button> */}
       </div>
     </AttendStyle>
-  )
-}
+  );
+};
 
-export  {Details}
+export { Details };
