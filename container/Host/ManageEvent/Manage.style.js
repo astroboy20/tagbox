@@ -89,6 +89,10 @@ export const ManageStyle = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+  .link{
+    text-decoration:none ;
+    color:black ;
+  }
   .events span,
   .wishes span {
     font-size: 24px;

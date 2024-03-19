@@ -136,7 +136,7 @@ const Manage = () => {
           {events.map((event) => (
             <>
               <div className="created-events">
-                <Link href={`/manage-event/${event?.qr_code}`}>
+                <Link className="link" href={`/manage-event/${event?.qr_code}`}>
                   <p>{event?.event_hashtag}</p>
                 </Link>
 
