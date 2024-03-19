@@ -120,6 +120,7 @@ export const HeroContainer = styled.div`
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
+    padding:16px 10px ;
   }
   .button {
     display: flex;

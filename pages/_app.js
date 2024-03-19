@@ -13,7 +13,7 @@ import { ProfileOptionProvider } from "@/features/Axios/ProfileOptionContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/styles/globals.css";
 import TokenExpirationHandler from "@/container/ProtectedRoute/TokenExpirationHandler";
-import { ChakraProvider } from "@chakra-ui/react";
+
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -32,9 +32,9 @@ export default function App({ Component, pageProps }) {
               <ThemeProvider theme={theme}>
                 <GlobalStyles />
                 <ToastContainer />
-                <ChakraProvider>
+                
                   <Component {...pageProps} />
-                </ChakraProvider>
+                
               </ThemeProvider>
             </OptionProvider>
           </ProfileOptionProvider>

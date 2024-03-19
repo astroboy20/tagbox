@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Details } from "@/container/Host/ManageEvent";
 import { HeaderFixed } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
 
 const ManageId = () => {
   const router = useRouter();
@@ -52,9 +53,11 @@ const ManageId = () => {
 
   return (
     <>
-      <HeaderFixed />
-      <Details eventDetails={eventDetails} wishes={wishes} />
-      <Footer />
+      <ProtectedRoute>
+        <HeaderFixed />
+        <Details eventDetails={eventDetails} wishes={wishes} />
+        <Footer />
+      </ProtectedRoute>
     </>
   );
 };
