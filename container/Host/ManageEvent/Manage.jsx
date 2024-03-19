@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ManageStyle } from "./Manage.style";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const Manage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -59,34 +60,34 @@ const Manage = () => {
     }
   }, [token]);
 
-  const fetchIndividualWishestData = async (qr_code) => {
-    try {
-      const response = await axios.get(
-        `https://tagbox.ployco.com/v1/attendee/${qr_code}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return response.data?.data;
-    } catch (error) {
-      console.error("Error fetching individual wishes data:", error);
-      return null;
-    }
-  };
+  //   const fetchIndividualWishestData = async (qr_code) => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://tagbox.ployco.com/v1/attendee/${qr_code}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       return response.data?.data;
+  //     } catch (error) {
+  //       console.error("Error fetching individual wishes data:", error);
+  //       return null;
+  //     }
+  //   };
 
-  useEffect(() => {
-    if (events.length > 0) {
-      const qrCodes = events.map((event) => event.qr_code);
-      const wishesPromises = qrCodes.map((qr_code) =>
-        fetchIndividualWishestData(qr_code)
-      );
-      Promise.all(wishesPromises).then((wishesData) => {
-        setWishesId(wishesData.flat().filter((wish) => wish !== null));
-      });
-    }
-  }, [events]);
+  //   useEffect(() => {
+  //     if (events.length > 0) {
+  //       const qrCodes = events.map((event) => event.qr_code);
+  //       const wishesPromises = qrCodes.map((qr_code) =>
+  //         fetchIndividualWishestData(qr_code)
+  //       );
+  //       Promise.all(wishesPromises).then((wishesData) => {
+  //         setWishesId(wishesData.flat().filter((wish) => wish !== null));
+  //       });
+  //     }
+  //   }, [events]);
 
   const eventCount = events.length;
   const wishesCount = wishes.length;
@@ -135,14 +136,17 @@ const Manage = () => {
           {events.map((event) => (
             <>
               <div className="created-events">
-                <p>{event?.event_hashtag}</p>
+                <Link href={`/manage-event/${event?.qr_code}`}>
+                  <p>{event?.event_hashtag}</p>
+                </Link>
+
                 <button className="button">Edit</button>
               </div>
             </>
           ))}
         </div>
         <div className="wishes">
-          <span>
+          {/* <span>
             {" "}
             Wishes Received ({" "}
             {wishesCount === 0
@@ -151,15 +155,14 @@ const Manage = () => {
               ? `0${wishesCount}`
               : wishesCount}
             )
-          </span>
+          </span> */}
           <div className="wishes-created">
-          {wisheshId.map((wish) => (
+            {/* {wisheshId.map((wish) => (
             <div key={wish._id} className="items">
               <p className="a">{wish.name}</p>
               <p className="b">{wish.wish}</p>
             </div>
-          ))}
-            
+          ))} */}
           </div>
         </div>
       </div>
