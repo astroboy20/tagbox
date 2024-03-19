@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Details } from "@/container/Host/ManageEvent";
+import { HeaderFixed } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const ManageId = () => {
   const router = useRouter();
@@ -14,11 +16,14 @@ const ManageId = () => {
   const [wishes, setWishes] = useState([]);
   const fetchEvent = async () => {
     try {
-      const response = axios.get(`https://tagbox.ployco.com/v1/event/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `https://tagbox.ployco.com/v1/event/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setEventDetails(response.data?.data);
     } catch (error) {}
   };
@@ -44,10 +49,12 @@ const ManageId = () => {
       fetchIndividualWishestData();
     }
   }, [id]);
+
   return (
     <>
-      [id]:{id}
-      <Details eventDetails={eventDetails} wishes={wishes}/>
+      <HeaderFixed />
+      <Details eventDetails={eventDetails} wishes={wishes} />
+      <Footer />
     </>
   );
 };

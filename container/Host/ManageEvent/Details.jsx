@@ -3,10 +3,20 @@ import { ManageStyle } from './Manage.style'
 import { EventStyle } from '@/components/Input/Input.style'
 import { Button } from '@/components/Button/Button'
 import Image from "next/image"
+import { AttendStyle } from '../AttendEvent/AAttend.style'
 
 const Details = ({eventDetails}) => {
+    console.log(eventDetails)
+    const formatDate = (inputDate) => {
+        const dateObj = new Date(inputDate);
+        const options = { month: "long", day: "numeric", year: "numeric" };
+        return dateObj.toLocaleDateString("en-US", options);
+      };{formatDate(eventDetails?.event_date)}
   return (
-    <ManageStyle>
+    <AttendStyle>
+        <div className='header'>
+            {eventDetails?.event_hashtag}
+        </div>
           <div className="body">
         <div className="welcome">
           <span>
@@ -14,47 +24,19 @@ const Details = ({eventDetails}) => {
           </span>
         </div>
         <div className="location">
+          <span>Event Type</span>
+          <p>{eventDetails?.hosting_type}</p>
+        </div>
+        <div className="location">
           <span>Event location</span>
           <p>{eventDetails?.location}</p>
         </div>
-        <div className="avalability">
-          <span>Will you be available for this event?</span>
-          {/* <div className="input">
-            <div className="radio-input">
-              <input
-                type="radio"
-                id="yes"
-                value="Yes"
-                name="availability"
-                checked={availability === "Yes"}
-                onChange={() => handleEventTypeChange("Yes")}
-              />
-              <label>Yes, definitely</label>
-            </div>
-            <div className="radio-input">
-              <input
-                type="radio"
-                id="maybe"
-                value="Maybe"
-                name="availability"
-                checked={availability === "Maybe"}
-                onChange={() => handleEventTypeChange("Maybe")}
-              />
-              <label>Maybe</label>
-            </div>
-            <div className="radio-input">
-              <input
-                type="radio"
-                id="no"
-                value="No"
-                name="eventavailability"
-                checked={availability === "No"}
-                onChange={() => handleEventTypeChange("No")}
-              />
-              <label>No</label>
-            </div>
-          </div> */}
+        <div className="location">
+          <span>Event Date</span>
+          <p>{formatDate(eventDetails?.event_date)}</p>
+          
         </div>
+      
 
         {/* <EventStyle>
           <label>Copy unique entrance code for this event</label>
@@ -177,7 +159,7 @@ const Details = ({eventDetails}) => {
                   objectFit="contain"
                   className="image"
                   alt="invitation card"
-                  onLoad={() => setImageLoaded(true)}
+                //   onLoad={() => setImageLoaded(true)}
                 />
                 <p>#{item.dress_price}</p>
               </div>
@@ -185,33 +167,7 @@ const Details = ({eventDetails}) => {
           </div>
         )}
 
-        <EventStyle>
-          <label>Write a wish to the couples</label>
-          <div>
-            <input
-              id="date"
-              type="text"
-              name="date"
-            //   value={wish}
-            //   onChange={(e) => setWish(e.target.value)}
-              style={{ border: "none" }}
-            />
-          </div>
-        </EventStyle>
-
-        <EventStyle>
-          <label>Input Senders Name</label>
-          <div>
-            <input
-              id="date"
-              type="text"
-              name="date"
-              style={{ border: "none" }}
-            //   value={senderName}
-            //   onChange={(e) => setSenderName(e.target.value)}
-            />
-          </div>
-        </EventStyle>
+       
         {eventDetails?.invitation_card === "" ? (
           ""
         ) : (
@@ -238,7 +194,7 @@ const Details = ({eventDetails}) => {
           RSVP
         </Button>
       </div>
-    </ManageStyle>
+    </AttendStyle>
   )
 }
 
