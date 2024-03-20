@@ -93,6 +93,10 @@ export const ManageStyle = styled.div`
     text-decoration:none ;
     color:black ;
   }
+  .button-link{
+    text-decoration:none ;
+    color:black ;
+  }
   .events span,
   .wishes span {
     font-size: 24px;

@@ -140,7 +140,7 @@ const Manage = () => {
                   <p>{event?.event_hashtag}</p>
                 </Link>
 
-                <button className="button">Edit</button>
+                <Link className="button-link" href={`/edit-event/${event?._id}`}><button className="button">Edit</button></Link>
               </div>
             </>
           ))}
