@@ -91,8 +91,6 @@ const SingleEvent = ({ name, id }) => {
       setEventBg("header");
     }
   }, [name]);
-
-  // Function to generate a new unique ID and update QR code value
   const generateId = () => {
     const id = uuidv4();
     const trimmed_id = encodeURIComponent(id.trim().slice(0, 8));

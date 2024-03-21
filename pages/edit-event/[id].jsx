@@ -60,13 +60,15 @@ const EventId = () => {
     }
   };
 
+const eventId = events._id
+console.log(eventId)
   const name = eventName?.event_type;
 
   return (
     <>
       <ProtectedRoute>
         <HeaderFixed />
-        <EditEvent events={events} name={name} />
+        <EditEvent events={events} name={name} eventId={eventId}/>
         <Footer />
       </ProtectedRoute>
     </>

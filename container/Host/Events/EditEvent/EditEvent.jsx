@@ -11,44 +11,56 @@ import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
 import { BankList } from "../../SingleEvent/Bank";
 import { v4 as uuidv4 } from "uuid";
 import QRCode from "react-qr-code";
+import EventIv from "../../SingleEvent/EventIV";
+import { Button } from "@/components/Button/Button";
+import { useSelector } from "react-redux";
 
-const EditEvent = ({ events, name }) => {
-  console.log(name);
+const EditEvent = ({ events, name, eventId }) => {
+  const { user } = useSelector((state) => state.auth);
+  const token = user ? user.data || user : "";
   const [bgName, setBgName] = useState("");
   const [dressCode, setDressCode] = useState("");
-  const [uniqueId, setUniqueId] = useState("");
+  const [uniqueId, setUniqueId] = useState(events?.qr_code || "");
+  const [consultationTime, setConsultationTime] = useState("");
+  const [card, setCard] = useState("");
+  const [consultation_date] = useState("");
+  const [inviteeInput, setInviteeInput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(
     Array(events?.dress_code?.length).fill(false)
   );
   const [newDetails, setNewDetails] = useState({
     hosting_type: "",
-    date: "",
+    date: events?.event_date,
     event_hashtag: "",
     location: "",
     amount_of_invitee: "",
-    color_code: "",
     dress_code: {
       items: [],
     },
-    wishlist:{
-        items: [], 
+    wishlist: {
+      items: [],
     },
-    bank_name:"",
-    account_name:"",
-    account_number:"",
-    qr_code:""
+    bank_name: "",
+    account_name: "",
+    account_number: "",
+    qr_code: events?.qr_code,
+    invitee_emails: events?.invitee_emails,
+    consultationTime: events?.consultation,
+    invitation_card: events?.invitation_card,
   });
+  const imageInfo =
+    typeof window !== "undefined" && localStorage.getItem("imageUrl");
 
   useEffect(() => {
     if (events) {
       setNewDetails({
         hosting_type: events.hosting_type,
-        date: events.date,
+        date: events?.event_date,
         event_hashtag: events.event_hashtag,
         location: events.location,
         amount_of_invitee: events.amount_of_invitee,
-        color_code: events.color_code,
         dress_code: events.dress_code
           ? { items: [...events.dress_code.items] }
           : { items: [] },
@@ -56,20 +68,26 @@ const EditEvent = ({ events, name }) => {
           ? { items: [...events.wishlist.items] }
           : { items: [] },
         bank_name: events?.bank_account?.bank_name,
-        account_name:events?.bank_account?.account_name,
-        account_number:events?.bank_account?.account_number,
-        qr_code:events?.qr_code
+        account_name: events?.bank_account?.account_name,
+        account_number: events?.bank_account?.account_number,
+        qr_code: uniqueId,
+        invitee_emails: events?.invitee_emails,
+        invitation_card: events?.invitation_card,
       });
-
     }
-  }, [events]);
+  }, [events, uniqueId]);
+  console.log(events?.qr_code);
 
   useEffect(() => {
     if (name === "Birthday") {
       setBgName("birthday-header");
     }
   }, [name]);
-
+  const formatDate = (inputDate) => {
+    const dateObj = new Date(inputDate);
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    return dateObj.toLocaleDateString("en-US", options);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -179,16 +197,15 @@ const EditEvent = ({ events, name }) => {
 
   const handleWishlistItemChange = async (event, index, field) => {
     if (field === "name") {
-        const { value } = event.target;
-        const updatedWishList = [...newDetails.wishlist.items];
-        updatedWishList[index][field] = value;
-        setNewDetails((prevDetails) => ({
-          ...prevDetails,
-          dress_code: {
-            items: updatedWishList,
-          },
-        }));
-
+      const { value } = event.target;
+      const updatedWishList = [...newDetails.wishlist.items];
+      updatedWishList[index][field] = value;
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        dress_code: {
+          items: updatedWishList,
+        },
+      }));
     } else if (field === "link") {
       const { value } = event.target;
       const updatedWishList = [...newDetails.wishlist.items];
@@ -206,10 +223,7 @@ const EditEvent = ({ events, name }) => {
     setNewDetails((prevDetails) => ({
       ...prevDetails,
       wishlist: {
-        items: [
-          ...prevDetails.wishlist.items,
-          { name: "", link: "" },
-        ],
+        items: [...prevDetails.wishlist.items, { name: "", link: "" }],
       },
     }));
   };
@@ -224,18 +238,134 @@ const EditEvent = ({ events, name }) => {
   };
 
   const generateId = () => {
-    const id = uuidv4();
-    const trimmed_id = encodeURIComponent(id.trim().slice(0, 8));
-    setUniqueId(trimmed_id);
+    if (!uniqueId) {
+      const id = uuidv4();
+      const trimmed_id = encodeURIComponent(id.trim().slice(0, 8));
+      setUniqueId(trimmed_id);
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        qr_code: trimmed_id,
+      }));
+    }
+  };
+
+  useEffect(() => {
+    generateId();
+  }, []);
+  const handleInviteeChange = (inputType) => {
+    setInviteeInput(inputType);
+  };
+
+  const handleManualSubmit = () => {
+    const enteredEmail = document.getElementById("email");
+    if (enteredEmail && enteredEmail.value.trim() !== "") {
+      const email = enteredEmail.value.trim();
+      if (!newDetails.invitee_emails.includes(email)) {
+        setNewDetails((prevDetails) => ({
+          ...prevDetails,
+          invitee_emails: [...prevDetails.invitee_emails, email],
+        }));
+        enteredEmail.value = "";
+      } else {
+        toast.error("Email already exists.");
+      }
+    } else {
+      toast.error("Field cannot be empty");
+    }
+  };
+
+  const handleDeleteEmail = (email) => {
     setNewDetails((prevDetails) => ({
       ...prevDetails,
-      qr_code: `${trimmed_id}`,
+      invitee_emails: prevDetails.invitee_emails.filter((e) => e !== email),
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(newDetails);
+  const parseCSV = (csvContent) => {
+    const rows = csvContent.split("\n");
+    const emails = [];
+
+    rows.forEach((row) => {
+      const values = row.split(",");
+
+      const email = values[0].trim();
+
+      if (email) {
+        emails.push(email);
+      }
+    });
+
+    return emails;
+  };
+
+  const handleCvsUpload = async () => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const text = e.target.result;
+
+      const emails = parseCSV(text);
+
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        invitee_emails: emails,
+      }));
+    };
+
+    reader.readAsText(file);
+  };
+  const handleConsultationChange = (type) => {
+    if (type === "Yes") {
+      setConsultationTime("Yes");
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        consultation: consultation_date,
+      }));
+    } else {
+      setConsultationTime("");
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        consultation: "",
+      }));
+    }
+    setConsultationTime(type);
+  };
+
+  const handleCardChange = (type) => {
+    if (type === "Upload") {
+      setCard("Upload");
+    } else if (type === "Customize") {
+      setCard("Customize");
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        invitation_card: imageInfo ? imageInfo : "",
+      }));
+    }
+  };
+  const handleInviteImageChange = async (event) => {
+    const imageFile = event.target.files[0];
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("upload_preset", "za8tsrje");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dm42ixhsz/image/upload",
+        formData
+      );
+      toast.success("Image upload successful");
+      const imageUrl = res.data.secure_url;
+
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        invitation_card: imageUrl,
+      }));
+    } catch (error) {
+      toast.error("Error uploading image:", error);
+    } finally {
+      setLoading(false);
+    }
   };
   const copyTextToClipboard = async (text) => {
     if ("clipboard" in navigator) {
@@ -259,6 +389,30 @@ const EditEvent = ({ events, name }) => {
         toast.warning(error);
       });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newDetails);
+
+    axios
+      .post(`https://tagbox.ployco.com/v1/edit-event/${eventId}`, newDetails, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        // setMessage(response?.data.message);
+        // setLoading(false);
+        // setModalShow(true);
+      })
+      .catch((error) => {
+        // toast.error(error.response.data?.message);
+        // setError(error.response.data?.message);
+        // setLoading(false);
+        // setModalShow(false);
+      });
+  };
+
   return (
     <EditStyle>
       <div className={bgName}>{name}</div>
@@ -325,8 +479,8 @@ const EditEvent = ({ events, name }) => {
                 onChange={handleChange}
               />
               {/* Render the date value directly */}
-              <span>{events?.event_date}</span>
             </div>
+            <span>{formatDate(events?.event_date)}</span>
           </EventStyle>
 
           <Input
@@ -345,19 +499,70 @@ const EditEvent = ({ events, name }) => {
             name="amount_of_invitee"
             onChange={handleChange}
           />
-          <EventStyle>
-            <label>Color Code</label>
-            <p className="input-p">Input your color code</p>
-            <div>
-              <input
-                style={{ border: "none", width: "100%" }}
-                type="text"
-                value={newDetails.color_code}
-                name="color_code"
-                onChange={handleChange}
-              />
+
+          <div className="event-display">
+            <div>How would you like to input the details of your invitees?</div>
+
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="manual"
+                  value="Manual"
+                  name="invitee"
+                  checked={inviteeInput === "Manual"}
+                  onChange={() => handleInviteeChange("Manual")}
+                />
+                <label>Manually (add email of invitees manually)</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="cvs"
+                  value="CSV"
+                  name="invitee"
+                  checked={inviteeInput === "CSV"}
+                  onChange={() => handleInviteeChange("CSV")} 
+                />
+                <label>Upload the csv file of all invitees</label>
+              </div>
             </div>
-          </EventStyle>
+          </div>
+
+          {inviteeInput === "Manual" && (
+            <EventStyle>
+              <label>Add email address of invitees manually</label>
+              <div>
+                <EventDiv type="text" id="email" />
+
+                <p className="button" onClick={handleManualSubmit}>
+                  Add
+                </p>
+              </div>
+              <div className="email">
+                {newDetails.invitee_emails.map((email, index) => (
+                  <div className="email-details" key={index}>
+                    {email}
+
+                    <MdOutlineCancel
+                      onClick={() => handleDeleteEmail(email)}
+                      fontSize={"30px"}
+                      color="red"
+                    />
+                  </div>
+                ))}
+              </div>
+            </EventStyle>
+          )}
+
+          {inviteeInput === "CSV" && (
+            <EventStyle>
+              <label>Upload CSV file containing attendees email address</label>
+              <div>
+                <input type="file" accept=".csv" onChange={handleCvsUpload} />
+              </div>
+            </EventStyle>
+          )}
 
           <div className="event-display">
             <div>Dress code</div>
@@ -444,7 +649,60 @@ const EditEvent = ({ events, name }) => {
               </div>
             </div>
           )}
-   <div className="wishlist">
+          <div className="event-display">
+            <div>Consultation and Planning</div>
+            <span>
+              We have put in place consultation services with various options to
+              help with the proper planning of your event. Would you like to
+              book us?{" "}
+            </span>
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="consultation-yes"
+                  value="Yes"
+                  name="consultationType"
+                  checked={consultationTime === "Yes"}
+                  onChange={() => handleConsultationChange("Yes")}
+                />
+                <label htmlFor="consultation-yes">Yes</label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="consultation-no"
+                  value="No"
+                  name="consultationType"
+                  checked={consultationTime === "No"}
+                  onChange={() => handleConsultationChange("No")}
+                />
+                <label htmlFor="consultation-no">No</label>
+              </div>
+            </div>
+          </div>
+
+          {consultationTime === "Yes" && (
+            <EventStyle>
+              <label>
+                Choose your preferred day and time of your consultation.
+              </label>
+              <div>
+                <input
+                  id="date"
+                  type="date"
+                  name="consultation"
+                  value={newDetails.consultation}
+                  onChange={handleChange}
+                  // style={{ border: "none" }}
+                />
+                <span>
+                  <Date />
+                </span>
+              </div>
+            </EventStyle>
+          )}
+          <div className="wishlist">
             <span>Wishlist</span>
             <label>
               Curate your wishlist here and have well wishers gift you with ease
@@ -524,8 +782,8 @@ const EditEvent = ({ events, name }) => {
             </div>
           </div>
 
-            {/* QR code */}
-            <EventStyle>
+          {/* QR code */}
+          <EventStyle>
             <label>Generate QR code and customized link for your event</label>
 
             <div>
@@ -556,11 +814,12 @@ const EditEvent = ({ events, name }) => {
                   name="qr_code"
                   id="url"
                   onChange={generateId}
+                  readOnly
                 />
               </div>
 
               <div className="copy-generate">
-                <p onClick={generateId}>Generate</p>
+                {/* <p onClick={generateId}>Generate</p> */}
                 <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
               </div>
             </div>
@@ -568,7 +827,71 @@ const EditEvent = ({ events, name }) => {
 
           {/* end */}
 
-          <button>submit</button>
+          <div className="event-display">
+            <div>Invitation Card</div>
+            <div className="input">
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="iv"
+                  value="Customize"
+                  name="Customize"
+                  checked={card === "Customize"}
+                  onChange={() => handleCardChange("Customize")}
+                />
+                <label htmlFor="Customize">
+                  Select and Customize your invitation card
+                </label>
+              </div>
+              <div className="radio-input">
+                <input
+                  type="radio"
+                  id="iv"
+                  value="Upload"
+                  name="invitation card"
+                  checked={card === "Upload"}
+                  onChange={() => handleCardChange("Upload")}
+                />
+                <label htmlFor="Upload">Upload your invitation card</label>
+              </div>
+            </div>
+            {card === "Customize" && (
+              <>
+                <EventIv name={name} uniqueId={uniqueId} />
+              </>
+            )}
+
+            {card === "Upload" && (
+              <div className="image-button">
+                <div className="buttons">
+                  <input
+                    onChange={handleInviteImageChange}
+                    id="upload"
+                    accept="image/*"
+                    type="file"
+                    placeholder="Upload invitation card"
+                    hidden
+                  />
+                  <div className="upload-aso" htmlFor={"upload"}>
+                    {loading ? <BlackSpinner /> : ""}
+                    <label htmlFor={`upload`}>
+                      {newDetails.invitation_card ? (
+                        <div className="success-image">
+                          {" "}
+                          <IoCheckmarkDoneCircle size={"20px"} />
+                          Image Uploaded
+                        </div>
+                      ) : (
+                        " Choose Image"
+                      )}
+                    </label>{" "}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Button variant="dark-button">Update Response</Button>
         </form>
       </div>
     </EditStyle>

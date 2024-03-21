@@ -161,7 +161,7 @@ export const EventDiv = styled.input`
   text-align:left ;
 
   @media screen and (max-width: 1024px) {
-    width: auto ;
+    width: 100% ;
     
   }
   
