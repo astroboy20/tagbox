@@ -39,7 +39,6 @@ const ConfirmOtp = () => {
     try {
         const response  = await axios.post("https://tagbox.ployco.com/v1/user/confirm-otp", otp)
         toast.success(response.data.message)
-        console.log(response.data.data)
         setDataToken(response.data?.data)
         router.push("/new-password")
     } catch (error) {

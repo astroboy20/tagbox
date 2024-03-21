@@ -6,7 +6,7 @@ import Image from "next/image";
 import { AttendStyle } from "../AttendEvent/AAttend.style";
 
 const Details = ({ eventDetails, wishes }) => {
-  console.log(eventDetails);
+
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);
     const options = { month: "long", day: "numeric", year: "numeric" };

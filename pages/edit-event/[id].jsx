@@ -6,12 +6,15 @@ import { useRouter } from "next/router";
 import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
 import { EditEvent } from "@/container/Host/Events/EditEvent";
 import { useSelector } from "react-redux";
+import Spinner from "@/components/Spinner/Spinner"; // Import Spinner component
+import { EditSpinner } from "@/components/Spinner/EditSpinner";
 
 const EventId = () => {
   const router = useRouter();
   const { id } = router.query;
   const [events, setEvent] = useState({});
   const [eventName, setEventName] = useState("");
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
@@ -26,9 +29,11 @@ const EventId = () => {
           },
         }
       );
-      setEvent(response.data.data || {}); // Ensure setting an empty object if data is not available
+      setEvent(response.data.data || {}); 
+      setLoading(false); 
     } catch (error) {
       console.log(error);
+      setLoading(false); 
     }
   };
 
@@ -42,7 +47,7 @@ const EventId = () => {
     if (events && events.event_type) {
       fetchEvent(events.event_type);
     }
-  }, [events]); // Add events as a dependency here
+  }, [events]); 
 
   const fetchEvent = async (eventId) => {
     try {
@@ -54,21 +59,24 @@ const EventId = () => {
           },
         }
       );
-      setEventName(response.data.data || ""); // Ensure setting an empty string if data is not available
+      setEventName(response.data.data || ""); 
     } catch (error) {
       console.log(error);
     }
   };
 
-const eventId = events._id
-console.log(eventId)
+  const eventId = events._id;
   const name = eventName?.event_type;
 
   return (
     <>
       <ProtectedRoute>
         <HeaderFixed />
-        <EditEvent events={events} name={name} eventId={eventId}/>
+        {loading ? ( 
+          <EditSpinner />
+        ) : (
+          <EditEvent events={events} name={name} eventId={eventId} />
+        )}
         <Footer />
       </ProtectedRoute>
     </>

@@ -18,11 +18,9 @@ import { Modal } from "@/components/Modal";
 import { Buttons } from "../../SingleEvent/SingleEvent.style";
 import { Actions } from "../../AttendEvent/AAttend.style";
 import Spinner from "@/components/Spinner/Spinner";
+import Link from "next/link";
 
 const EditEvent = ({ events, name, eventId }) => {
-
-  
-      
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
   const [eventBg, setEventBg] = useState("");
@@ -34,8 +32,9 @@ const EditEvent = ({ events, name, eventId }) => {
   const [inviteeInput, setInviteeInput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [message, setMessage] = useState("")
   const [imageLoading, setImageLoading] = useState(
     Array(events?.dress_code?.length).fill(false)
   );
@@ -45,12 +44,8 @@ const EditEvent = ({ events, name, eventId }) => {
     event_hashtag: "",
     location: "",
     amount_of_invitee: "",
-    dress_code: {
-      items: [],
-    },
-    wishlist: {
-      items: [],
-    },
+    dress_code: [],
+    wishlist: [],
     bank_name: "",
     account_name: "",
     account_number: "",
@@ -62,27 +57,27 @@ const EditEvent = ({ events, name, eventId }) => {
   const imageInfo =
     typeof window !== "undefined" && localStorage.getItem("imageUrl");
 
-    useEffect(() => {
-      if (name === "Wedding") {
-        setEventBg("header ");
-      } else if (name === "Birthday") {
-        setEventBg("birthday-header");
-      } else if (name === "Graduation") {
-        setEventBg("graduation-header ");
-      } else if (name === "House Warming") {
-        setEventBg("header ");
-      } else if (name === "Conference and Meetings") {
-        setEventBg("conference-header ");
-      } else if (name === "Baby Shower") {
-        setEventBg("shower-header ");
-      } else if (name === "Hangout") {
-        setEventBg("hangout-header ");
-      } else if (name === "Others") {
-        setEventBg("header ");
-      } else {
-        setEventBg("header");
-      }
-    }, [name]);
+  useEffect(() => {
+    if (name === "Wedding") {
+      setEventBg("header ");
+    } else if (name === "Birthday") {
+      setEventBg("birthday-header");
+    } else if (name === "Graduation") {
+      setEventBg("graduation-header ");
+    } else if (name === "House Warming") {
+      setEventBg("header ");
+    } else if (name === "Conference and Meetings") {
+      setEventBg("conference-header ");
+    } else if (name === "Baby Shower") {
+      setEventBg("shower-header ");
+    } else if (name === "Hangout") {
+      setEventBg("hangout-header ");
+    } else if (name === "Others") {
+      setEventBg("header ");
+    } else {
+      setEventBg("header");
+    }
+  }, [name]);
 
   useEffect(() => {
     if (events) {
@@ -92,12 +87,8 @@ const EditEvent = ({ events, name, eventId }) => {
         event_hashtag: events.event_hashtag,
         location: events.location,
         amount_of_invitee: events.amount_of_invitee,
-        dress_code: events.dress_code
-          ? { items: [...events.dress_code.items] }
-          : { items: [] },
-        wishlist: events.wishlist
-          ? { items: [...events.wishlist.items] }
-          : { items: [] },
+        dress_code: events.dress_code?.items,
+        wishlist: events.wishlist?.items,
         bank_name: events?.bank_account?.bank_name,
         account_name: events?.bank_account?.account_name,
         account_number: events?.bank_account?.account_number,
@@ -109,7 +100,6 @@ const EditEvent = ({ events, name, eventId }) => {
   }, [events, uniqueId]);
   console.log(events?.qr_code);
 
- 
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);
     const options = { month: "long", day: "numeric", year: "numeric" };
@@ -132,16 +122,22 @@ const EditEvent = ({ events, name, eventId }) => {
   };
 
   const handleDressCodeChange = (type) => {
-    setDressCode(type);
     if (type === "Yes") {
+      // ... rest of the code
+    } else {
+      // If the user selects 'No', keep the existing dress_code array
       setNewDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: {
-          items: prevDetails.dress_code.items,
-        },
+        dress_code: events?.dress_code?.items || [],
       }));
     }
+    setDressCode(type);
   };
+  
+  
+  
+  
+  
 
   const handleDressCodeItemChange = async (event, index, field) => {
     if (field === "dress") {
@@ -163,14 +159,12 @@ const EditEvent = ({ events, name, eventId }) => {
 
         const imageUrl = res.data.secure_url;
 
-        const updatedDressCode = [...newDetails.dress_code.items];
+        const updatedDressCode = [...newDetails.dress_code];
         updatedDressCode[index][field] = imageUrl;
 
         setNewDetails((prevDetails) => ({
           ...prevDetails,
-          dress_code: {
-            items: updatedDressCode,
-          },
+          dress_code: updatedDressCode,
         }));
 
         toast.success("Image upload successful");
@@ -190,77 +184,79 @@ const EditEvent = ({ events, name, eventId }) => {
       }
     } else if (field === "dress_price") {
       const { value } = event.target;
-      const updatedDressCode = [...newDetails.dress_code.items];
+      const updatedDressCode = [...newDetails.dress_code];
       updatedDressCode[index][field] = value;
       setNewDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: {
-          items: updatedDressCode,
-        },
+        dress_code: updatedDressCode,
       }));
     }
   };
 
   const handleAddDressCodeItem = () => {
-    setNewDetails((prevDetails) => ({
-      ...prevDetails,
-      dress_code: {
-        items: [
-          ...prevDetails.dress_code.items,
-          { dress: "", dress_price: "" },
-        ],
-      },
-    }));
+    const allItemsFilled = newDetails.dress_code.every(
+      (item) => item.dress && item.dress_price
+    );
+  
+    if (allItemsFilled) {
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        dress_code: [...prevDetails.dress_code, { dress: null, dress_price: "" }],
+      }));
+    } else {
+      toast.error("Please fill all existing dress code items before adding a new one.");
+    }
   };
-
-  const handleRemoveDressCodeItem = (index) => {
+  const handleRemoveDressCodeItem = (indexToRemove) => {
     setNewDetails((prevDetails) => ({
       ...prevDetails,
-      dress_code: {
-        items: prevDetails.dress_code.items.filter((_, i) => i !== index),
-      },
+      dress_code: prevDetails.dress_code.filter(
+        (_, index) => index !== indexToRemove
+      ),
     }));
   };
 
   const handleWishlistItemChange = async (event, index, field) => {
-    if (field === "name") {
+    if (field === "item_name") {
       const { value } = event.target;
-      const updatedWishList = [...newDetails.wishlist.items];
+      const updatedWishList = [...newDetails.wishlist];
       updatedWishList[index][field] = value;
       setNewDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: {
-          items: updatedWishList,
-        },
+        dress_code: updatedWishList,
       }));
-    } else if (field === "link") {
+    } else if (field === "item_link") {
       const { value } = event.target;
-      const updatedWishList = [...newDetails.wishlist.items];
+      const updatedWishList = [...newDetails.wishlist];
       updatedWishList[index][field] = value;
       setNewDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: {
-          items: updatedWishList,
-        },
+        dress_code: updatedWishList,
       }));
     }
   };
 
   const handleWishlistItem = () => {
-    setNewDetails((prevDetails) => ({
-      ...prevDetails,
-      wishlist: {
-        items: [...prevDetails.wishlist.items, { name: "", link: "" }],
-      },
-    }));
+    const allItemsFilled = newDetails.wishlist.every(
+      (item) => item.item_name && item.item_link
+    );
+  
+    if (allItemsFilled) {
+      setNewDetails((prevDetails) => ({
+        ...prevDetails,
+        wishlist: [...prevDetails.wishlist, { item_name: "", item_link: "" }],
+      }));
+    } else {
+      toast.error("Please fill all existing wishlist items before adding a new one.");
+    }
   };
 
-  const handleRemoveWishListItem = (index) => {
+  const handleRemoveWishListItem = (indexToRemove) => {
     setNewDetails((prevDetails) => ({
       ...prevDetails,
-      wishlist: {
-        items: prevDetails.wishlist.items.filter((_, i) => i !== index),
-      },
+      wishlist: prevDetails.wishlist.filter(
+        (_, index) => index !== indexToRemove
+      ),
     }));
   };
 
@@ -416,37 +412,36 @@ const EditEvent = ({ events, name, eventId }) => {
         toast.warning(error);
       });
   };
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     setIsLoading(true);
     setModalShow(true);
-  
-   
-     if (newDetails){
-       axios.post(
-        `https://tagbox.ployco.com/v1/edit-event1/${eventId}`,
-        newDetails,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      ).then((response)=>{
-        console.log(response.data)
-        setIsLoading(false);
-        setModalShow(true);
 
-      }).catch((error)=>{
-        console.log(error.response.data)
-        setIsLoading(false);
-        setModalShow(false);
-      })
-     }
-     
-  
+    if (newDetails) {
+      axios
+        .post(
+          `https://tagbox.ployco.com/v1/edit-event/${eventId}`,
+          newDetails,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          setMessage("Event edited sucessfully");
+          // console.log(response.message);
+          setIsLoading(false);
+          setModalShow(true);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          setIsLoading(false);
+          setModalShow(false);
+        });
+    }
   };
-  
 
   return (
     <EditStyle>
@@ -557,7 +552,7 @@ const EditEvent = ({ events, name, eventId }) => {
                   value="CSV"
                   name="invitee"
                   checked={inviteeInput === "CSV"}
-                  onChange={() => handleInviteeChange("CSV")} 
+                  onChange={() => handleInviteeChange("CSV")}
                 />
                 <label>Upload the csv file of all invitees</label>
               </div>
@@ -632,47 +627,48 @@ const EditEvent = ({ events, name, eventId }) => {
             <div className="wishlist">
               <span>Upload dress-code (Aso-Ebi)</span>
               <div className="input-container">
-                {newDetails.dress_code.items.map((item, index) => (
-                  <div className="input" key={index}>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) =>
-                        handleDressCodeItemChange(e, index, "dress")
-                      }
-                      hidden
-                      id={`upload-${index}`}
-                    />
-                    <div className="upload-aso" htmlFor={`upload-${index}`}>
-                      {imageLoading[index] ? <BlackSpinner /> : ""}
-                      <label htmlFor={`upload-${index}`}>
-                        {item?.dress ? (
-                          <div className="success-image">
-                            {" "}
-                            <IoCheckmarkDoneCircle size={"20px"} />
-                            Image Uploaded
-                          </div>
-                        ) : (
-                          " Choose Image"
-                        )}
-                      </label>{" "}
+                {newDetails.dress_code &&
+                  newDetails.dress_code.map((item, index) => (
+                    <div className="input" key={index}>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleDressCodeItemChange(e, index, "dress")
+                        }
+                        hidden
+                        id={`upload-${index}`}
+                      />
+                      <div className="upload-aso" htmlFor={`upload-${index}`}>
+                        {imageLoading[index] ? <BlackSpinner /> : ""}
+                        <label htmlFor={`upload-${index}`}>
+                          {item?.dress ? (
+                            <div className="success-image">
+                              {" "}
+                              <IoCheckmarkDoneCircle size={"20px"} />
+                              Image Uploaded
+                            </div>
+                          ) : (
+                            " Choose Image"
+                          )}
+                        </label>{" "}
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Price"
+                        value={item.dress_price}
+                        onChange={(e) =>
+                          handleDressCodeItemChange(e, index, "dress_price")
+                        }
+                      />
+                      <MdOutlineCancel
+                        type="button"
+                        onClick={() => handleRemoveDressCodeItem(index)}
+                        fontSize={"60px"}
+                        color="red"
+                      />
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Price"
-                      value={item.dress_price}
-                      onChange={(e) =>
-                        handleDressCodeItemChange(e, index, "dress_price")
-                      }
-                    />
-                    <MdOutlineCancel
-                      type="button"
-                      onClick={() => handleRemoveDressCodeItem(index)}
-                      fontSize={"60px"}
-                      color="red"
-                    />
-                  </div>
-                ))}
+                  ))}
                 {/* Add a button to add new dress code items */}
                 <button
                   className="dark-button"
@@ -745,31 +741,32 @@ const EditEvent = ({ events, name, eventId }) => {
             </label>
             {/* <label>Upload image of preferred items</label> */}
             <div className="input-container">
-              {newDetails.wishlist.items.map((item, index) => (
-                <div className="input" key={index}>
-                  <input
-                    type="text"
-                    name="item_name"
-                    placeholder={"Item Name"}
-                    value={item.item_name}
-                    onChange={(e) => handleWishlistItemChange(e, index)}
-                  />
+              {newDetails.wishlist &&
+                newDetails.wishlist.map((item, index) => (
+                  <div className="input" key={index}>
+                    <input
+                      type="text"
+                      name="item_name"
+                      placeholder={"Item Name"}
+                      value={item.item_name}
+                      onChange={(e) => handleWishlistItemChange(e, index, "item_name")}
+                    />
 
-                  <input
-                    type="text"
-                    name="item_link"
-                    value={item.item_link}
-                    placeholder={"Item Link"}
-                    onChange={(e) => handleWishlistItemChange(e, index)}
-                  />
+                    <input
+                      type="text"
+                      name="item_link"
+                      value={item.item_link}
+                      placeholder={"Item Link"}
+                      onChange={(e) => handleWishlistItemChange(e, index, "item_link")}
+                    />
 
-                  <MdOutlineCancel
-                    onClick={() => handleRemoveWishListItem(index)}
-                    fontSize={"60px"}
-                    color="red"
-                  />
-                </div>
-              ))}
+                    <MdOutlineCancel
+                      onClick={() => handleRemoveWishListItem(index)}
+                      fontSize={"60px"}
+                      color="red"
+                    />
+                  </div>
+                ))}
               {/* <br /> */}
               <button
                 className="dark-button"
@@ -935,23 +932,14 @@ const EditEvent = ({ events, name, eventId }) => {
         ) : (
           <>
             <Actions className="actions">
-              {/* <span>{message}</span> */}
+              <span>{message}</span>
               <Buttons className="buttons">
                 <button className={"white-btn"}>
                   {" "}
-                  {/* <Link
-                    className="link-white"
-                    href={`/attend-event/${decodeURIComponent(uniqueId)}`}
-                  >
+                  <Link className="link-white" href={`/manage-event`}>
                     {" "}
                     View Event
-                  </Link> */}
-                </button>
-                <button className={"dark-button"}>
-                  {/* <Link className="link" href={"/host-event"}>
-                    {" "}
-                    Continue
-                  </Link> */}
+                  </Link>
                 </button>
               </Buttons>
             </Actions>
