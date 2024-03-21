@@ -196,4 +196,35 @@ gap:30px;
     cursor: pointer;
   }
 
+  .bank {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .bank select {
+    /* width:20% ; */
+    border: 1px solid black;
+    padding: 16px 20px;
+    border-radius: 4px;
+  }
+  .bank .in-border {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bank .input-border {
+    box-shadow: none;
+    /* border:none ; */
+    border-bottom: 2px solid black;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0px;
+    padding: 0 ;
+    margin-top:5% ;
+  }
+  .bank .input-border label {
+    font-size: 20px;
+  }
+
 `

@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { EditStyle } from "./EditEvent.style";
 import { Input } from "@/components/Input/Input";
-import { EventStyle } from "@/components/Input/Input.style";
+import { EventDiv, EventStyle } from "@/components/Input/Input.style";
 import { Location } from "@/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { MdOutlineCancel } from "react-icons/md";
 import { BlackSpinner } from "@/components/Spinner/BlackSpinner";
+import { BankList } from "../../SingleEvent/Bank";
+import { v4 as uuidv4 } from "uuid";
+import QRCode from "react-qr-code";
 
 const EditEvent = ({ events, name }) => {
   console.log(name);
   const [bgName, setBgName] = useState("");
   const [dressCode, setDressCode] = useState("");
+  const [uniqueId, setUniqueId] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
   const [imageLoading, setImageLoading] = useState(
     Array(events?.dress_code?.length).fill(false)
   );
@@ -29,6 +34,10 @@ const EditEvent = ({ events, name }) => {
     wishlist:{
         items: [], 
     },
+    bank_name:"",
+    account_name:"",
+    account_number:"",
+    qr_code:""
   });
 
   useEffect(() => {
@@ -46,7 +55,12 @@ const EditEvent = ({ events, name }) => {
         wishlist: events.wishlist
           ? { items: [...events.wishlist.items] }
           : { items: [] },
+        bank_name: events?.bank_account?.bank_name,
+        account_name:events?.bank_account?.account_name,
+        account_number:events?.bank_account?.account_number,
+        qr_code:events?.qr_code
       });
+
     }
   }, [events]);
 
@@ -209,9 +223,41 @@ const EditEvent = ({ events, name }) => {
     }));
   };
 
+  const generateId = () => {
+    const id = uuidv4();
+    const trimmed_id = encodeURIComponent(id.trim().slice(0, 8));
+    setUniqueId(trimmed_id);
+    setNewDetails((prevDetails) => ({
+      ...prevDetails,
+      qr_code: `${trimmed_id}`,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(newDetails);
+  };
+  const copyTextToClipboard = async (text) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  };
+
+  const handleCopyClick = () => {
+    const inputField = document.getElementById("url");
+    const textToCopy = inputField.value;
+    copyTextToClipboard(textToCopy)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((error) => {
+        toast.warning(error);
+      });
   };
   return (
     <EditStyle>
@@ -441,10 +487,10 @@ const EditEvent = ({ events, name }) => {
               </button>
             </div>
 
-            {/* <label>In lieu of cash donation, input account details</label>
+            <label>In lieu of cash donation, input account details</label>
             <div className="bank">
               <select
-                value={eventDetails.bank_name}
+                value={newDetails.bank_name}
                 onChange={handleChange}
                 name="bank_name"
               >
@@ -461,7 +507,7 @@ const EditEvent = ({ events, name }) => {
                   <input
                     className="input-border"
                     name="account_name"
-                    value={eventDetails.account_name}
+                    value={newDetails.account_name}
                     onChange={handleChange}
                   />
                 </div>
@@ -470,13 +516,58 @@ const EditEvent = ({ events, name }) => {
                   <input
                     className="input-border"
                     name="account_number"
-                    value={eventDetails.account_number}
+                    value={newDetails.account_number}
                     onChange={handleChange}
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
+
+            {/* QR code */}
+            <EventStyle>
+            <label>Generate QR code and customized link for your event</label>
+
+            <div>
+              <div className="qr-input">
+                <div
+                  style={{
+                    height: "100%",
+                    margin: "2px 0",
+                    maxWidth: 64,
+                    width: "100%",
+                    textAlign: "left",
+                  }}
+                >
+                  {uniqueId && (
+                    <QRCode
+                      size={256}
+                      style={{
+                        height: "auto",
+                      }}
+                      value={newDetails.qr_code}
+                      viewBox={`0 0 256 256`}
+                    />
+                  )}
+                </div>
+                <EventDiv
+                  type="text"
+                  value={`https://thetagbox.com/attend-event/${uniqueId}`}
+                  name="qr_code"
+                  id="url"
+                  onChange={generateId}
+                />
+              </div>
+
+              <div className="copy-generate">
+                <p onClick={generateId}>Generate</p>
+                <p onClick={handleCopyClick}>{isCopied ? "Copied" : "Copy"}</p>
+              </div>
+            </div>
+          </EventStyle>
+
+          {/* end */}
+
           <button>submit</button>
         </form>
       </div>
