@@ -89,9 +89,9 @@ const Manage = () => {
   //     }
   //   }, [events]);
 
-  const eventCount = events.length;
-  const wishesCount = wishes.length;
-  const ticketCount = ticket.length;
+  const eventCount = events?.length;
+  const wishesCount = wishes?.length;
+  const ticketCount = ticket?.length;
 
   return (
     <ManageStyle>
