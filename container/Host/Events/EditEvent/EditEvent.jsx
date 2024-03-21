@@ -75,7 +75,7 @@ const EditEvent = ({ events, name, eventId }) => {
     } else if (name === "Others") {
       setEventBg("header ");
     } else {
-      setEventBg("header");
+      setEventBg("");
     }
   }, [name]);
 
