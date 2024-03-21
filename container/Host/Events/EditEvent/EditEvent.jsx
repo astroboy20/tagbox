@@ -14,11 +14,18 @@ import QRCode from "react-qr-code";
 import EventIv from "../../SingleEvent/EventIV";
 import { Button } from "@/components/Button/Button";
 import { useSelector } from "react-redux";
+import { Modal } from "@/components/Modal";
+import { Buttons } from "../../SingleEvent/SingleEvent.style";
+import { Actions } from "../../AttendEvent/AAttend.style";
+import Spinner from "@/components/Spinner/Spinner";
 
 const EditEvent = ({ events, name, eventId }) => {
+
+  
+      
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
-  const [bgName, setBgName] = useState("");
+  const [eventBg, setEventBg] = useState("");
   const [dressCode, setDressCode] = useState("");
   const [uniqueId, setUniqueId] = useState(events?.qr_code || "");
   const [consultationTime, setConsultationTime] = useState("");
@@ -27,6 +34,8 @@ const EditEvent = ({ events, name, eventId }) => {
   const [inviteeInput, setInviteeInput] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [modalShow, setModalShow] = useState(false);
   const [imageLoading, setImageLoading] = useState(
     Array(events?.dress_code?.length).fill(false)
   );
@@ -53,6 +62,28 @@ const EditEvent = ({ events, name, eventId }) => {
   const imageInfo =
     typeof window !== "undefined" && localStorage.getItem("imageUrl");
 
+    useEffect(() => {
+      if (name === "Wedding") {
+        setEventBg("header ");
+      } else if (name === "Birthday") {
+        setEventBg("birthday-header");
+      } else if (name === "Graduation") {
+        setEventBg("graduation-header ");
+      } else if (name === "House Warming") {
+        setEventBg("header ");
+      } else if (name === "Conference and Meetings") {
+        setEventBg("conference-header ");
+      } else if (name === "Baby Shower") {
+        setEventBg("shower-header ");
+      } else if (name === "Hangout") {
+        setEventBg("hangout-header ");
+      } else if (name === "Others") {
+        setEventBg("header ");
+      } else {
+        setEventBg("header");
+      }
+    }, [name]);
+
   useEffect(() => {
     if (events) {
       setNewDetails({
@@ -78,11 +109,7 @@ const EditEvent = ({ events, name, eventId }) => {
   }, [events, uniqueId]);
   console.log(events?.qr_code);
 
-  useEffect(() => {
-    if (name === "Birthday") {
-      setBgName("birthday-header");
-    }
-  }, [name]);
+ 
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);
     const options = { month: "long", day: "numeric", year: "numeric" };
@@ -389,33 +416,41 @@ const EditEvent = ({ events, name, eventId }) => {
         toast.warning(error);
       });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    console.log(newDetails);
+    
+    setIsLoading(true);
+    setModalShow(true);
+  
+   
+     if (newDetails){
+       axios.post(
+        `https://tagbox.ployco.com/v1/edit-event1/${eventId}`,
+        newDetails,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      ).then((response)=>{
+        console.log(response.data)
+        setIsLoading(false);
+        setModalShow(true);
 
-    axios
-      .post(`https://tagbox.ployco.com/v1/edit-event/${eventId}`, newDetails, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      }).catch((error)=>{
+        console.log(error.response.data)
+        setIsLoading(false);
+        setModalShow(false);
       })
-      .then((response) => {
-        console.log(response.data);
-        // setMessage(response?.data.message);
-        // setLoading(false);
-        // setModalShow(true);
-      })
-      .catch((error) => {
-        // toast.error(error.response.data?.message);
-        // setError(error.response.data?.message);
-        // setLoading(false);
-        // setModalShow(false);
-      });
+     }
+     
+  
   };
+  
 
   return (
     <EditStyle>
-      <div className={bgName}>{name}</div>
+      <div className={eventBg}>{name}</div>
       <div className="body">
         <form onSubmit={handleSubmit}>
           <div className="event-display">
@@ -894,6 +929,35 @@ const EditEvent = ({ events, name, eventId }) => {
           <Button variant="dark-button">Update Response</Button>
         </form>
       </div>
+      <Modal show={modalShow} onClose={() => setModalShow(false)}>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Actions className="actions">
+              {/* <span>{message}</span> */}
+              <Buttons className="buttons">
+                <button className={"white-btn"}>
+                  {" "}
+                  {/* <Link
+                    className="link-white"
+                    href={`/attend-event/${decodeURIComponent(uniqueId)}`}
+                  >
+                    {" "}
+                    View Event
+                  </Link> */}
+                </button>
+                <button className={"dark-button"}>
+                  {/* <Link className="link" href={"/host-event"}>
+                    {" "}
+                    Continue
+                  </Link> */}
+                </button>
+              </Buttons>
+            </Actions>
+          </>
+        )}
+      </Modal>
     </EditStyle>
   );
 };
