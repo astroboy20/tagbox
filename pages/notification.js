@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import { HeaderFixed } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { NotificationContainer } from "@/container/Notification";
+import Head from "next/head";
 import useSWR from "swr";
+import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
 const Notification = () => {
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
@@ -34,11 +36,22 @@ const Notification = () => {
   }, [token, user]);
 
   return (
-    <div>
-      <HeaderFixed notificationCount={notificationCount} />
-      <NotificationContainer notifications={notifications} />
-      {/* <Footer /> */}
-    </div>
+    <>
+      <Head>
+        <title>TagBox | Notification</title>
+        <meta name="description" content="TagBox" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/at.svg" />
+      </Head>{" "}
+      <>
+        <ProtectedRoute>
+          <HeaderFixed notificationCount={notificationCount} />
+          <NotificationContainer notifications={notifications} />
+        </ProtectedRoute>
+
+        {/* <Footer /> */}
+      </>
+    </>
   );
 };
 

@@ -6,15 +6,16 @@ import { useRouter } from "next/router";
 import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
 import { EditEvent } from "@/container/Host/Events/EditEvent";
 import { useSelector } from "react-redux";
-import Spinner from "@/components/Spinner/Spinner"; // Import Spinner component
+import Spinner from "@/components/Spinner/Spinner";
 import { EditSpinner } from "@/components/Spinner/EditSpinner";
+import Head from "next/head";
 
 const EventId = () => {
   const router = useRouter();
   const { id } = router.query;
   const [events, setEvent] = useState({});
   const [eventName, setEventName] = useState("");
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
@@ -29,11 +30,11 @@ const EventId = () => {
           },
         }
       );
-      setEvent(response.data.data || {}); 
-      setLoading(false); 
+      setEvent(response.data.data || {});
+      setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -47,7 +48,7 @@ const EventId = () => {
     if (events && events.event_type) {
       fetchEvent(events.event_type);
     }
-  }, [events]); 
+  }, [events]);
 
   const fetchEvent = async (eventId) => {
     try {
@@ -59,7 +60,7 @@ const EventId = () => {
           },
         }
       );
-      setEventName(response.data.data || ""); 
+      setEventName(response.data.data || "");
     } catch (error) {
       console.log(error);
     }
@@ -70,15 +71,24 @@ const EventId = () => {
 
   return (
     <>
-      <ProtectedRoute>
-        <HeaderFixed />
-        {loading ? ( 
-          <EditSpinner />
-        ) : (
-          <EditEvent events={events} name={name} eventId={eventId} />
-        )}
-        <Footer />
-      </ProtectedRoute>
+      {" "}
+      <Head>
+        <title>TagBox | Attend-Event</title>
+        <meta name="description" content="TagBox" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/at.svg" />
+      </Head>{" "}
+      <>
+        <ProtectedRoute>
+          <HeaderFixed />
+          {loading ? (
+            <EditSpinner />
+          ) : (
+            <EditEvent events={events} name={name} eventId={eventId} />
+          )}
+          <Footer />
+        </ProtectedRoute>
+      </>
     </>
   );
 };

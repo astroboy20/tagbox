@@ -7,6 +7,7 @@ import { Details } from "@/container/Host/ManageEvent";
 import { HeaderFixed } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
+import Head from "next/head";
 
 const ManageId = () => {
   const router = useRouter();
@@ -53,11 +54,20 @@ const ManageId = () => {
 
   return (
     <>
-      <ProtectedRoute>
-        <HeaderFixed />
-        <Details eventDetails={eventDetails} wishes={wishes} />
-        <Footer />
-      </ProtectedRoute>
+      {" "}
+      <Head>
+        <title>TagBox | Manage-Event</title>
+        <meta name="description" content="TagBox" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/at.svg" />
+      </Head>{" "}
+      <>
+        <ProtectedRoute>
+          <HeaderFixed />
+          <Details eventDetails={eventDetails} wishes={wishes} />
+          <Footer />
+        </ProtectedRoute>
+      </>
     </>
   );
 };

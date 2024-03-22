@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BlogContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 80px;
   .header {
     background: url("images/blog-bg.png");
     height: 400px;
@@ -11,7 +11,7 @@ export const BlogContainer = styled.div`
     color: #fff;
   }
   .header span {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 500;
     line-height: 64px;
     text-align: center;
@@ -26,21 +26,20 @@ export const BlogContainer = styled.div`
   }
 
   .body span {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 36px;
     text-decoration: underline;
   }
 
   @media screen and (max-width: 786px) {
-    padding-top: 60px;
+    padding-top: 75px;
     .header {
-      padding-top: 100px;
-      height: 180px;
+      /* padding-top: 75px; */
+      height: 200px;
       width: 100%;
-      justify-content: center;
-    align-items: center;
-    color: #fff;
+      background-position:center;
+    background-size:cover ;
       
     }
     .header span {

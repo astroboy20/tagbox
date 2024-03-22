@@ -12,8 +12,6 @@ const EventId = () => {
   const { id } = router.query;
   const [name, setName] = useState("");
 
- 
-
   const fetchEventName = async () => {
     try {
       const response = await axios.get(
@@ -29,17 +27,24 @@ const EventId = () => {
     if (id) {
       fetchEventName();
     }
-   
   }, [id]);
 
-  
   return (
     <>
-      <ProtectedRoute>
-        <HeaderFixed />
-        <SingleEvent name={name} id={id} />
-        <Footer />
-      </ProtectedRoute>
+      {" "}
+      <Head>
+        <title>TagBox | Host-Event</title>
+        <meta name="description" content="TagBox" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/at.svg" />
+      </Head>{" "}
+      <>
+        <ProtectedRoute>
+          <HeaderFixed />
+          <SingleEvent name={name} id={id} />
+          <Footer />
+        </ProtectedRoute>
+      </>
     </>
   );
 };

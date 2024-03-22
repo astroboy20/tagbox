@@ -390,28 +390,28 @@ const SingleEvent = ({ name, id }) => {
       return;
     }
 
-    // setLoading(true);
-    // setModalShow(true);
-    // if (eventDetails) {
-    //   axios
-    //     .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       setMessage(response?.data.message);
-    //       setLoading(false);
-    //       setModalShow(true);
-    //     })
-    //     .catch((error) => {
-    //       toast.error(error.response.data?.message);
-    //       setError(error.response.data?.message);
-    //       setLoading(false);
-    //       setModalShow(false);
-    //     });
-    // }
-    console.log(eventDetails);
+    setLoading(true);
+    setModalShow(true);
+    if (eventDetails) {
+      axios
+        .post(`https://tagbox.ployco.com/v1/user/event/${id}`, eventDetails, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setMessage(response?.data.message);
+          setLoading(false);
+          setModalShow(true);
+        })
+        .catch((error) => {
+          toast.error(error.response.data?.message);
+          setError(error.response.data?.message);
+          setLoading(false);
+          setModalShow(false);
+        });
+    }
+    // console.log(eventDetails);
   };
 
   useEffect(() => {

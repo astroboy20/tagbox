@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
+import Head from "next/head";
 
 const EventId = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const EventId = () => {
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.token || user : "";
 
-  const [eventDetails, setEventDetails] = useState(null); 
+  const [eventDetails, setEventDetails] = useState(null);
   const [name, setName] = useState("");
 
   const fetchEventDetails = async () => {
@@ -26,13 +27,13 @@ const EventId = () => {
           },
         }
       );
-      setEventDetails(response.data.data); 
+      setEventDetails(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-  
-const eventId = eventDetails?.event_type
+
+  const eventId = eventDetails?.event_type;
 
   const fetchEventName = async () => {
     try {
@@ -45,28 +46,41 @@ const eventId = eventDetails?.event_type
     }
   };
 
-
   useEffect(() => {
     if (id) {
-      fetchEventDetails(); 
+      fetchEventDetails();
     }
-  }, [id]); 
+  }, [id]);
 
   useEffect(() => {
     if (eventId) {
       fetchEventName();
     }
-    
-   
   }, [eventId]);
-  
+
   return (
     <>
-      {/* <ProtectedRoute> */}
+      {" "}
+      <Head>
+        <title>TagBox | Attend-Event</title>
+        <meta name="description" content="TagBox" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/at.svg" />
+      </Head>{" "}
+      <>
+        {/* <ProtectedRoute> */}
         <HeaderFixed />
-        {<AttendEvent name={name} eventDetails={eventDetails} setEventDetails={setEventDetails} id={id}/>}
+        {
+          <AttendEvent
+            name={name}
+            eventDetails={eventDetails}
+            setEventDetails={setEventDetails}
+            id={id}
+          />
+        }
         <Footer />
-      {/* </ProtectedRoute> */}
+        {/* </ProtectedRoute> */}
+      </>
     </>
   );
 };
