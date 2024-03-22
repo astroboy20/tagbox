@@ -5,7 +5,7 @@ import { updateUser } from "@/features/authSlice";
 import { useRouter } from "next/router";
 import { RotatingLines, ThreeCircles } from "react-loader-spinner";
 import { toast } from "react-toastify";
-import Home from "next/head";
+import Head from "next/head";
 
 const GoogleAuth = () => {
   const searchParams = useSearchParams();
