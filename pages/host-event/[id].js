@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ProtectedRoute from "@/container/ProtectedRoute/ProtectedRoute";
+import Head from "next/head"
 
 const EventId = () => {
   const router = useRouter();
