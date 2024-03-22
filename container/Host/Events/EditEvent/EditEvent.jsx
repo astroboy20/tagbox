@@ -34,7 +34,7 @@ const EditEvent = ({ events, name, eventId }) => {
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
   const [imageLoading, setImageLoading] = useState(
     Array(events?.dress_code?.length).fill(false)
   );
@@ -98,7 +98,6 @@ const EditEvent = ({ events, name, eventId }) => {
       });
     }
   }, [events, uniqueId]);
-  console.log(events?.qr_code);
 
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);
@@ -125,7 +124,6 @@ const EditEvent = ({ events, name, eventId }) => {
     if (type === "Yes") {
       // ... rest of the code
     } else {
-      // If the user selects 'No', keep the existing dress_code array
       setNewDetails((prevDetails) => ({
         ...prevDetails,
         dress_code: events?.dress_code?.items || [],
@@ -133,11 +131,6 @@ const EditEvent = ({ events, name, eventId }) => {
     }
     setDressCode(type);
   };
-  
-  
-  
-  
-  
 
   const handleDressCodeItemChange = async (event, index, field) => {
     if (field === "dress") {
@@ -197,14 +190,19 @@ const EditEvent = ({ events, name, eventId }) => {
     const allItemsFilled = newDetails.dress_code.every(
       (item) => item.dress && item.dress_price
     );
-  
+
     if (allItemsFilled) {
       setNewDetails((prevDetails) => ({
         ...prevDetails,
-        dress_code: [...prevDetails.dress_code, { dress: null, dress_price: "" }],
+        dress_code: [
+          ...prevDetails.dress_code,
+          { dress: null, dress_price: "" },
+        ],
       }));
     } else {
-      toast.error("Please fill all existing dress code items before adding a new one.");
+      toast.error(
+        "Please fill all existing dress code items before adding a new one."
+      );
     }
   };
   const handleRemoveDressCodeItem = (indexToRemove) => {
@@ -240,14 +238,16 @@ const EditEvent = ({ events, name, eventId }) => {
     const allItemsFilled = newDetails.wishlist.every(
       (item) => item.item_name && item.item_link
     );
-  
+
     if (allItemsFilled) {
       setNewDetails((prevDetails) => ({
         ...prevDetails,
         wishlist: [...prevDetails.wishlist, { item_name: "", item_link: "" }],
       }));
     } else {
-      toast.error("Please fill all existing wishlist items before adding a new one.");
+      toast.error(
+        "Please fill all existing wishlist items before adding a new one."
+      );
     }
   };
 
@@ -749,7 +749,9 @@ const EditEvent = ({ events, name, eventId }) => {
                       name="item_name"
                       placeholder={"Item Name"}
                       value={item.item_name}
-                      onChange={(e) => handleWishlistItemChange(e, index, "item_name")}
+                      onChange={(e) =>
+                        handleWishlistItemChange(e, index, "item_name")
+                      }
                     />
 
                     <input
@@ -757,7 +759,9 @@ const EditEvent = ({ events, name, eventId }) => {
                       name="item_link"
                       value={item.item_link}
                       placeholder={"Item Link"}
-                      onChange={(e) => handleWishlistItemChange(e, index, "item_link")}
+                      onChange={(e) =>
+                        handleWishlistItemChange(e, index, "item_link")
+                      }
                     />
 
                     <MdOutlineCancel

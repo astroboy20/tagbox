@@ -16,6 +16,7 @@ const EventId = () => {
   const [events, setEvent] = useState({});
   const [eventName, setEventName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] =useState(true)
 
   const { user } = useSelector((state) => state.auth);
   const token = user ? user.data || user : "";
@@ -61,8 +62,10 @@ const EventId = () => {
         }
       );
       setEventName(response.data.data || "");
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
+      setIsLoading(false)
     }
   };
 
@@ -73,7 +76,7 @@ const EventId = () => {
     <>
       {" "}
       <Head>
-        <title>TagBox | Attend-Event</title>
+        <title>TagBox | Edit-Event</title>
         <meta name="description" content="TagBox" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/at.svg" />
@@ -81,7 +84,7 @@ const EventId = () => {
       <>
         <ProtectedRoute>
           <HeaderFixed />
-          {loading ? (
+          {loading && isLoading ? (
             <EditSpinner />
           ) : (
             <EditEvent events={events} name={name} eventId={eventId} />
