@@ -25,13 +25,14 @@ import axios from "axios"
 
 const HeaderFixed = () => {
   const [showEvent, setShowEvent] = useState(false);
+  const [error, setError] = useState("")
   const [show, setShow] = useState(false);
   const router = useRouter();
   const [notifications, setNotification] = useState([])
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const token = user ? user.token || user  : "";
+  const token = user ? user.data || user  : "";
 
 
   const fetchNotification = async () => {
@@ -40,14 +41,14 @@ const HeaderFixed = () => {
         "https://tagbox.ployco.com/v1/user/notification",
         {
           headers: {
-            Authorization: `Bearer ${user.data}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       setNotification(response.data.data)
     } catch (error) {
-      console.log(error);
+      setError(error.response?.data?.message);
     }
   };
   
@@ -75,6 +76,13 @@ const HeaderFixed = () => {
     toast.success("You have been successfully logged out");
     router.push("/login");
   };
+
+  useEffect(() => {
+    if (error === "Unauthorised access, new session required") {
+      dispatch(reset());
+      router.push("/login");
+    }
+  }, [error, router]);
 
   return (
     <>

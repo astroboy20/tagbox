@@ -406,12 +406,12 @@ const SingleEvent = ({ name, id }) => {
         })
         .catch((error) => {
           toast.error(error.response.data?.message);
-          setError(error.response.data?.message);
+          setError(error.response?.data?.message);
           setLoading(false);
           setModalShow(false);
         });
     }
-    // console.log(eventDetails);
+    console.log(eventDetails);
   };
 
   useEffect(() => {
@@ -779,7 +779,7 @@ const SingleEvent = ({ name, id }) => {
                   Choose Bank
                 </option>
                 {BankList.map((bank) => (
-                  <option key={bank.id}>{bank.name}</option>
+                  <option key={bank.code}>{bank.name}</option>
                 ))}
               </select>
               <div className="in-border">
