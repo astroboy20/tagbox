@@ -417,7 +417,8 @@ export const BankList = [
   { name: "ZENITH BANK PLC", code: "000015" },
   { name: "ZWallet", code: "100034" },
   { name: "Zikora Microfinance bank", code: "090504" },
-  { name: "unilorin Microfinance Bank", code: "090341" }
+  { name: "unilorin Microfinance Bank", code: "090341" },
+  { name: "Other Banks", code: "090342" }
 ];
 
 

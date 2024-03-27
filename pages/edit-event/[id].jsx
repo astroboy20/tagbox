@@ -8,7 +8,7 @@ import { EditEvent } from "@/container/Host/Events/EditEvent";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/Spinner/Spinner";
 import { EditSpinner } from "@/components/Spinner/EditSpinner";
-import Head from "next/head";
+import Head from "next/head"
 
 const EventId = () => {
   const router = useRouter();

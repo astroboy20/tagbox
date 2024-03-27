@@ -8,8 +8,6 @@ import {
   ProfilePicture,
 } from "@/assets";
 import { useEffect, useState } from "react";
-import { HeaderContainer, HeaderStyle, HeroContainer } from "./Header.style";
-import { Button } from "../Button/Button";
 import {
   HeaderFixedContainer,
   HeaderFixedStyle,
@@ -49,10 +47,12 @@ const HeaderFixed = () => {
       setNotification(response.data.data)
     } catch (error) {
       setError(error.response?.data?.message);
+      toast.error(error.response?.data?.message)
     }
   };
   
   const notificationCount = notifications?.length
+
   useEffect(() => {
     if (token){
         fetchNotification();
@@ -163,6 +163,7 @@ const HeaderFixed = () => {
             </Link>
           </div>
         </HeaderFixedStyle>
+        
         {show && (
           <MobileNav>
             <span onClick={handleShowEvent} className="events">

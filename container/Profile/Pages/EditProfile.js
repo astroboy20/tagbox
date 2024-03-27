@@ -102,7 +102,7 @@ const EditProfile = () => {
       console.log(error);
     } finally {
       setIsLoading(false);
-      // setModalShow(false);
+      setModalShow(false);
     }
   };
 
@@ -153,7 +153,7 @@ const EditProfile = () => {
         {details?.isGoogleUser ? (
           ""
         ) : (
-          <button className="button">"Save and Submit </button>
+          <button className="button">Save and Submit </button>
         )}
       </form>
 
